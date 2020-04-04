@@ -24,7 +24,6 @@
 #define APPLICATION_H
 
 #include <iostream>
-#include <stdexcept>
 #include <fmt/format.h>
 #include <cxxopts.hpp>
 
@@ -35,17 +34,20 @@ class Application
 {
 public:
     Application();
-    void ExecuteEnv();
-    void ExecuteCmdLine(cxxopts::ParseResult const&);
+    void Run(cxxopts::ParseResult const&);
 protected:
+    ZSwapObject ZSwapEnabled;
     ZSwapObject ZSwapSameFilledPages;
     ZSwapObject ZSwapMaxPoolPercent;
     ZSwapObject ZSwapCompressor;
     ZSwapObject ZSwapZpool;
+    ZSwapObject ZSwapAcceptThrehsoldPercent;
 private:
     std::string GetEnv(std::string const&);
     void WriteLogEntry(std::string const&, std::string const&, std::string const&);
     void WriteZSwapValue(ZSwapObject&, std::string const&);
+    void ExecuteEnv();
+    void ExecuteCmdLine(cxxopts::ParseResult const&);
 };
 
 #endif // APPLICATION_H

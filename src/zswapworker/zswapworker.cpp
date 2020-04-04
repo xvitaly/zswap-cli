@@ -37,7 +37,3 @@ std::string ZSwapWorker::ReadZSwapValue(std::string const& Name)
     ZSwapSysFs.close();
     return Result;
 }
-
-ZSwapWorker::ZSwapWorker()
-{
-}

@@ -32,7 +32,7 @@ public:
     static void WriteZSwapValue(std::string const&, std::string const&);
     static std::string ReadZSwapValue(std::string const&);
 private:
-    ZSwapWorker();
+    ZSwapWorker() = default;
 };
 
 #endif // ZSWAPWORKER_H
