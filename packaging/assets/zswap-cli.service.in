@@ -1,0 +1,13 @@
+[Unit]
+Description=ZSwap-cli service
+Documentation=man:zswap-cli(1) https://github.com/xvitaly/zswap-cli
+
+[Service]
+Type=oneshot
+EnvironmentFile=@SYSCONF_INSTALL_DIR@/default/zswap-cli
+ExecStart=@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_BINDIR@/zswap-cli --env
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
