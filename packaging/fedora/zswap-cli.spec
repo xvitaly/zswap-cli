@@ -46,7 +46,7 @@ popd
 %files
 %doc README.md
 %license LICENSE
-%{_bindir}/%{name}
+%{_sbindir}/%{name}
 %{_unitdir}/%{name}.service
 %config(noreplace) %{_sysconfdir}/default/%{name}
 
