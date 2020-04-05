@@ -22,15 +22,9 @@
 
 #include "application/application.hpp"
 
-std::string Application::GetEnv(std::string const& KeyName)
-{
-    char const* EnvValue = getenv(KeyName.c_str());
-    return EnvValue != nullptr ? std::string(EnvValue) : std::string();
-}
-
 void Application::WriteLogEntry(std::string const& Name, std::string const& NewValue, std::string const& OldValue)
 {
-    std::cout << fmt::format("Writing to \"{0}\". Value: \"{1}\". Old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
+    std::cout << fmt::format("Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
 }
 
 void Application::WriteZSwapValue(ZSwapObject& ZSwapObj, std::string const& NewValue)
@@ -42,18 +36,28 @@ void Application::WriteZSwapValue(ZSwapObject& ZSwapObj, std::string const& NewV
     }
     else
     {
-        std::cerr << fmt::format("Failed to change \"{0}\" variable. Value \"{1}\" does not match regular expression.", ZSwapObj.GetName(), NewValue) << std::endl;
+        std::cerr << fmt::format("Failed to change the \"{0}\" variable. The value \"{1}\" does not match regular expression.", ZSwapObj.GetName(), NewValue) << std::endl;
     }
+}
+
+bool Application::CheckIfRunningBySuperUser()
+{
+    if (CWrappers::CheckRoot())
+    {
+        std::cerr << "This program must be run by the super-user. Terminating." << std::endl;
+        return true;
+    }
+    return false;
 }
 
 void Application::ExecuteEnv()
 {
-    std::string const ZSwapEnabledEnv = GetEnv("ZSWAP_ENABLED_VALUE");
-    std::string const ZSwapSameFilledPagesEnv = GetEnv("ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE");
-    std::string const ZSwapMaxPoolPercentEnv = GetEnv("ZSWAP_MAX_POOL_PERCENT_VALUE");
-    std::string const ZSwapCompressorEnv = GetEnv("ZSWAP_COMPRESSOR_VALUE");
-    std::string const ZSwapZpoolEnv = GetEnv("ZSWAP_ZPOOL_VALUE");
-    std::string const ZSwapAcceptThrehsoldPercentEnv = GetEnv("ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE");
+    std::string const ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
+    std::string const ZSwapSameFilledPagesEnv = CWrappers::GetEnv("ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE");
+    std::string const ZSwapMaxPoolPercentEnv = CWrappers::GetEnv("ZSWAP_MAX_POOL_PERCENT_VALUE");
+    std::string const ZSwapCompressorEnv = CWrappers::GetEnv("ZSWAP_COMPRESSOR_VALUE");
+    std::string const ZSwapZpoolEnv = CWrappers::GetEnv("ZSWAP_ZPOOL_VALUE");
+    std::string const ZSwapAcceptThrehsoldPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE");
 
     if (!ZSwapEnabledEnv.empty()) WriteZSwapValue(ZSwapEnabled, ZSwapEnabledEnv);
     if (!ZSwapSameFilledPagesEnv.empty()) WriteZSwapValue(ZSwapSameFilledPages, ZSwapSameFilledPagesEnv);
@@ -73,9 +77,11 @@ void Application::ExecuteCmdLine(cxxopts::ParseResult const& CmdLine)
     if (CmdLine.count("accept_threhsold_percent")) WriteZSwapValue(ZSwapAcceptThrehsoldPercent, CmdLine["accept_threhsold_percent"].as<std::string>());
 }
 
-void Application::Run(cxxopts::ParseResult const& CmdLine)
+int Application::Run(cxxopts::ParseResult const& CmdLine)
 {
+    if (CheckIfRunningBySuperUser()) return 1;
     if (CmdLine.count("env")) ExecuteEnv(); else ExecuteCmdLine(CmdLine);
+    return 0;
 }
 
 Application::Application()

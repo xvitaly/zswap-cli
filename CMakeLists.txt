@@ -4,10 +4,10 @@ project(zswap-cli LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include_directories("src")
 
 set(SOURCES
+    src/cwrappers/cwrappers.cpp
     src/zswapworker/zswapworker.cpp
     src/zswapobject/zswapobject.cpp
     src/application/application.cpp
@@ -15,6 +15,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    src/cwrappers/cwrappers.hpp
     src/zswapworker/zswapworker.hpp
     src/zswapobject/zswapobject.hpp
     src/application/application.hpp
@@ -40,4 +41,4 @@ configure_file("${CMAKE_SOURCE_DIR}/packaging/assets/zswap-cli.service.in" "${CM
 
 install(TARGETS zswap-cli RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/zswap-cli.service" DESTINATION "lib/systemd/system")
-install(FILES "${CMAKE_SOURCE_DIR}/packaging/assets/zswap-cli.default" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/default" RENAME "zswap-cli")
+install(FILES "${CMAKE_SOURCE_DIR}/packaging/assets/zswap-cli.default" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/default" RENAME "zswap-cli")

@@ -43,7 +43,7 @@ popd
 %install
 %ninja_install -C %{_target_platform}
 
-%files devel
+%files
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}

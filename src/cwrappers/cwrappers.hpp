@@ -20,23 +20,19 @@
     THE SOFTWARE.
 */
 
-#include <iostream>
-#include <cxxopts.hpp>
+#ifndef CWRAPPERS_HPP
+#define CWRAPPERS_HPP
 
-#include "application/application.hpp"
+#include <string>
+#include <unistd.h>
 
-int main(int argc, char** argv)
+class CWrappers
 {
-    cxxopts::Options options("zswap-cli", "ZSwap command-line utility.");
-    options.add_options()
-            ("env", "Use environment options instead of cmdline.", cxxopts::value<bool>()->default_value("false"))
-            ("e,enabled", "Enable or disable ZSwap module.", cxxopts::value<std::string>())
-            ("s,same_filled_pages_enabled", "Enable or disable same filled pages deduplication.", cxxopts::value<std::string>())
-            ("p,max_pool_percent", "Max pool percent.", cxxopts::value<std::string>())
-            ("c,compressor", "Comression alghorithm.", cxxopts::value<std::string>())
-            ("z,zpool", "Zpool type.", cxxopts::value<std::string>())
-            ("a,accept_threhsold_percent", "Accept threhsold percent.", cxxopts::value<std::string>());
-    if (argc < 2) std::cout << options.help() << std::endl;
+public:
+    static std::string GetEnv(std::string const&);
+    static bool CheckRoot();
+private:
+    CWrappers() = default;
+};
 
-    return Application().Run(options.parse(argc, argv));
-}
+#endif // CWRAPPERS_HPP

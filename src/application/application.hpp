@@ -27,6 +27,7 @@
 #include <fmt/format.h>
 #include <cxxopts.hpp>
 
+#include "cwrappers/cwrappers.hpp"
 #include "zswapworker/zswapworker.hpp"
 #include "zswapobject/zswapobject.hpp"
 
@@ -34,7 +35,7 @@ class Application
 {
 public:
     Application();
-    void Run(cxxopts::ParseResult const&);
+    int Run(cxxopts::ParseResult const&);
 protected:
     ZSwapObject ZSwapEnabled;
     ZSwapObject ZSwapSameFilledPages;
@@ -43,9 +44,9 @@ protected:
     ZSwapObject ZSwapZpool;
     ZSwapObject ZSwapAcceptThrehsoldPercent;
 private:
-    std::string GetEnv(std::string const&);
     void WriteLogEntry(std::string const&, std::string const&, std::string const&);
     void WriteZSwapValue(ZSwapObject&, std::string const&);
+    bool CheckIfRunningBySuperUser();
     void ExecuteEnv();
     void ExecuteCmdLine(cxxopts::ParseResult const&);
 };
