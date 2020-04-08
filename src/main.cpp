@@ -20,13 +20,11 @@
     THE SOFTWARE.
 */
 
-#include <iostream>
-#include <cxxopts.hpp>
-
 #include "application/application.hpp"
 
 int main(int argc, char** argv)
 {
+    // Initializing command-line arguments parser...
     cxxopts::Options options("zswap-cli", "ZSwap command-line utility.");
     options.add_options()
             ("env", "Use environment options instead of cmdline.", cxxopts::value<bool>()->default_value("false"))
@@ -35,8 +33,14 @@ int main(int argc, char** argv)
             ("p,max_pool_percent", "Max pool percent.", cxxopts::value<std::string>())
             ("c,compressor", "Comression alghorithm.", cxxopts::value<std::string>())
             ("z,zpool", "Zpool type.", cxxopts::value<std::string>())
-            ("a,accept_threhsold_percent", "Accept threhsold percent.", cxxopts::value<std::string>());
-    if (argc < 2) std::cout << options.help() << std::endl;
+            ("a,accept_threhsold_percent", "Accept threhsold percent.", cxxopts::value<std::string>())
+            ("h,help", "Print this help.");
 
-    return Application().Run(options.parse(argc, argv));
+    // Workaround to known cxxopts bug #224.
+    bool argchk = argc < 2;
+
+    // Parsing command-line arguments...
+    cxxopts::ParseResult CmdLine = options.parse(argc, argv);
+    if (argchk || CmdLine.count("help")) std::cout << options.help() << std::endl; else return Application().Run(CmdLine);
+    return 0;
 }
