@@ -29,7 +29,7 @@
 class CWrappers
 {
 public:
-    static std::string GetEnv(std::string const&);
+    static std::string GetEnv(const std::string&);
     static bool CheckRoot();
 private:
     CWrappers() = default;

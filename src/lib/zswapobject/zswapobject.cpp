@@ -23,28 +23,28 @@
 #include "zswapobject/zswapobject.hpp"
 #include "zswapworker/zswapworker.hpp"
 
-std::string ZSwapObject::GetName()
+std::string ZSwapObject::GetName() const
 {
     return _Name;
 }
 
-std::string ZSwapObject::GetValue()
+std::string ZSwapObject::GetValue() const
 {
     return _Value;
 }
 
-void ZSwapObject::SetValue(std::string const& NewValue)
+void ZSwapObject::SetValue(const std::string& NewValue)
 {
     _Value = NewValue;
     ZSwapWorker::WriteZSwapValue(_Name, _Value);
 }
 
-bool ZSwapObject::Validate(std::string const& CheckValue)
+bool ZSwapObject::Validate(const std::string& CheckValue)
 {
     return std::regex_match(CheckValue, _Regex);
 }
 
-ZSwapObject::ZSwapObject(std::string const& Name, std::string const& Regex)
+ZSwapObject::ZSwapObject(const std::string& Name, const std::string& Regex)
 {
     _Name = Name;
     _Regex = std::regex(Regex);

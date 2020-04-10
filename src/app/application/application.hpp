@@ -35,7 +35,7 @@ class Application
 {
 public:
     Application();
-    int Run(cxxopts::ParseResult const&);
+    int Run(const cxxopts::ParseResult&);
 protected:
     ZSwapObject ZSwapEnabled;
     ZSwapObject ZSwapSameFilledPages;
@@ -44,11 +44,11 @@ protected:
     ZSwapObject ZSwapZpool;
     ZSwapObject ZSwapAcceptThrehsoldPercent;
 private:
-    void WriteLogEntry(std::string const&, std::string const&, std::string const&);
-    void WriteZSwapValue(ZSwapObject&, std::string const&);
+    void WriteLogEntry(const std::string&, const std::string&, const std::string&);
+    void WriteZSwapValue(ZSwapObject&, const std::string&);
     bool CheckIfRunningBySuperUser();
     void ExecuteEnv();
-    void ExecuteCmdLine(cxxopts::ParseResult const&);
+    void ExecuteCmdLine(const cxxopts::ParseResult&);
 };
 
 #endif // APPLICATION_H

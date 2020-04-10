@@ -22,7 +22,7 @@
 
 #include "cwrappers/cwrappers.hpp"
 
-std::string CWrappers::GetEnv(std::string const& KeyName)
+std::string CWrappers::GetEnv(const std::string& KeyName)
 {
     char const* EnvValue = getenv(KeyName.c_str());
     return EnvValue != nullptr ? std::string(EnvValue) : std::string();

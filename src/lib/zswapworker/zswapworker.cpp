@@ -22,14 +22,14 @@
 
 #include "zswapworker/zswapworker.hpp"
 
-void ZSwapWorker::WriteZSwapValue(std::string const& Name, std::string const& Value)
+void ZSwapWorker::WriteZSwapValue(const std::string& Name, const std::string& Value)
 {
     std::ofstream ZSwapSysFs("/sys/module/zswap/parameters/" + Name);
     ZSwapSysFs << Value;
     ZSwapSysFs.close();
 }
 
-std::string ZSwapWorker::ReadZSwapValue(std::string const& Name)
+std::string ZSwapWorker::ReadZSwapValue(const std::string& Name)
 {
     std::string Result;
     std::ifstream ZSwapSysFs("/sys/module/zswap/parameters/" + Name);

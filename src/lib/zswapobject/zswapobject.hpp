@@ -29,12 +29,12 @@
 class ZSwapObject
 {
 public:
-    ZSwapObject(std::string const&, std::string const&);
+    ZSwapObject(const std::string&, const std::string&);
     ZSwapObject() = default;
-    std::string GetName();
-    std::string GetValue();
-    bool Validate(std::string const&);
-    void SetValue(std::string const&);
+    std::string GetName() const;
+    std::string GetValue() const;
+    bool Validate(const std::string&);
+    void SetValue(const std::string&);
 protected:
     std::string _Name;
     std::string _Value;
