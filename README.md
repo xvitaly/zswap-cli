@@ -8,5 +8,14 @@
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/zswap-cli.svg?label=issues&maxAge=180)](https://github.com/xvitaly/zswap-cli/issues)
 ---
 
-ZSwap-cli is a command-line tool to control [zswap options](https://github.com/torvalds/linux/blob/master/Documentation/vm/zswap.rst).
+ZSwap-cli is a command-line tool to control [zswap](https://github.com/torvalds/linux/blob/master/Documentation/vm/zswap.rst) Linux kernel module options.
 
+## License
+
+This project is licensed under the terms of the [MIT license](LICENSE).
+
+## Documentation
+
+  * [Installation](docs/installation.md).
+  * [Using application](docs/using-application.md).
+  * [Environment options](docs/environment-options.md).
