@@ -25,16 +25,16 @@
 int main(int argc, char** argv)
 {
     // Initializing command-line arguments parser...
-    cxxopts::Options options("zswap-cli", "ZSwap command-line utility.");
+    cxxopts::Options options("zswap-cli", "Command-line tool to control ZSwap Linux kernel module.");
     options.add_options()
-            ("env", "Use environment options instead of cmdline.", cxxopts::value<bool>()->default_value("false"))
-            ("e,enabled", "Enable or disable ZSwap module.", cxxopts::value<std::string>())
-            ("s,same_filled_pages_enabled", "Enable or disable same filled pages deduplication.", cxxopts::value<std::string>())
-            ("p,max_pool_percent", "Max pool percent.", cxxopts::value<std::string>())
-            ("c,compressor", "Comression alghorithm.", cxxopts::value<std::string>())
-            ("z,zpool", "Zpool type.", cxxopts::value<std::string>())
-            ("a,accept_threhsold_percent", "Accept threhsold percent.", cxxopts::value<std::string>())
-            ("h,help", "Print this help.");
+            ("env", "Get options from environment variables instead of cmdline.", cxxopts::value<bool>()->default_value("false"))
+            ("e,enabled", "Enable or disable ZSwap kernel module.", cxxopts::value<std::string>())
+            ("s,same_filled_pages_enabled", "Enable or disable memory pages deduplication.", cxxopts::value<std::string>())
+            ("p,max_pool_percent", "The maximum percentage of memory that the compressed pool can occupy.", cxxopts::value<std::string>())
+            ("c,compressor", "The default comression algorithm.", cxxopts::value<std::string>())
+            ("z,zpool", "The kernel's zpool type.", cxxopts::value<std::string>())
+            ("a,accept_threhsold_percent", "The threshold at which ZSwap would start accepting pages again after it became full.", cxxopts::value<std::string>())
+            ("h,help", "Print this help message and exit.");
 
     // Workaround to known cxxopts bug #224.
     bool argchk = argc < 2;
