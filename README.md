@@ -10,24 +10,3 @@
 
 ZSwap-cli is a command-line tool to control [zswap options](https://github.com/torvalds/linux/blob/master/Documentation/vm/zswap.rst).
 
-# Installation
-
-Install CMake, C++ compiler and optional dependencies ([fmt](https://github.com/fmtlib/fmt) and [cxxopts](https://github.com/jarro2783/cxxopts)).
-
-Download sources and build them:
-
-```bash
-git clone --depth=1 --recursive https://github.com/xvitaly/zswap-cli.git zswap-cli
-cd zswap-cli
-mkdir build
-cd build
-cmake ..
-cmake --build .
-```
-
-Install:
-
-```bash
-cd zswap-cli/build
-cmake --install .
-```
