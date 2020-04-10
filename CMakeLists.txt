@@ -6,33 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(cmake/External.cmake)
-include_directories("src")
 
-set(SOURCES
-    src/cwrappers/cwrappers.cpp
-    src/zswapworker/zswapworker.cpp
-    src/zswapobject/zswapobject.cpp
-    src/application/application.cpp
-    src/main.cpp
-)
+include_directories("src/app")
+include_directories("src/lib")
 
-set(HEADERS
-    src/cwrappers/cwrappers.hpp
-    src/zswapworker/zswapworker.hpp
-    src/zswapobject/zswapobject.hpp
-    src/application/application.hpp
-)
-
-set(INTERNAL_LIBS
-    ${SOURCES}
-    ${HEADERS}
-)
-
-set(EXTERNAL_LIBS
-    fmt::fmt
-)
-
-add_executable(zswap-cli ${INTERNAL_LIBS})
-target_link_libraries(zswap-cli PRIVATE ${EXTERNAL_LIBS})
-
-include(cmake/InstallTargets.cmake)
+add_subdirectory("src/lib")
+add_subdirectory("src/app")
