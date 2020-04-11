@@ -1,3 +1,5 @@
 include(GNUInstallDirs)
+include(FindPackageHandleStandardArgs)
 include(cmake/FindFmt.cmake)
 include(cmake/FindCxxOpts.cmake)
+include(cmake/FindPandoc.cmake)
