@@ -1,5 +1,5 @@
 Name: zswap-cli
-Version: 0.1.0
+Version: 0.2.0
 Release: 1%{?dist}
 
 Summary: Command-line tool to control zswap options
@@ -12,6 +12,7 @@ BuildRequires: ninja-build
 BuildRequires: fmt-devel
 BuildRequires: systemd
 BuildRequires: gcc-c++
+BuildRequires: pandoc
 BuildRequires: cmake
 
 %{?systemd_requires}
@@ -44,12 +45,16 @@ popd
 %ninja_install -C %{_target_platform}
 
 %files
-%doc README.md
+%doc README.md docs/*
 %license LICENSE
 %{_sbindir}/%{name}
 %{_unitdir}/%{name}.service
+%{_mandir}/man1/%{name}.*
 %config(noreplace) %{_sysconfdir}/default/%{name}
 
 %changelog
+* Mon Apr 13 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1
+- Updated to version 0.2.0.
+
 * Sat Apr 04 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1
 - Initial SPEC release.
