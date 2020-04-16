@@ -23,6 +23,7 @@
 #ifndef ZSWAPOBJECT_H
 #define ZSWAPOBJECT_H
 
+#include "zswapworker/zswapworker.hpp"
 #include <iostream>
 #include <regex>
 

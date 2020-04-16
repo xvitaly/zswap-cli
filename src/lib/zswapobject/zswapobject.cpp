@@ -21,7 +21,6 @@
 */
 
 #include "zswapobject/zswapobject.hpp"
-#include "zswapworker/zswapworker.hpp"
 
 std::string ZSwapObject::GetName() const
 {
