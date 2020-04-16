@@ -50,6 +50,22 @@ bool Application::CheckIfRunningBySuperUser()
     return false;
 }
 
+int Application::GetUsageStats()
+{
+    ZSwapDebug ZSwapDebugger;
+    std::cout << fmt::format("Duplicate entries count: {0}.", ZSwapDebugger.GetDuplicateEntry()) << std::endl;
+    std::cout << fmt::format("Pool limit hit: {0}.", ZSwapDebugger.GetPoolLimitHit()) << std::endl;
+    std::cout << fmt::format("Pool total size: {0}.", ZSwapDebugger.GetPoolTotalSize()) << std::endl;
+    std::cout << fmt::format("Reject allocation failures: {0}.", ZSwapDebugger.GetRejectAllocFail()) << std::endl;
+    std::cout << fmt::format("Reject compression poor: {0}.", ZSwapDebugger.GetRejectCompressPoor()) << std::endl;
+    std::cout << fmt::format("Reject Kmemcache failures: {0}.", ZSwapDebugger.GetRejectKmemCacheFail()) << std::endl;
+    std::cout << fmt::format("Reject reclaim failures: {0}.", ZSwapDebugger.GetRejectReclaimFail()) << std::endl;
+    std::cout << fmt::format("Same filled pages count: {0}.", ZSwapDebugger.GetSameFilledPages()) << std::endl;
+    std::cout << fmt::format("Stored pages count: {0}.", ZSwapDebugger.GetStoredPages()) << std::endl;
+    std::cout << fmt::format("Written back pages count: {0}.", ZSwapDebugger.GetWrittenBackPages()) << std::endl;
+    return 0;
+}
+
 void Application::ExecuteEnv()
 {
     const std::string ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
@@ -80,6 +96,7 @@ void Application::ExecuteCmdLine(const cxxopts::ParseResult& CmdLine)
 int Application::Run(const cxxopts::ParseResult& CmdLine)
 {
     if (CheckIfRunningBySuperUser()) return 1;
+    if (CmdLine.count("stats")) return GetUsageStats();
     if (CmdLine.count("env")) ExecuteEnv(); else ExecuteCmdLine(CmdLine);
     return 0;
 }

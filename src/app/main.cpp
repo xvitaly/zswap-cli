@@ -28,6 +28,7 @@ int main(int argc, char** argv)
     cxxopts::Options options("zswap-cli", "Command-line tool to control ZSwap Linux kernel module.");
     options.add_options()
             ("env", "Get options from environment variables instead of cmdline.", cxxopts::value<bool>()->default_value("false"))
+            ("stats", "Get statistics of ZSwap usage and current settings.", cxxopts::value<bool>()->default_value("false"))
             ("e,enabled", "Enable or disable ZSwap kernel module.", cxxopts::value<std::string>())
             ("s,same_filled_pages_enabled", "Enable or disable memory pages deduplication.", cxxopts::value<std::string>())
             ("p,max_pool_percent", "The maximum percentage of memory that the compressed pool can occupy.", cxxopts::value<std::string>())

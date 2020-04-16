@@ -30,6 +30,7 @@
 #include "cwrappers/cwrappers.hpp"
 #include "zswapworker/zswapworker.hpp"
 #include "zswapobject/zswapobject.hpp"
+#include "zswapdebug/zswapdebug.hpp"
 
 class Application
 {
@@ -49,6 +50,7 @@ private:
     bool CheckIfRunningBySuperUser();
     void ExecuteEnv();
     void ExecuteCmdLine(const cxxopts::ParseResult&);
+    int GetUsageStats();
 };
 
 #endif // APPLICATION_H
