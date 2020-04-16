@@ -17,6 +17,9 @@ ZSwap-cli is a simple command-line tool to control ZSwap Linux kernel module.
 #### \-\-env
 Get options from environment variables instead of cmdline.
 
+#### \-\-stats
+Get statistics of ZSwap usage and current settings.
+
 #### -e, \-\-enabled
 Enable or disable ZSwap kernel module.
 
