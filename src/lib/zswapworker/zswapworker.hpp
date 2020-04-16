@@ -31,6 +31,7 @@ class ZSwapWorker
 public:
     static void WriteZSwapValue(const std::string&, const std::string&);
     static std::string ReadZSwapValue(const std::string&);
+    static std::string ReadZSwapDebugValue(const std::string&);
 private:
     ZSwapWorker() = default;
 };
