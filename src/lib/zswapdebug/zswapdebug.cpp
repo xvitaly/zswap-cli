@@ -1,51 +1,51 @@
 #include "zswapdebug/zswapdebug.hpp"
 
-std::string& ZSwapDebug::GetDuplicateEntry()
+long& ZSwapDebug::GetDuplicateEntry()
 {
     return ZSwapDebug::DuplicateEntry;
 }
 
-std::string& ZSwapDebug::GetPoolLimitHit()
+long& ZSwapDebug::GetPoolLimitHit()
 {
     return ZSwapDebug::PoolLimitHit;
 }
 
-std::string& ZSwapDebug::GetPoolTotalSize()
+long& ZSwapDebug::GetPoolTotalSize()
 {
     return ZSwapDebug::PoolTotalSize;
 }
 
-std::string& ZSwapDebug::GetRejectAllocFail()
+long& ZSwapDebug::GetRejectAllocFail()
 {
     return ZSwapDebug::RejectAllocFail;
 }
 
-std::string& ZSwapDebug::GetRejectCompressPoor()
+long& ZSwapDebug::GetRejectCompressPoor()
 {
     return ZSwapDebug::RejectCompressPoor;
 }
 
-std::string& ZSwapDebug::GetRejectKmemCacheFail()
+long& ZSwapDebug::GetRejectKmemCacheFail()
 {
     return ZSwapDebug::RejectKmemCacheFail;
 }
 
-std::string& ZSwapDebug::GetRejectReclaimFail()
+long& ZSwapDebug::GetRejectReclaimFail()
 {
     return ZSwapDebug::RejectReclaimFail;
 }
 
-std::string& ZSwapDebug::GetSameFilledPages()
+long& ZSwapDebug::GetSameFilledPages()
 {
     return ZSwapDebug::SameFilledPages;
 }
 
-std::string& ZSwapDebug::GetStoredPages()
+long& ZSwapDebug::GetStoredPages()
 {
     return ZSwapDebug::StoredPages;
 }
 
-std::string& ZSwapDebug::GetWrittenBackPages()
+long& ZSwapDebug::GetWrittenBackPages()
 {
     return ZSwapDebug::WrittenBackPages;
 }

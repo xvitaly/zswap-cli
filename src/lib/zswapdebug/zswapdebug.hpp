@@ -7,27 +7,27 @@ class ZSwapDebug
 {
 public:
     ZSwapDebug();
-    std::string& GetDuplicateEntry();
-    std::string& GetPoolLimitHit();
-    std::string& GetPoolTotalSize();
-    std::string& GetRejectAllocFail();
-    std::string& GetRejectCompressPoor();
-    std::string& GetRejectKmemCacheFail();
-    std::string& GetRejectReclaimFail();
-    std::string& GetSameFilledPages();
-    std::string& GetStoredPages();
-    std::string& GetWrittenBackPages();
+    long& GetDuplicateEntry();
+    long& GetPoolLimitHit();
+    long& GetPoolTotalSize();
+    long& GetRejectAllocFail();
+    long& GetRejectCompressPoor();
+    long& GetRejectKmemCacheFail();
+    long& GetRejectReclaimFail();
+    long& GetSameFilledPages();
+    long& GetStoredPages();
+    long& GetWrittenBackPages();
 protected:
-    std::string DuplicateEntry;
-    std::string PoolLimitHit;
-    std::string PoolTotalSize;
-    std::string RejectAllocFail;
-    std::string RejectCompressPoor;
-    std::string RejectKmemCacheFail;
-    std::string RejectReclaimFail;
-    std::string SameFilledPages;
-    std::string StoredPages;
-    std::string WrittenBackPages;
+    long DuplicateEntry;
+    long PoolLimitHit;
+    long PoolTotalSize;
+    long RejectAllocFail;
+    long RejectCompressPoor;
+    long RejectKmemCacheFail;
+    long RejectReclaimFail;
+    long SameFilledPages;
+    long StoredPages;
+    long WrittenBackPages;
 private:
     void ReadDebugValues();
 };

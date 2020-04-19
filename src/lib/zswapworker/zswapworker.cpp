@@ -38,9 +38,9 @@ std::string ZSwapWorker::ReadZSwapValue(const std::string& Name)
     return Result;
 }
 
-std::string ZSwapWorker::ReadZSwapDebugValue(const std::string& Name)
+long ZSwapWorker::ReadZSwapDebugValue(const std::string& Name)
 {
-    std::string Result;
+    long Result;
     std::ifstream ZSwapSysFs("/sys/kernel/debug/zswap/" + Name);
     ZSwapSysFs >> Result;
     ZSwapSysFs.close();
