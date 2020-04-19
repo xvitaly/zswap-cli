@@ -23,10 +23,46 @@
 #ifndef ZSWAPOBJECT_H
 #define ZSWAPOBJECT_H
 
+#include "zswapworker/zswapworker.hpp"
+#include <iostream>
+#include <stdexcept>
+#include <regex>
+#include <fmt/format.h>
+
 class ZSwapObject
 {
 public:
     ZSwapObject();
+    std::string& GetZSwapEnabled();
+    void SetZSwapEnabled(const std::string&);
+    std::string& GetZSwapSameFilledPages();
+    void SetZSwapSameFilledPages(const std::string&);
+    std::string& GetZSwapMaxPoolPercent();
+    void SetZSwapMaxPoolPercent(const std::string&);
+    std::string& GetZSwapCompressor();
+    void SetZSwapCompressor(const std::string&);
+    std::string& GetZSwapZpool();
+    void SetZSwapZpool(const std::string&);
+    std::string& GetZSwapAcceptThrehsoldPercent();
+    void SetZSwapAcceptThrehsoldPercent(const std::string&);
+protected:
+    std::string ZSwapEnabled;
+    std::string ZSwapSameFilledPages;
+    std::string ZSwapMaxPoolPercent;
+    std::string ZSwapCompressor;
+    std::string ZSwapZpool;
+    std::string ZSwapAcceptThrehsoldPercent;
+    const std::string ZSwapEnabledName = "enabled";
+    const std::string ZSwapSameFilledPagesName = "same_filled_pages_enabled";
+    const std::string ZSwapMaxPoolPercentName = "max_pool_percent";
+    const std::string ZSwapCompressorName = "compressor";
+    const std::string ZSwapZpoolName = "zpool";
+    const std::string ZSwapAcceptThrehsoldPercentName = "accept_threhsold_percent";
+private:
+    void WriteLogEntry(const std::string&, const std::string&, const std::string&);
+    void ReadValues();
+    bool CheckPercent(const std::string&);
+    bool CheckEnabled(const std::string&);
 };
 
 #endif // ZSWAPOBJECT_H
