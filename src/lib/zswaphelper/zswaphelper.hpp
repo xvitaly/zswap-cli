@@ -20,37 +20,26 @@
     THE SOFTWARE.
 */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef ZSWAPHELPER_HPP
+#define ZSWAPHELPER_HPP
 
-#include <iostream>
-#include <fmt/format.h>
-#include <cxxopts.hpp>
-
-#include "cwrappers/cwrappers.hpp"
 #include "zswapworker/zswapworker.hpp"
-#include "zswaphelper/zswaphelper.hpp"
-#include "zswapdebug/zswapdebug.hpp"
+#include <iostream>
+#include <regex>
 
-class Application
+class ZSwapHelper
 {
 public:
-    Application();
-    int Run(const cxxopts::ParseResult&);
+    ZSwapHelper(const std::string&, const std::string&);
+    ZSwapHelper() = default;
+    std::string GetName() const;
+    std::string GetValue() const;
+    bool Validate(const std::string&);
+    void SetValue(const std::string&);
 protected:
-    ZSwapHelper ZSwapEnabled;
-    ZSwapHelper ZSwapSameFilledPages;
-    ZSwapHelper ZSwapMaxPoolPercent;
-    ZSwapHelper ZSwapCompressor;
-    ZSwapHelper ZSwapZpool;
-    ZSwapHelper ZSwapAcceptThrehsoldPercent;
-private:
-    void WriteLogEntry(const std::string&, const std::string&, const std::string&);
-    void WriteZSwapValue(ZSwapHelper&, const std::string&);
-    bool CheckIfRunningBySuperUser();
-    void ExecuteEnv();
-    void ExecuteCmdLine(const cxxopts::ParseResult&);
-    int GetUsageStats();
+    std::string _Name;
+    std::string _Value;
+    std::regex _Regex;
 };
 
-#endif // APPLICATION_H
+#endif // ZSWAPHELPER_HPP

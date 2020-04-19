@@ -27,7 +27,7 @@ void Application::WriteLogEntry(const std::string& Name, const std::string& NewV
     std::cout << fmt::format("Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
 }
 
-void Application::WriteZSwapValue(ZSwapObject& ZSwapObj, const std::string& NewValue)
+void Application::WriteZSwapValue(ZSwapHelper& ZSwapObj, const std::string& NewValue)
 {
     if (ZSwapObj.Validate(NewValue))
     {
@@ -103,10 +103,10 @@ int Application::Run(const cxxopts::ParseResult& CmdLine)
 
 Application::Application()
 {
-    ZSwapEnabled = ZSwapObject("enabled", "^[YN]$");
-    ZSwapSameFilledPages = ZSwapObject("same_filled_pages_enabled", "^[YN]$");
-    ZSwapMaxPoolPercent = ZSwapObject("max_pool_percent", "^\\d{1,3}$");
-    ZSwapCompressor = ZSwapObject("compressor", "^.*$");
-    ZSwapZpool = ZSwapObject("zpool", "^.*$");
-    ZSwapAcceptThrehsoldPercent = ZSwapObject("accept_threhsold_percent", "^\\d{1,3}$");
+    ZSwapEnabled = ZSwapHelper("enabled", "^[YN]$");
+    ZSwapSameFilledPages = ZSwapHelper("same_filled_pages_enabled", "^[YN]$");
+    ZSwapMaxPoolPercent = ZSwapHelper("max_pool_percent", "^\\d{1,3}$");
+    ZSwapCompressor = ZSwapHelper("compressor", "^.*$");
+    ZSwapZpool = ZSwapHelper("zpool", "^.*$");
+    ZSwapAcceptThrehsoldPercent = ZSwapHelper("accept_threhsold_percent", "^\\d{1,3}$");
 }

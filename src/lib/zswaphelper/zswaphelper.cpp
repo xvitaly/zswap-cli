@@ -20,37 +20,32 @@
     THE SOFTWARE.
 */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
-
-#include <iostream>
-#include <fmt/format.h>
-#include <cxxopts.hpp>
-
-#include "cwrappers/cwrappers.hpp"
-#include "zswapworker/zswapworker.hpp"
 #include "zswaphelper/zswaphelper.hpp"
-#include "zswapdebug/zswapdebug.hpp"
 
-class Application
+std::string ZSwapHelper::GetName() const
 {
-public:
-    Application();
-    int Run(const cxxopts::ParseResult&);
-protected:
-    ZSwapHelper ZSwapEnabled;
-    ZSwapHelper ZSwapSameFilledPages;
-    ZSwapHelper ZSwapMaxPoolPercent;
-    ZSwapHelper ZSwapCompressor;
-    ZSwapHelper ZSwapZpool;
-    ZSwapHelper ZSwapAcceptThrehsoldPercent;
-private:
-    void WriteLogEntry(const std::string&, const std::string&, const std::string&);
-    void WriteZSwapValue(ZSwapHelper&, const std::string&);
-    bool CheckIfRunningBySuperUser();
-    void ExecuteEnv();
-    void ExecuteCmdLine(const cxxopts::ParseResult&);
-    int GetUsageStats();
-};
+    return _Name;
+}
 
-#endif // APPLICATION_H
+std::string ZSwapHelper::GetValue() const
+{
+    return _Value;
+}
+
+void ZSwapHelper::SetValue(const std::string& NewValue)
+{
+    _Value = NewValue;
+    ZSwapWorker::WriteZSwapValue(_Name, _Value);
+}
+
+bool ZSwapHelper::Validate(const std::string& CheckValue)
+{
+    return std::regex_match(CheckValue, _Regex);
+}
+
+ZSwapHelper::ZSwapHelper(const std::string& Name, const std::string& Regex)
+{
+    _Name = Name;
+    _Regex = std::regex(Regex);
+    _Value = ZSwapWorker::ReadZSwapValue(Name);
+}

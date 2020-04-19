@@ -23,23 +23,10 @@
 #ifndef ZSWAPOBJECT_H
 #define ZSWAPOBJECT_H
 
-#include "zswapworker/zswapworker.hpp"
-#include <iostream>
-#include <regex>
-
 class ZSwapObject
 {
 public:
-    ZSwapObject(const std::string&, const std::string&);
-    ZSwapObject() = default;
-    std::string GetName() const;
-    std::string GetValue() const;
-    bool Validate(const std::string&);
-    void SetValue(const std::string&);
-protected:
-    std::string _Name;
-    std::string _Value;
-    std::regex _Regex;
+    ZSwapObject();
 };
 
 #endif // ZSWAPOBJECT_H
