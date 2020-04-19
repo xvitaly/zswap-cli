@@ -25,6 +25,7 @@
 
 #include <iostream>
 #include <cxxopts.hpp>
+#include <fmt/format.h>
 
 #include "cwrappers/cwrappers.hpp"
 #include "zswapobject/zswapobject.hpp"
@@ -40,7 +41,8 @@ private:
     bool CheckIfRunningBySuperUser();
     void ExecuteEnv();
     void ExecuteCmdLine(const cxxopts::ParseResult&);
-    int GetUsageStats();
+    int PrintUsageStats();
+    int PrintSettings();
 };
 
 #endif // APPLICATION_H

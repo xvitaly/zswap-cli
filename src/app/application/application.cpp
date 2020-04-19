@@ -32,7 +32,7 @@ bool Application::CheckIfRunningBySuperUser()
     return false;
 }
 
-int Application::GetUsageStats()
+int Application::PrintUsageStats()
 {
     ZSwapDebug ZSwapDebugger;
     std::cout << fmt::format("Duplicate entries count: {0}.", ZSwapDebugger.GetDuplicateEntry()) << std::endl;
@@ -45,6 +45,17 @@ int Application::GetUsageStats()
     std::cout << fmt::format("Same filled pages count: {0}.", ZSwapDebugger.GetSameFilledPages()) << std::endl;
     std::cout << fmt::format("Stored pages count: {0}.", ZSwapDebugger.GetStoredPages()) << std::endl;
     std::cout << fmt::format("Written back pages count: {0}.", ZSwapDebugger.GetWrittenBackPages()) << std::endl;
+    return 0;
+}
+
+int Application::PrintSettings()
+{
+    std::cout << fmt::format("ZSwap enabled: {0}.", ZSwap.GetZSwapEnabled()) << std::endl;
+    std::cout << fmt::format("Same filled pages enabled: {0}.", ZSwap.GetZSwapSameFilledPages()) << std::endl;
+    std::cout << fmt::format("Maximum pool percentage: {0}.", ZSwap.GetZSwapMaxPoolPercent()) << std::endl;
+    std::cout << fmt::format("Comression algorithm: {0}.", ZSwap.GetZSwapCompressor()) << std::endl;
+    std::cout << fmt::format("Kernel's zpool type: {0}.", ZSwap.GetZSwapZpool()) << std::endl;
+    std::cout << fmt::format("Accept threhsold percentage: {0}.", ZSwap.GetZSwapAcceptThrehsoldPercent()) << std::endl;
     return 0;
 }
 
@@ -78,7 +89,8 @@ void Application::ExecuteCmdLine(const cxxopts::ParseResult& CmdLine)
 int Application::Run(const cxxopts::ParseResult& CmdLine)
 {
     if (CheckIfRunningBySuperUser()) return 1;
-    if (CmdLine.count("stats")) return GetUsageStats();
+    if (CmdLine.count("stats")) return PrintUsageStats();
+    if (CmdLine.count("settings")) return PrintSettings();
     if (CmdLine.count("env")) ExecuteEnv(); else ExecuteCmdLine(CmdLine);
     return 0;
 }

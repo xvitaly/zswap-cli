@@ -54,7 +54,8 @@ sudo systemctl stop zswap-cli.service
 Supported command-line arguments:
 
   * `--cli` - get options from [environment variables](environment-options.md);
-  * `--stats` - get statistics of ZSwap usage and current settings;
+  * `--stats` - get statistics of ZSwap kernel module usage;
+  * `--settings` - get current configuration of ZSwap kernel module;
   * `-e` or `--enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module;
   * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication;
   * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`);
