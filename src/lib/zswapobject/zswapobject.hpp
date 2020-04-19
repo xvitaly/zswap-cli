@@ -23,11 +23,12 @@
 #ifndef ZSWAPOBJECT_H
 #define ZSWAPOBJECT_H
 
-#include "zswapworker/zswapworker.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <regex>
 #include <fmt/format.h>
+
+#include "zswapworker/zswapworker.hpp"
 
 class ZSwapObject
 {

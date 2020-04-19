@@ -13,8 +13,8 @@ set(INTERNAL_LIBS
 )
 
 set(EXTERNAL_LIBS
-    fmt::fmt
     zswap-lib
+    fmt::fmt
 )
 
 add_executable(zswap-cli ${INTERNAL_LIBS})

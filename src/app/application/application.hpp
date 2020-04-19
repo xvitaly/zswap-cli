@@ -24,29 +24,19 @@
 #define APPLICATION_H
 
 #include <iostream>
-#include <fmt/format.h>
 #include <cxxopts.hpp>
 
 #include "cwrappers/cwrappers.hpp"
-#include "zswapworker/zswapworker.hpp"
-#include "zswaphelper/zswaphelper.hpp"
+#include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 
 class Application
 {
 public:
-    Application();
+    Application() = default;
     int Run(const cxxopts::ParseResult&);
-protected:
-    ZSwapHelper ZSwapEnabled;
-    ZSwapHelper ZSwapSameFilledPages;
-    ZSwapHelper ZSwapMaxPoolPercent;
-    ZSwapHelper ZSwapCompressor;
-    ZSwapHelper ZSwapZpool;
-    ZSwapHelper ZSwapAcceptThrehsoldPercent;
 private:
-    void WriteLogEntry(const std::string&, const std::string&, const std::string&);
-    void WriteZSwapValue(ZSwapHelper&, const std::string&);
+    ZSwapObject ZSwap;
     bool CheckIfRunningBySuperUser();
     void ExecuteEnv();
     void ExecuteCmdLine(const cxxopts::ParseResult&);

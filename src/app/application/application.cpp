@@ -22,24 +22,6 @@
 
 #include "application/application.hpp"
 
-void Application::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue)
-{
-    std::cout << fmt::format("Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
-}
-
-void Application::WriteZSwapValue(ZSwapHelper& ZSwapObj, const std::string& NewValue)
-{
-    if (ZSwapObj.Validate(NewValue))
-    {
-        WriteLogEntry(ZSwapObj.GetName(), NewValue, ZSwapObj.GetValue());
-        ZSwapObj.SetValue(NewValue);
-    }
-    else
-    {
-        std::cerr << fmt::format("Failed to change the \"{0}\" variable. The value \"{1}\" does not match regular expression.", ZSwapObj.GetName(), NewValue) << std::endl;
-    }
-}
-
 bool Application::CheckIfRunningBySuperUser()
 {
     if (CWrappers::CheckRoot())
@@ -75,22 +57,22 @@ void Application::ExecuteEnv()
     const std::string ZSwapZpoolEnv = CWrappers::GetEnv("ZSWAP_ZPOOL_VALUE");
     const std::string ZSwapAcceptThrehsoldPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE");
 
-    if (!ZSwapEnabledEnv.empty()) WriteZSwapValue(ZSwapEnabled, ZSwapEnabledEnv);
-    if (!ZSwapSameFilledPagesEnv.empty()) WriteZSwapValue(ZSwapSameFilledPages, ZSwapSameFilledPagesEnv);
-    if (!ZSwapMaxPoolPercentEnv.empty()) WriteZSwapValue(ZSwapMaxPoolPercent, ZSwapMaxPoolPercentEnv);
-    if (!ZSwapCompressorEnv.empty()) WriteZSwapValue(ZSwapCompressor, ZSwapCompressorEnv);
-    if (!ZSwapZpoolEnv.empty()) WriteZSwapValue(ZSwapZpool, ZSwapZpoolEnv);
-    if (!ZSwapAcceptThrehsoldPercentEnv.empty()) WriteZSwapValue(ZSwapAcceptThrehsoldPercent, ZSwapAcceptThrehsoldPercentEnv);
+    if (!ZSwapEnabledEnv.empty()) ZSwap.SetZSwapEnabled(ZSwapEnabledEnv);
+    if (!ZSwapSameFilledPagesEnv.empty()) ZSwap.SetZSwapSameFilledPages(ZSwapSameFilledPagesEnv);
+    if (!ZSwapMaxPoolPercentEnv.empty()) ZSwap.SetZSwapMaxPoolPercent(ZSwapMaxPoolPercentEnv);
+    if (!ZSwapCompressorEnv.empty()) ZSwap.SetZSwapCompressor(ZSwapCompressorEnv);
+    if (!ZSwapZpoolEnv.empty()) ZSwap.SetZSwapZpool(ZSwapZpoolEnv);
+    if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap.SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
 }
 
 void Application::ExecuteCmdLine(const cxxopts::ParseResult& CmdLine)
 {
-    if (CmdLine.count("enabled")) WriteZSwapValue(ZSwapEnabled, CmdLine["enabled"].as<std::string>());
-    if (CmdLine.count("same_filled_pages_enabled")) WriteZSwapValue(ZSwapSameFilledPages, CmdLine["same_filled_pages_enabled"].as<std::string>());
-    if (CmdLine.count("max_pool_percent")) WriteZSwapValue(ZSwapMaxPoolPercent, CmdLine["max_pool_percent"].as<std::string>());
-    if (CmdLine.count("compressor")) WriteZSwapValue(ZSwapCompressor, CmdLine["compressor"].as<std::string>());
-    if (CmdLine.count("zpool")) WriteZSwapValue(ZSwapZpool, CmdLine["zpool"].as<std::string>());
-    if (CmdLine.count("accept_threhsold_percent")) WriteZSwapValue(ZSwapAcceptThrehsoldPercent, CmdLine["accept_threhsold_percent"].as<std::string>());
+    if (CmdLine.count("enabled")) ZSwap.SetZSwapEnabled(CmdLine["enabled"].as<std::string>());
+    if (CmdLine.count("same_filled_pages_enabled")) ZSwap.SetZSwapSameFilledPages(CmdLine["same_filled_pages_enabled"].as<std::string>());
+    if (CmdLine.count("max_pool_percent")) ZSwap.SetZSwapMaxPoolPercent(CmdLine["max_pool_percent"].as<std::string>());
+    if (CmdLine.count("compressor")) ZSwap.SetZSwapCompressor(CmdLine["compressor"].as<std::string>());
+    if (CmdLine.count("zpool")) ZSwap.SetZSwapZpool(CmdLine["zpool"].as<std::string>());
+    if (CmdLine.count("accept_threhsold_percent")) ZSwap.SetZSwapAcceptThrehsoldPercent(CmdLine["accept_threhsold_percent"].as<std::string>());
 }
 
 int Application::Run(const cxxopts::ParseResult& CmdLine)
@@ -99,14 +81,4 @@ int Application::Run(const cxxopts::ParseResult& CmdLine)
     if (CmdLine.count("stats")) return GetUsageStats();
     if (CmdLine.count("env")) ExecuteEnv(); else ExecuteCmdLine(CmdLine);
     return 0;
-}
-
-Application::Application()
-{
-    ZSwapEnabled = ZSwapHelper("enabled", "^[YN]$");
-    ZSwapSameFilledPages = ZSwapHelper("same_filled_pages_enabled", "^[YN]$");
-    ZSwapMaxPoolPercent = ZSwapHelper("max_pool_percent", "^\\d{1,3}$");
-    ZSwapCompressor = ZSwapHelper("compressor", "^.*$");
-    ZSwapZpool = ZSwapHelper("zpool", "^.*$");
-    ZSwapAcceptThrehsoldPercent = ZSwapHelper("accept_threhsold_percent", "^\\d{1,3}$");
 }

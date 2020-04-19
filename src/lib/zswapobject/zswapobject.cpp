@@ -72,7 +72,7 @@ std::string& ZSwapObject::GetZSwapMaxPoolPercent()
 
 void ZSwapObject::SetZSwapMaxPoolPercent(const std::string& Value)
 {
-    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapMaxPoolPercent is out of range.");
+    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapMaxPoolPercent is out of range [0..100].");
     WriteLogEntry(ZSwapObject::ZSwapMaxPoolPercentName, Value, ZSwapObject::ZSwapMaxPoolPercent);
     ZSwapObject::ZSwapMaxPoolPercent = Value;
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName, Value);
@@ -111,7 +111,7 @@ std::string& ZSwapObject::GetZSwapAcceptThrehsoldPercent()
 
 void ZSwapObject::SetZSwapAcceptThrehsoldPercent(const std::string& Value)
 {
-    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThrehsoldPercent is out of range.");
+    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThrehsoldPercent is out of range [0..100].");
     WriteLogEntry(ZSwapObject::ZSwapAcceptThrehsoldPercentName, Value, ZSwapObject::ZSwapAcceptThrehsoldPercent);
     ZSwapObject::ZSwapAcceptThrehsoldPercent = Value;
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapAcceptThrehsoldPercentName, Value);
