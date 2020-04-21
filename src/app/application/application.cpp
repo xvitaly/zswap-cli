@@ -35,26 +35,45 @@ bool Application::CheckIfRunningBySuperUser()
 void Application::PrintDebugInfo()
 {
     ZSwapDebug ZSwapDebugger;
-    std::cout << fmt::format("Duplicate entries count: {0}.", ZSwapDebugger.GetDuplicateEntry()) << std::endl;
-    std::cout << fmt::format("Pool limit hit: {0}.", ZSwapDebugger.GetPoolLimitHit()) << std::endl;
-    std::cout << fmt::format("Pool total size: {0}.", ZSwapDebugger.GetPoolTotalSize()) << std::endl;
-    std::cout << fmt::format("Reject allocation failures: {0}.", ZSwapDebugger.GetRejectAllocFail()) << std::endl;
-    std::cout << fmt::format("Reject compression poor: {0}.", ZSwapDebugger.GetRejectCompressPoor()) << std::endl;
-    std::cout << fmt::format("Reject Kmemcache failures: {0}.", ZSwapDebugger.GetRejectKmemCacheFail()) << std::endl;
-    std::cout << fmt::format("Reject reclaim failures: {0}.", ZSwapDebugger.GetRejectReclaimFail()) << std::endl;
-    std::cout << fmt::format("Same filled pages count: {0}.", ZSwapDebugger.GetSameFilledPages()) << std::endl;
-    std::cout << fmt::format("Stored pages count: {0}.", ZSwapDebugger.GetStoredPages()) << std::endl;
-    std::cout << fmt::format("Written back pages count: {0}.", ZSwapDebugger.GetWrittenBackPages()) << std::endl;
+    std::cout << fmt::format("Duplicate entries count: {0}.\n"
+                             "Pool limit hit: {1}.\n"
+                             "Pool total size: {2}.\n"
+                             "Reject allocation failures: {3}.\n"
+                             "Reject compression poor: {4}.\n"
+                             "Reject Kmemcache failures: {5}.\n"
+                             "Reject reclaim failures: {6}.\n"
+                             "Same filled pages count: {7}.\n"
+                             "Stored pages count: {8}.\n"
+                             "Written back pages count: {9}.",
+                             ZSwapDebugger.GetDuplicateEntry(),
+                             ZSwapDebugger.GetPoolLimitHit(),
+                             ZSwapDebugger.GetPoolTotalSize(),
+                             ZSwapDebugger.GetRejectAllocFail(),
+                             ZSwapDebugger.GetRejectCompressPoor(),
+                             ZSwapDebugger.GetRejectKmemCacheFail(),
+                             ZSwapDebugger.GetRejectReclaimFail(),
+                             ZSwapDebugger.GetSameFilledPages(),
+                             ZSwapDebugger.GetSameFilledPages(),
+                             ZSwapDebugger.GetStoredPages(),
+                             ZSwapDebugger.GetWrittenBackPages())
+              << std::endl;
 }
 
 void Application::PrintSettings()
 {
-    std::cout << fmt::format("ZSwap enabled: {0}.", ZSwap.GetZSwapEnabled()) << std::endl;
-    std::cout << fmt::format("Same filled pages enabled: {0}.", ZSwap.GetZSwapSameFilledPages()) << std::endl;
-    std::cout << fmt::format("Maximum pool percentage: {0}.", ZSwap.GetZSwapMaxPoolPercent()) << std::endl;
-    std::cout << fmt::format("Comression algorithm: {0}.", ZSwap.GetZSwapCompressor()) << std::endl;
-    std::cout << fmt::format("Kernel's zpool type: {0}.", ZSwap.GetZSwapZpool()) << std::endl;
-    std::cout << fmt::format("Accept threhsold percentage: {0}.", ZSwap.GetZSwapAcceptThrehsoldPercent()) << std::endl;
+    std::cout << fmt::format("ZSwap enabled: {0}.\n"
+                             "Same filled pages enabled: {1}.\n"
+                             "Maximum pool percentage: {2}.\n"
+                             "Comression algorithm: {3}.\n"
+                             "Kernel's zpool type: {4}.\n"
+                             "Accept threhsold percentage: {5}.",
+                             ZSwap.GetZSwapEnabled(),
+                             ZSwap.GetZSwapSameFilledPages(),
+                             ZSwap.GetZSwapMaxPoolPercent(),
+                             ZSwap.GetZSwapCompressor(),
+                             ZSwap.GetZSwapZpool(),
+                             ZSwap.GetZSwapAcceptThrehsoldPercent())
+              << std::endl;
 }
 
 void Application::PrintCombined()
@@ -66,7 +85,7 @@ void Application::PrintCombined()
     PrintDebugInfo();
 }
 
-int Application::PrintStats(int Value)
+int Application::PrintStats(const int Value)
 {
     switch (Value)
     {
