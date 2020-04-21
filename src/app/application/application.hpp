@@ -41,8 +41,10 @@ private:
     bool CheckIfRunningBySuperUser();
     void ExecuteEnv();
     void ExecuteCmdLine(const cxxopts::ParseResult&);
-    int PrintUsageStats();
-    int PrintSettings();
+    void PrintDebugInfo();
+    void PrintSettings();
+    void PrintCombined();
+    int PrintStats(int);
 };
 
 #endif // APPLICATION_H
