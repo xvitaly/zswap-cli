@@ -35,7 +35,6 @@ bool Application::CheckIfRunningBySuperUser()
 void Application::PrintDebugInfo()
 {
     ZSwapDebug ZSwapDebugger;
-    std::cout << "ZSWAP KERNEL MODULE DEBUG INFO:" << std::endl;
     std::cout << fmt::format("Duplicate entries count: {0}.", ZSwapDebugger.GetDuplicateEntry()) << std::endl;
     std::cout << fmt::format("Pool limit hit: {0}.", ZSwapDebugger.GetPoolLimitHit()) << std::endl;
     std::cout << fmt::format("Pool total size: {0}.", ZSwapDebugger.GetPoolTotalSize()) << std::endl;
@@ -50,7 +49,6 @@ void Application::PrintDebugInfo()
 
 void Application::PrintSettings()
 {
-    std::cout << "ZSWAP KERNEL MODULE SETTINGS:" << std::endl;
     std::cout << fmt::format("ZSwap enabled: {0}.", ZSwap.GetZSwapEnabled()) << std::endl;
     std::cout << fmt::format("Same filled pages enabled: {0}.", ZSwap.GetZSwapSameFilledPages()) << std::endl;
     std::cout << fmt::format("Maximum pool percentage: {0}.", ZSwap.GetZSwapMaxPoolPercent()) << std::endl;
@@ -61,8 +59,10 @@ void Application::PrintSettings()
 
 void Application::PrintCombined()
 {
+    std::cout << "ZSWAP KERNEL MODULE SETTINGS:" << std::endl;
     PrintSettings();
     std::cout << std::endl;
+    std::cout << "ZSWAP KERNEL MODULE DEBUG INFO:" << std::endl;
     PrintDebugInfo();
 }
 
