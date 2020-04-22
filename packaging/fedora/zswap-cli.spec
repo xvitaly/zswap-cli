@@ -1,5 +1,5 @@
 Name: zswap-cli
-Version: 0.2.0
+Version: 0.3.0
 Release: 1%{?dist}
 
 Summary: Command-line tool to control zswap options
@@ -53,6 +53,9 @@ popd
 %config(noreplace) %{_sysconfdir}/default/%{name}
 
 %changelog
+* Wed Apr 22 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1
+- Updated to version 0.3.0.
+
 * Mon Apr 13 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1
 - Updated to version 0.2.0.
 
