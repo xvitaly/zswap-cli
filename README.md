@@ -1,6 +1,7 @@
 # zswap-cli
 
 [![GitHub version](https://badge.fury.io/gh/xvitaly%2Fzswap-cli.svg)](https://github.com/xvitaly/zswap-cli/releases)
+[![Linux CI](https://github.com/xvitaly/zswap-cli/workflows/Linux%20CI/badge.svg)](https://github.com/xvitaly/zswap-cli/actions)
 [![Build status](https://travis-ci.org/xvitaly/zswap-cli.svg?branch=master)](https://travis-ci.org/xvitaly/zswap-cli)
 [![Build status](https://ci.appveyor.com/api/projects/status/s6a2rtv46jewxwp3?svg=true)](https://ci.appveyor.com/project/xvitaly/zswap-cli)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/xvitaly/zswap-cli.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/zswap-cli/alerts/)
