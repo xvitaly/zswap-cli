@@ -8,6 +8,12 @@ compiler:
   - clang
   - gcc
 
+addons:
+  apt:
+    update: true
+    packages:
+      - linux-libc-dev
+
 script:
   - mkdir build
   - cd build

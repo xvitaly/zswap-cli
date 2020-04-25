@@ -7,6 +7,8 @@ License: MIT
 URL: https://github.com/xvitaly/%{name}
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires: kernel-headers
+BuildRequires: glibc-headers
 BuildRequires: cxxopts-devel
 BuildRequires: ninja-build
 BuildRequires: fmt-devel

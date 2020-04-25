@@ -16,7 +16,7 @@ jobs:
     - name: Install requirements
       run: |
         sudo apt-get update
-        sudo apt-get -y install g++ cmake make
+        sudo apt-get -y install g++ cmake make linux-libc-dev
     - name: Fetch Git submodules
       run: git submodule update --init --recursive
     - name: Run build with CMake
