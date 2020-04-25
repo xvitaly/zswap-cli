@@ -30,6 +30,7 @@
 #include "cwrappers/cwrappers.hpp"
 #include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
+#include "ksysinfo/ksysinfo.hpp"
 
 class Application
 {
@@ -43,6 +44,7 @@ private:
     void ExecuteCmdLine(const cxxopts::ParseResult&);
     void PrintDebugInfo();
     void PrintSettings();
+    void PrintSummary();
     void PrintCombined();
     int PrintStats(int);
 };

@@ -76,6 +76,35 @@ void Application::PrintSettings()
               << std::endl;
 }
 
+void Application::PrintSummary()
+{
+    ZSwapDebug ZSwapDebugger;
+    KSysInfo SysInfo;
+
+    if (ZSwapDebugger.GetPoolTotalSize() == 0)
+    {
+        std::cerr << "ZSwap is not working. The pool is empty." << std::endl;
+        return;
+    }
+
+    constexpr const long Power = 1024 << 10;
+    const float PoolSizeMB = static_cast<float>(ZSwapDebugger.GetPoolTotalSize()) / Power;
+    const float MemTotalPercent = static_cast<float>(ZSwapDebugger.GetPoolTotalSize()) / static_cast<float>(SysInfo.GetTotalRam()) * 100.f;
+    const float StoredPagesMB = static_cast<float>(ZSwapDebugger.GetStoredPages() * CWrappers::GetSCPageSize()) / Power;
+    const float SwapUsedPercent = static_cast<float>(ZSwapDebugger.GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo.GetTotalSwap() - SysInfo.GetFreeSwap()) * 100.f;
+    const float CompressionRatio = StoredPagesMB / PoolSizeMB;
+
+    std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
+                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed)\n"
+                             "Comression ratio: {4:.2f}",
+                             PoolSizeMB,
+                             MemTotalPercent,
+                             StoredPagesMB,
+                             SwapUsedPercent,
+                             CompressionRatio)
+              << std::endl;
+}
+
 void Application::PrintCombined()
 {
     std::cout << "ZSWAP KERNEL MODULE SETTINGS:" << std::endl;
@@ -97,6 +126,9 @@ int Application::PrintStats(const int Value)
             break;
         case 2:
             PrintDebugInfo();
+            break;
+        case 3:
+            PrintSummary();
             break;
         default:
             std::cout << "Incorrect value of --stats command-line option was specified." << std::endl;

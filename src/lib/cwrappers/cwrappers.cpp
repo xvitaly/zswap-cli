@@ -32,3 +32,8 @@ bool CWrappers::CheckRoot()
 {
     return getuid();
 }
+
+long CWrappers::GetSCPageSize()
+{
+    return sysconf(_SC_PAGESIZE);
+}

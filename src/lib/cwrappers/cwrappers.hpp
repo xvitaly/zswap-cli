@@ -31,6 +31,7 @@ class CWrappers
 public:
     static std::string GetEnv(const std::string&);
     static bool CheckRoot();
+    static long GetSCPageSize();
 private:
     CWrappers() = default;
 };
