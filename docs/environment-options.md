@@ -7,7 +7,7 @@ ZSwap-cli support of getting options from environment variables.
   * `ZSWAP_ENABLED_VALUE` - enable (`Y`) or disable (`N`) ZSwap kernel module.
   * `ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE` - enable (`Y`) or disable (`N`) memory pages deduplication.
   * `ZSWAP_MAX_POOL_PERCENT_VALUE` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
-  * `ZSWAP_COMPRESSOR_VALUE` - the default comression algorithm.
+  * `ZSWAP_COMPRESSOR_VALUE` - the default compression algorithm.
   * `ZSWAP_ZPOOL_VALUE` - the kernel's zpool type.
   * `ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
 

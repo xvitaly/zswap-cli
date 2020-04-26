@@ -83,13 +83,13 @@ public:
     void SetZSwapMaxPoolPercent(const std::string&);
 
     /**
-     *  Gets the comression algorithm name.
-     * @returns Comression algorithm name.
+     *  Gets the compression algorithm name.
+     * @returns Compression algorithm name.
     */
     std::string& GetZSwapCompressor();
 
     /**
-     *  Sets the comression algorithm name.
+     *  Sets the compression algorithm name.
      * @param Value New value.
     */
     void SetZSwapCompressor(const std::string&);
@@ -134,7 +134,7 @@ protected:
     std::string ZSwapMaxPoolPercent;
 
     /**
-     *  Stores the comression algorithm name.
+     *  Stores the compression algorithm name.
     */
     std::string ZSwapCompressor;
 
@@ -164,7 +164,7 @@ protected:
     const std::string ZSwapMaxPoolPercentName = "max_pool_percent";
 
     /**
-     *  Stores the comression algorithm internal parameter name.
+     *  Stores the compression algorithm internal parameter name.
     */
     const std::string ZSwapCompressorName = "compressor";
 
