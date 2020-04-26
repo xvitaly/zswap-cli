@@ -83,7 +83,7 @@ void Application::PrintSummary()
 
     if (ZSwapDebugger.GetPoolTotalSize() == 0)
     {
-        std::cerr << "ZSwap is not working. The pool is empty." << std::endl;
+        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
         return;
     }
 
@@ -94,9 +94,9 @@ void Application::PrintSummary()
     const float SwapUsedPercent = static_cast<float>(ZSwapDebugger.GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo.GetTotalSwap() - SysInfo.GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
-    std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
-                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed)\n"
-                             "Comression ratio: {4:.2f}",
+    std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
+                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed).\n"
+                             "Comression ratio: {4:.2f}.",
                              PoolSizeMB,
                              MemTotalPercent,
                              StoredPagesMB,
@@ -109,6 +109,9 @@ void Application::PrintCombined()
 {
     std::cout << "ZSWAP KERNEL MODULE SETTINGS:" << std::endl;
     PrintSettings();
+    std::cout << std::endl;
+    std::cout << "ZSWAP KERNEL MODULE USAGE SUMMARY:" << std::endl;
+    PrintSummary();
     std::cout << std::endl;
     std::cout << "ZSWAP KERNEL MODULE DEBUG INFO:" << std::endl;
     PrintDebugInfo();
@@ -125,10 +128,10 @@ int Application::PrintStats(const int Value)
             PrintSettings();
             break;
         case 2:
-            PrintDebugInfo();
+            PrintSummary();
             break;
         case 3:
-            PrintSummary();
+            PrintDebugInfo();
             break;
         default:
             std::cout << "Incorrect value of --stats command-line option was specified." << std::endl;
