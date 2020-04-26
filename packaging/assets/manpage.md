@@ -24,7 +24,8 @@ Supported values:
 
   * `0` - print both ZSwap kernel module settings and debug information;
   * `1` - print ZSwap kernel module settings;
-  * `2` - print  ZSwap kernel module debug information.
+  * `2` - print ZSwap kernel module usage summary;
+  * `3` - print  ZSwap kernel module debug information.
 
 #### -e, \-\-enabled
 Enable or disable ZSwap kernel module.
