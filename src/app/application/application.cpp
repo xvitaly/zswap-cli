@@ -64,7 +64,7 @@ void Application::PrintSettings()
     std::cout << fmt::format("ZSwap enabled: {0}.\n"
                              "Same filled pages enabled: {1}.\n"
                              "Maximum pool percentage: {2}.\n"
-                             "Comression algorithm: {3}.\n"
+                             "Compression algorithm: {3}.\n"
                              "Kernel's zpool type: {4}.\n"
                              "Accept threhsold percentage: {5}.",
                              ZSwap.GetZSwapEnabled(),
@@ -96,7 +96,7 @@ void Application::PrintSummary()
 
     std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
                              "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed).\n"
-                             "Comression ratio: {4:.2f}.",
+                             "Compression ratio: {4:.2f}.",
                              PoolSizeMB,
                              MemTotalPercent,
                              StoredPagesMB,

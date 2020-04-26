@@ -32,7 +32,7 @@ int main(int argc, char** argv)
             ("e,enabled", "Enable or disable ZSwap kernel module.", cxxopts::value<std::string>())
             ("s,same_filled_pages_enabled", "Enable or disable memory pages deduplication.", cxxopts::value<std::string>())
             ("p,max_pool_percent", "The maximum percentage of memory that the compressed pool can occupy.", cxxopts::value<std::string>())
-            ("c,compressor", "The default comression algorithm.", cxxopts::value<std::string>())
+            ("c,compressor", "The default compression algorithm.", cxxopts::value<std::string>())
             ("z,zpool", "The kernel's zpool type.", cxxopts::value<std::string>())
             ("a,accept_threhsold_percent", "The threshold at which ZSwap would start accepting pages again after it became full.", cxxopts::value<std::string>())
             ("h,help", "Print this help message and exit.");

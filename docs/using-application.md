@@ -58,7 +58,7 @@ Supported command-line arguments:
   * `-e` or `--enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module;
   * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication;
   * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`);
-  * `-c` or `--compressor` - the default comression algorithm;
+  * `-c` or `--compressor` - the default compression algorithm;
   * `-z` or `--zpool` - the kernel's zpool type;
   * `-a` or `--accept_threhsold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
 
