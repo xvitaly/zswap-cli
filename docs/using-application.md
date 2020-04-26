@@ -11,7 +11,7 @@ After [installation](installation.md), the systemd-unit `zswap-cli.service` will
 
 ### Changing settings
 
-All settings are stored in `/etc/default/zswap-cli` file. Feel free to edit it.
+All settings are stored in `/etc/zswap-cli.conf` file. Feel free to edit it.
 
 All supported values can be found [here](environment-options.md).
 

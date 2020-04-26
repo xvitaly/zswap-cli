@@ -92,7 +92,7 @@ After installation, the systemd-unit **zswap-cli.service** will be added.
 
 ## Changing settings
 
-All settings are stored in **/etc/default/zswap-cli** file. It use environment options syntax.
+All settings are stored in **/etc/zswap-cli.conf** file. It use environment options syntax.
 
 ## Enabling unit
 

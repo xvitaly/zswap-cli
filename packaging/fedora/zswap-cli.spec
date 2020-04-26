@@ -52,7 +52,7 @@ popd
 %{_sbindir}/%{name}
 %{_unitdir}/%{name}.service
 %{_mandir}/man1/%{name}.*
-%config(noreplace) %{_sysconfdir}/default/%{name}
+%config(noreplace) %{_sysconfdir}/%{name}.conf
 
 %changelog
 * Wed Apr 22 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1
