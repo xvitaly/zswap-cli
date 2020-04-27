@@ -30,6 +30,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <regex>
+#include <stdexcept>
 #include <fmt/format.h>
 
 #include "zswapworker/zswapworker.hpp"
@@ -55,6 +56,8 @@ public:
     /**
      *  Sets the ZSwap enabled value.
      * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
     */
     void SetZSwapEnabled(const std::string&);
 
@@ -67,6 +70,8 @@ public:
     /**
      *  Sets the same filled pages enabled value.
      * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
     */
     void SetZSwapSameFilledPages(const std::string&);
 
@@ -79,6 +84,8 @@ public:
     /**
      *  Sets the maximum pool percentage value.
      * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
     */
     void SetZSwapMaxPoolPercent(const std::string&);
 
@@ -91,6 +98,8 @@ public:
     /**
      *  Sets the compression algorithm name.
      * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
     */
     void SetZSwapCompressor(const std::string&);
 
@@ -103,6 +112,8 @@ public:
     /**
      *  Sets the kernel's zpool type.
      * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
     */
     void SetZSwapZpool(const std::string&);
 
@@ -115,6 +126,8 @@ public:
     /**
      *  Sets the accept threhsold percentage value.
      * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
     */
     void SetZSwapAcceptThrehsoldPercent(const std::string&);
 protected:

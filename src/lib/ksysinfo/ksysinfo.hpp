@@ -110,6 +110,7 @@ public:
 private:
     /**
      *  Stores instance of sysinfo structure.
+     * @exception Raises an instance of std::runtime_error on error.
     */
     struct sysinfo SysInfo;
 };
