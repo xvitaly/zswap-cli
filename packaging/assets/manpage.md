@@ -128,4 +128,4 @@ sudo systemctl stop zswap-cli.service
 
 # AUTHORS
 
-Vitaly Zaitsev ⟨vitaly@easycoding.org⟩.
+Copyright (c) 2020 EasyCoding Team and contributors.
