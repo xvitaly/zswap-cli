@@ -156,7 +156,7 @@ void Application::ExecuteEnv()
     if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap.SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
 }
 
-void Application::ExecuteCmdLine(const cxxopts::ParseResult& CmdLine)
+void Application::ExecuteCmdLine(const boost::program_options::variables_map& CmdLine)
 {
     if (CmdLine.count("enabled")) ZSwap.SetZSwapEnabled(CmdLine["enabled"].as<std::string>());
     if (CmdLine.count("same_filled_pages_enabled")) ZSwap.SetZSwapSameFilledPages(CmdLine["same_filled_pages_enabled"].as<std::string>());
@@ -166,7 +166,7 @@ void Application::ExecuteCmdLine(const cxxopts::ParseResult& CmdLine)
     if (CmdLine.count("accept_threhsold_percent")) ZSwap.SetZSwapAcceptThrehsoldPercent(CmdLine["accept_threhsold_percent"].as<std::string>());
 }
 
-int Application::Run(const cxxopts::ParseResult& CmdLine)
+int Application::Run(const boost::program_options::variables_map& CmdLine)
 {
     if (CheckIfRunningBySuperUser()) return 1;
     if (CmdLine.count("stats")) return PrintStats(CmdLine["stats"].as<int>());

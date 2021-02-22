@@ -28,7 +28,7 @@
  */
 
 #include <iostream>
-#include <cxxopts.hpp>
+#include <boost/program_options.hpp>
 #include <fmt/format.h>
 
 #include "cwrappers/cwrappers.hpp"
@@ -52,7 +52,7 @@ public:
      * @param CmdLine Instance of command-line arguments parser.
      * @returns Exit code.
     */
-    int Run(const cxxopts::ParseResult&);
+    int Run(const boost::program_options::variables_map&);
 private:
     /**
      *  Stores an instance of ZSwapObject class.
@@ -77,7 +77,7 @@ private:
      *  Gets parameters from command-line arguments.
      * @param CmdLine Instance of command-line arguments parser.
     */
-    void ExecuteCmdLine(const cxxopts::ParseResult&);
+    void ExecuteCmdLine(const boost::program_options::variables_map&);
 
     /**
      *  Prints ZSwap kernel module debug information.

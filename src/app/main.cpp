@@ -25,23 +25,25 @@
 int main(int argc, char** argv)
 {
     // Initializing command-line arguments parser...
-    cxxopts::Options options("zswap-cli", "Command-line tool to control ZSwap Linux kernel module.");
+    boost::program_options::options_description options("Command-line tool to control ZSwap Linux kernel module");
     options.add_options()
-            ("env", "Get options from environment variables instead of cmdline.", cxxopts::value<bool>()->default_value("false"))
-            ("stats", "Get statistics and current settings of ZSwap kernel module.", cxxopts::value<int>())
-            ("e,enabled", "Enable or disable ZSwap kernel module.", cxxopts::value<std::string>())
-            ("s,same_filled_pages_enabled", "Enable or disable memory pages deduplication.", cxxopts::value<std::string>())
-            ("p,max_pool_percent", "The maximum percentage of memory that the compressed pool can occupy.", cxxopts::value<std::string>())
-            ("c,compressor", "The default compression algorithm.", cxxopts::value<std::string>())
-            ("z,zpool", "The kernel's zpool type.", cxxopts::value<std::string>())
-            ("a,accept_threhsold_percent", "The threshold at which ZSwap would start accepting pages again after it became full.", cxxopts::value<std::string>())
-            ("h,help", "Print this help message and exit.");
-
-    // Workaround to known cxxopts bug #224.
-    bool argchk = argc < 2;
+        ("env", "Get options from environment variables instead of cmdline.")
+        ("help", "Print this help message and exit.")
+        ("stats", boost::program_options::value<int>()->implicit_value(0), "Get statistics and current settings of ZSwap kernel module.")
+        ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable ZSwap kernel module.")
+        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Get statistics and current settings of ZSwap kernel module.")
+        ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("compressor,c", boost::program_options::value<std::string>(), "The default compression algorithm.")
+        ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
+        ("accept_threhsold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ;
 
     // Parsing command-line arguments...
-    cxxopts::ParseResult CmdLine = options.parse(argc, argv);
-    if (argchk || CmdLine.count("help")) std::cout << options.help() << std::endl; else return Application().Run(CmdLine);
+    boost::program_options::variables_map vm;
+    boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(options).allow_unregistered().run(), vm);
+    boost::program_options::notify(vm);
+
+    // Running application...
+    if (argc < 2 || vm.count("help")) options.print(std::cout); else return Application().Run(vm);
     return 0;
 }
