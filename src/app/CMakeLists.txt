@@ -15,6 +15,7 @@ set(INTERNAL_LIBS
 set(EXTERNAL_LIBS
     zswap-lib
     fmt::fmt
+    Boost::program_options
 )
 
 add_executable(zswap-cli ${INTERNAL_LIBS})

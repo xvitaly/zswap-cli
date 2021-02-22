@@ -1,7 +1,7 @@
 include(GNUInstallDirs)
 include(FindPackageHandleStandardArgs)
+include(cmake/FindBoost.cmake)
 include(cmake/FindFmt.cmake)
-include(cmake/FindCxxOpts.cmake)
 include(cmake/FindPandoc.cmake)
 include(cmake/FindKernelHeaders.cmake)
 include(cmake/FindGlibcHeaders.cmake)
