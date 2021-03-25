@@ -3,7 +3,6 @@
 [![GitHub version](https://img.shields.io/github/v/release/xvitaly/zswap-cli?sort=semver&color=brightgreen&logo=git&logoColor=white)](https://github.com/xvitaly/zswap-cli/releases)
 [![GCC CI status](https://github.com/xvitaly/zswap-cli/actions/workflows/gcc.yml/badge.svg)](https://github.com/xvitaly/zswap-cli/actions/workflows/gcc.yml)
 [![Clang CI status](https://github.com/xvitaly/zswap-cli/actions/workflows/clang.yml/badge.svg)](https://github.com/xvitaly/zswap-cli/actions/workflows/clang.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/s6a2rtv46jewxwp3?svg=true)](https://ci.appveyor.com/project/xvitaly/zswap-cli)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/xvitaly/zswap-cli.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/zswap-cli/alerts/)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/xvitaly/zswap-cli.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/zswap-cli/context:cpp)
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/zswap-cli.svg?label=issues&maxAge=180)](https://github.com/xvitaly/zswap-cli/issues)
