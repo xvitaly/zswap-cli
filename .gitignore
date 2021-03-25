@@ -31,6 +31,12 @@
 *.out
 *.app
 
+# Qt Creator CMake
+CMakeLists.txt.user*
+
+# Build directory
+/build
+
 # Doxygen output
 /Doxyfile
 /doxyout
