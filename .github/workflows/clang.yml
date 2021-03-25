@@ -1,0 +1,40 @@
+name: Clang CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build project with Clang
+    runs-on: ubuntu-latest
+    env:
+      CC: clang
+      CXX: clang++
+    steps:
+    - name: Fetching sources
+      uses: actions/checkout@v2
+    - name: Fetching submodules
+      run: git submodule update --init --recursive
+    - name: Installing compiler
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install clang
+    - name: Installing build system
+      run: |
+        sudo apt-get -y install cmake make
+    - name: Installing development packages
+      run: |
+        sudo apt-get -y install linux-libc-dev libboost-all-dev
+    - name: Preparing for the build
+      run: |
+        mkdir build
+    - name: Building with CMake
+      run: |
+        pushd build
+        cmake ..
+        cmake --build .
+        popd
+    - name: Installing project
+      run: |
+        pushd build
+        sudo make install
+        popd

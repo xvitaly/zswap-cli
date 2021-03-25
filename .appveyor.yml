@@ -7,7 +7,7 @@ install:
 - sh: >-
     sudo apt-get update
 
-    sudo apt-get -y install g++ cmake make linux-libc-dev
+    sudo apt-get install --yes g++ cmake make linux-libc-dev libboost-all-dev
 build_script:
 - sh: >-
     git submodule update --init --recursive
