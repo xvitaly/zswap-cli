@@ -23,7 +23,7 @@ jobs:
         sudo apt-get -y install cmake make
     - name: Installing development packages
       run: |
-        sudo apt-get -y install linux-libc-dev libboost-all-dev
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev
     - name: Preparing for the build
       run: |
         mkdir build
