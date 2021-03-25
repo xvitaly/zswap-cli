@@ -1,1 +1,1 @@
-find_package(Boost 1.63.0 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.65.0 COMPONENTS program_options REQUIRED)
