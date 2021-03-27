@@ -10,6 +10,7 @@ project(zswap-cli
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(cmake/Variables.cmake)
 include(cmake/Settings.cmake)
 include(cmake/External.cmake)
 
