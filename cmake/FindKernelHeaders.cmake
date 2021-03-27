@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 find_path(KERNELHEADERS_PATH
     NAMES "linux/kernel.h"
 )

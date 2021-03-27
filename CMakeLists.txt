@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 cmake_minimum_required(VERSION 3.12)
 
 project(zswap-cli

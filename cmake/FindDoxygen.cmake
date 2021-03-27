@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 if (BUILD_DOC)
     find_package(Doxygen REQUIRED)
     set(DOXYGEN_QUIET YES)
