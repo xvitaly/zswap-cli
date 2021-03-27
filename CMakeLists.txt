@@ -19,3 +19,5 @@ add_subdirectory("src/lib")
 
 include_directories("src/app")
 add_subdirectory("src/app")
+
+add_subdirectory("assets")
