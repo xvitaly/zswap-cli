@@ -23,11 +23,11 @@ set(EXTERNAL_LIBS
     fmt::fmt
 )
 
-add_library(zswap-lib STATIC
+add_library(${LIB_NAME} STATIC
     ${INTERNAL_LIBS}
 )
 
-target_link_libraries(zswap-lib PRIVATE ${EXTERNAL_LIBS})
+target_link_libraries(${LIB_NAME} PRIVATE ${EXTERNAL_LIBS})
 
 if (BUILD_DOC)
     find_package(Doxygen)
