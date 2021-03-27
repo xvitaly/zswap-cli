@@ -57,15 +57,3 @@ ZSwap-cli is a command-line tool to control zswap options.
 %changelog
 * Mon Apr 27 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1
 - Updated to version 0.4.1.
-
-* Sun Apr 26 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-1
-- Updated to version 0.4.0.
-
-* Wed Apr 22 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1
-- Updated to version 0.3.0.
-
-* Mon Apr 13 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1
-- Updated to version 0.2.0.
-
-* Sat Apr 04 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1
-- Initial SPEC release.
