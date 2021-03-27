@@ -1,6 +1,6 @@
 include(GNUInstallDirs)
-include(FindPackageHandleStandardArgs)
 include(cmake/FindBoost.cmake)
+include(cmake/FindDoxygen.cmake)
 include(cmake/FindFmt.cmake)
 include(cmake/FindPandoc.cmake)
 include(cmake/FindKernelHeaders.cmake)
