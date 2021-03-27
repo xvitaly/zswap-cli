@@ -1,3 +1,5 @@
+%undefine __cmake_in_source_build
+
 Name: zswap-cli
 Version: 0.4.1
 Release: 1%{?dist}
@@ -24,15 +26,13 @@ ZSwap-cli is a command-line tool to control zswap options.
 
 %prep
 %autosetup
-mkdir -p %{_target_platform}
 
 %build
-pushd %{_target_platform}
-    %cmake -G Ninja \
+%cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
-    ..
-popd
-%ninja_build -C %{_target_platform}
+    -DBUILD_DOCS:BOOL=OFF \
+    -DBUILD_MANPAGE:BOOL=ON
+%cmake_build
 
 %post
 %systemd_post %{name}.service
@@ -44,7 +44,7 @@ popd
 %systemd_postun_with_restart %{name}.service
 
 %install
-%ninja_install -C %{_target_platform}
+%cmake_install
 
 %files
 %doc README.md docs/*
@@ -57,15 +57,3 @@ popd
 %changelog
 * Mon Apr 27 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1
 - Updated to version 0.4.1.
-
-* Sun Apr 26 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.0-1
-- Updated to version 0.4.0.
-
-* Wed Apr 22 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.3.0-1
-- Updated to version 0.3.0.
-
-* Mon Apr 13 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.2.0-1
-- Updated to version 0.2.0.
-
-* Sat Apr 04 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.1.0-1
-- Initial SPEC release.
