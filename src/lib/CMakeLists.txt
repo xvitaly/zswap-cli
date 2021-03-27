@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 set(SOURCES
     cwrappers/cwrappers.cpp
     ksysinfo/ksysinfo.cpp

@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 if (BUILD_MANPAGE)
     find_program(
         Pandoc_EXECUTABLE
