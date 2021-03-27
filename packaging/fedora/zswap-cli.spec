@@ -29,7 +29,9 @@ ZSwap-cli is a command-line tool to control zswap options.
 
 %build
 %cmake -G Ninja \
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_DOCS:BOOL=OFF \
+    -DBUILD_MANPAGE:BOOL=ON
 %cmake_build
 
 %post
