@@ -1,12 +1,12 @@
 [Unit]
-Description=ZSwap-cli service
-Documentation=man:zswap-cli(1) https://github.com/xvitaly/zswap-cli
+Description=@APP_NAME@ service
+Documentation=man:@APP_NAME@(1) @CMAKE_PROJECT_HOMEPAGE_URL@
 
 [Service]
 Type=oneshot
-EnvironmentFile=@CMAKE_INSTALL_FULL_SYSCONFDIR@/zswap-cli.conf
-ExecStart=@CMAKE_INSTALL_FULL_SBINDIR@/zswap-cli --env
-ExecStop=@CMAKE_INSTALL_FULL_SBINDIR@/zswap-cli -e N
+EnvironmentFile=@CMAKE_INSTALL_FULL_SYSCONFDIR@/@APP_NAME@.conf
+ExecStart=@CMAKE_INSTALL_FULL_SBINDIR@/@APP_NAME@ --env
+ExecStop=@CMAKE_INSTALL_FULL_SBINDIR@/@APP_NAME@ -e N
 RemainAfterExit=yes
 ProtectSystem=strict
 ProtectHome=true
