@@ -18,7 +18,7 @@ bool Application::CheckIfRunningBySuperUser()
 
 void Application::PrintDebugInfo()
 {
-    ZSwapDebug ZSwapDebugger;
+    std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
     std::cout << fmt::format("Duplicate entries count: {0}.\n"
                              "Pool limit hit: {1}.\n"
                              "Pool total size: {2}.\n"
@@ -29,17 +29,17 @@ void Application::PrintDebugInfo()
                              "Same filled pages count: {7}.\n"
                              "Stored pages count: {8}.\n"
                              "Written back pages count: {9}.",
-                             ZSwapDebugger.GetDuplicateEntry(),
-                             ZSwapDebugger.GetPoolLimitHit(),
-                             ZSwapDebugger.GetPoolTotalSize(),
-                             ZSwapDebugger.GetRejectAllocFail(),
-                             ZSwapDebugger.GetRejectCompressPoor(),
-                             ZSwapDebugger.GetRejectKmemCacheFail(),
-                             ZSwapDebugger.GetRejectReclaimFail(),
-                             ZSwapDebugger.GetSameFilledPages(),
-                             ZSwapDebugger.GetSameFilledPages(),
-                             ZSwapDebugger.GetStoredPages(),
-                             ZSwapDebugger.GetWrittenBackPages())
+                             ZSwapDebugger -> GetDuplicateEntry(),
+                             ZSwapDebugger -> GetPoolLimitHit(),
+                             ZSwapDebugger -> GetPoolTotalSize(),
+                             ZSwapDebugger -> GetRejectAllocFail(),
+                             ZSwapDebugger -> GetRejectCompressPoor(),
+                             ZSwapDebugger -> GetRejectKmemCacheFail(),
+                             ZSwapDebugger -> GetRejectReclaimFail(),
+                             ZSwapDebugger -> GetSameFilledPages(),
+                             ZSwapDebugger -> GetSameFilledPages(),
+                             ZSwapDebugger -> GetStoredPages(),
+                             ZSwapDebugger -> GetWrittenBackPages())
               << std::endl;
 }
 
@@ -51,31 +51,31 @@ void Application::PrintSettings()
                              "Compression algorithm: {3}.\n"
                              "Kernel's zpool type: {4}.\n"
                              "Accept threhsold percentage: {5}.",
-                             ZSwap.GetZSwapEnabled(),
-                             ZSwap.GetZSwapSameFilledPages(),
-                             ZSwap.GetZSwapMaxPoolPercent(),
-                             ZSwap.GetZSwapCompressor(),
-                             ZSwap.GetZSwapZpool(),
-                             ZSwap.GetZSwapAcceptThrehsoldPercent())
+                             ZSwap -> GetZSwapEnabled(),
+                             ZSwap -> GetZSwapSameFilledPages(),
+                             ZSwap -> GetZSwapMaxPoolPercent(),
+                             ZSwap -> GetZSwapCompressor(),
+                             ZSwap -> GetZSwapZpool(),
+                             ZSwap -> GetZSwapAcceptThrehsoldPercent())
               << std::endl;
 }
 
 void Application::PrintSummary()
 {
-    ZSwapDebug ZSwapDebugger;
-    KSysInfo SysInfo;
+    std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
+    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
 
-    if (ZSwapDebugger.GetPoolTotalSize() == 0)
+    if (ZSwapDebugger -> GetPoolTotalSize() == 0)
     {
         std::cout << "ZSwap is not working. The pool is empty." << std::endl;
         return;
     }
 
     constexpr const long Power = 1024 << 10;
-    const float PoolSizeMB = static_cast<float>(ZSwapDebugger.GetPoolTotalSize()) / Power;
-    const float MemTotalPercent = static_cast<float>(ZSwapDebugger.GetPoolTotalSize()) / static_cast<float>(SysInfo.GetTotalRam()) * 100.f;
-    const float StoredPagesMB = static_cast<float>(ZSwapDebugger.GetStoredPages() * CWrappers::GetSCPageSize()) / Power;
-    const float SwapUsedPercent = static_cast<float>(ZSwapDebugger.GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo.GetTotalSwap() - SysInfo.GetFreeSwap()) * 100.f;
+    const float PoolSizeMB = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize()) / Power;
+    const float MemTotalPercent = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize()) / static_cast<float>(SysInfo -> GetTotalRam()) * 100.f;
+    const float StoredPagesMB = static_cast<float>(ZSwapDebugger -> GetStoredPages() * CWrappers::GetSCPageSize()) / Power;
+    const float SwapUsedPercent = static_cast<float>(ZSwapDebugger -> GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
     std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
@@ -132,22 +132,22 @@ void Application::ExecuteEnv()
     const std::string ZSwapZpoolEnv = CWrappers::GetEnv("ZSWAP_ZPOOL_VALUE");
     const std::string ZSwapAcceptThrehsoldPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE");
 
-    if (!ZSwapEnabledEnv.empty()) ZSwap.SetZSwapEnabled(ZSwapEnabledEnv);
-    if (!ZSwapSameFilledPagesEnv.empty()) ZSwap.SetZSwapSameFilledPages(ZSwapSameFilledPagesEnv);
-    if (!ZSwapMaxPoolPercentEnv.empty()) ZSwap.SetZSwapMaxPoolPercent(ZSwapMaxPoolPercentEnv);
-    if (!ZSwapCompressorEnv.empty()) ZSwap.SetZSwapCompressor(ZSwapCompressorEnv);
-    if (!ZSwapZpoolEnv.empty()) ZSwap.SetZSwapZpool(ZSwapZpoolEnv);
-    if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap.SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
+    if (!ZSwapEnabledEnv.empty()) ZSwap -> SetZSwapEnabled(ZSwapEnabledEnv);
+    if (!ZSwapSameFilledPagesEnv.empty()) ZSwap -> SetZSwapSameFilledPages(ZSwapSameFilledPagesEnv);
+    if (!ZSwapMaxPoolPercentEnv.empty()) ZSwap -> SetZSwapMaxPoolPercent(ZSwapMaxPoolPercentEnv);
+    if (!ZSwapCompressorEnv.empty()) ZSwap -> SetZSwapCompressor(ZSwapCompressorEnv);
+    if (!ZSwapZpoolEnv.empty()) ZSwap -> SetZSwapZpool(ZSwapZpoolEnv);
+    if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap -> SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
 }
 
 void Application::ExecuteCmdLine(const boost::program_options::variables_map& CmdLine)
 {
-    if (CmdLine.count("enabled")) ZSwap.SetZSwapEnabled(CmdLine["enabled"].as<std::string>());
-    if (CmdLine.count("same_filled_pages_enabled")) ZSwap.SetZSwapSameFilledPages(CmdLine["same_filled_pages_enabled"].as<std::string>());
-    if (CmdLine.count("max_pool_percent")) ZSwap.SetZSwapMaxPoolPercent(CmdLine["max_pool_percent"].as<std::string>());
-    if (CmdLine.count("compressor")) ZSwap.SetZSwapCompressor(CmdLine["compressor"].as<std::string>());
-    if (CmdLine.count("zpool")) ZSwap.SetZSwapZpool(CmdLine["zpool"].as<std::string>());
-    if (CmdLine.count("accept_threhsold_percent")) ZSwap.SetZSwapAcceptThrehsoldPercent(CmdLine["accept_threhsold_percent"].as<std::string>());
+    if (CmdLine.count("enabled")) ZSwap -> SetZSwapEnabled(CmdLine["enabled"].as<std::string>());
+    if (CmdLine.count("same_filled_pages_enabled")) ZSwap -> SetZSwapSameFilledPages(CmdLine["same_filled_pages_enabled"].as<std::string>());
+    if (CmdLine.count("max_pool_percent")) ZSwap -> SetZSwapMaxPoolPercent(CmdLine["max_pool_percent"].as<std::string>());
+    if (CmdLine.count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine["compressor"].as<std::string>());
+    if (CmdLine.count("zpool")) ZSwap -> SetZSwapZpool(CmdLine["zpool"].as<std::string>());
+    if (CmdLine.count("accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(CmdLine["accept_threhsold_percent"].as<std::string>());
 }
 
 int Application::Run(const boost::program_options::variables_map& CmdLine)
@@ -156,4 +156,9 @@ int Application::Run(const boost::program_options::variables_map& CmdLine)
     if (CmdLine.count("stats")) return PrintStats(CmdLine["stats"].as<int>());
     if (CmdLine.count("env")) ExecuteEnv(); else ExecuteCmdLine(CmdLine);
     return 0;
+}
+
+Application::Application()
+{
+    ZSwap = std::make_unique<ZSwapObject>();
 }

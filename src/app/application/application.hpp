@@ -12,6 +12,8 @@
  */
 
 #include <iostream>
+#include <memory>
+
 #include <boost/program_options.hpp>
 #include <fmt/format.h>
 
@@ -27,9 +29,9 @@ class Application
 {
 public:
     /**
-     *  Default constructor of the Application class.
+     *  Main constructor of the Application class.
     */
-    Application() = default;
+    Application();
 
     /**
      *  Runs an application and return exit code.
@@ -41,7 +43,7 @@ private:
     /**
      *  Stores an instance of ZSwapObject class.
     */
-    ZSwapObject ZSwap;
+    std::unique_ptr<ZSwapObject> ZSwap;
 
     /**
      *  Checks of current application is running with super-user
