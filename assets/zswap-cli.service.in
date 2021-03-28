@@ -1,5 +1,5 @@
 [Unit]
-Description=@APP_NAME@ service
+Description=@CMAKE_PROJECT_DESCRIPTION@
 Documentation=man:@APP_NAME@(1) @CMAKE_PROJECT_HOMEPAGE_URL@
 
 [Service]
