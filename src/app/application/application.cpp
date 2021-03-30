@@ -184,8 +184,21 @@ void Application::InitCmdLineOptions()
 void Application::ParseCmdLine(int argc, char** argv)
 {
     CmdLine = std::make_unique<boost::program_options::variables_map>();
-    boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
-    CmdLine -> notify();
+    try
+    {
+        boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
+        CmdLine -> notify();
+    }
+    catch (boost::program_options::required_option& e)
+    {
+        std::cerr << "Missing command-line argument: " << e.what() << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    catch (boost::program_options::error& e)
+    {
+        std::cerr << "Command-line argument error: " << e.what() << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 Application::Application(int argc, char** argv)
