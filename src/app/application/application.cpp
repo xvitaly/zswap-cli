@@ -6,16 +6,6 @@
 
 #include "application/application.hpp"
 
-bool Application::CheckIfRunningBySuperUser()
-{
-    if (CWrappers::CheckRoot())
-    {
-        std::cerr << "This program must be run by the super-user. Terminating." << std::endl;
-        return true;
-    }
-    return false;
-}
-
 void Application::PrintDebugInfo()
 {
     std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
@@ -158,11 +148,18 @@ void Application::ExecuteCmdLine()
 
 int Application::Run()
 {
-    if (CheckIfRunningBySuperUser()) return 1;
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
     if (CmdLine -> count("env")) ExecuteEnv(); else ExecuteCmdLine();
     return 0;
+}
+
+void Application::CheckIfRunningBySuperUser()
+{
+    if (CWrappers::CheckRoot())
+    {
+        throw std::runtime_error("This program must be run by the super-user. Terminating.");
+    }
 }
 
 void Application::InitClassMembers()
@@ -195,6 +192,7 @@ void Application::ParseCmdLine(int argc, char** argv)
 
 Application::Application(int argc, char** argv)
 {
+    CheckIfRunningBySuperUser();
     InitClassMembers();
     InitCmdLineOptions();
     ParseCmdLine(argc, argv);

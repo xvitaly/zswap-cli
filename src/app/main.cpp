@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     }
     catch (std::exception& e)
     {
-        std::cerr << "An error occured:" << std::endl << e.what() << std::endl;
+        std::cerr << "An error occured: " << e.what() << std::endl;
     }
     return 1;
 }

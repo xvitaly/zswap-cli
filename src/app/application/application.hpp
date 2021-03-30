@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 
 #include <boost/program_options.hpp>
 #include <fmt/format.h>
@@ -79,11 +80,10 @@ private:
     /**
      *  Checks of current application is running with super-user
      * privileges.
-     * @returns Check results.
-     * @retval true No super-user privileges were detected.
-     * @retval false Otherwise.
+     * @exception Raises an instance of std::runtime_error on missing
+     * super-user privileges.
     */
-    bool CheckIfRunningBySuperUser();
+    void CheckIfRunningBySuperUser();
 
     /**
      *  Gets parameters from environment variables.
