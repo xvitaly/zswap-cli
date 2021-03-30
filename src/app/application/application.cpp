@@ -165,9 +165,15 @@ int Application::Run()
     return 0;
 }
 
-void Application::InitCmdLineOptions()
+void Application::InitClassMembers()
 {
     CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control ZSwap Linux kernel module");
+    CmdLine = std::make_unique<boost::program_options::variables_map>();
+    ZSwap = std::make_unique<ZSwapObject>();
+}
+
+void Application::InitCmdLineOptions()
+{
     CmdLineOptions -> add_options()
         ("env", "Get options from environment variables instead of cmdline.")
         ("help", "Print this help message and exit.")
@@ -183,7 +189,6 @@ void Application::InitCmdLineOptions()
 
 void Application::ParseCmdLine(int argc, char** argv)
 {
-    CmdLine = std::make_unique<boost::program_options::variables_map>();
     try
     {
         boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
@@ -203,7 +208,7 @@ void Application::ParseCmdLine(int argc, char** argv)
 
 Application::Application(int argc, char** argv)
 {
+    InitClassMembers();
     InitCmdLineOptions();
     ParseCmdLine(argc, argv);
-    ZSwap = std::make_unique<ZSwapObject>();
 }

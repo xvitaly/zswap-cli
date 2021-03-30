@@ -59,6 +59,11 @@ private:
     std::unique_ptr<boost::program_options::variables_map> CmdLine;
 
     /**
+     *  Initializes private class members.
+    */
+    void InitClassMembers();
+
+    /**
      *  Initializes the list of available command-line options
      * with full descriptions.
     */
