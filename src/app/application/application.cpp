@@ -123,6 +123,12 @@ int Application::PrintStats(const int Value)
     return 0;
 }
 
+int Application::PrintHelp()
+{
+    CmdLineOptions -> print(std::cout);
+    return 0;
+}
+
 void Application::ExecuteEnv()
 {
     const std::string ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
@@ -140,25 +146,51 @@ void Application::ExecuteEnv()
     if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap -> SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
 }
 
-void Application::ExecuteCmdLine(const boost::program_options::variables_map& CmdLine)
+void Application::ExecuteCmdLine()
 {
-    if (CmdLine.count("enabled")) ZSwap -> SetZSwapEnabled(CmdLine["enabled"].as<std::string>());
-    if (CmdLine.count("same_filled_pages_enabled")) ZSwap -> SetZSwapSameFilledPages(CmdLine["same_filled_pages_enabled"].as<std::string>());
-    if (CmdLine.count("max_pool_percent")) ZSwap -> SetZSwapMaxPoolPercent(CmdLine["max_pool_percent"].as<std::string>());
-    if (CmdLine.count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine["compressor"].as<std::string>());
-    if (CmdLine.count("zpool")) ZSwap -> SetZSwapZpool(CmdLine["zpool"].as<std::string>());
-    if (CmdLine.count("accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(CmdLine["accept_threhsold_percent"].as<std::string>());
+    if (CmdLine -> count("enabled")) ZSwap -> SetZSwapEnabled(CmdLine -> at("enabled").as<std::string>());
+    if (CmdLine -> count("same_filled_pages_enabled")) ZSwap -> SetZSwapSameFilledPages(CmdLine -> at("same_filled_pages_enabled").as<std::string>());
+    if (CmdLine -> count("max_pool_percent")) ZSwap -> SetZSwapMaxPoolPercent(CmdLine -> at("max_pool_percent").as<std::string>());
+    if (CmdLine -> count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine -> at("compressor").as<std::string>());
+    if (CmdLine -> count("zpool")) ZSwap -> SetZSwapZpool(CmdLine -> at("zpool").as<std::string>());
+    if (CmdLine -> count("accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(CmdLine -> at("accept_threhsold_percent").as<std::string>());
 }
 
-int Application::Run(const boost::program_options::variables_map& CmdLine)
+int Application::Run()
 {
     if (CheckIfRunningBySuperUser()) return 1;
-    if (CmdLine.count("stats")) return PrintStats(CmdLine["stats"].as<int>());
-    if (CmdLine.count("env")) ExecuteEnv(); else ExecuteCmdLine(CmdLine);
+    if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
+    if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
+    if (CmdLine -> count("env")) ExecuteEnv(); else ExecuteCmdLine();
     return 0;
 }
 
-Application::Application()
+void Application::InitCmdLineOptions()
 {
+    CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control ZSwap Linux kernel module");
+    CmdLineOptions -> add_options()
+        ("env", "Get options from environment variables instead of cmdline.")
+        ("help", "Print this help message and exit.")
+        ("stats", boost::program_options::value<int>() -> implicit_value(0), "Get statistics and current settings of ZSwap kernel module.")
+        ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable ZSwap kernel module.")
+        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Get statistics and current settings of ZSwap kernel module.")
+        ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("compressor,c", boost::program_options::value<std::string>(), "The default compression algorithm.")
+        ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
+        ("accept_threhsold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ;
+}
+
+void Application::ParseCmdLine(int argc, char** argv)
+{
+    CmdLine = std::make_unique<boost::program_options::variables_map>();
+    boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
+    CmdLine -> notify();
+}
+
+Application::Application(int argc, char** argv)
+{
+    InitCmdLineOptions();
+    ParseCmdLine(argc, argv);
     ZSwap = std::make_unique<ZSwapObject>();
 }
