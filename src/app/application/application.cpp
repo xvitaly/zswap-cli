@@ -197,12 +197,12 @@ void Application::ParseCmdLine(int argc, char** argv)
     catch (boost::program_options::required_option& e)
     {
         std::cerr << "Missing command-line argument: " << e.what() << std::endl;
-        exit(EXIT_FAILURE);
+        exit(1);
     }
     catch (boost::program_options::error& e)
     {
         std::cerr << "Command-line argument error: " << e.what() << std::endl;
-        exit(EXIT_FAILURE);
+        exit(1);
     }
 }
 
