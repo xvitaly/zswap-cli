@@ -33,6 +33,6 @@ int main(int argc, char** argv)
     boost::program_options::notify(vm);
 
     // Running application...
-    if (argc < 2 || vm.count("help")) options.print(std::cout); else return Application().Run(vm);
+    if (argc < 2 || vm.count("help")) options.print(std::cout); else return std::make_unique<Application>() -> Run(vm);
     return 0;
 }
