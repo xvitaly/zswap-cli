@@ -129,6 +129,8 @@ private:
      * user diagnostic information about ZSwap kernel module.
      * @param Value Request code: 0 - all; 1 - settings; 2 - usage stats;
      * 3 - debug.
+     * @exception Raises an instance of std::invalid_argument exception
+     * if incorrect request code was specified.
      * @returns Exit code.
     */
     int PrintStats(int);
