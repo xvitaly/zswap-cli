@@ -119,7 +119,7 @@ int Application::PrintHelp()
     return 0;
 }
 
-void Application::ExecuteEnv()
+int Application::ExecuteEnv()
 {
     const std::string ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
     const std::string ZSwapSameFilledPagesEnv = CWrappers::GetEnv("ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE");
@@ -134,6 +134,7 @@ void Application::ExecuteEnv()
     if (!ZSwapCompressorEnv.empty()) ZSwap -> SetZSwapCompressor(ZSwapCompressorEnv);
     if (!ZSwapZpoolEnv.empty()) ZSwap -> SetZSwapZpool(ZSwapZpoolEnv);
     if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap -> SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
+    return 0;
 }
 
 int Application::ExecuteConfig(const std::string& Config)
@@ -142,7 +143,7 @@ int Application::ExecuteConfig(const std::string& Config)
     return 0;
 }
 
-void Application::ExecuteCmdLine()
+int Application::ExecuteCmdLine()
 {
     if (CmdLine -> count("enabled")) ZSwap -> SetZSwapEnabled(CmdLine -> at("enabled").as<std::string>());
     if (CmdLine -> count("same_filled_pages_enabled")) ZSwap -> SetZSwapSameFilledPages(CmdLine -> at("same_filled_pages_enabled").as<std::string>());
@@ -150,6 +151,7 @@ void Application::ExecuteCmdLine()
     if (CmdLine -> count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine -> at("compressor").as<std::string>());
     if (CmdLine -> count("zpool")) ZSwap -> SetZSwapZpool(CmdLine -> at("zpool").as<std::string>());
     if (CmdLine -> count("accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(CmdLine -> at("accept_threhsold_percent").as<std::string>());
+    return 0;
 }
 
 int Application::Run()
@@ -157,8 +159,8 @@ int Application::Run()
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
     if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
-    if (CmdLine -> count("env")) ExecuteEnv(); else ExecuteCmdLine();
-    return 0;
+    if (CmdLine -> count("env")) return ExecuteEnv();
+    return ExecuteCmdLine();
 }
 
 void Application::CheckIfRunningBySuperUser()

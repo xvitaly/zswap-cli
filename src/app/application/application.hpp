@@ -87,19 +87,22 @@ private:
 
     /**
      *  Gets parameters from environment variables.
+     * @returns Exit code.
     */
-    void ExecuteEnv();
+    int ExecuteEnv();
 
     /**
      *  Gets parameters from configuration file.
+     * @returns Exit code.
     */
     int ExecuteConfig(const std::string&);
 
     /**
      *  Gets parameters from command-line arguments.
      * @param CmdLine Instance of command-line arguments parser.
+     * @returns Exit code.
     */
-    void ExecuteCmdLine();
+    int ExecuteCmdLine();
 
     /**
      *  Prints ZSwap kernel module debug information.
