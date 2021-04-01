@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(zswap-cli
-    VERSION 0.4.1
+    VERSION 0.5.0
     DESCRIPTION "Command-line tool to control zswap options"
     HOMEPAGE_URL "https://github.com/xvitaly/zswap-cli"
     LANGUAGES CXX

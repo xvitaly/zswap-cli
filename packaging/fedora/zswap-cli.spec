@@ -1,7 +1,7 @@
 %undefine __cmake_in_source_build
 
 Name: zswap-cli
-Version: 0.4.1
+Version: 0.5.0
 Release: 1%{?dist}
 
 Summary: Command-line tool to control zswap options
@@ -55,5 +55,5 @@ ZSwap-cli is a command-line tool to control zswap options.
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 
 %changelog
-* Mon Apr 27 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1
-- Updated to version 0.4.1.
+* Thu Apr 01 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.0-1
+- Updated to version 0.5.0.
