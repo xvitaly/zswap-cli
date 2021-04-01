@@ -9,15 +9,15 @@ License: MIT
 URL: https://github.com/xvitaly/%{name}
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires: kernel-headers
-BuildRequires: glibc-headers
-BuildRequires: cxxopts-devel
-BuildRequires: ninja-build
-BuildRequires: fmt-devel
-BuildRequires: systemd
-BuildRequires: gcc-c++
-BuildRequires: pandoc
+BuildRequires: boost-devel
 BuildRequires: cmake
+BuildRequires: fmt-devel
+BuildRequires: gcc-c++
+BuildRequires: glibc-headers
+BuildRequires: kernel-headers
+BuildRequires: ninja-build
+BuildRequires: pandoc
+BuildRequires: systemd
 
 %{?systemd_requires}
 
