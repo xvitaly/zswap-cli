@@ -14,8 +14,11 @@ ZSwap-cli is a simple command-line tool to control ZSwap Linux kernel module.
 
 # COMMAND-LINE OPTIONS
 
+#### \-\-config
+Get options from the configuration file instead of the cmdline.
+
 #### \-\-env
-Get options from environment variables instead of cmdline.
+Get options from the environment variables instead of the cmdline.
 
 #### \-\-stats
 Get statistics and current settings of ZSwap kernel module.
@@ -80,6 +83,27 @@ Start application with `--env` command-line argument:
 sudo zswap-cli --env
 ```
 
+# CONFIGURATION FILES
+
+ZSwap-cli support of getting options from the configuration files.
+
+## Supported options
+
+  * `enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module.
+  * `same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
+  * `max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
+  * `compressor` - the default compression algorithm.
+  * `zpool` - the kernel's zpool type.
+  * `accept_threhsold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+
+## Forwarding options
+
+Start application with `--config` command-line argument:
+
+```
+sudo zswap-cli --config /path/to/zswap-cli.conf
+```
+
 # EXIT STATUS
 
 0: Successful exit.
@@ -92,7 +116,7 @@ After installation, the systemd-unit **zswap-cli.service** will be added.
 
 ## Changing settings
 
-All settings are stored in **/etc/zswap-cli.conf** file. It use environment options syntax.
+All settings are stored in **/etc/zswap-cli/zswap-cli.conf** file. It use environment options syntax.
 
 ## Enabling unit
 
@@ -128,4 +152,4 @@ sudo systemctl stop zswap-cli.service
 
 # AUTHORS
 
-Copyright (c) 2020 EasyCoding Team and contributors.
+Copyright (c) 2020 - 2021 EasyCoding Team and contributors.
