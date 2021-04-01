@@ -11,6 +11,7 @@
  *  This file is a part of zswap-cli application.
  */
 
+#include <filesystem>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
@@ -93,6 +94,9 @@ private:
 
     /**
      *  Gets parameters from configuration file.
+     * @param ConfigFile Full path to configuration file.
+     * @exception Raises an instance of std::invalid_argument exception
+     * if incorrect file path was specified.
      * @returns Exit code.
     */
     int ExecuteConfig(const std::string&);
