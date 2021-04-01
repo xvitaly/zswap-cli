@@ -2,7 +2,7 @@
 
 ## About
 
-ZSwap-cli is a command-line tool to control [zswap](https://github.com/torvalds/linux/blob/master/Documentation/vm/zswap.rst) Linux kernel module options.
+ZSwap-cli is a command-line tool to control [zswap](https://www.kernel.org/doc/html/latest/vm/zswap.html) Linux kernel module options.
 
 ## Pages
 
