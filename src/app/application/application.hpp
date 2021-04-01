@@ -91,6 +91,11 @@ private:
     void ExecuteEnv();
 
     /**
+     *  Gets parameters from configuration file.
+    */
+    int ExecuteConfig(const std::string&);
+
+    /**
      *  Gets parameters from command-line arguments.
      * @param CmdLine Instance of command-line arguments parser.
     */
