@@ -25,7 +25,7 @@ Get statistics and current settings of ZSwap kernel module.
 
 Supported values:
 
-  * `0` - print both ZSwap kernel module settings and debug information;
+  * `0` (default) - print both ZSwap kernel module settings and debug information;
   * `1` - print ZSwap kernel module settings;
   * `2` - print ZSwap kernel module usage summary;
   * `3` - print  ZSwap kernel module debug information.
@@ -116,7 +116,7 @@ After installation, the systemd-unit **zswap-cli.service** will be added.
 
 ## Changing settings
 
-All settings are stored in **/etc/zswap-cli/zswap-cli.conf** file. It use environment options syntax.
+All settings are stored in the **/etc/zswap-cli/zswap-cli.conf** configuration file. It uses standard key-value systax.
 
 ## Enabling unit
 
