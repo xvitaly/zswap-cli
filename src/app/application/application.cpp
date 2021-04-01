@@ -108,7 +108,7 @@ int Application::PrintStats(const int Value)
             PrintDebugInfo();
             break;
         default:
-            std::cout << "Incorrect value of --stats command-line option was specified." << std::endl;
+            throw std::invalid_argument("Incorrect value of --stats command-line option was specified.");
     }
     return 0;
 }
@@ -119,7 +119,7 @@ int Application::PrintHelp()
     return 0;
 }
 
-void Application::ExecuteEnv()
+int Application::ExecuteEnv()
 {
     const std::string ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
     const std::string ZSwapSameFilledPagesEnv = CWrappers::GetEnv("ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE");
@@ -134,9 +134,38 @@ void Application::ExecuteEnv()
     if (!ZSwapCompressorEnv.empty()) ZSwap -> SetZSwapCompressor(ZSwapCompressorEnv);
     if (!ZSwapZpoolEnv.empty()) ZSwap -> SetZSwapZpool(ZSwapZpoolEnv);
     if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap -> SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
+    return 0;
 }
 
-void Application::ExecuteCmdLine()
+int Application::ExecuteConfig(const std::string& ConfigFile)
+{
+    std::unique_ptr<boost::program_options::variables_map> Config = std::make_unique<boost::program_options::variables_map>();
+    std::unique_ptr<boost::program_options::options_description> ConfigOptions = std::make_unique<boost::program_options::options_description>("Configuration file options.");
+    ConfigOptions -> add_options()
+        ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable ZSwap kernel module.")
+        ("zswap.same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
+        ("zswap.max_pool_percent", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("zswap.compressor", boost::program_options::value<std::string>(), "The default compression algorithm.")
+        ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
+        ("zswap.accept_threhsold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ;
+
+    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exists!");
+    std::ifstream ConfigFileFs(ConfigFile);
+    boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
+    Config -> notify();
+    ConfigFileFs.close();
+
+    if (Config -> count("zswap.enabled")) ZSwap -> SetZSwapEnabled(Config -> at("zswap.enabled").as<std::string>());
+    if (Config -> count("zswap.same_filled_pages_enabled")) ZSwap -> SetZSwapSameFilledPages(Config -> at("zswap.same_filled_pages_enabled").as<std::string>());
+    if (Config -> count("zswap.max_pool_percent")) ZSwap -> SetZSwapMaxPoolPercent(Config -> at("zswap.max_pool_percent").as<std::string>());
+    if (Config -> count("zswap.compressor")) ZSwap -> SetZSwapCompressor(Config -> at("zswap.compressor").as<std::string>());
+    if (Config -> count("zswap.zpool")) ZSwap -> SetZSwapZpool(Config -> at("zswap.zpool").as<std::string>());
+    if (Config -> count("zswap.accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(Config -> at("zswap.accept_threhsold_percent").as<std::string>());
+    return 0;
+}
+
+int Application::ExecuteCmdLine()
 {
     if (CmdLine -> count("enabled")) ZSwap -> SetZSwapEnabled(CmdLine -> at("enabled").as<std::string>());
     if (CmdLine -> count("same_filled_pages_enabled")) ZSwap -> SetZSwapSameFilledPages(CmdLine -> at("same_filled_pages_enabled").as<std::string>());
@@ -144,14 +173,16 @@ void Application::ExecuteCmdLine()
     if (CmdLine -> count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine -> at("compressor").as<std::string>());
     if (CmdLine -> count("zpool")) ZSwap -> SetZSwapZpool(CmdLine -> at("zpool").as<std::string>());
     if (CmdLine -> count("accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(CmdLine -> at("accept_threhsold_percent").as<std::string>());
+    return 0;
 }
 
 int Application::Run()
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
-    if (CmdLine -> count("env")) ExecuteEnv(); else ExecuteCmdLine();
-    return 0;
+    if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
+    if (CmdLine -> count("env")) return ExecuteEnv();
+    return ExecuteCmdLine();
 }
 
 void Application::CheckIfRunningBySuperUser()
@@ -172,11 +203,12 @@ void Application::InitClassMembers()
 void Application::InitCmdLineOptions()
 {
     CmdLineOptions -> add_options()
-        ("env", "Get options from environment variables instead of cmdline.")
         ("help", "Print this help message and exit.")
+        ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
+        ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Get statistics and current settings of ZSwap kernel module.")
         ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable ZSwap kernel module.")
-        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Get statistics and current settings of ZSwap kernel module.")
+        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
         ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
         ("compressor,c", boost::program_options::value<std::string>(), "The default compression algorithm.")
         ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")

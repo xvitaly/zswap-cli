@@ -11,6 +11,7 @@
  *  This file is a part of zswap-cli application.
  */
 
+#include <filesystem>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
@@ -86,15 +87,28 @@ private:
     void CheckIfRunningBySuperUser();
 
     /**
-     *  Gets parameters from environment variables.
+     *  Handles \-\-env command-line argument. Gets parameters from
+     * the environment variables.
+     * @returns Exit code.
     */
-    void ExecuteEnv();
+    int ExecuteEnv();
+
+    /**
+     *  Handles \-\-config command-line argument. Gets parameters from
+     * the specified configuration file.
+     * @param ConfigFile Full path to configuration file.
+     * @exception Raises an instance of std::invalid_argument exception
+     * if incorrect file path was specified.
+     * @returns Exit code.
+    */
+    int ExecuteConfig(const std::string&);
 
     /**
      *  Gets parameters from command-line arguments.
      * @param CmdLine Instance of command-line arguments parser.
+     * @returns Exit code.
     */
-    void ExecuteCmdLine();
+    int ExecuteCmdLine();
 
     /**
      *  Prints ZSwap kernel module debug information.
@@ -121,6 +135,8 @@ private:
      * user diagnostic information about ZSwap kernel module.
      * @param Value Request code: 0 - all; 1 - settings; 2 - usage stats;
      * 3 - debug.
+     * @exception Raises an instance of std::invalid_argument exception
+     * if incorrect request code was specified.
      * @returns Exit code.
     */
     int PrintStats(int);

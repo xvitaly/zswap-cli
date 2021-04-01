@@ -11,9 +11,9 @@ After [installation](installation.md), the systemd-unit `zswap-cli.service` will
 
 ### Changing settings
 
-All settings are stored in `/etc/zswap-cli.conf` file. Feel free to edit it.
+All settings are stored in `/etc/zswap-cli/zswap-cli.conf` file. Feel free to edit it.
 
-All supported values can be found [here](environment-options.md).
+All supported values can be found [here](configuration-files.md).
 
 ### Enabling unit
 
@@ -53,7 +53,8 @@ sudo systemctl stop zswap-cli.service
 
 Supported command-line arguments:
 
-  * `--cli` - get options from [environment variables](environment-options.md);
+  * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline;
+  * `--env` - get options from the [environment variables](environment-options.md);
   * `--stats` - get statistics and current settings of ZSwap kernel module;
   * `-e` or `--enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module;
   * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication;
