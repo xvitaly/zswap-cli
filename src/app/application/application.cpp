@@ -108,7 +108,7 @@ int Application::PrintStats(const int Value)
             PrintDebugInfo();
             break;
         default:
-            std::cout << "Incorrect value of --stats command-line option was specified." << std::endl;
+            throw std::invalid_argument("Incorrect value of --stats command-line option was specified.");
     }
     return 0;
 }
