@@ -1,7 +1,7 @@
 %undefine __cmake_in_source_build
 
 Name: zswap-cli
-Version: 0.4.1
+Version: 0.5.0
 Release: 1%{?dist}
 
 Summary: Command-line tool to control zswap options
@@ -9,15 +9,15 @@ License: MIT
 URL: https://github.com/xvitaly/%{name}
 Source0: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires: kernel-headers
-BuildRequires: glibc-headers
-BuildRequires: cxxopts-devel
-BuildRequires: ninja-build
-BuildRequires: fmt-devel
-BuildRequires: systemd
-BuildRequires: gcc-c++
-BuildRequires: pandoc
+BuildRequires: boost-devel
 BuildRequires: cmake
+BuildRequires: fmt-devel
+BuildRequires: gcc-c++
+BuildRequires: glibc-headers
+BuildRequires: kernel-headers
+BuildRequires: ninja-build
+BuildRequires: pandoc
+BuildRequires: systemd
 
 %{?systemd_requires}
 
@@ -52,8 +52,9 @@ ZSwap-cli is a command-line tool to control zswap options.
 %{_sbindir}/%{name}
 %{_unitdir}/%{name}.service
 %{_mandir}/man1/%{name}.*
-%config(noreplace) %{_sysconfdir}/%{name}.conf
+%dir %{_sysconfdir}/%{name}
+%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 
 %changelog
-* Mon Apr 27 2020 Vitaly Zaitsev <vitaly@easycoding.org> - 0.4.1-1
-- Updated to version 0.4.1.
+* Thu Apr 01 2021 Vitaly Zaitsev <vitaly@easycoding.org> - 0.5.0-1
+- Updated to version 0.5.0.
