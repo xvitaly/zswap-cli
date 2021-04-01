@@ -87,13 +87,15 @@ private:
     void CheckIfRunningBySuperUser();
 
     /**
-     *  Gets parameters from environment variables.
+     *  Handles \-\-env command-line argument. Gets parameters from
+     * the environment variables.
      * @returns Exit code.
     */
     int ExecuteEnv();
 
     /**
-     *  Gets parameters from configuration file.
+     *  Handles \-\-config command-line argument. Gets parameters from
+     * the specified configuration file.
      * @param ConfigFile Full path to configuration file.
      * @exception Raises an instance of std::invalid_argument exception
      * if incorrect file path was specified.
