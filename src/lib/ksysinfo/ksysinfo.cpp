@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <stdexcept>
+#include <sys/sysinfo.h>
+
 #include "ksysinfo/ksysinfo.hpp"
 
 __kernel_long_t& KSysInfo::GetUptime()
