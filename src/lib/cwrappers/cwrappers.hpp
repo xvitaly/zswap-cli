@@ -12,7 +12,6 @@
  */
 
 #include <string>
-#include <unistd.h>
 
 /**
  *  Static class with wrappers for plain C functions.

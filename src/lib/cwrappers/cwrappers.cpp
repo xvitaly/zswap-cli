@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <string>
+#include <unistd.h>
+
 #include "cwrappers/cwrappers.hpp"
 
 std::string CWrappers::GetEnv(const std::string& KeyName)
