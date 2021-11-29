@@ -11,8 +11,6 @@
  *  This file gets debug information from the ZSwap kernel module.
  */
 
-#include "zswapworker/zswapworker.hpp"
-
 /**
  *  Class with properties and methods for working with the ZSwap kernel
  * module debug information.

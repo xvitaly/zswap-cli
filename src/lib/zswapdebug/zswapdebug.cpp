@@ -5,6 +5,7 @@
 */
 
 #include "zswapdebug/zswapdebug.hpp"
+#include "zswapworker/zswapworker.hpp"
 
 long& ZSwapDebug::GetDuplicateEntry()
 {
