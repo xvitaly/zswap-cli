@@ -11,8 +11,7 @@
  *  This file contains methods for working with ZSwap kernel module.
  */
 
-#include <iostream>
-#include <fstream>
+#include <string>
 
 /**
  *  Static class with methods for working with ZSwap kernel module.

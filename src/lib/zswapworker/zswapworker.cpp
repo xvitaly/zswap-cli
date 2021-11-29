@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <iostream>
+#include <fstream>
+#include <string>
+
 #include "zswapworker/zswapworker.hpp"
 
 void ZSwapWorker::WriteZSwapValue(const std::string& Name, const std::string& Value)
