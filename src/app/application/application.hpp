@@ -11,18 +11,9 @@
  *  This file is a part of zswap-cli application.
  */
 
-#include <filesystem>
-#include <iostream>
-#include <memory>
-#include <stdexcept>
-
 #include <boost/program_options.hpp>
-#include <fmt/format.h>
 
-#include "cwrappers/cwrappers.hpp"
 #include "zswapobject/zswapobject.hpp"
-#include "zswapdebug/zswapdebug.hpp"
-#include "ksysinfo/ksysinfo.hpp"
 
 /**
  *  Main class of application.
