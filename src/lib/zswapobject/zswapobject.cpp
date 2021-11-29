@@ -4,7 +4,15 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <iostream>
+#include <stdexcept>
+#include <string>
+#include <regex>
+
+#include <fmt/format.h>
+
 #include "zswapobject/zswapobject.hpp"
+#include "zswapworker/zswapworker.hpp"
 
 bool ZSwapObject::CheckPercent(const std::string& Value)
 {

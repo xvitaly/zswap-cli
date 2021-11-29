@@ -4,7 +4,20 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+#include <memory>
+#include <stdexcept>
+
+#include <boost/program_options.hpp>
+#include <fmt/format.h>
+
 #include "application/application.hpp"
+#include "cwrappers/cwrappers.hpp"
+#include "zswapobject/zswapobject.hpp"
+#include "zswapdebug/zswapdebug.hpp"
+#include "ksysinfo/ksysinfo.hpp"
 
 void Application::PrintDebugInfo()
 {

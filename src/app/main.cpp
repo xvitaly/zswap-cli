@@ -4,6 +4,11 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <iostream>
+#include <stdexcept>
+
+#include <boost/program_options.hpp>
+
 #include "application/application.hpp"
 
 /**

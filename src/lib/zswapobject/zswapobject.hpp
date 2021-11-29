@@ -11,13 +11,7 @@
  *  This file gets information from the ZSwap kernel module.
  */
 
-#include <iostream>
-#include <stdexcept>
-#include <regex>
-#include <stdexcept>
-#include <fmt/format.h>
-
-#include "zswapworker/zswapworker.hpp"
+#include <string>
 
 /**
  *  Class with properties and methods for working with the ZSwap kernel

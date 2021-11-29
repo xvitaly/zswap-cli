@@ -11,7 +11,6 @@
  *  This file gets memory information using Linux kernel API.
  */
 
-#include <stdexcept>
 #include <sys/sysinfo.h>
 
 /**
