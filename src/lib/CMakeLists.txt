@@ -29,7 +29,7 @@ set(EXTERNAL_LIBS
     fmt::fmt
 )
 
-add_library(${LIB_NAME} STATIC
+add_library(${LIB_NAME} OBJECT
     ${INTERNAL_LIBS}
 )
 
