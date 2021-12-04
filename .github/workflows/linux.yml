@@ -21,14 +21,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - compiler: 'Clang'
+          - compiler: 'clang'
             cc: 'clang'
             cxx: 'clang++'
-            pkg: 'clang'
-          - compiler: 'GCC'
+          - compiler: 'gcc'
             cc: 'gcc'
             cxx: 'g++'
-            pkg: 'g++'
     env:
       CC: ${{ matrix.cc }}
       CXX: ${{ matrix.cxx }}
@@ -40,7 +38,7 @@ jobs:
         sudo apt-get update
     - name: Installing compiler ${{ matrix.compiler }}
       run: |
-        sudo apt-get -y install ${{ matrix.pkg }}
+        sudo apt-get -y install ${{ matrix.compiler }}
     - name: Installing build system
       run: |
         sudo apt-get -y install cmake make
