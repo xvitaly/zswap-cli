@@ -24,8 +24,6 @@ jobs:
     steps:
     - name: Fetching sources
       uses: actions/checkout@v2
-    - name: Fetching submodules
-      run: git submodule update --init --recursive
     - name: Installing compiler
       run: |
         sudo apt-get update

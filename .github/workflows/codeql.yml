@@ -36,8 +36,6 @@ jobs:
       uses: github/codeql-action/init@v1
       with:
         languages: ${{ matrix.language }}
-    - name: Fetching submodules
-      run: git submodule update --init --recursive
     - name: Installing development packages
       run: |
         sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
