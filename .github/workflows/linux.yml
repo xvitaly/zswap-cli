@@ -1,0 +1,59 @@
+#
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: Linux CI
+
+on:
+  push:
+    branches:
+    - 'master'
+  pull_request:
+    branches:
+    - 'master'
+
+jobs:
+  build:
+    name: Build project on Linux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - compiler: 'Clang'
+            cc: 'clang'
+            cxx: 'clang++'
+            pkg: 'clang'
+          - compiler: 'GCC'
+            cc: 'gcc'
+            cxx: 'g++'
+            pkg: 'g++'
+    env:
+      CC: ${{ matrix.cc }}
+      CXX: ${{ matrix.cxx }}
+    steps:
+    - name: Fetching sources
+      uses: actions/checkout@v2
+    - name: Updating apt package metadata
+      run: |
+        sudo apt-get update
+    - name: Installing compiler ${{ matrix.compiler }}
+      run: |
+        sudo apt-get -y install ${{ matrix.pkg }}
+    - name: Installing build system
+      run: |
+        sudo apt-get -y install cmake make
+    - name: Installing development packages
+      run: |
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
+    - name: Creating build directory
+      run: |
+        mkdir build
+    - name: Building with CMake
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build
+    - name: Installing project with CMake
+      run: |
+        sudo cmake --install build
