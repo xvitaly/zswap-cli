@@ -24,11 +24,9 @@ jobs:
           - compiler: 'Clang'
             cc: 'clang'
             cxx: 'clang++'
-            pkg: 'clang'
           - compiler: 'GCC'
             cc: 'gcc'
             cxx: 'g++'
-            pkg: 'g++'
     env:
       CC: ${{ matrix.cc }}
       CXX: ${{ matrix.cxx }}
@@ -37,16 +35,16 @@ jobs:
       uses: actions/checkout@v2
     - name: Updating apt package metadata
       run: |
-        sudo apt-get update
+        sudo apt update
     - name: Installing compiler ${{ matrix.compiler }}
       run: |
-        sudo apt-get -y install ${{ matrix.pkg }}
+        sudo apt -y install ${{ matrix.cc }} ${{ matrix.cxx }}
     - name: Installing build system
       run: |
-        sudo apt-get -y install cmake make
+        sudo apt -y install cmake make
     - name: Installing development packages
       run: |
-        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
+        sudo apt -y install linux-libc-dev libboost-program-options-dev libfmt-dev
     - name: Creating build directory
       run: |
         mkdir build
