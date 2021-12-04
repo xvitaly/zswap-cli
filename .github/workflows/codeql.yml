@@ -1,7 +1,7 @@
 #
-# SPDX-FileCopyrightText: 2011-2021 EasyCoding Team
+# SPDX-FileCopyrightText: 2020-2021 EasyCoding Team and contributors
 #
-# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-License-Identifier: MIT
 #
 
 name: CodeQL
@@ -40,7 +40,7 @@ jobs:
       run: git submodule update --init --recursive
     - name: Installing development packages
       run: |
-        sudo apt-get -y install linux-libc-dev libboost-program-options-dev
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
     - name: Perform CodeQL Analysis
