@@ -27,9 +27,6 @@ jobs:
           - compiler: 'gcc'
             cc: 'gcc'
             cxx: 'g++'
-    env:
-      CC: ${{ matrix.cc }}
-      CXX: ${{ matrix.cxx }}
     steps:
     - name: Fetching sources
       uses: actions/checkout@v2
@@ -50,7 +47,10 @@ jobs:
         mkdir build
     - name: Building with CMake
       run: |
-        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        cmake -S . -B build \
+            -DCMAKE_C_COMPILER=${{ matrix.cc }} \
+            -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
+            -DCMAKE_BUILD_TYPE=Release
         cmake --build build
     - name: Installing project with CMake
       run: |
