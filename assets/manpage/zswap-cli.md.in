@@ -1,16 +1,16 @@
-% zswap-cli(1) | General Commands Manual
+% @APP_NAME@(1) | General Commands Manual
 
 # NAME
 
-zswap-cli - command-line tool to control ZSwap Linux kernel module
+@APP_NAME@ - command-line tool to control ZSwap Linux kernel module
 
 # SYNOPSIS
 
-**zswap-cli** [**OPTION**...]
+**@APP_NAME@** [**OPTION**...]
 
 # DESCRIPTION
 
-ZSwap-cli is a simple command-line tool to control ZSwap Linux kernel module.
+@APP_NAME@ is a simple command-line tool to control ZSwap Linux kernel module.
 
 # COMMAND-LINE OPTIONS
 
@@ -53,7 +53,7 @@ Print help message and exit.
 
 # ENVIRONMENT OPTIONS
 
-ZSwap-cli support of getting options from environment variables.
+@APP_NAME@ support of getting options from environment variables.
 
 ## Supported options
 
@@ -80,12 +80,12 @@ export ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE=40
 Start application with `--env` command-line argument:
 
 ```
-sudo zswap-cli --env
+sudo @APP_NAME@ --env
 ```
 
 # CONFIGURATION FILES
 
-ZSwap-cli support of getting options from the configuration files.
+@APP_NAME@ support of getting options from the configuration files.
 
 ## Supported options
 
@@ -101,7 +101,7 @@ ZSwap-cli support of getting options from the configuration files.
 Start application with `--config` command-line argument:
 
 ```
-sudo zswap-cli --config /path/to/zswap-cli.conf
+sudo @APP_NAME@ --config /path/to/@APP_NAME@.conf
 ```
 
 # EXIT STATUS
@@ -112,18 +112,18 @@ sudo zswap-cli --config /path/to/zswap-cli.conf
 
 # SYSTEMD UNIT
 
-After installation, the systemd-unit **zswap-cli.service** will be added.
+After installation, the systemd-unit **@CMAKE_PROJECT_NAME@.service** will be added.
 
 ## Changing settings
 
-All settings are stored in the **/etc/zswap-cli/zswap-cli.conf** configuration file. It uses standard key-value systax.
+All settings are stored in the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@APP_NAME@.conf** configuration file. It uses standard key-value systax.
 
 ## Enabling unit
 
 Enable systemd-unit and run it on system startup:
 
 ```
-sudo systemctl enable --now zswap-cli.service
+sudo systemctl enable --now @CMAKE_PROJECT_NAME@.service
 ```
 
 ## Disabling unit
@@ -131,7 +131,7 @@ sudo systemctl enable --now zswap-cli.service
 Disable systemd-unit and stop runing it on system startup:
 
 ```
-sudo systemctl disable zswap-cli.service
+sudo systemctl disable @CMAKE_PROJECT_NAME@.service
 ```
 
 ## Running unit
@@ -141,15 +141,15 @@ You can also run systemd-unit without adding it to startup.
 Start unit and enable ZSwap:
 
 ```
-sudo systemctl start zswap-cli.service
+sudo systemctl start @CMAKE_PROJECT_NAME@.service
 ```
 
 Stop unit and disable ZSwap:
 
 ```
-sudo systemctl stop zswap-cli.service
+sudo systemctl stop @CMAKE_PROJECT_NAME@.service
 ```
 
 # AUTHORS
 
-Copyright (c) 2020 - 2021 EasyCoding Team and contributors.
+Copyright (c) 2020-2021 EasyCoding Team and contributors.
