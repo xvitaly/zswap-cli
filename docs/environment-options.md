@@ -1,6 +1,6 @@
 # Environment options
 
-zswap-cli support of getting options from environment variables.
+This project support of getting options from environment variables.
 
 ## Supported options
 
