@@ -2,7 +2,7 @@
 
 ## Pre-requirements
 
-Install Git client, CMake, GCC/Clang compiler, Boost and ([fmt](https://github.com/fmtlib/fmt) from your distro's repositories.
+Install Git client, CMake, GCC/Clang compiler, [Boost](https://www.boost.org/) and [fmt](https://github.com/fmtlib/fmt) from your distro's repositories.
 
 ## Versions
 

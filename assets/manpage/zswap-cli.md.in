@@ -10,7 +10,7 @@
 
 # DESCRIPTION
 
-@APP_NAME@ is a simple command-line tool to control ZSwap Linux kernel module.
+@APP_NAME@ is a command-line tool to control ZSwap Linux kernel module.
 
 # COMMAND-LINE OPTIONS
 
