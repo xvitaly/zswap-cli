@@ -42,6 +42,9 @@ jobs:
     - name: Installing development packages
       run: |
         sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
+    - name: Installing helper tools
+      run: |
+        sudo apt-get -y install doxygen pandoc
     - name: Creating build directory
       run: |
         mkdir build
@@ -52,7 +55,9 @@ jobs:
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
             -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-            -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_DOC:BOOL=ON \
+            -DBUILD_MANPAGE:BOOL=ON
         cmake --build build
       env:
         CFLAGS: -O2 -g -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection

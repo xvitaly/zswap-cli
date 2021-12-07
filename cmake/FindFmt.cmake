@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: MIT
 #
 
-find_package(FMT 5.2.0 REQUIRED)
+find_package(FMT 6.1.2 REQUIRED)

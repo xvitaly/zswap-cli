@@ -2,9 +2,7 @@
 
 ## Pre-requirements
 
-Install Git client, CMake, GCC/Clang compiler and optional dependencies Boost and ([fmt](https://github.com/fmtlib/fmt) from your distro's repositories.
-
-If the packaged version of optional dependency will not be found, the bundled one will be used.
+Install Git client, CMake, GCC/Clang compiler, Boost and ([fmt](https://github.com/fmtlib/fmt) from your distro's repositories.
 
 ## Versions
 
@@ -15,6 +13,7 @@ You need the following versions:
   * CMake: 3.10+;
   * Boost: 1.65.0+;
   * fmt: 6.1.2+;
+  * doxygen (for building documentation);
   * pandoc (for generating manpage).
 
 ## Downloading sources
@@ -22,7 +21,7 @@ You need the following versions:
 Download sources using Git:
 
 ```
-git clone --depth=1 --recursive https://github.com/xvitaly/zswap-cli.git zswap-cli
+git clone --depth=1 https://github.com/xvitaly/zswap-cli.git zswap-cli
 ```
 
 You can also use [release tarballs](https://github.com/xvitaly/zswap-cli/releases).
