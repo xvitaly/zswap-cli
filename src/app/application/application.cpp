@@ -172,7 +172,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
         ("zswap.accept_threhsold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
         ;
 
-    if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exists!");
+    if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
