@@ -55,13 +55,13 @@ jobs:
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
             -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DBUILD_DOC:BOOL=ON \
             -DBUILD_MANPAGE:BOOL=ON
         cmake --build build
       env:
-        CFLAGS: -O2 -g -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
-        CXXFLAGS: -O2 -g -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        CFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        CXXFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
         LDFLAGS: -Wl,-z,relro -Wl,--as-needed -Wl,-z,now
     - name: Installing project with CMake
       run: |
