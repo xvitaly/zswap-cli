@@ -24,6 +24,10 @@ set(EXTERNAL_LIBS
     Boost::program_options
 )
 
+if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
+    list(APPEND EXTERNAL_LIBS stdc++fs)
+endif()
+
 add_executable(${APP_NAME} ${INTERNAL_LIBS})
 target_link_libraries(${APP_NAME} PRIVATE ${EXTERNAL_LIBS})
 
