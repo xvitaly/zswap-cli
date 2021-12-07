@@ -18,7 +18,4 @@ This project is licensed under the terms of the [MIT license](LICENSE).
 
 ## Documentation
 
-  * [Installation](docs/installation.md).
-  * [Using application](docs/using-application.md).
-  * [Configuration files](docs/configuration-files.md).
-  * [Environment options](docs/environment-options.md).
+Documentation is available [here](docs/README.md).
