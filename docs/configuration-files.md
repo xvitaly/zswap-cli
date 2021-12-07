@@ -1,6 +1,6 @@
 # Configuration files
 
-ZSwap-cli support of getting options from the configuration files.
+zswap-cli support of getting options from the configuration files.
 
 ## Supported options
 
