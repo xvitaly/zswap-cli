@@ -4,11 +4,20 @@
  * SPDX-License-Identifier: MIT
 */
 
-#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <memory>
 #include <stdexcept>
+
+#if __has_include(<filesystem>)
+#include <filesystem>
+namespace fs = std::filesystem;
+#elif __has_include(<experimental/filesystem>)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#else
+#error "Missing filesystem"
+#endif
 
 #include <boost/program_options.hpp>
 #include <fmt/format.h>
@@ -163,7 +172,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
         ("zswap.accept_threhsold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
         ;
 
-    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exists!");
+    if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exists!");
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
