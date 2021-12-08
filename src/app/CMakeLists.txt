@@ -24,11 +24,16 @@ set(EXTERNAL_LIBS
     Boost::program_options
 )
 
-if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
+add_executable(${APP_NAME} ${INTERNAL_LIBS})
+
+if (FILESYSTEM_REQUIRE_LINKAGE)
     list(APPEND EXTERNAL_LIBS stdc++fs)
 endif()
 
-add_executable(${APP_NAME} ${INTERNAL_LIBS})
+if(FILESYSTEM_REQUIRE_EXPERIMENTAL)
+    target_compile_definitions(${APP_NAME} PRIVATE FILESYSTEM_LEGACY)
+endif()
+
 target_link_libraries(${APP_NAME} PRIVATE ${EXTERNAL_LIBS})
 
 install(TARGETS ${APP_NAME} DESTINATION "${CMAKE_INSTALL_SBINDIR}")
