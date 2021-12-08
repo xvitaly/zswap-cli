@@ -9,14 +9,12 @@
 #include <memory>
 #include <stdexcept>
 
-#if __has_include(<filesystem>)
+#ifndef FILESYSTEM_LEGACY
 #include <filesystem>
 namespace fs = std::filesystem;
-#elif __has_include(<experimental/filesystem>)
+#else
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
-#else
-#error "Missing filesystem"
 #endif
 
 #include <boost/program_options.hpp>
