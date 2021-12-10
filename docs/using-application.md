@@ -61,12 +61,12 @@ Supported command-line arguments:
   * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`);
   * `-c` or `--compressor` - the default compression algorithm;
   * `-z` or `--zpool` - the kernel's zpool type;
-  * `-a` or `--accept_threhsold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+  * `-a` or `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
 
 ### Forwarding options
 
 Start application with at least one command-line argument:
 
 ```
-sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor zstd --zpool z3fold --accept_threhsold_percent 40
+sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor zstd --zpool z3fold --accept_threshold_percent 40
 ```
