@@ -96,17 +96,17 @@ void ZSwapObject::SetZSwapZpool(const std::string& Value)
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapZpoolName, Value);
 }
 
-std::string& ZSwapObject::GetZSwapAcceptThrehsoldPercent()
+std::string& ZSwapObject::GetZSwapAcceptThresholdPercent()
 {
-    return ZSwapObject::ZSwapAcceptThrehsoldPercent;
+    return ZSwapObject::ZSwapAcceptThresholdPercent;
 }
 
-void ZSwapObject::SetZSwapAcceptThrehsoldPercent(const std::string& Value)
+void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value)
 {
-    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThrehsoldPercent is out of range [0..100].");
-    WriteLogEntry(ZSwapObject::ZSwapAcceptThrehsoldPercentName, Value, ZSwapObject::ZSwapAcceptThrehsoldPercent);
-    ZSwapObject::ZSwapAcceptThrehsoldPercent = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapAcceptThrehsoldPercentName, Value);
+    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThresholdPercent is out of range [0..100].");
+    WriteLogEntry(ZSwapObject::ZSwapAcceptThresholdPercentName, Value, ZSwapObject::ZSwapAcceptThresholdPercent);
+    ZSwapObject::ZSwapAcceptThresholdPercent = Value;
+    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName, Value);
 }
 
 void ZSwapObject::ReadValues()
@@ -116,7 +116,7 @@ void ZSwapObject::ReadValues()
     ZSwapObject::ZSwapMaxPoolPercent = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName);
     ZSwapObject::ZSwapCompressor = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapCompressorName);
     ZSwapObject::ZSwapZpool = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapZpoolName);
-    ZSwapObject::ZSwapAcceptThrehsoldPercent = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThrehsoldPercentName);
+    ZSwapObject::ZSwapAcceptThresholdPercent = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
 }
 
 ZSwapObject::ZSwapObject()
