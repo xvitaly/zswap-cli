@@ -96,18 +96,18 @@ public:
     void SetZSwapZpool(const std::string&);
 
     /**
-     *  Gets the accept threhsold percentage value.
-     * @returns Accept threhsold percentage value.
+     *  Gets the accept threshold percentage value.
+     * @returns Accept threshold percentage value.
     */
-    std::string& GetZSwapAcceptThrehsoldPercent();
+    std::string& GetZSwapAcceptThresholdPercent();
 
     /**
-     *  Sets the accept threhsold percentage value.
+     *  Sets the accept threshold percentage value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapAcceptThrehsoldPercent(const std::string&);
+    void SetZSwapAcceptThresholdPercent(const std::string&);
 protected:
     /**
      *  Stores the ZSwap enabled value.
@@ -135,9 +135,9 @@ protected:
     std::string ZSwapZpool;
 
     /**
-     *  Stores the accept threhsold percentage value.
+     *  Stores the accept threshold percentage value.
     */
-    std::string ZSwapAcceptThrehsoldPercent;
+    std::string ZSwapAcceptThresholdPercent;
 
     /**
      *  Stores the ZSwap enabled internal parameter name.
@@ -165,9 +165,9 @@ protected:
     const std::string ZSwapZpoolName = "zpool";
 
     /**
-     *  Stores the accept threhsold percentage internal parameter name.
+     *  Stores the accept threshold percentage internal parameter name.
     */
-    const std::string ZSwapAcceptThrehsoldPercentName = "accept_threhsold_percent";
+    const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 private:
     /**
      *  Prints log entry to the standard output.

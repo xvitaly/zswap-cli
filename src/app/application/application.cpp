@@ -60,13 +60,13 @@ void Application::PrintSettings()
                              "Maximum pool percentage: {2}.\n"
                              "Compression algorithm: {3}.\n"
                              "Kernel's zpool type: {4}.\n"
-                             "Accept threhsold percentage: {5}.",
+                             "Accept threshold percentage: {5}.",
                              ZSwap -> GetZSwapEnabled(),
                              ZSwap -> GetZSwapSameFilledPages(),
                              ZSwap -> GetZSwapMaxPoolPercent(),
                              ZSwap -> GetZSwapCompressor(),
                              ZSwap -> GetZSwapZpool(),
-                             ZSwap -> GetZSwapAcceptThrehsoldPercent())
+                             ZSwap -> GetZSwapAcceptThresholdPercent())
               << std::endl;
 }
 
@@ -146,14 +146,14 @@ int Application::ExecuteEnv()
     const std::string ZSwapMaxPoolPercentEnv = CWrappers::GetEnv("ZSWAP_MAX_POOL_PERCENT_VALUE");
     const std::string ZSwapCompressorEnv = CWrappers::GetEnv("ZSWAP_COMPRESSOR_VALUE");
     const std::string ZSwapZpoolEnv = CWrappers::GetEnv("ZSWAP_ZPOOL_VALUE");
-    const std::string ZSwapAcceptThrehsoldPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THREHSOLD_PERCENT_VALUE");
+    const std::string ZSwapAcceptThresholdPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE");
 
     if (!ZSwapEnabledEnv.empty()) ZSwap -> SetZSwapEnabled(ZSwapEnabledEnv);
     if (!ZSwapSameFilledPagesEnv.empty()) ZSwap -> SetZSwapSameFilledPages(ZSwapSameFilledPagesEnv);
     if (!ZSwapMaxPoolPercentEnv.empty()) ZSwap -> SetZSwapMaxPoolPercent(ZSwapMaxPoolPercentEnv);
     if (!ZSwapCompressorEnv.empty()) ZSwap -> SetZSwapCompressor(ZSwapCompressorEnv);
     if (!ZSwapZpoolEnv.empty()) ZSwap -> SetZSwapZpool(ZSwapZpoolEnv);
-    if (!ZSwapAcceptThrehsoldPercentEnv.empty()) ZSwap -> SetZSwapAcceptThrehsoldPercent(ZSwapAcceptThrehsoldPercentEnv);
+    if (!ZSwapAcceptThresholdPercentEnv.empty()) ZSwap -> SetZSwapAcceptThresholdPercent(ZSwapAcceptThresholdPercentEnv);
     return 0;
 }
 
@@ -167,7 +167,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
         ("zswap.max_pool_percent", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
         ("zswap.compressor", boost::program_options::value<std::string>(), "The default compression algorithm.")
         ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
-        ("zswap.accept_threhsold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ("zswap.accept_threshold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
         ;
 
     if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
@@ -181,7 +181,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
     if (Config -> count("zswap.max_pool_percent")) ZSwap -> SetZSwapMaxPoolPercent(Config -> at("zswap.max_pool_percent").as<std::string>());
     if (Config -> count("zswap.compressor")) ZSwap -> SetZSwapCompressor(Config -> at("zswap.compressor").as<std::string>());
     if (Config -> count("zswap.zpool")) ZSwap -> SetZSwapZpool(Config -> at("zswap.zpool").as<std::string>());
-    if (Config -> count("zswap.accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(Config -> at("zswap.accept_threhsold_percent").as<std::string>());
+    if (Config -> count("zswap.accept_threshold_percent")) ZSwap -> SetZSwapAcceptThresholdPercent(Config -> at("zswap.accept_threshold_percent").as<std::string>());
     return 0;
 }
 
@@ -192,7 +192,7 @@ int Application::ExecuteCmdLine()
     if (CmdLine -> count("max_pool_percent")) ZSwap -> SetZSwapMaxPoolPercent(CmdLine -> at("max_pool_percent").as<std::string>());
     if (CmdLine -> count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine -> at("compressor").as<std::string>());
     if (CmdLine -> count("zpool")) ZSwap -> SetZSwapZpool(CmdLine -> at("zpool").as<std::string>());
-    if (CmdLine -> count("accept_threhsold_percent")) ZSwap -> SetZSwapAcceptThrehsoldPercent(CmdLine -> at("accept_threhsold_percent").as<std::string>());
+    if (CmdLine -> count("accept_threshold_percent")) ZSwap -> SetZSwapAcceptThresholdPercent(CmdLine -> at("accept_threshold_percent").as<std::string>());
     return 0;
 }
 
@@ -232,7 +232,7 @@ void Application::InitCmdLineOptions()
         ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
         ("compressor,c", boost::program_options::value<std::string>(), "The default compression algorithm.")
         ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
-        ("accept_threhsold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ("accept_threshold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
         ;
 }
 
