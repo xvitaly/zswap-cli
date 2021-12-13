@@ -7,6 +7,7 @@
 set(SOURCES
     cwrappers/cwrappers.cpp
     ksysinfo/ksysinfo.cpp
+    ksysversion/ksysversion.cpp
     zswapworker/zswapworker.cpp
     zswapobject/zswapobject.cpp
     zswapdebug/zswapdebug.cpp
@@ -15,6 +16,7 @@ set(SOURCES
 set(HEADERS
     cwrappers/cwrappers.hpp
     ksysinfo/ksysinfo.hpp
+    ksysversion/ksysversion.hpp
     zswapworker/zswapworker.hpp
     zswapobject/zswapobject.hpp
     zswapdebug/zswapdebug.hpp
