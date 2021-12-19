@@ -6,3 +6,4 @@
 
 option(BUILD_DOC "Build documentation." OFF)
 option(BUILD_MANPAGE "Build manpage." OFF)
+option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
