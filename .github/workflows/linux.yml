@@ -30,6 +30,8 @@ jobs:
     steps:
     - name: Fetching sources
       uses: actions/checkout@v2
+      with:
+        submodules: true
     - name: Updating apt package metadata
       run: |
         sudo apt-get update
