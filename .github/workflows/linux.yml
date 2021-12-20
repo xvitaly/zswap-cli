@@ -47,9 +47,6 @@ jobs:
     - name: Installing helper tools
       run: |
         sudo apt-get -y install doxygen pandoc
-    - name: Creating build directory
-      run: |
-        mkdir build
     - name: Building with CMake
       run: |
         cmake -S . -B build \
