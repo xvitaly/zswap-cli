@@ -10,7 +10,9 @@
 #include <regex>
 
 #include <fmt/format.h>
+#include <semver.hpp>
 
+#include "ksysversion/ksysversion.hpp"
 #include "zswapobject/zswapobject.hpp"
 #include "zswapworker/zswapworker.hpp"
 
@@ -24,6 +26,11 @@ bool ZSwapObject::CheckPercent(const std::string& Value)
 bool ZSwapObject::CheckEnabled(const std::string& Value)
 {
     return !std::regex_match(Value, std::regex("^[YN]$"));
+}
+
+bool ZSwapObject::CheckKernelVersion(const std::string& RequiredKernelVersion)
+{
+    return semver::from_string(std::make_unique<KSysVersion>() -> GetKernelVersion()) < semver::from_string(RequiredKernelVersion);
 }
 
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue)
@@ -103,6 +110,7 @@ std::string& ZSwapObject::GetZSwapAcceptThresholdPercent()
 
 void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value)
 {
+    if (CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion)) throw std::domain_error("This feature requires the Linux kernel 5.6 or later.");
     if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThresholdPercent is out of range [0..100].");
     WriteLogEntry(ZSwapObject::ZSwapAcceptThresholdPercentName, Value, ZSwapObject::ZSwapAcceptThresholdPercent);
     ZSwapObject::ZSwapAcceptThresholdPercent = Value;
@@ -116,7 +124,7 @@ void ZSwapObject::ReadValues()
     ZSwapObject::ZSwapMaxPoolPercent = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName);
     ZSwapObject::ZSwapCompressor = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapCompressorName);
     ZSwapObject::ZSwapZpool = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapZpoolName);
-    ZSwapObject::ZSwapAcceptThresholdPercent = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
+    ZSwapObject::ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
 }
 
 ZSwapObject::ZSwapObject()
