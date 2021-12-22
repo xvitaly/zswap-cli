@@ -6,7 +6,8 @@ Install Git client, CMake, GCC/Clang compiler and [Boost](https://www.boost.org/
 
 Optional dependencies:
 
-  * [fmt](https://github.com/fmtlib/fmt).
+  * [fmt](https://github.com/fmtlib/fmt);
+  * [semver](https://github.com/Neargye/semver).
 
 If no packaged version of optional dependencies were found, the bundled version will be used.
 
@@ -19,6 +20,7 @@ You need the following versions:
   * CMake: 3.10+;
   * Boost: 1.65.0+;
   * fmt: 6.1.2+ (optional);
+  * semver: 0.3.0+ (optional);
   * doxygen (for building documentation);
   * pandoc (for generating manpage).
 
