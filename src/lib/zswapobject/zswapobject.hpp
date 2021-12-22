@@ -104,6 +104,8 @@ public:
     /**
      *  Sets the accept threshold percentage value.
      * @param Value New value.
+     * @exception Raises an instance of std::runtime_error if the Linux kernel
+     * version is too old.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
