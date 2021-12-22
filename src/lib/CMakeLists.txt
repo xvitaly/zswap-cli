@@ -29,6 +29,7 @@ set(INTERNAL_LIBS
 
 set(EXTERNAL_LIBS
     fmt::fmt
+    semver::semver
 )
 
 add_library(${LIB_NAME} OBJECT

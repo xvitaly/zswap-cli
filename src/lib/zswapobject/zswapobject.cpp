@@ -10,6 +10,7 @@
 #include <regex>
 
 #include <fmt/format.h>
+#include <semver.hpp>
 
 #include "zswapobject/zswapobject.hpp"
 #include "zswapworker/zswapworker.hpp"
