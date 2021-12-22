@@ -168,6 +168,12 @@ protected:
      *  Stores the accept threshold percentage internal parameter name.
     */
     const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
+
+    /**
+     *  Stores the required Linux kernel version to work with accept threshold
+     *  percentage values.
+    */
+    const std::string ZSwapAcceptThresholdRequiredKernelVersion = "5.6.0";
 private:
     /**
      *  Prints log entry to the standard output.
@@ -199,6 +205,16 @@ private:
      * @retval false Otherwise.
     */
     bool CheckEnabled(const std::string&);
+
+    /**
+     *  Checks if the required Linux kernel version lower than current
+     *  version.
+     * @param RequiredKernelVersion The required Linux kernel version to check.
+     * @returns Check results.
+     * @retval true If the required Linux kernel version lower than current version.
+     * @retval false Otherwise.
+    */
+    bool CheckKernelVersion(const std::string&);
 };
 
 #endif // ZSWAPOBJECT_H
