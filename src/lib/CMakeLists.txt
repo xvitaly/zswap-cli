@@ -15,6 +15,7 @@ set(SOURCES
 
 set(HEADERS
     cwrappers/cwrappers.hpp
+    ksysinfo/ksystype.hpp
     ksysinfo/ksysinfo.hpp
     ksysversion/ksysversion.hpp
     zswapworker/zswapworker.hpp
