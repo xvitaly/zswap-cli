@@ -1,7 +1,8 @@
 # zswap-cli
 
 [![GitHub version](https://img.shields.io/github/v/release/xvitaly/zswap-cli?sort=semver&color=brightgreen&logo=git&logoColor=white)](https://github.com/xvitaly/zswap-cli/releases)
-[![Linux CI](https://github.com/xvitaly/zswap-cli/actions/workflows/linux.yml/badge.svg)](https://github.com/xvitaly/zswap-cli/actions/workflows/linux.yml)
+[![Fedora CI](https://github.com/xvitaly/zswap-cli/actions/workflows/fedora.yml/badge.svg)](https://github.com/xvitaly/zswap-cli/actions/workflows/fedora.yml)
+[![Ubuntu CI](https://github.com/xvitaly/zswap-cli/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/xvitaly/zswap-cli/actions/workflows/ubuntu.yml)
 [![CodeQL](https://github.com/xvitaly/zswap-cli/actions/workflows/codeql.yml/badge.svg)](https://github.com/xvitaly/zswap-cli/actions/workflows/codeql.yml)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/xvitaly/zswap-cli.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/zswap-cli/context:cpp)
 [![LGTM alerts](https://img.shields.io/lgtm/alerts/g/xvitaly/zswap-cli.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xvitaly/zswap-cli/alerts/)

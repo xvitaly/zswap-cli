@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-name: Linux CI
+name: Ubuntu CI
 
 on:
   push:
@@ -18,7 +18,6 @@ jobs:
   build:
     name: Build and install project
     runs-on: ubuntu-latest
-    container: fedora:latest
     strategy:
       fail-fast: false
       matrix:
@@ -31,29 +30,28 @@ jobs:
             cc: 'gcc'
             cxx: 'g++'
     steps:
-    - name: Installing core packages
-      run: |
-        sudo dnf -y install git-core
     - name: Fetching sources
       uses: actions/checkout@v2
       with:
         submodules: true
+    - name: Updating apt package metadata
+      run: |
+        sudo apt-get update
     - name: Installing compiler ${{ matrix.compiler }}
       run: |
-        sudo dnf -y install '/usr/bin/${{ matrix.cc }}' '/usr/bin/${{ matrix.cxx }}'
+        sudo apt-get -y install ${{ matrix.compiler }}
     - name: Installing build system
       run: |
-        sudo dnf -y install cmake ninja-build
+        sudo apt-get -y install cmake make
     - name: Installing development packages
       run: |
-        sudo dnf -y install boost-devel fmt-devel glibc-headers kernel-headers semver-devel
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
     - name: Installing helper tools
       run: |
-        sudo dnf -y install doxygen pandoc
+        sudo apt-get -y install doxygen pandoc
     - name: Building project with CMake
       run: |
         cmake -S . -B build \
-            -GNinja \
             -DCMAKE_C_COMPILER=${{ matrix.cc }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
