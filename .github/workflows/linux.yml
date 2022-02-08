@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        compiler: ['clang', 'gcc']
         include:
           - compiler: 'clang'
             cc: 'clang'
