@@ -1,0 +1,70 @@
+#
+# SPDX-FileCopyrightText: 2020-2022 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: Ubuntu CI
+
+on:
+  push:
+    branches:
+    - 'master'
+  pull_request:
+    branches:
+    - 'master'
+
+jobs:
+  build:
+    name: Build and install project
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: ['clang', 'gcc']
+        include:
+          - compiler: 'clang'
+            cc: 'clang'
+            cxx: 'clang++'
+          - compiler: 'gcc'
+            cc: 'gcc'
+            cxx: 'g++'
+    steps:
+    - name: Fetching sources
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Updating apt package metadata
+      run: |
+        sudo apt-get update
+    - name: Installing compiler ${{ matrix.compiler }}
+      run: |
+        sudo apt-get -y install ${{ matrix.compiler }}
+    - name: Installing build system
+      run: |
+        sudo apt-get -y install cmake make
+    - name: Installing development packages
+      run: |
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
+    - name: Installing helper tools
+      run: |
+        sudo apt-get -y install doxygen pandoc
+    - name: Building project with CMake
+      run: |
+        cmake -S . -B build \
+            -DCMAKE_C_COMPILER=${{ matrix.cc }} \
+            -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
+            -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
+            -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DBUILD_DOC:BOOL=ON \
+            -DBUILD_MANPAGE:BOOL=ON \
+            -DSYSTEMD_INTEGRATION:BOOL=ON
+        cmake --build build
+      env:
+        CFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        CXXFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        LDFLAGS: -Wl,-z,relro -Wl,--as-needed -Wl,-z,now
+    - name: Installing project with CMake
+      run: |
+        sudo cmake --install build
