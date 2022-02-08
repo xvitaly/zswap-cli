@@ -18,6 +18,7 @@ jobs:
   build:
     name: Build and install project
     runs-on: ubuntu-latest
+    container: fedora:latest
     strategy:
       fail-fast: false
       matrix:
