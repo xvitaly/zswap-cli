@@ -2,7 +2,7 @@
 
 ## About
 
-Сommand-line tool to control [zswap](https://www.kernel.org/doc/html/latest/vm/zswap.html) Linux kernel module options.
+Сommand-line tool to control [zswap](https://www.kernel.org/doc/html/latest/admin-guide/mm/zswap.html) Linux kernel module options.
 
 ## Pages
 
