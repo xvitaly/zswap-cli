@@ -138,6 +138,13 @@ private:
      * @returns Exit code.
     */
     int PrintHelp();
+
+    /**
+     *  Handles \-\-version command-line argument. Prints version
+     * information.
+     * @returns Exit code.
+    */
+    int PrintVersion();
 };
 
 #endif // APPLICATION_H
