@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <sys/sysinfo.h>
 
+#include "ksysinfo/ksystype.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 
 ksystype::long_t& KSysInfo::GetUptime()
