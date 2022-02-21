@@ -1,0 +1,31 @@
+/**
+ * SPDX-FileCopyrightText: 2020-2022 EasyCoding Team and contributors
+ *
+ * SPDX-License-Identifier: MIT
+*/
+
+#ifndef APPCONSTANTS_H
+#define APPCONSTANTS_H
+
+/** @file lib/appconstants/appconstants.h
+ * This file contains AppConstants namespace.
+*/
+
+#include <string>
+
+/**
+ * Namespace for working with various constants used in project.
+*/
+namespace AppConstants {
+    /**
+     * Stores application internal name.
+    */
+    const std::string ProductNameInternal = "@CMAKE_PROJECT_NAME@";
+
+    /**
+     * Stores application version number as string.
+    */
+    const std::string ProductVersion = "@CMAKE_PROJECT_VERSION@";
+}
+
+#endif // APPCONSTANTS_H
