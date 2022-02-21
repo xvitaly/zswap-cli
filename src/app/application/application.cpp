@@ -20,6 +20,7 @@ namespace fs = std::experimental::filesystem;
 #include <boost/program_options.hpp>
 #include <fmt/format.h>
 
+#include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
 #include "cwrappers/cwrappers.hpp"
 #include "zswapobject/zswapobject.hpp"
@@ -139,6 +140,15 @@ int Application::PrintHelp()
     return 0;
 }
 
+int Application::PrintVersion()
+{
+    std::cout << fmt::format("{0} project version: {1}.",
+                             AppConstants::ProductNameInternal,
+                             AppConstants::ProductVersion)
+              << std::endl;
+    return 0;
+}
+
 int Application::ExecuteEnv()
 {
     const std::string ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
@@ -199,6 +209,7 @@ int Application::ExecuteCmdLine()
 int Application::Run()
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
+    if (CmdLine -> count("version")) return PrintVersion();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
     if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
     if (CmdLine -> count("env")) return ExecuteEnv();
@@ -224,6 +235,7 @@ void Application::InitCmdLineOptions()
 {
     CmdLineOptions -> add_options()
         ("help", "Print this help message and exit.")
+        ("version", "Print version information and exit.")
         ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Get statistics and current settings of ZSwap kernel module.")
