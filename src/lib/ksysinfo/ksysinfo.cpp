@@ -9,57 +9,57 @@
 
 #include "ksysinfo/ksysinfo.hpp"
 
-__kernel_long_t& KSysInfo::GetUptime()
+ksystype::long_t& KSysInfo::GetUptime()
 {
     return SysInfo.uptime;
 }
 
-__kernel_ulong_t& KSysInfo::GetTotalRam()
+ksystype::ulong_t& KSysInfo::GetTotalRam()
 {
     return SysInfo.totalram;
 }
 
-__kernel_ulong_t& KSysInfo::GetFreeRam()
+ksystype::ulong_t& KSysInfo::GetFreeRam()
 {
     return SysInfo.freeram;
 }
 
-__kernel_ulong_t& KSysInfo::GetSharedRam()
+ksystype::ulong_t& KSysInfo::GetSharedRam()
 {
     return SysInfo.sharedram;
 }
 
-__kernel_ulong_t& KSysInfo::GetBufferedRam()
+ksystype::ulong_t& KSysInfo::GetBufferedRam()
 {
     return SysInfo.bufferram;
 }
 
-__kernel_ulong_t& KSysInfo::GetTotalSwap()
+ksystype::ulong_t& KSysInfo::GetTotalSwap()
 {
     return SysInfo.totalswap;
 }
 
-__kernel_ulong_t& KSysInfo::GetFreeSwap()
+ksystype::ulong_t& KSysInfo::GetFreeSwap()
 {
     return SysInfo.freeswap;
 }
 
-__u16& KSysInfo::GetProcessesCount()
+ksystype::ushort_t& KSysInfo::GetProcessesCount()
 {
     return SysInfo.procs;
 }
 
-__kernel_ulong_t& KSysInfo::GetTotalHighMem()
+ksystype::ulong_t& KSysInfo::GetTotalHighMem()
 {
     return SysInfo.totalhigh;
 }
 
-__kernel_ulong_t& KSysInfo::GetFreeHighMem()
+ksystype::ulong_t& KSysInfo::GetFreeHighMem()
 {
     return SysInfo.freehigh;
 }
 
-__u32& KSysInfo::GetMemUnitSize()
+ksystype::uint_t& KSysInfo::GetMemUnitSize()
 {
     return SysInfo.mem_unit;
 }
