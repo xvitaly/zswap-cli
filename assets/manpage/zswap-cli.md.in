@@ -48,7 +48,7 @@ The kernel's zpool type.
 #### -a, \-\-accept_threshold_percent
 The threshold at which ZSwap would start accepting pages again after it became full.
 
-#### -h, \-\-help
+#### \-\-help
 Print help message and exit.
 
 #### \-\-version
