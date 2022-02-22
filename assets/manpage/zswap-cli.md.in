@@ -51,6 +51,9 @@ The threshold at which ZSwap would start accepting pages again after it became f
 #### -h, \-\-help
 Print help message and exit.
 
+#### \-\-version
+Print version information and exit.
+
 # ENVIRONMENT OPTIONS
 
 @APP_NAME@ support of getting options from environment variables.
