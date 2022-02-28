@@ -233,12 +233,21 @@ void Application::InitClassMembers()
 
 void Application::InitCmdLineOptions()
 {
-    CmdLineOptions -> add_options()
+    boost::program_options::options_description OptionsGeneral("General options");
+    OptionsGeneral.add_options()
         ("help", "Print this help message and exit.")
         ("version", "Print version information and exit.")
+        ;
+
+    boost::program_options::options_description OptionsConfiguration("Application configuration options");
+    OptionsConfiguration.add_options()
         ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Get statistics and current settings of ZSwap kernel module.")
+        ;
+
+    boost::program_options::options_description OptionsZSwap("Kernel module configuration options");
+    OptionsZSwap.add_options()
         ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable ZSwap kernel module.")
         ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
         ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
@@ -246,6 +255,8 @@ void Application::InitCmdLineOptions()
         ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ("accept_threshold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
         ;
+
+    CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
 }
 
 void Application::ParseCmdLine(int argc, char** argv)
