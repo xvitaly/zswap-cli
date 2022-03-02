@@ -14,6 +14,12 @@
 
 # COMMAND-LINE OPTIONS
 
+#### \-\-help
+Print help message and exit.
+
+#### \-\-version
+Print version information and exit.
+
 #### \-\-config
 Get options from the configuration file instead of the cmdline.
 
@@ -47,12 +53,6 @@ The kernel's zpool type.
 
 #### -a, \-\-accept_threshold_percent
 The threshold at which ZSwap would start accepting pages again after it became full.
-
-#### \-\-help
-Print help message and exit.
-
-#### \-\-version
-Print version information and exit.
 
 # ENVIRONMENT OPTIONS
 
