@@ -11,9 +11,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/xvitaly/zswap-cli.svg?label=issues&maxAge=180)](https://github.com/xvitaly/zswap-cli/issues)
 ---
 
-Сommand-line tool to control [zswap](https://www.kernel.org/doc/html/latest/admin-guide/mm/zswap.html) Linux kernel module options.
-
 ## About
+
+Zswap-cli is a command-line tool to control [zswap](https://www.kernel.org/doc/html/latest/admin-guide/mm/zswap.html) Linux kernel module options.
 
 Zswap is a compressed cache for swap pages. It takes pages that are in the process of being swapped out to disk and tries to compress them into a RAM-based memory pool with dynamic allocation.
 
