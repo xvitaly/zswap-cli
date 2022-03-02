@@ -49,21 +49,27 @@ sudo systemctl stop zswap-cli.service
 
 ## Using as CLI
 
-### Supported options
+### Available command-line options
 
-Supported command-line arguments:
+#### General options
 
-  * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline;
-  * `--env` - get options from the [environment variables](environment-options.md);
-  * `--stats` - get statistics and current settings of ZSwap kernel module;
-  * `-e` or `--enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module;
-  * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication;
-  * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`);
-  * `-c` or `--compressor` - the default compression algorithm;
-  * `-z` or `--zpool` - the kernel's zpool type;
-  * `-a` or `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`);
-  * `--help` - print help message and exit;
+  * `--help` - print help message and exit.
   * `--version` - print version information and exit.
+
+#### Application configuration options
+
+  * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline.
+  * `--env` - get options from the [environment variables](environment-options.md).
+  * `--stats` - get statistics and current settings of ZSwap kernel module.
+
+#### Kernel module configuration options
+
+  * `-e` or `--enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module.
+  * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
+  * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
+  * `-c` or `--compressor` - the default compression algorithm.
+  * `-z` or `--zpool` - the kernel's zpool type.
+  * `-a` or `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
 
 ### Forwarding options
 
