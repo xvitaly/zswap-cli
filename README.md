@@ -13,6 +13,14 @@
 
 Сommand-line tool to control [zswap](https://www.kernel.org/doc/html/latest/admin-guide/mm/zswap.html) Linux kernel module options.
 
+## Features
+
+Currently supported features:
+
+  * CLI, environment variables and configuration files support.
+  * Optional systemd integration.
+  * Usage statistics and debug information support.
+
 ## License
 
 This project is licensed under the terms of the [MIT license](LICENSE).
