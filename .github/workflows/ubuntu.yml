@@ -31,7 +31,7 @@ jobs:
             cxx: 'g++'
     steps:
     - name: Fetching sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         submodules: true
     - name: Updating apt package metadata
