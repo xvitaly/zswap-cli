@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
 */
 
-#ifndef KSYSVERSION_H
-#define KSYSVERSION_H
+#ifndef KSYSVERSION_HPP
+#define KSYSVERSION_HPP
 
 /** @file ksysversion/ksysversion.hpp
  *  This file gets the Linux kernel version using its API.
@@ -44,4 +44,4 @@ private:
     std::string ParseKernelVersion(const std::string&) const;
 };
 
-#endif // KSYSVERSION_H
+#endif // KSYSVERSION_HPP
