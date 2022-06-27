@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
 */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef APPLICATION_HPP
+#define APPLICATION_HPP
 
 /** @file application/application.hpp
  *  This file is a part of zswap-cli application.
@@ -147,4 +147,4 @@ private:
     int PrintVersion();
 };
 
-#endif // APPLICATION_H
+#endif // APPLICATION_HPP
