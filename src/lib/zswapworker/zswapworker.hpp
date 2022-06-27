@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
 */
 
-#ifndef ZSWAPWORKER_H
-#define ZSWAPWORKER_H
+#ifndef ZSWAPWORKER_HPP
+#define ZSWAPWORKER_HPP
 
 /** @file zswapworker/zswapworker.hpp
  *  This file contains methods for working with ZSwap kernel module.
@@ -46,4 +46,4 @@ private:
     ZSwapWorker() = default;
 };
 
-#endif // ZSWAPWORKER_H
+#endif // ZSWAPWORKER_HPP

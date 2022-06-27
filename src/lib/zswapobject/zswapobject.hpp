@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
 */
 
-#ifndef ZSWAPOBJECT_H
-#define ZSWAPOBJECT_H
+#ifndef ZSWAPOBJECT_HPP
+#define ZSWAPOBJECT_HPP
 
 /** @file zswapobject/zswapobject.hpp
  *  This file gets information from the ZSwap kernel module.
@@ -219,4 +219,4 @@ private:
     bool CheckKernelVersion(const std::string&);
 };
 
-#endif // ZSWAPOBJECT_H
+#endif // ZSWAPOBJECT_HPP
