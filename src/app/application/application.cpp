@@ -235,8 +235,8 @@ void Application::InitCmdLineOptions()
 {
     boost::program_options::options_description OptionsGeneral("General options");
     OptionsGeneral.add_options()
-        ("help", "Print this help message and exit.")
-        ("version", "Print version information and exit.")
+        ("help,h", "Print this help message and exit.")
+        ("version,v", "Print version information and exit.")
         ;
 
     boost::program_options::options_description OptionsConfiguration("Application configuration options");
