@@ -4,8 +4,11 @@
 # SPDX-License-Identifier: MIT
 #
 
-# Targets internal names...
+# Internal targets names...
 set(APP_NAME "${CMAKE_PROJECT_NAME}")
 set(LIB_NAME "${CMAKE_PROJECT_NAME}-lib")
 set(DOCS_NAME "${CMAKE_PROJECT_NAME}-docs")
 set(MAN_NAME "${CMAKE_PROJECT_NAME}-man")
+
+# Internal variables...
+set(UNIT_NAME "${CMAKE_PROJECT_NAME}")
