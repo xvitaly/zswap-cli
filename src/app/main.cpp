@@ -20,8 +20,7 @@ int main(int argc, char** argv)
 {
     try
     {
-        std::unique_ptr<Application> App = std::make_unique<Application>(argc, argv);
-        return App -> Run();
+        return std::make_unique<Application>(argc, argv) -> Run();
     }
     catch (boost::program_options::required_option& e)
     {
