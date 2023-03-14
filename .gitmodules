@@ -1,6 +1,0 @@
-[submodule "3rdparty/fmt"]
-	path = 3rdparty/fmt
-	url = https://github.com/fmtlib/fmt.git
-[submodule "3rdparty/semver"]
-	path = 3rdparty/semver
-	url = https://github.com/Neargye/semver.git
