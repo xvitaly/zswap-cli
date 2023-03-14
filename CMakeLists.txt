@@ -8,7 +8,7 @@
 # =============== Project initialization ===============
 # ======================================================
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.14)
 
 project(zswap-cli
     VERSION 0.9.1
@@ -95,7 +95,12 @@ find_package(fmt 6.1.2 QUIET)
 
 if (NOT fmt_FOUND)
     message(STATUS "Using bundled version of fmt library.")
-    add_subdirectory("${CMAKE_SOURCE_DIR}/3rdparty/fmt" EXCLUDE_FROM_ALL)
+    FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
+        GIT_TAG "8.1.1"
+    )
+    FetchContent_MakeAvailable(fmt)
 endif()
 
 # ======================================================
@@ -106,7 +111,12 @@ find_package(semver 0.3.0 QUIET)
 
 if (NOT semver_FOUND)
     message(STATUS "Using bundled version of semver library.")
-    add_subdirectory("${CMAKE_SOURCE_DIR}/3rdparty/semver" EXCLUDE_FROM_ALL)
+    FetchContent_Declare(
+        semver
+        GIT_REPOSITORY "https://github.com/Neargye/semver.git"
+        GIT_TAG "v0.3.0"
+    )
+    FetchContent_MakeAvailable(semver)
 endif()
 
 # ======================================================
