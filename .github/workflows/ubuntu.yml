@@ -45,7 +45,7 @@ jobs:
         sudo apt-get -y install cmake make
     - name: Installing development packages
       run: |
-        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev libsdbus-c++-dev libsystemd-dev
     - name: Installing helper tools
       run: |
         sudo apt-get -y install doxygen pandoc

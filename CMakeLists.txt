@@ -104,6 +104,13 @@ if (NOT fmt_FOUND)
 endif()
 
 # ======================================================
+# ================ sdbus-cpp detection =================
+# ======================================================
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(sdbuscpp REQUIRED IMPORTED_TARGET "sdbus-c++>=1.1.0")
+
+# ======================================================
 # ================= semver detection ===================
 # ======================================================
 
@@ -161,6 +168,7 @@ target_include_directories(${LIB_NAME} PUBLIC
 target_link_libraries(${LIB_NAME} PUBLIC
     fmt::fmt
     semver::semver
+    PkgConfig::sdbuscpp
 )
 
 # ======================================================

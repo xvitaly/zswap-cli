@@ -40,7 +40,7 @@ jobs:
         languages: ${{ matrix.language }}
     - name: Installing development packages
       run: |
-        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev libsdbus-c++-dev libsystemd-dev
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
     - name: Perform CodeQL Analysis
