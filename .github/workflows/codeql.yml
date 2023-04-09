@@ -32,16 +32,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        submodules: true
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
+        queries: +security-and-quality
     - name: Installing development packages
       run: |
         sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev libsdbus-c++-dev libsystemd-dev
-    - name: Autobuild
+    - name: Perform automatic build
       uses: github/codeql-action/autobuild@v2
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+      with:
+          category: "/language:${{ matrix.language }}"
