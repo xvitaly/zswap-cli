@@ -1,0 +1,49 @@
+#
+# SPDX-FileCopyrightText: 2020-2023 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
+name: IWYU CI
+
+on:
+  push:
+    branches:
+    - 'master'
+  pull_request:
+    branches:
+    - 'master'
+
+jobs:
+  build:
+    name: Analyze project with include-what-you-use
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+    - name: Installing development packages
+      run: |
+        sudo dnf -y install clang cmake git-core iwyu ninja-build
+    - name: Fetching sources
+      uses: actions/checkout@v3
+    - name: Installing dependencies
+      run: |
+        sudo dnf -y install boost-devel fmt-devel glibc-headers kernel-headers sdbus-cpp-devel systemd-devel semver-devel
+    - name: Building project with CMake
+      run: |
+        cmake -S . -B build \
+            -GNinja \
+            -DCMAKE_C_COMPILER='clang' \
+            -DCMAKE_C_INCLUDE_WHAT_YOU_USE='include-what-you-use' \
+            -DCMAKE_CXX_COMPILER='clang++' \
+            -DCMAKE_CXX_INCLUDE_WHAT_YOU_USE='include-what-you-use' \
+            -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
+            -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DBUILD_DOC:BOOL=OFF \
+            -DBUILD_MANPAGE:BOOL=OFF \
+            -DSYSTEMD_INTEGRATION:BOOL=ON
+        cmake --build build
+      env:
+        CFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        CXXFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        LDFLAGS: -Wl,-z,relro -Wl,--as-needed -Wl,-z,now
