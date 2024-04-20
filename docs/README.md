@@ -1,10 +1,6 @@
 # Documentation
 
-## About
-
-Сommand-line tool to control [zswap](https://www.kernel.org/doc/html/latest/admin-guide/mm/zswap.html) Linux kernel module options.
-
-## Pages
+## Table of contents
 
   * [Installation](installation.md).
   * [Using application](using-application.md).
