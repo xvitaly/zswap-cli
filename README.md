@@ -15,6 +15,7 @@ Currently supported features:
   * CLI, environment variables and configuration files support.
   * Optional systemd integration.
   * Usage statistics and debug information support.
+  * Does not require a reboot.
 
 ## License
 
