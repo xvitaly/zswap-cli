@@ -155,4 +155,4 @@ sudo systemctl stop @CMAKE_PROJECT_NAME@.service
 
 # AUTHORS
 
-Copyright (c) 2020-2023 EasyCoding Team and contributors.
+Copyright (c) 2020-2024 EasyCoding Team and contributors.
