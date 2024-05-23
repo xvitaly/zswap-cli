@@ -151,7 +151,6 @@ target_include_directories(${LIB_NAME} PUBLIC
 target_link_libraries(${LIB_NAME} PUBLIC
     fmt::fmt
     semver::semver
-    PkgConfig::sdbuscpp
 )
 
 # ======================================================
