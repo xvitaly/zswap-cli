@@ -104,7 +104,7 @@ if (NOT semver_FOUND)
     FetchContent_Declare(
         semver
         GIT_REPOSITORY "https://github.com/Neargye/semver.git"
-        GIT_TAG "v0.3.0"
+        GIT_TAG "v0.3.1"
     )
     FetchContent_MakeAvailable(semver)
 endif()
