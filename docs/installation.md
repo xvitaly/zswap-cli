@@ -20,7 +20,6 @@ You need the following versions:
   * CMake: 3.10+;
   * Boost: 1.65.0+;
   * fmt: 6.1.2+;
-  * sdbus-cpp 1.1.0+;
   * semver: 0.3.0+ (optional);
   * doxygen (for building documentation);
   * pandoc (for generating manpage).
