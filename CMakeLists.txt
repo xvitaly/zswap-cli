@@ -110,6 +110,20 @@ if (NOT semver_FOUND)
 endif()
 
 # ======================================================
+# ================= systemd detection ==================
+# ======================================================
+
+if (SYSTEMD_INTEGRATION)
+    if (CMAKE_VERSION VERSION_LESS "3.28")
+        set(SYSTEMD_UNITDIR "lib/systemd/system")
+    else()
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET systemd)
+        pkg_get_variable(SYSTEMD_UNITDIR systemd "systemdsystemunitdir" DEFINE_VARIABLES "prefix=${CMAKE_INSTALL_PREFIX}" "rootprefix=${CMAKE_INSTALL_PREFIX}")
+    endif()
+endif()
+
+# ======================================================
 # ================== Library target ====================
 # ======================================================
 
@@ -209,7 +223,7 @@ endif()
 
 if (SYSTEMD_INTEGRATION)
     configure_file("assets/systemd/${CMAKE_PROJECT_NAME}.service.in" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.service" @ONLY)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.service" DESTINATION "lib/systemd/system" RENAME "${UNIT_NAME}.service")
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.service" DESTINATION "${SYSTEMD_UNITDIR}" RENAME "${UNIT_NAME}.service")
 endif()
 
 install(FILES "assets/config/${CMAKE_PROJECT_NAME}.conf" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" RENAME "${APP_NAME}.conf")
