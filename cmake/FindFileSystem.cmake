@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2024 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 include(CheckCXXSourceCompiles)
 
 check_cxx_source_compiles(
