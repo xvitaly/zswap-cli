@@ -2,7 +2,7 @@
 
 # NAME
 
-@APP_NAME@ - command-line tool to control ZSwap Linux kernel module
+@APP_NAME@ - command-line tool to control the ZSwap kernel module
 
 # SYNOPSIS
 
@@ -10,7 +10,7 @@
 
 # DESCRIPTION
 
-@APP_NAME@ is a command-line tool to control ZSwap Linux kernel module.
+@APP_NAME@ is a command-line tool to control the ZSwap kernel module.
 
 # COMMAND-LINE OPTIONS
 
@@ -27,60 +27,72 @@ Get options from the configuration file instead of the cmdline.
 Get options from the environment variables instead of the cmdline.
 
 #### \-\-stats
-Get statistics and current settings of ZSwap kernel module.
+Get statistics and current settings of the ZSwap kernel module.
 
 Supported values:
 
-  * `0` (default) - print both ZSwap kernel module settings and debug information;
-  * `1` - print ZSwap kernel module settings;
-  * `2` - print ZSwap kernel module usage summary;
-  * `3` - print  ZSwap kernel module debug information.
+  * **0** (default) - print everything: kernel module settings, usage summary, and debug information.
+  * **1** - print kernel module settings.
+  * **2** - print kernel module usage summary.
+  * **3** - print kernel module debug information.
 
 #### -e, \-\-enabled
-Enable or disable ZSwap kernel module.
+Enable or disable the ZSwap kernel module.
+
+Supported values: **Y**, **N**.
 
 #### -s, \-\-same_filled_pages_enabled
 Enable or disable memory pages deduplication.
 
+Supported values: **Y**, **N**.
+
 #### -p, \-\-max_pool_percent
 The maximum percentage of memory that the compressed pool can occupy.
 
+Supported values: integer from **1** to **100**.
+
 #### -c, \-\-compressor
-The default compression algorithm.
+The algorithm used to compress memory pages.
+
+Supported values: depends on the kernel build time configuration.
 
 #### -z, \-\-zpool
 The kernel's zpool type.
 
+Supported values: depends on the kernel build time configuration.
+
 #### -a, \-\-accept_threshold_percent
 The threshold at which ZSwap would start accepting pages again after it became full.
 
+Supported values: integer from **1** to **100**.
+
 # ENVIRONMENT OPTIONS
 
-@APP_NAME@ support of getting options from environment variables.
+@APP_NAME@ support of getting options from the environment variables.
 
 ## Supported options
 
-  * **ZSWAP_ENABLED_VALUE** - enable (**Y**) or disable (**N**) ZSwap kernel module.
+  * **ZSWAP_ENABLED_VALUE** - enable (**Y**) or disable (**N**) the ZSwap kernel module.
   * **ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE** - enable (**Y**) or disable (**N**) memory pages deduplication.
   * **ZSWAP_MAX_POOL_PERCENT_VALUE** - the maximum percentage of memory that the compressed pool can occupy (integer from **1** to **100**).
-  * **ZSWAP_COMPRESSOR_VALUE** - the default compression algorithm.
+  * **ZSWAP_COMPRESSOR_VALUE** - the algorithm used to compress memory pages.
   * **ZSWAP_ZPOOL_VALUE** - the kernel's zpool type.
   * **ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE** - the threshold at which ZSwap would start accepting pages again after it became full (integer from **1** to **100**).
 
 ## Forwarding options
 
-Export environment options using `export` command:
+Export the environment variables using the `export` command:
 
 ```
 export ZSWAP_ENABLED_VALUE=Y
 export ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE=Y
 export ZSWAP_MAX_POOL_PERCENT_VALUE=60
-export ZSWAP_COMPRESSOR_VALUE=zstd
+export ZSWAP_COMPRESSOR_VALUE=lzo
 export ZSWAP_ZPOOL_VALUE=z3fold
 export ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE=40
 ```
 
-Start application with `--env` command-line argument:
+Start the application with the `--env` command-line argument:
 
 ```
 sudo @APP_NAME@ --env
@@ -92,16 +104,16 @@ sudo @APP_NAME@ --env
 
 ## Supported options
 
-  * `enabled` - enable (`Y`) or disable (`N`) ZSwap kernel module.
-  * `same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
-  * `max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
-  * `compressor` - the default compression algorithm.
-  * `zpool` - the kernel's zpool type.
-  * `accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+  * **enabled** - enable (**Y**) or disable (**N**) the ZSwap kernel module.
+  * **same_filled_pages_enabled** - enable (**Y**) or disable (**N**) memory pages deduplication.
+  * **max_pool_percent** - the maximum percentage of memory that the compressed pool can occupy (integer from **1** to **100**).
+  * **compressor** - the algorithm used to compress memory pages.
+  * **zpool** - the kernel's zpool type.
+  * **accept_threshold_percent** - the threshold at which ZSwap would start accepting pages again after it became full (integer from **1** to **100**).
 
 ## Forwarding options
 
-Start application with `--config` command-line argument:
+Start the application with the `--config` command-line argument:
 
 ```
 sudo @APP_NAME@ --config /path/to/@APP_NAME@.conf
@@ -109,21 +121,21 @@ sudo @APP_NAME@ --config /path/to/@APP_NAME@.conf
 
 # EXIT STATUS
 
-0: Successful exit.
+**0**: Successful exit.
 
-1: Insuffient access rights.
+**1**: Insuffient access rights.
 
 # SYSTEMD UNIT
 
-After installation, the systemd-unit **@CMAKE_PROJECT_NAME@.service** will be added.
+After installation, the systemd unit **@CMAKE_PROJECT_NAME@.service** will be added.
 
 ## Changing settings
 
-All settings are stored in the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@APP_NAME@.conf** configuration file. It uses standard key-value systax.
+All settings are stored in the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@APP_NAME@.conf** configuration file. It uses standard key-value syntax and can be edited by the user.
 
 ## Enabling unit
 
-Enable systemd-unit and run it on system startup:
+Enable the systemd unit to allow it to run at system startup:
 
 ```
 sudo systemctl enable --now @CMAKE_PROJECT_NAME@.service
@@ -131,7 +143,7 @@ sudo systemctl enable --now @CMAKE_PROJECT_NAME@.service
 
 ## Disabling unit
 
-Disable systemd-unit and stop runing it on system startup:
+Disable the systemd unit and stop it from running at system startup:
 
 ```
 sudo systemctl disable @CMAKE_PROJECT_NAME@.service
@@ -139,15 +151,15 @@ sudo systemctl disable @CMAKE_PROJECT_NAME@.service
 
 ## Running unit
 
-You can also run systemd-unit without adding it to startup.
+It is also possible to start the systemd unit without adding it to startup.
 
-Start unit and enable ZSwap:
+Start the unit and enable ZSwap:
 
 ```
 sudo systemctl start @CMAKE_PROJECT_NAME@.service
 ```
 
-Stop unit and disable ZSwap:
+Stop the unit and disable ZSwap:
 
 ```
 sudo systemctl stop @CMAKE_PROJECT_NAME@.service
