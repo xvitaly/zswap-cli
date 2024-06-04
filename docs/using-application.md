@@ -11,7 +11,7 @@ After [installation](installation.md), the systemd unit `zswap-cli.service` will
 
 ### Changing settings
 
-All settings are stored in the `/etc/zswap-cli/zswap-cli.conf` file. Feel free to edit it.
+All settings are stored in the `/etc/zswap-cli/zswap-cli.conf` file. It uses standard key-value syntax and can be edited by the user.
 
 All supported values can be found [here](configuration-files.md).
 
@@ -58,9 +58,13 @@ sudo systemctl stop zswap-cli.service
 
 #### Application configuration options
 
-  * `--config` - get options from the [configuration file](configuration-files.md).
-  * `--env` - get options from the [environment variables](environment-options.md).
-  * `--stats` - show statistics and current settings of the ZSwap kernel module.
+  * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline.
+  * `--env` - get options from the [environment variables](environment-options.md) instead of the cmdline.
+  * `--stats` - show statistics and current settings of the ZSwap kernel module. Supported values:
+    * `0` (default) - print everything: kernel module settings, usage summary, and debug information.
+    * `1` - print kernel module settings.
+    * `2` - print kernel module usage summary.
+    * `3` - print kernel module debug information.
 
 #### Kernel module configuration options
 

@@ -19,7 +19,7 @@ Export the environment variables using the `export` command:
 export ZSWAP_ENABLED_VALUE=Y
 export ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE=Y
 export ZSWAP_MAX_POOL_PERCENT_VALUE=60
-export ZSWAP_COMPRESSOR_VALUE=zstd
+export ZSWAP_COMPRESSOR_VALUE=lzo
 export ZSWAP_ZPOOL_VALUE=z3fold
 export ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE=40
 ```
