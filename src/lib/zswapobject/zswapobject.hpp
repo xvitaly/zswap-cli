@@ -167,9 +167,9 @@ protected:
     std::string ZSwapZpool;
 
     /**
-     *  Stores the exclusive loads enabled value.
+     *  Stores the accept threshold percentage value.
     */
-    std::string ZSwapExclusiveLoads;
+    std::string ZSwapAcceptThresholdPercent;
 
     /**
      *  Stores the non same filled pages enabled value.
@@ -177,9 +177,9 @@ protected:
     std::string ZSwapNonSameFilledPages;
 
     /**
-     *  Stores the accept threshold percentage value.
+     *  Stores the exclusive loads enabled value.
     */
-    std::string ZSwapAcceptThresholdPercent;
+    std::string ZSwapExclusiveLoads;
 
     /**
      *  Stores the ZSwap enabled internal parameter name.
