@@ -104,12 +104,28 @@ public:
     /**
      *  Sets the accept threshold percentage value.
      * @param Value New value.
-     * @exception Raises an instance of std::runtime_error if the Linux kernel
+     * @exception Raises an instance of std::runtime_error if the kernel
      * version is too old.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
     void SetZSwapAcceptThresholdPercent(const std::string&);
+
+    /**
+     *  Gets the exclusive loads enabled value.
+     * @returns Exclusive loads enabled value.
+    */
+    std::string& GetZSwapExclusiveLoads();
+
+    /**
+     *  Sets the exclusive loads enabled value.
+     * @param Value New value.
+     * @exception Raises an instance of std::runtime_error if the kernel
+     * version is too old.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
+    */
+    void SetZSwapExclusiveLoads(const std::string&);
 protected:
     /**
      *  Stores the ZSwap enabled value.
@@ -135,6 +151,11 @@ protected:
      *  Stores the kernel's zpool type.
     */
     std::string ZSwapZpool;
+
+    /**
+     *  Stores the exclusive loads enabled value.
+    */
+    std::string ZSwapExclusiveLoads;
 
     /**
      *  Stores the accept threshold percentage value.
@@ -172,10 +193,21 @@ protected:
     const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 
     /**
-     *  Stores the required Linux kernel version to work with accept threshold
+     *  Stores the required kernel version to work with accept threshold
      *  percentage values.
     */
     const std::string ZSwapAcceptThresholdRequiredKernelVersion = "5.6.0";
+
+    /**
+     *  Stores the exclusive loads enabled internal parameter name.
+    */
+    const std::string ZSwapExclusiveLoadsName = "exclusive_loads";
+
+    /**
+     *  Stores the required kernel version to work with exclusive loads
+     *  value.
+    */
+    const std::string ZSwapExclusiveLoadsRequiredKernelVersion = "6.5.0";
 private:
     /**
      *  Prints log entry to the standard output.
@@ -209,11 +241,10 @@ private:
     bool CheckEnabled(const std::string&);
 
     /**
-     *  Checks if the required Linux kernel version lower than current
-     *  version.
-     * @param RequiredKernelVersion The required Linux kernel version to check.
+     *  Checks if the required kernel version lower than current version.
+     * @param RequiredKernelVersion The required kernel version to check.
      * @returns Check results.
-     * @retval true If the required Linux kernel version lower than current version.
+     * @retval true If the required kernel version lower than current version.
      * @retval false Otherwise.
     */
     bool CheckKernelVersion(const std::string&);

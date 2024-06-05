@@ -110,11 +110,25 @@ std::string& ZSwapObject::GetZSwapAcceptThresholdPercent()
 
 void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapAcceptThresholdPercent requires Linux kernel 5.6 or later.");
+    if (CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapAcceptThresholdPercent requires kernel 5.6 or later.");
     if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThresholdPercent is out of range [0..100].");
     WriteLogEntry(ZSwapObject::ZSwapAcceptThresholdPercentName, Value, ZSwapObject::ZSwapAcceptThresholdPercent);
     ZSwapObject::ZSwapAcceptThresholdPercent = Value;
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName, Value);
+}
+
+std::string& ZSwapObject::GetZSwapExclusiveLoads()
+{
+    return ZSwapObject::ZSwapExclusiveLoads;
+}
+
+void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value)
+{
+    if (CheckKernelVersion(ZSwapObject::ZSwapExclusiveLoadsRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapExclusiveLoads requires kernel 6.5 or later.");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapExclusiveLoads is incorrect (only Y or N are supported).");
+    WriteLogEntry(ZSwapObject::ZSwapExclusiveLoadsName, Value, ZSwapObject::ZSwapExclusiveLoads);
+    ZSwapObject::ZSwapExclusiveLoads = Value;
+    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName, Value);
 }
 
 void ZSwapObject::ReadValues()
@@ -125,6 +139,7 @@ void ZSwapObject::ReadValues()
     ZSwapObject::ZSwapCompressor = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapCompressorName);
     ZSwapObject::ZSwapZpool = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapZpoolName);
     ZSwapObject::ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
+    ZSwapObject::ZSwapExclusiveLoads = CheckKernelVersion(ZSwapObject::ZSwapExclusiveLoadsRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
 }
 
 ZSwapObject::ZSwapObject()
