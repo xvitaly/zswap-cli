@@ -145,6 +145,20 @@ void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value)
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName, Value);
 }
 
+std::string& ZSwapObject::GetZSwapShrinkerEnabled()
+{
+    return ZSwapObject::ZSwapShrinkerEnabled;
+}
+
+void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value)
+{
+    if (CheckKernelVersion(ZSwapObject::ZSwapShrinkerEnabledRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapShrinkerEnabled requires kernel 6.8 or later.");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapNonSameFilledPages is incorrect (only Y or N are supported).");
+    WriteLogEntry(ZSwapObject::ZSwapShrinkerEnabledName, Value, ZSwapObject::ZSwapShrinkerEnabled);
+    ZSwapObject::ZSwapShrinkerEnabled = Value;
+    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName, Value);
+}
+
 void ZSwapObject::ReadValues()
 {
     ZSwapObject::ZSwapEnabled = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapEnabledName);
@@ -155,6 +169,7 @@ void ZSwapObject::ReadValues()
     ZSwapObject::ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
     ZSwapObject::ZSwapNonSameFilledPages = CheckKernelVersion(ZSwapObject::ZSwapNonSameFilledPagesRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
     ZSwapObject::ZSwapExclusiveLoads = CheckKernelVersion(ZSwapObject::ZSwapExclusiveLoadsRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
+    ZSwapObject::ZSwapShrinkerEnabled = CheckKernelVersion(ZSwapObject::ZSwapShrinkerEnabledRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName);
 }
 
 ZSwapObject::ZSwapObject()

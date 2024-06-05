@@ -140,6 +140,22 @@ public:
      * the proposed value.
     */
     void SetZSwapExclusiveLoads(const std::string&);
+
+    /**
+     *  Gets the shrinker enabled value.
+     * @returns Shrinker enabled value.
+    */
+    std::string& GetZSwapShrinkerEnabled();
+
+    /**
+     *  Sets the shrinker enabled value.
+     * @param Value New value.
+     * @exception Raises an instance of std::runtime_error if the kernel
+     * version is too old.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
+    */
+    void SetZSwapShrinkerEnabled(const std::string&);
 protected:
     /**
      *  Stores the ZSwap enabled value.
@@ -180,6 +196,11 @@ protected:
      *  Stores the exclusive loads enabled value.
     */
     std::string ZSwapExclusiveLoads;
+
+    /**
+     *  Stores the shrinker enabled value.
+    */
+    std::string ZSwapShrinkerEnabled;
 
     /**
      *  Stores the ZSwap enabled internal parameter name.
@@ -238,6 +259,17 @@ protected:
      *  value.
     */
     const std::string ZSwapExclusiveLoadsRequiredKernelVersion = "6.5.0";
+
+    /**
+     *  Stores the shrinker enabled internal parameter name.
+    */
+    const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
+
+    /**
+     *  Stores the required kernel version to work with shrinker enabled
+     *  value.
+    */
+    const std::string ZSwapShrinkerEnabledRequiredKernelVersion = "6.8.0";
 private:
     /**
      *  Prints log entry to the standard output.
