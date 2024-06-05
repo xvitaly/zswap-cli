@@ -112,6 +112,20 @@ public:
     void SetZSwapAcceptThresholdPercent(const std::string&);
 
     /**
+     *  Gets the non same filled pages enabled value.
+     * @returns Non same filled pages enabled value.
+    */
+    std::string& GetZSwapNonSameFilledPages();
+
+    /**
+     *  Sets the non same filled pages enabled value.
+     * @param Value New value.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
+    */
+    void SetZSwapNonSameFilledPages(const std::string&);
+
+    /**
      *  Gets the exclusive loads enabled value.
      * @returns Exclusive loads enabled value.
     */
@@ -158,6 +172,11 @@ protected:
     std::string ZSwapExclusiveLoads;
 
     /**
+     *  Stores the non same filled pages enabled value.
+    */
+    std::string ZSwapNonSameFilledPages;
+
+    /**
      *  Stores the accept threshold percentage value.
     */
     std::string ZSwapAcceptThresholdPercent;
@@ -197,6 +216,17 @@ protected:
      *  percentage values.
     */
     const std::string ZSwapAcceptThresholdRequiredKernelVersion = "5.6.0";
+
+    /**
+     *  Stores the non same filled pages enabled internal parameter name.
+    */
+    const std::string ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
+
+    /**
+     *  Stores the required kernel version to work with non same filled pages
+     *  enabled value.
+    */
+    const std::string ZSwapNonSameFilledPagesRequiredKernelVersion = "5.18.0";
 
     /**
      *  Stores the exclusive loads enabled internal parameter name.

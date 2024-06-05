@@ -117,6 +117,20 @@ void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value)
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName, Value);
 }
 
+std::string& ZSwapObject::GetZSwapNonSameFilledPages()
+{
+    return ZSwapObject::ZSwapNonSameFilledPages;
+}
+
+void ZSwapObject::SetZSwapNonSameFilledPages(const std::string& Value)
+{
+    if (CheckKernelVersion(ZSwapObject::ZSwapNonSameFilledPagesRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapNonSameFilledPages requires kernel 5.18 or later.");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapNonSameFilledPages is incorrect (only Y or N are supported).");
+    WriteLogEntry(ZSwapObject::ZSwapNonSameFilledPagesName, Value, ZSwapObject::ZSwapNonSameFilledPages);
+    ZSwapObject::ZSwapNonSameFilledPages = Value;
+    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName, Value);
+}
+
 std::string& ZSwapObject::GetZSwapExclusiveLoads()
 {
     return ZSwapObject::ZSwapExclusiveLoads;
@@ -139,6 +153,7 @@ void ZSwapObject::ReadValues()
     ZSwapObject::ZSwapCompressor = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapCompressorName);
     ZSwapObject::ZSwapZpool = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapZpoolName);
     ZSwapObject::ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
+    ZSwapObject::ZSwapNonSameFilledPages = CheckKernelVersion(ZSwapObject::ZSwapNonSameFilledPagesRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
     ZSwapObject::ZSwapExclusiveLoads = CheckKernelVersion(ZSwapObject::ZSwapExclusiveLoadsRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
 }
 
