@@ -61,13 +61,15 @@ void Application::PrintSettings()
                              "Maximum pool percentage: {2}.\n"
                              "Compression algorithm: {3}.\n"
                              "Kernel's zpool type: {4}.\n"
-                             "Accept threshold percentage: {5}.",
+                             "Accept threshold percentage: {5}.\n"
+                             "Non same filled pages enabled: {6}.",
                              ZSwap -> GetZSwapEnabled(),
                              ZSwap -> GetZSwapSameFilledPages(),
                              ZSwap -> GetZSwapMaxPoolPercent(),
                              ZSwap -> GetZSwapCompressor(),
                              ZSwap -> GetZSwapZpool(),
-                             ZSwap -> GetZSwapAcceptThresholdPercent())
+                             ZSwap -> GetZSwapAcceptThresholdPercent(),
+                             ZSwap -> GetZSwapNonSameFilledPages())
               << std::endl;
 }
 
@@ -157,6 +159,7 @@ int Application::ExecuteEnv()
     const std::string ZSwapCompressorEnv = CWrappers::GetEnv("ZSWAP_COMPRESSOR_VALUE");
     const std::string ZSwapZpoolEnv = CWrappers::GetEnv("ZSWAP_ZPOOL_VALUE");
     const std::string ZSwapAcceptThresholdPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE");
+    const std::string ZSwapNonSameFilledPagesEnv = CWrappers::GetEnv("ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE");
 
     if (!ZSwapEnabledEnv.empty()) ZSwap -> SetZSwapEnabled(ZSwapEnabledEnv);
     if (!ZSwapSameFilledPagesEnv.empty()) ZSwap -> SetZSwapSameFilledPages(ZSwapSameFilledPagesEnv);
@@ -164,6 +167,7 @@ int Application::ExecuteEnv()
     if (!ZSwapCompressorEnv.empty()) ZSwap -> SetZSwapCompressor(ZSwapCompressorEnv);
     if (!ZSwapZpoolEnv.empty()) ZSwap -> SetZSwapZpool(ZSwapZpoolEnv);
     if (!ZSwapAcceptThresholdPercentEnv.empty()) ZSwap -> SetZSwapAcceptThresholdPercent(ZSwapAcceptThresholdPercentEnv);
+    if (!ZSwapNonSameFilledPagesEnv.empty()) ZSwap -> SetZSwapNonSameFilledPages(ZSwapNonSameFilledPagesEnv);
     return 0;
 }
 
@@ -178,6 +182,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
         ("zswap.compressor", boost::program_options::value<std::string>(), "The default compression algorithm.")
         ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ("zswap.accept_threshold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ("zswap.non_same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
         ;
 
     if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
@@ -192,6 +197,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
     if (Config -> count("zswap.compressor")) ZSwap -> SetZSwapCompressor(Config -> at("zswap.compressor").as<std::string>());
     if (Config -> count("zswap.zpool")) ZSwap -> SetZSwapZpool(Config -> at("zswap.zpool").as<std::string>());
     if (Config -> count("zswap.accept_threshold_percent")) ZSwap -> SetZSwapAcceptThresholdPercent(Config -> at("zswap.accept_threshold_percent").as<std::string>());
+    if (Config -> count("zswap.non_same_filled_pages_enabled")) ZSwap -> SetZSwapNonSameFilledPages(Config -> at("zswap.non_same_filled_pages_enabled").as<std::string>());
     return 0;
 }
 
@@ -203,6 +209,7 @@ int Application::ExecuteCmdLine()
     if (CmdLine -> count("compressor")) ZSwap -> SetZSwapCompressor(CmdLine -> at("compressor").as<std::string>());
     if (CmdLine -> count("zpool")) ZSwap -> SetZSwapZpool(CmdLine -> at("zpool").as<std::string>());
     if (CmdLine -> count("accept_threshold_percent")) ZSwap -> SetZSwapAcceptThresholdPercent(CmdLine -> at("accept_threshold_percent").as<std::string>());
+    if (CmdLine -> count("non_same_filled_pages_enabled")) ZSwap -> SetZSwapNonSameFilledPages(CmdLine -> at("non_same_filled_pages_enabled").as<std::string>());
     return 0;
 }
 
@@ -226,7 +233,7 @@ void Application::CheckIfRunningBySuperUser()
 
 void Application::InitClassMembers()
 {
-    CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control ZSwap Linux kernel module");
+    CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control the ZSwap kernel module");
     CmdLine = std::make_unique<boost::program_options::variables_map>();
     ZSwap = std::make_unique<ZSwapObject>();
 }
@@ -254,6 +261,7 @@ void Application::InitCmdLineOptions()
         ("compressor,c", boost::program_options::value<std::string>(), "The default compression algorithm.")
         ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ("accept_threshold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ("non_same_filled_pages_enabled,n", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
         ;
 
     CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
