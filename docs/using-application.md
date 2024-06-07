@@ -74,11 +74,14 @@ sudo systemctl stop zswap-cli.service
   * `-c` or `--compressor` - the algorithm used to compress memory pages.
   * `-z` or `--zpool` - the kernel's zpool type.
   * `-a` or `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+  * `-n` or `--non_same_filled_pages_enabled` - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
+  * `-x` or `--exclusive_loads` - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
+  * `-r` or `--shrinker_enabled` - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
 
 ### Forwarding options
 
 Start the application with at least one command-line argument:
 
 ```
-sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor lzo --zpool z3fold --accept_threshold_percent 40
+sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor lzo --zpool z3fold --accept_threshold_percent 40 --non_same_filled_pages_enabled Y --exclusive_loads Y --shrinker_enabled Y
 ```
