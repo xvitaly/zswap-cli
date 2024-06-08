@@ -272,12 +272,23 @@ protected:
     const std::string ZSwapShrinkerEnabledRequiredKernelVersion = "6.8.0";
 private:
     /**
+     *  Stores the current kernel version in string format.
+    */
+    std::string KernelVersion;
+
+    /**
      *  Prints log entry to the standard output.
      * @param Name Parameter name.
      * @param NewValue New value.
      * @param OldValue Old value.
     */
     void WriteLogEntry(const std::string&, const std::string&, const std::string&);
+
+    /**
+     *  Reads the current kernel version and and stores it in a private
+     *  field.
+    */
+    void ReadKernelVersion();
 
     /**
      *  Reads the ZSwap kernel module values.

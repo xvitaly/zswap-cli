@@ -30,7 +30,7 @@ bool ZSwapObject::CheckEnabled(const std::string& Value)
 
 bool ZSwapObject::CheckKernelVersion(const std::string& RequiredKernelVersion)
 {
-    return semver::from_string(std::make_unique<KSysVersion>() -> GetKernelVersion()) < semver::from_string(RequiredKernelVersion);
+    return semver::from_string(ZSwapObject::KernelVersion) < semver::from_string(RequiredKernelVersion);
 }
 
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue)
@@ -159,6 +159,11 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value)
     ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName, Value);
 }
 
+void ZSwapObject::ReadKernelVersion()
+{
+    ZSwapObject::KernelVersion = std::make_unique<KSysVersion>() -> GetKernelVersion();
+}
+
 void ZSwapObject::ReadValues()
 {
     ZSwapObject::ZSwapEnabled = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapEnabledName);
@@ -174,5 +179,6 @@ void ZSwapObject::ReadValues()
 
 ZSwapObject::ZSwapObject()
 {
+    ReadKernelVersion();
     ReadValues();
 }
