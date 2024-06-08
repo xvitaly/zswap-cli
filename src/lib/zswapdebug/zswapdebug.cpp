@@ -57,6 +57,11 @@ long& ZSwapDebug::GetWrittenBackPages()
     return ZSwapDebug::WrittenBackPages;
 }
 
+std::string ZSwapDebug::GetModulePath()
+{
+    return std::string("/sys/kernel/debug/zswap/");
+}
+
 void ZSwapDebug::ReadDebugValues()
 {
     ZSwapDebug::DuplicateEntry = ZSwapWorker::ReadZSwapDebugValue("duplicate_entry");

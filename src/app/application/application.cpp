@@ -29,14 +29,13 @@ namespace fs = std::experimental::filesystem;
 
 void Application::PrintDebugInfo()
 {
-    std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
-
-    if (ZSwapDebugger -> GetPoolTotalSize() == 0)
+    if (!fs::exists(ZSwapDebug::GetModulePath()))
     {
         std::cout << "ZSwap is not running or access to debug is denied." << std::endl;
         return;
     }
 
+    std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
     std::cout << fmt::format("Duplicate entries count: {0}.\n"
                              "Pool limit hit: {1}.\n"
                              "Pool total size: {2}.\n"

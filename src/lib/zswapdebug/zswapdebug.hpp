@@ -11,6 +11,8 @@
  *  This file gets debug information from the ZSwap kernel module.
  */
 
+#include <string>
+
 /**
  *  Class with properties and methods for working with the ZSwap kernel
  * module debug information.
@@ -82,6 +84,12 @@ public:
      * @returns Written back pages count.
     */
     long& GetWrittenBackPages();
+
+    /**
+     *  Gets the kernel module debug path.
+     * @returns Kernel module debug path.
+    */
+    static std::string GetModulePath();
 protected:
     /**
      *  Stores the number of the duplicate entries.
