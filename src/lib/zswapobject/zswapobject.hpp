@@ -203,6 +203,11 @@ protected:
     std::string ZSwapShrinkerEnabled;
 
     /**
+     *  Stores the ZSwap kernel module parameters path.
+    */
+    const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
+
+    /**
      *  Stores the ZSwap enabled internal parameter name.
     */
     const std::string ZSwapEnabledName = "enabled";
@@ -275,6 +280,20 @@ private:
      *  Stores the current kernel version in string format.
     */
     std::string KernelVersion;
+
+    /**
+     *  Writes the ZSwap kernel module value.
+     * @param Name Name.
+     * @param Value Value.
+    */
+    void WriteZSwapValue(const std::string&, const std::string&);
+
+    /**
+     *  Reads the value of the ZSwap kernel module by specified name.
+     * @param Name Value name.
+     * @returns Value.
+    */
+    std::string ReadZSwapValue(const std::string&);
 
     /**
      *  Prints log entry to the standard output.

@@ -4,8 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <fstream>
+#include <string>
+
 #include "zswapdebug/zswapdebug.hpp"
-#include "zswapworker/zswapworker.hpp"
 
 long& ZSwapDebug::GetDuplicateEntry()
 {
@@ -57,23 +59,32 @@ long& ZSwapDebug::GetWrittenBackPages()
     return ZSwapDebug::WrittenBackPages;
 }
 
-std::string ZSwapDebug::GetModulePath()
+const std::string& ZSwapDebug::GetModulePath()
 {
-    return std::string("/sys/kernel/debug/zswap/");
+    return ZSwapDebug::ModuleDebugPath;
+}
+
+long ZSwapDebug::ReadModuleDebugValue(const std::string& Name)
+{
+    long Result = 0;
+    std::ifstream ZSwapSysFs(ZSwapDebug::ModuleDebugPath + Name);
+    ZSwapSysFs >> Result;
+    ZSwapSysFs.close();
+    return Result;
 }
 
 void ZSwapDebug::ReadDebugValues()
 {
-    ZSwapDebug::DuplicateEntry = ZSwapWorker::ReadZSwapDebugValue("duplicate_entry");
-    ZSwapDebug::PoolLimitHit = ZSwapWorker::ReadZSwapDebugValue("pool_limit_hit");
-    ZSwapDebug::PoolTotalSize = ZSwapWorker::ReadZSwapDebugValue("pool_total_size");
-    ZSwapDebug::RejectAllocFail = ZSwapWorker::ReadZSwapDebugValue("reject_alloc_fail");
-    ZSwapDebug::RejectCompressPoor = ZSwapWorker::ReadZSwapDebugValue("reject_compress_poor");
-    ZSwapDebug::RejectKmemCacheFail = ZSwapWorker::ReadZSwapDebugValue("reject_kmemcache_fail");
-    ZSwapDebug::RejectReclaimFail = ZSwapWorker::ReadZSwapDebugValue("reject_reclaim_fail");
-    ZSwapDebug::SameFilledPages = ZSwapWorker::ReadZSwapDebugValue("same_filled_pages");
-    ZSwapDebug::StoredPages = ZSwapWorker::ReadZSwapDebugValue("stored_pages");
-    ZSwapDebug::WrittenBackPages = ZSwapWorker::ReadZSwapDebugValue("written_back_pages");
+    ZSwapDebug::DuplicateEntry = ZSwapDebug::ReadModuleDebugValue("duplicate_entry");
+    ZSwapDebug::PoolLimitHit = ZSwapDebug::ReadModuleDebugValue("pool_limit_hit");
+    ZSwapDebug::PoolTotalSize = ZSwapDebug::ReadModuleDebugValue("pool_total_size");
+    ZSwapDebug::RejectAllocFail = ZSwapDebug::ReadModuleDebugValue("reject_alloc_fail");
+    ZSwapDebug::RejectCompressPoor = ZSwapDebug::ReadModuleDebugValue("reject_compress_poor");
+    ZSwapDebug::RejectKmemCacheFail = ZSwapDebug::ReadModuleDebugValue("reject_kmemcache_fail");
+    ZSwapDebug::RejectReclaimFail = ZSwapDebug::ReadModuleDebugValue("reject_reclaim_fail");
+    ZSwapDebug::SameFilledPages = ZSwapDebug::ReadModuleDebugValue("same_filled_pages");
+    ZSwapDebug::StoredPages = ZSwapDebug::ReadModuleDebugValue("stored_pages");
+    ZSwapDebug::WrittenBackPages = ZSwapDebug::ReadModuleDebugValue("written_back_pages");
 }
 
 ZSwapDebug::ZSwapDebug()

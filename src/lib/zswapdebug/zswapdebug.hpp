@@ -89,7 +89,7 @@ public:
      *  Gets the kernel module debug path.
      * @returns Kernel module debug path.
     */
-    static std::string GetModulePath();
+    static const std::string& GetModulePath();
 protected:
     /**
      *  Stores the number of the duplicate entries.
@@ -140,11 +140,23 @@ protected:
      *  Stores the number of the written back pages.
     */
     long WrittenBackPages;
+
+    /**
+     *  Stores the kernel module debug path.
+    */
+    static inline const std::string ModuleDebugPath = "/sys/kernel/debug/zswap/";
 private:
     /**
      *  Reads the ZSwap kernel module debug values.
     */
     void ReadDebugValues();
+
+    /**
+     *  Reads the debug value of the ZSwap kernel module by specified name.
+     * @param Name Debug value name.
+     * @returns Value.
+    */
+    long ReadModuleDebugValue(const std::string&);
 };
 
 #endif // ZSWAPDEBUG_HPP

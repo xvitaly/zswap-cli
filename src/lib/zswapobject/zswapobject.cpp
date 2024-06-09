@@ -5,6 +5,7 @@
 */
 
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 #include <regex>
@@ -14,7 +15,6 @@
 
 #include "ksysversion/ksysversion.hpp"
 #include "zswapobject/zswapobject.hpp"
-#include "zswapworker/zswapworker.hpp"
 
 bool ZSwapObject::CheckPercent(const std::string& Value)
 {
@@ -38,6 +38,22 @@ void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewV
     std::cout << fmt::format("Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
 }
 
+void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value)
+{
+    std::ofstream ZSwapSysFs(ZSwapObject::ZSwapModuleParametersPath + Name);
+    ZSwapSysFs << Value;
+    ZSwapSysFs.close();
+}
+
+std::string ZSwapObject::ReadZSwapValue(const std::string& Name)
+{
+    std::string Result;
+    std::ifstream ZSwapSysFs(ZSwapObject::ZSwapModuleParametersPath + Name);
+    ZSwapSysFs >> Result;
+    ZSwapSysFs.close();
+    return Result;
+}
+
 std::string& ZSwapObject::GetZSwapEnabled()
 {
     return ZSwapObject::ZSwapEnabled;
@@ -48,7 +64,7 @@ void ZSwapObject::SetZSwapEnabled(const std::string& Value)
     if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapEnabled is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapObject::ZSwapEnabledName, Value, ZSwapObject::ZSwapEnabled);
     ZSwapObject::ZSwapEnabled = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapEnabledName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapEnabledName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapSameFilledPages()
@@ -61,7 +77,7 @@ void ZSwapObject::SetZSwapSameFilledPages(const std::string& Value)
     if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapSameFilledPages is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapObject::ZSwapSameFilledPagesName, Value, ZSwapObject::ZSwapSameFilledPages);
     ZSwapObject::ZSwapSameFilledPages = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapSameFilledPagesName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapSameFilledPagesName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapMaxPoolPercent()
@@ -74,7 +90,7 @@ void ZSwapObject::SetZSwapMaxPoolPercent(const std::string& Value)
     if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapMaxPoolPercent is out of range [0..100].");
     WriteLogEntry(ZSwapObject::ZSwapMaxPoolPercentName, Value, ZSwapObject::ZSwapMaxPoolPercent);
     ZSwapObject::ZSwapMaxPoolPercent = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapCompressor()
@@ -87,7 +103,7 @@ void ZSwapObject::SetZSwapCompressor(const std::string& Value)
     if (Value.empty()) throw std::invalid_argument("The value of ZSwapCompressor is empty.");
     WriteLogEntry(ZSwapObject::ZSwapCompressorName, Value, ZSwapObject::ZSwapCompressor);
     ZSwapObject::ZSwapCompressor = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapCompressorName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapCompressorName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapZpool()
@@ -100,7 +116,7 @@ void ZSwapObject::SetZSwapZpool(const std::string& Value)
     if (Value.empty()) throw std::invalid_argument("The value of ZSwapZpool is empty.");
     WriteLogEntry(ZSwapObject::ZSwapZpoolName, Value, ZSwapObject::ZSwapZpool);
     ZSwapObject::ZSwapZpool = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapZpoolName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapZpoolName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapAcceptThresholdPercent()
@@ -114,7 +130,7 @@ void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value)
     if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThresholdPercent is out of range [0..100].");
     WriteLogEntry(ZSwapObject::ZSwapAcceptThresholdPercentName, Value, ZSwapObject::ZSwapAcceptThresholdPercent);
     ZSwapObject::ZSwapAcceptThresholdPercent = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapNonSameFilledPages()
@@ -128,7 +144,7 @@ void ZSwapObject::SetZSwapNonSameFilledPages(const std::string& Value)
     if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapNonSameFilledPages is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapObject::ZSwapNonSameFilledPagesName, Value, ZSwapObject::ZSwapNonSameFilledPages);
     ZSwapObject::ZSwapNonSameFilledPages = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapExclusiveLoads()
@@ -142,7 +158,7 @@ void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value)
     if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapExclusiveLoads is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapObject::ZSwapExclusiveLoadsName, Value, ZSwapObject::ZSwapExclusiveLoads);
     ZSwapObject::ZSwapExclusiveLoads = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName, Value);
 }
 
 std::string& ZSwapObject::GetZSwapShrinkerEnabled()
@@ -156,7 +172,7 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value)
     if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapNonSameFilledPages is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapObject::ZSwapShrinkerEnabledName, Value, ZSwapObject::ZSwapShrinkerEnabled);
     ZSwapObject::ZSwapShrinkerEnabled = Value;
-    ZSwapWorker::WriteZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName, Value);
+    ZSwapObject::WriteZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName, Value);
 }
 
 void ZSwapObject::ReadKernelVersion()
@@ -166,15 +182,15 @@ void ZSwapObject::ReadKernelVersion()
 
 void ZSwapObject::ReadValues()
 {
-    ZSwapObject::ZSwapEnabled = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapEnabledName);
-    ZSwapObject::ZSwapSameFilledPages = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapSameFilledPagesName);
-    ZSwapObject::ZSwapMaxPoolPercent = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName);
-    ZSwapObject::ZSwapCompressor = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapCompressorName);
-    ZSwapObject::ZSwapZpool = ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapZpoolName);
-    ZSwapObject::ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
-    ZSwapObject::ZSwapNonSameFilledPages = CheckKernelVersion(ZSwapObject::ZSwapNonSameFilledPagesRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
-    ZSwapObject::ZSwapExclusiveLoads = CheckKernelVersion(ZSwapObject::ZSwapExclusiveLoadsRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
-    ZSwapObject::ZSwapShrinkerEnabled = CheckKernelVersion(ZSwapObject::ZSwapShrinkerEnabledRequiredKernelVersion) ? "N/A" : ZSwapWorker::ReadZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName);
+    ZSwapObject::ZSwapEnabled = ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapEnabledName);
+    ZSwapObject::ZSwapSameFilledPages = ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapSameFilledPagesName);
+    ZSwapObject::ZSwapMaxPoolPercent = ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapMaxPoolPercentName);
+    ZSwapObject::ZSwapCompressor = ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapCompressorName);
+    ZSwapObject::ZSwapZpool = ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapZpoolName);
+    ZSwapObject::ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapObject::ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
+    ZSwapObject::ZSwapNonSameFilledPages = CheckKernelVersion(ZSwapObject::ZSwapNonSameFilledPagesRequiredKernelVersion) ? "N/A" : ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
+    ZSwapObject::ZSwapExclusiveLoads = CheckKernelVersion(ZSwapObject::ZSwapExclusiveLoadsRequiredKernelVersion) ? "N/A" : ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
+    ZSwapObject::ZSwapShrinkerEnabled = CheckKernelVersion(ZSwapObject::ZSwapShrinkerEnabledRequiredKernelVersion) ? "N/A" : ZSwapObject::ReadZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName);
 }
 
 ZSwapObject::ZSwapObject()
