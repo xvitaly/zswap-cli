@@ -73,10 +73,10 @@ sudo systemctl stop zswap-cli.service
   * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
   * `-c` or `--compressor` - the algorithm used to compress memory pages.
   * `-z` or `--zpool` - the kernel's zpool type.
-  * `-a` or `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
-  * `-n` or `--non_same_filled_pages_enabled` - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
-  * `-x` or `--exclusive_loads` - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
-  * `-r` or `--shrinker_enabled` - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
+  * `-a` or `--accept_threshold_percent` (requires kernel `5.6.0` or higher) - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+  * `-n` or `--non_same_filled_pages_enabled` (requires kernel `5.18.0` or higher) - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
+  * `-x` or `--exclusive_loads` (requires kernel `6.5.0` or higher) - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
+  * `-r` or `--shrinker_enabled` (requires kernel `6.8.0` or higher) - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
 
 ### Forwarding options
 

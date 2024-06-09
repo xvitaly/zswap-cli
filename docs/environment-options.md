@@ -9,10 +9,10 @@ This project support of getting options from the environment variables.
   * `ZSWAP_MAX_POOL_PERCENT_VALUE` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
   * `ZSWAP_COMPRESSOR_VALUE` - the algorithm used to compress memory pages.
   * `ZSWAP_ZPOOL_VALUE` - the kernel's zpool type.
-  * `ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE` - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
-  * `ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE` - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
-  * `ZSWAP_EXCLUSIVE_LOADS_VALUE` - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
-  * `ZSWAP_SHRINKER_ENABLED_VALUE` - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
+  * `ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE` (requires kernel `5.6.0` or higher) - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+  * `ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE` (requires kernel `5.18.0` or higher) - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
+  * `ZSWAP_EXCLUSIVE_LOADS_VALUE` (requires kernel `6.5.0` or higher) - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
+  * `ZSWAP_SHRINKER_ENABLED_VALUE` (requires kernel `6.8.0` or higher) - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
 
 ## Forwarding options
 
