@@ -12,7 +12,6 @@ You need the following versions:
   * Clang: 7.0+;
   * CMake: 3.14+;
   * Boost: 1.65.0+;
-  * fmt: 6.1.2+;
   * semver: 0.3.0+ (optional);
   * doxygen (for building documentation);
   * pandoc (for generating manpage).
