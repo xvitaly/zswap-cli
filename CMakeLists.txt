@@ -88,12 +88,6 @@ if (BUILD_DOC)
 endif()
 
 # ======================================================
-# ================= fmtlib detection ===================
-# ======================================================
-
-find_package(fmt 6.1.2 REQUIRED)
-
-# ======================================================
 # ================= semver detection ===================
 # ======================================================
 
@@ -161,7 +155,6 @@ target_include_directories(${LIB_NAME} PUBLIC
 )
 
 target_link_libraries(${LIB_NAME} PUBLIC
-    fmt::fmt
     semver::semver
 )
 
@@ -189,7 +182,6 @@ target_include_directories(${APP_NAME} PRIVATE
 
 target_link_libraries(${APP_NAME} PRIVATE
     ${LIB_NAME}
-    fmt::fmt
     Boost::program_options
 )
 
