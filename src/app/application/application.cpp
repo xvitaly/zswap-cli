@@ -5,18 +5,11 @@
 */
 
 #include <iostream>
+#include <filesystem>
 #include <format>
 #include <fstream>
 #include <memory>
 #include <stdexcept>
-
-#ifndef FILESYSTEM_LEGACY
-#include <filesystem>
-namespace fs = std::filesystem;
-#else
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-#endif
 
 #include <boost/program_options.hpp>
 
@@ -29,7 +22,7 @@ namespace fs = std::experimental::filesystem;
 
 void Application::PrintDebugInfo()
 {
-    if (!fs::exists(ZSwapDebug::GetModulePath()))
+    if (!std::filesystem::exists(ZSwapDebug::GetModulePath()))
     {
         std::cout << "ZSwap is not running or access to debug is denied." << std::endl;
         return;
@@ -201,7 +194,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
         ("zswap.shrinker_enabled", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
         ;
 
-    if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
+    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
