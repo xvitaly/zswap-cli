@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <format>
 #include <fstream>
 #include <memory>
 #include <stdexcept>
@@ -19,7 +20,6 @@ namespace fs = std::experimental::filesystem;
 #endif
 
 #include <boost/program_options.hpp>
-#include <fmt/format.h>
 
 #include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
@@ -37,7 +37,7 @@ void Application::PrintDebugInfo()
     }
 
     std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
-    std::cout << fmt::format("Duplicate entries count: {0}.\n"
+    std::cout << std::format("Duplicate entries count: {0}.\n"
                              "Pool limit hit: {1}.\n"
                              "Pool total size: {2}.\n"
                              "Reject allocation failures: {3}.\n"
@@ -63,7 +63,7 @@ void Application::PrintDebugInfo()
 
 void Application::PrintSettings()
 {
-    std::cout << fmt::format("ZSwap enabled: {0}.\n"
+    std::cout << std::format("ZSwap enabled: {0}.\n"
                              "Same filled pages enabled: {1}.\n"
                              "Maximum pool percentage: {2}.\n"
                              "Compression algorithm: {3}.\n"
@@ -102,7 +102,7 @@ void Application::PrintSummary()
     const float SwapUsedPercent = static_cast<float>(ZSwapDebugger -> GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
-    std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
+    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
                              "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed).\n"
                              "Compression ratio: {4:.2f}.",
                              PoolSizeMB,
@@ -155,7 +155,7 @@ int Application::PrintHelp()
 
 int Application::PrintVersion()
 {
-    std::cout << fmt::format("{0} project version: {1}.",
+    std::cout << std::format("{0} project version: {1}.",
                              AppConstants::ProductNameInternal,
                              AppConstants::ProductVersion)
               << std::endl;
