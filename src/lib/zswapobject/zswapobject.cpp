@@ -19,7 +19,7 @@
 bool ZSwapObject::CheckPercent(const std::string& Value)
 {
     if (Value.empty()) return true;
-    int ValueInt = std::stoi(Value);
+    const int ValueInt = std::stoi(Value);
     return (ValueInt < 0) || (ValueInt > 100);
 }
 
