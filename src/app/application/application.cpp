@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <memory>

@@ -11,6 +11,9 @@
  *  This file is a part of zswap-cli application.
  */
 
+#include <memory>
+#include <string>
+
 #include <boost/program_options.hpp>
 
 #include "zswapobject/zswapobject.hpp"
