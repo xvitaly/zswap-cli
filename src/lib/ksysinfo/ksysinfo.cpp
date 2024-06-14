@@ -5,6 +5,7 @@
 */
 
 #include <stdexcept>
+#include <linux/sysinfo.h>
 #include <sys/sysinfo.h>
 
 #include "ksysinfo/ksystype.hpp"

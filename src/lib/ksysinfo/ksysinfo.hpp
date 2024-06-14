@@ -11,7 +11,7 @@
  *  This file gets memory information using Linux kernel API.
  */
 
-#include <sys/sysinfo.h>
+#include <linux/sysinfo.h>
 
 #include "ksysinfo/ksystype.hpp"
 
