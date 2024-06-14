@@ -4,11 +4,12 @@
  * SPDX-License-Identifier: MIT
 */
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <memory>
+#include <regex>
 #include <stdexcept>
 #include <string>
-#include <regex>
 
 #include <fmt/format.h>
 #include <semver.hpp>
