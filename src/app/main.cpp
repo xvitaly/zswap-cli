@@ -4,10 +4,12 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <exception>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 
-#include <boost/program_options.hpp>
+#include <boost/program_options/errors.hpp>
 
 #include "application/application.hpp"
 
