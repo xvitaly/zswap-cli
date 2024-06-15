@@ -6,20 +6,13 @@
 
 #include <algorithm>
 #include <iostream>
+#include <filesystem>
+#include <format>
 #include <fstream>
 #include <memory>
 #include <stdexcept>
 
-#ifndef FILESYSTEM_LEGACY
-#include <filesystem>
-namespace fs = std::filesystem;
-#else
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-#endif
-
 #include <boost/program_options.hpp>
-#include <fmt/format.h>
 
 #include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
@@ -30,14 +23,14 @@ namespace fs = std::experimental::filesystem;
 
 void Application::PrintDebugInfo()
 {
-    if (!fs::exists(ZSwapDebug::GetModulePath()))
+    if (!std::filesystem::exists(ZSwapDebug::GetModulePath()))
     {
         std::cout << "ZSwap is not running or access to debug is denied." << std::endl;
         return;
     }
 
     std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
-    std::cout << fmt::format("Duplicate entries count: {0}.\n"
+    std::cout << std::format("Duplicate entries count: {0}.\n"
                              "Pool limit hit: {1}.\n"
                              "Pool total size: {2}.\n"
                              "Reject allocation failures: {3}.\n"
@@ -63,7 +56,7 @@ void Application::PrintDebugInfo()
 
 void Application::PrintSettings()
 {
-    std::cout << fmt::format("ZSwap enabled: {0}.\n"
+    std::cout << std::format("ZSwap enabled: {0}.\n"
                              "Same filled pages enabled: {1}.\n"
                              "Maximum pool percentage: {2}.\n"
                              "Compression algorithm: {3}.\n"
@@ -102,7 +95,7 @@ void Application::PrintSummary()
     const float SwapUsedPercent = static_cast<float>(ZSwapDebugger -> GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
-    std::cout << fmt::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
+    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
                              "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed).\n"
                              "Compression ratio: {4:.2f}.",
                              PoolSizeMB,
@@ -155,7 +148,7 @@ int Application::PrintHelp()
 
 int Application::PrintVersion()
 {
-    std::cout << fmt::format("{0} project version: {1}.",
+    std::cout << std::format("{0} project version: {1}.",
                              AppConstants::ProductNameInternal,
                              AppConstants::ProductVersion)
               << std::endl;
@@ -202,7 +195,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
         ("zswap.shrinker_enabled", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
         ;
 
-    if (!fs::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
+    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();

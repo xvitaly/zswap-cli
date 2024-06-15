@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <format>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -11,7 +12,6 @@
 #include <stdexcept>
 #include <string>
 
-#include <fmt/format.h>
 #include <semver.hpp>
 
 #include "ksysversion/ksysversion.hpp"
@@ -36,7 +36,7 @@ bool ZSwapObject::CheckKernelVersion(const std::string& RequiredKernelVersion)
 
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue)
 {
-    std::cout << fmt::format("Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
+    std::cout << std::format("Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".", Name, NewValue, OldValue) << std::endl;
 }
 
 void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value)
