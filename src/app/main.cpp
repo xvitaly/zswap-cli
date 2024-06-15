@@ -9,7 +9,7 @@
 #include <memory>
 #include <stdexcept>
 
-#include <boost/program_options/errors.hpp>
+#include <boost/program_options.hpp>
 
 #include "application/application.hpp"
 
