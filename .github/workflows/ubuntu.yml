@@ -60,8 +60,8 @@ jobs:
             -DSYSTEMD_INTEGRATION:BOOL=ON
         cmake --build build
       env:
-        CFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
-        CXXFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        CFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
+        CXXFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
         LDFLAGS: -Wl,-z,relro -Wl,--as-needed -Wl,-z,now
     - name: Installing project with CMake
       run: |
