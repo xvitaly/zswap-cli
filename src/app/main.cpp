@@ -7,7 +7,6 @@
 #include <exception>
 #include <iostream>
 #include <memory>
-#include <stdexcept>
 
 #include <boost/program_options.hpp>
 
