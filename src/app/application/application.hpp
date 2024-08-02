@@ -55,6 +55,63 @@ private:
     std::unique_ptr<boost::program_options::variables_map> CmdLine;
 
     /**
+     *  Sets the ZSwap enabled value and handles possible exceptions.
+     * @param Value New value.
+    */
+    void SetZSwapEnabledValue(const std::string&);
+
+    /**
+     *  Sets the same filled pages enabled value and handles possible
+     *  exceptions.
+     * @param Value New value.
+    */
+    void SetZSwapSameFilledPagesValue(const std::string&);
+
+    /**
+     *  Sets the maximum pool percentage value and handles possible
+     *  exceptions.
+     * @param Value New value.
+    */
+    void SetZSwapMaxPoolPercentValue(const std::string&);
+
+    /**
+     *  Sets the compression algorithm name and handles possible
+     *  exceptions.
+     * @param Value New value.
+    */
+    void SetZSwapCompressorValue(const std::string&);
+
+    /**
+     *  Sets the kernel's zpool type and handles possible exceptions.
+     * @param Value New value.
+    */
+    void SetZSwapZpoolValue(const std::string&);
+
+    /**
+     *  Sets the accept threshold percentage value and handles
+     *  possible exceptions.
+    */
+    void SetZSwapAcceptThresholdPercentValue(const std::string&);
+
+    /**
+     *  Sets the non same filled pages enabled value and handles
+     *  possible exceptions.
+    */
+    void SetZSwapNonSameFilledPagesValue(const std::string&);
+
+    /**
+     *  Sets the exclusive loads enabled value and handles possible
+     *  exceptions.
+    */
+    void SetZSwapExclusiveLoadsValue(const std::string&);
+
+    /**
+     *  Sets the shrinker enabled value and handles possible
+     *  exceptions.
+    */
+    void SetZSwapShrinkerEnabledValue(const std::string&);
+
+    /**
      *  Initializes private class members.
     */
     void InitClassMembers();

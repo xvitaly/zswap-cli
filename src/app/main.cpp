@@ -32,10 +32,6 @@ int main(int argc, char** argv)
     {
         std::cerr << "Command-line argument error: " << e.what() << std::endl;
     }
-    catch (std::invalid_argument& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
     catch (std::exception& e)
     {
         std::cerr << "An error occured: " << e.what() << std::endl;
