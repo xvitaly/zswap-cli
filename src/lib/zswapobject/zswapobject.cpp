@@ -62,7 +62,7 @@ std::string& ZSwapObject::GetZSwapEnabled()
 
 void ZSwapObject::SetZSwapEnabled(const std::string& Value)
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapEnabled is incorrect (only Y or N are supported).");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The requested value for the ZSwapEnabled variable is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapEnabledName, Value, ZSwapEnabled);
     ZSwapEnabled = Value;
     WriteZSwapValue(ZSwapEnabledName, Value);
@@ -75,7 +75,7 @@ std::string& ZSwapObject::GetZSwapSameFilledPages()
 
 void ZSwapObject::SetZSwapSameFilledPages(const std::string& Value)
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapSameFilledPages is incorrect (only Y or N are supported).");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The requested value for the ZSwapSameFilledPages variable is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapSameFilledPagesName, Value, ZSwapSameFilledPages);
     ZSwapSameFilledPages = Value;
     WriteZSwapValue(ZSwapSameFilledPagesName, Value);
@@ -88,7 +88,7 @@ std::string& ZSwapObject::GetZSwapMaxPoolPercent()
 
 void ZSwapObject::SetZSwapMaxPoolPercent(const std::string& Value)
 {
-    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapMaxPoolPercent is out of range [0..100].");
+    if (CheckPercent(Value)) throw std::invalid_argument("The requested value for the ZSwapMaxPoolPercent variable is out of range [0..100].");
     WriteLogEntry(ZSwapMaxPoolPercentName, Value, ZSwapMaxPoolPercent);
     ZSwapMaxPoolPercent = Value;
     WriteZSwapValue(ZSwapMaxPoolPercentName, Value);
@@ -101,7 +101,7 @@ std::string& ZSwapObject::GetZSwapCompressor()
 
 void ZSwapObject::SetZSwapCompressor(const std::string& Value)
 {
-    if (Value.empty()) throw std::invalid_argument("The value of ZSwapCompressor is empty.");
+    if (Value.empty()) throw std::invalid_argument("The requested value for the ZSwapCompressor variable is empty.");
     WriteLogEntry(ZSwapCompressorName, Value, ZSwapCompressor);
     ZSwapCompressor = Value;
     WriteZSwapValue(ZSwapCompressorName, Value);
@@ -114,7 +114,7 @@ std::string& ZSwapObject::GetZSwapZpool()
 
 void ZSwapObject::SetZSwapZpool(const std::string& Value)
 {
-    if (Value.empty()) throw std::invalid_argument("The value of ZSwapZpool is empty.");
+    if (Value.empty()) throw std::invalid_argument("The requested value for the ZSwapZpool variable is empty.");
     WriteLogEntry(ZSwapZpoolName, Value, ZSwapZpool);
     ZSwapZpool = Value;
     WriteZSwapValue(ZSwapZpoolName, Value);
@@ -127,8 +127,8 @@ std::string& ZSwapObject::GetZSwapAcceptThresholdPercent()
 
 void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapAcceptThresholdRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapAcceptThresholdPercent requires kernel 5.6 or later.");
-    if (CheckPercent(Value)) throw std::invalid_argument("The value of ZSwapAcceptThresholdPercent is out of range [0..100].");
+    if (CheckKernelVersion(ZSwapAcceptThresholdRequiredKernelVersion)) throw std::runtime_error("Configuring the ZSwapAcceptThresholdPercent variable requires kernel 5.6 or later.");
+    if (CheckPercent(Value)) throw std::invalid_argument("The requested value for the ZSwapAcceptThresholdPercent variable is out of range [0..100].");
     WriteLogEntry(ZSwapAcceptThresholdPercentName, Value, ZSwapAcceptThresholdPercent);
     ZSwapAcceptThresholdPercent = Value;
     WriteZSwapValue(ZSwapAcceptThresholdPercentName, Value);
@@ -141,8 +141,8 @@ std::string& ZSwapObject::GetZSwapNonSameFilledPages()
 
 void ZSwapObject::SetZSwapNonSameFilledPages(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapNonSameFilledPagesRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapNonSameFilledPages requires kernel 5.18 or later.");
-    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapNonSameFilledPages is incorrect (only Y or N are supported).");
+    if (CheckKernelVersion(ZSwapNonSameFilledPagesRequiredKernelVersion)) throw std::runtime_error("Configuring the ZSwapNonSameFilledPages variable requires kernel 5.18 or later.");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The requested value for the ZSwapNonSameFilledPages variable is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapNonSameFilledPagesName, Value, ZSwapNonSameFilledPages);
     ZSwapNonSameFilledPages = Value;
     WriteZSwapValue(ZSwapNonSameFilledPagesName, Value);
@@ -155,8 +155,8 @@ std::string& ZSwapObject::GetZSwapExclusiveLoads()
 
 void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapExclusiveLoadsRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapExclusiveLoads requires kernel 6.5 or later.");
-    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapExclusiveLoads is incorrect (only Y or N are supported).");
+    if (CheckKernelVersion(ZSwapExclusiveLoadsRequiredKernelVersion)) throw std::runtime_error("Configuring the ZSwapExclusiveLoads variable requires kernel 6.5 or later.");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The requested value for the ZSwapExclusiveLoads variable is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapExclusiveLoadsName, Value, ZSwapExclusiveLoads);
     ZSwapExclusiveLoads = Value;
     WriteZSwapValue(ZSwapExclusiveLoadsName, Value);
@@ -169,8 +169,8 @@ std::string& ZSwapObject::GetZSwapShrinkerEnabled()
 
 void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapShrinkerEnabledRequiredKernelVersion)) throw std::runtime_error("Configuring ZSwapShrinkerEnabled requires kernel 6.8 or later.");
-    if (CheckEnabled(Value)) throw std::invalid_argument("The value of ZSwapNonSameFilledPages is incorrect (only Y or N are supported).");
+    if (CheckKernelVersion(ZSwapShrinkerEnabledRequiredKernelVersion)) throw std::runtime_error("Configuring the ZSwapShrinkerEnabled variable requires kernel 6.8 or later.");
+    if (CheckEnabled(Value)) throw std::invalid_argument("The requested value for the ZSwapNonSameFilledPages variable is incorrect (only Y or N are supported).");
     WriteLogEntry(ZSwapShrinkerEnabledName, Value, ZSwapShrinkerEnabled);
     ZSwapShrinkerEnabled = Value;
     WriteZSwapValue(ZSwapShrinkerEnabledName, Value);
