@@ -203,6 +203,31 @@ protected:
     std::string ZSwapShrinkerEnabled;
 
     /**
+     *  Stores the ZSwap log message template.
+    */
+    const std::string ZSwapMessageLog = "Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".";
+
+    /**
+     *  Stores the ZSwap error message template for Y or N values.
+    */
+    const std::string ZSwapErrorBool = "The requested value for the \"{0}\" variable is incorrect (only Y or N are supported).";
+
+    /**
+     *  Stores the ZSwap error message template for range values.
+    */
+    const std::string ZSwapErrorRange = "The requested value for the \"{0}\" variable is out of range [0..100].";
+
+    /**
+     *  Stores the ZSwap error message template for empty values.
+    */
+    const std::string ZSwapErrorEmpty = "The requested value for the \"{0}\" variable is empty.";
+
+    /**
+     *  Stores the ZSwap error message template for incorrect kernel version.
+    */
+    const std::string ZSwapErrorKernel = "Configuring the \"{0}\" variable requires kernel \"{1}\" or later.";
+
+    /**
      *  Stores the ZSwap kernel module parameters path.
     */
     const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
