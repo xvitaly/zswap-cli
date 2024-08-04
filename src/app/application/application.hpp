@@ -57,59 +57,68 @@ private:
     /**
      *  Sets the ZSwap enabled value and handles possible exceptions.
      * @param Value New value.
+     * @returns Returns true on success.
     */
-    void SetZSwapEnabledValue(const std::string&);
+    bool SetZSwapEnabledValue(const std::string&);
 
     /**
      *  Sets the same filled pages enabled value and handles possible
      *  exceptions.
      * @param Value New value.
+     * @returns Returns true on success.
     */
-    void SetZSwapSameFilledPagesValue(const std::string&);
+    bool SetZSwapSameFilledPagesValue(const std::string&);
 
     /**
      *  Sets the maximum pool percentage value and handles possible
      *  exceptions.
      * @param Value New value.
+     * @returns Returns true on success.
     */
-    void SetZSwapMaxPoolPercentValue(const std::string&);
+    bool SetZSwapMaxPoolPercentValue(const std::string&);
 
     /**
      *  Sets the compression algorithm name and handles possible
      *  exceptions.
      * @param Value New value.
+     * @returns Returns true on success.
     */
-    void SetZSwapCompressorValue(const std::string&);
+    bool SetZSwapCompressorValue(const std::string&);
 
     /**
      *  Sets the kernel's zpool type and handles possible exceptions.
      * @param Value New value.
+     * @returns Returns true on success.
     */
-    void SetZSwapZpoolValue(const std::string&);
+    bool SetZSwapZpoolValue(const std::string&);
 
     /**
      *  Sets the accept threshold percentage value and handles
      *  possible exceptions.
+     *  @returns Returns true on success.
     */
-    void SetZSwapAcceptThresholdPercentValue(const std::string&);
+    bool SetZSwapAcceptThresholdPercentValue(const std::string&);
 
     /**
      *  Sets the non same filled pages enabled value and handles
      *  possible exceptions.
+     *  @returns Returns true on success.
     */
-    void SetZSwapNonSameFilledPagesValue(const std::string&);
+    bool SetZSwapNonSameFilledPagesValue(const std::string&);
 
     /**
      *  Sets the exclusive loads enabled value and handles possible
      *  exceptions.
+     *  @returns Returns true on success.
     */
-    void SetZSwapExclusiveLoadsValue(const std::string&);
+    bool SetZSwapExclusiveLoadsValue(const std::string&);
 
     /**
      *  Sets the shrinker enabled value and handles possible
      *  exceptions.
+     *  @returns Returns true on success.
     */
-    void SetZSwapShrinkerEnabledValue(const std::string&);
+    bool SetZSwapShrinkerEnabledValue(const std::string&);
 
     /**
      *  Initializes private class members.
