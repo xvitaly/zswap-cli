@@ -5,10 +5,14 @@
 */
 
 #include <algorithm>
-#include <iostream>
+#include <exception>
 #include <fstream>
+#include <functional>
+#include <iostream>
 #include <memory>
 #include <stdexcept>
+#include <utility>
+#include <vector>
 
 #ifndef FILESYSTEM_LEGACY
 #include <filesystem>
@@ -27,132 +31,6 @@ namespace fs = std::experimental::filesystem;
 #include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 #include "ksysinfo/ksysinfo.hpp"
-
-bool Application::SetZSwapEnabledValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapEnabled(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapSameFilledPagesValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapSameFilledPages(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapMaxPoolPercentValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapMaxPoolPercent(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapCompressorValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapCompressor(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapZpoolValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapZpool(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapAcceptThresholdPercentValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapAcceptThresholdPercent(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapNonSameFilledPagesValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapNonSameFilledPages(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapExclusiveLoadsValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapExclusiveLoads(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool Application::SetZSwapShrinkerEnabledValue(const std::string& Value)
-{
-    try
-    {
-        ZSwap -> SetZSwapShrinkerEnabled(Value);
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-    return true;
-}
 
 void Application::PrintDebugInfo()
 {
@@ -290,26 +168,34 @@ int Application::PrintVersion()
 
 int Application::ExecuteEnv()
 {
-    const std::string ZSwapEnabledEnv = CWrappers::GetEnv("ZSWAP_ENABLED_VALUE");
-    const std::string ZSwapSameFilledPagesEnv = CWrappers::GetEnv("ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE");
-    const std::string ZSwapMaxPoolPercentEnv = CWrappers::GetEnv("ZSWAP_MAX_POOL_PERCENT_VALUE");
-    const std::string ZSwapCompressorEnv = CWrappers::GetEnv("ZSWAP_COMPRESSOR_VALUE");
-    const std::string ZSwapZpoolEnv = CWrappers::GetEnv("ZSWAP_ZPOOL_VALUE");
-    const std::string ZSwapAcceptThresholdPercentEnv = CWrappers::GetEnv("ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE");
-    const std::string ZSwapNonSameFilledPagesEnv = CWrappers::GetEnv("ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE");
-    const std::string ZSwapExclusiveLoadsEnv = CWrappers::GetEnv("ZSWAP_EXCLUSIVE_LOADS_VALUE");
-    const std::string ZSwapShrinkerEnabledEnv = CWrappers::GetEnv("ZSWAP_SHRINKER_ENABLED_VALUE");
-
     bool Result = true;
-    if (!ZSwapEnabledEnv.empty()) Result &= SetZSwapEnabledValue(ZSwapEnabledEnv);
-    if (!ZSwapSameFilledPagesEnv.empty()) Result &= SetZSwapSameFilledPagesValue(ZSwapSameFilledPagesEnv);
-    if (!ZSwapMaxPoolPercentEnv.empty()) Result &= SetZSwapMaxPoolPercentValue(ZSwapMaxPoolPercentEnv);
-    if (!ZSwapCompressorEnv.empty()) Result &= SetZSwapCompressorValue(ZSwapCompressorEnv);
-    if (!ZSwapZpoolEnv.empty()) Result &= SetZSwapZpoolValue(ZSwapZpoolEnv);
-    if (!ZSwapAcceptThresholdPercentEnv.empty()) Result &= SetZSwapAcceptThresholdPercentValue(ZSwapAcceptThresholdPercentEnv);
-    if (!ZSwapNonSameFilledPagesEnv.empty()) Result &= SetZSwapNonSameFilledPagesValue(ZSwapNonSameFilledPagesEnv);
-    if (!ZSwapExclusiveLoadsEnv.empty()) Result &= SetZSwapExclusiveLoadsValue(ZSwapExclusiveLoadsEnv);
-    if (!ZSwapShrinkerEnabledEnv.empty()) Result &= SetZSwapShrinkerEnabledValue(ZSwapShrinkerEnabledEnv);
+    const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
+    {
+        { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
+        { "ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
+        { "ZSWAP_MAX_POOL_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
+        { "ZSWAP_COMPRESSOR_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
+        { "ZSWAP_ZPOOL_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
+        { "ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
+        { "ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "ZSWAP_EXCLUSIVE_LOADS_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
+        { "ZSWAP_SHRINKER_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
+    };
+
+    for (const auto& [Key, Handler] : Handlers)
+    {
+        try
+        {
+            const std::string EnvValue = CWrappers::GetEnv(Key);
+            if (!EnvValue.empty()) Handler(EnvValue);
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+            Result &= false;
+        }
+    }
+
     return !Result;
 }
 
@@ -336,30 +222,64 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
     ConfigFileFs.close();
 
     bool Result = true;
-    if (Config -> count("zswap.enabled")) Result &= SetZSwapEnabledValue(Config -> at("zswap.enabled").as<std::string>());
-    if (Config -> count("zswap.same_filled_pages_enabled")) Result &= SetZSwapSameFilledPagesValue(Config -> at("zswap.same_filled_pages_enabled").as<std::string>());
-    if (Config -> count("zswap.max_pool_percent")) Result &= SetZSwapMaxPoolPercentValue(Config -> at("zswap.max_pool_percent").as<std::string>());
-    if (Config -> count("zswap.compressor")) Result &= SetZSwapCompressorValue(Config -> at("zswap.compressor").as<std::string>());
-    if (Config -> count("zswap.zpool")) Result &= SetZSwapZpoolValue(Config -> at("zswap.zpool").as<std::string>());
-    if (Config -> count("zswap.accept_threshold_percent")) Result &= SetZSwapAcceptThresholdPercentValue(Config -> at("zswap.accept_threshold_percent").as<std::string>());
-    if (Config -> count("zswap.non_same_filled_pages_enabled")) Result &= SetZSwapNonSameFilledPagesValue(Config -> at("zswap.non_same_filled_pages_enabled").as<std::string>());
-    if (Config -> count("zswap.exclusive_loads")) Result &= SetZSwapExclusiveLoadsValue(Config -> at("zswap.exclusive_loads").as<std::string>());
-    if (Config -> count("zswap.shrinker_enabled")) Result &= SetZSwapShrinkerEnabledValue(Config -> at("zswap.shrinker_enabled").as<std::string>());
+    const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
+    {
+        { "zswap.enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
+        { "zswap.same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
+        { "zswap.max_pool_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
+        { "zswap.compressor", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
+        { "zswap.zpool", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
+        { "zswap.accept_threshold_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
+        { "zswap.non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "zswap.exclusive_loads", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
+        { "zswap.shrinker_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
+    };
+
+    for (const auto& [Key, Handler] : Handlers)
+    {
+        try
+        {
+            if (Config -> count(Key)) Handler(CmdLine -> at(Key).as<std::string>());
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+            Result &= false;
+        }
+    }
+
     return !Result;
 }
 
 int Application::ExecuteCmdLine()
 {
     bool Result = true;
-    if (CmdLine -> count("enabled")) Result &= SetZSwapEnabledValue(CmdLine -> at("enabled").as<std::string>());
-    if (CmdLine -> count("same_filled_pages_enabled")) Result &= SetZSwapSameFilledPagesValue(CmdLine -> at("same_filled_pages_enabled").as<std::string>());
-    if (CmdLine -> count("max_pool_percent")) Result &= SetZSwapMaxPoolPercentValue(CmdLine -> at("max_pool_percent").as<std::string>());
-    if (CmdLine -> count("compressor")) Result &= SetZSwapCompressorValue(CmdLine -> at("compressor").as<std::string>());
-    if (CmdLine -> count("zpool")) Result &= SetZSwapZpoolValue(CmdLine -> at("zpool").as<std::string>());
-    if (CmdLine -> count("accept_threshold_percent")) Result &= SetZSwapAcceptThresholdPercentValue(CmdLine -> at("accept_threshold_percent").as<std::string>());
-    if (CmdLine -> count("non_same_filled_pages_enabled")) Result &= SetZSwapNonSameFilledPagesValue(CmdLine -> at("non_same_filled_pages_enabled").as<std::string>());
-    if (CmdLine -> count("exclusive_loads")) Result &= SetZSwapExclusiveLoadsValue(CmdLine -> at("exclusive_loads").as<std::string>());
-    if (CmdLine -> count("shrinker_enabled")) Result &= SetZSwapShrinkerEnabledValue(CmdLine -> at("shrinker_enabled").as<std::string>());
+    const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
+    {
+        { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
+        { "same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
+        { "max_pool_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
+        { "compressor", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
+        { "zpool", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
+        { "accept_threshold_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
+        { "non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "exclusive_loads", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
+        { "shrinker_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
+    };
+
+    for (const auto& [Key, Handler] : Handlers)
+    {
+        try
+        {
+            if (CmdLine -> count(Key)) Handler(CmdLine -> at(Key).as<std::string>());
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+            Result &= false;
+        }
+    }
+
     return !Result;
 }
 
