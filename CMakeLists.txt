@@ -54,7 +54,6 @@ include(cmake/FindFormat.cmake)
 include(cmake/FindPandoc.cmake)
 include(cmake/FindKernelHeaders.cmake)
 include(cmake/FindGlibcHeaders.cmake)
-include(cmake/FindFileSystem.cmake)
 
 # ======================================================
 # ================== Boost detection ===================
@@ -185,14 +184,6 @@ target_link_libraries(${APP_NAME} PRIVATE
     ${LIB_NAME}
     Boost::program_options
 )
-
-if (FILESYSTEM_REQUIRE_LINKAGE)
-    target_link_libraries(${APP_NAME} PRIVATE stdc++fs)
-endif()
-
-if(FILESYSTEM_REQUIRE_EXPERIMENTAL)
-    target_compile_definitions(${APP_NAME} PRIVATE FILESYSTEM_LEGACY)
-endif()
 
 install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_SBINDIR})
 
