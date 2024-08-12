@@ -17,7 +17,7 @@ project(zswap-cli
     LANGUAGES CXX
 )
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ======================================================
@@ -50,6 +50,7 @@ include(FetchContent)
 # ============= External custom imports ================
 # ======================================================
 
+include(cmake/FindFormat.cmake)
 include(cmake/FindPandoc.cmake)
 include(cmake/FindKernelHeaders.cmake)
 include(cmake/FindGlibcHeaders.cmake)
@@ -86,12 +87,6 @@ if (BUILD_DOC)
     set(DOXYGEN_TOC_EXPAND YES)
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "README.md")
 endif()
-
-# ======================================================
-# ================= fmtlib detection ===================
-# ======================================================
-
-find_package(fmt 6.1.2 REQUIRED)
 
 # ======================================================
 # ================= semver detection ===================
@@ -161,7 +156,6 @@ target_include_directories(${LIB_NAME} PUBLIC
 )
 
 target_link_libraries(${LIB_NAME} PUBLIC
-    fmt::fmt
     semver::semver
 )
 
@@ -189,7 +183,6 @@ target_include_directories(${APP_NAME} PRIVATE
 
 target_link_libraries(${APP_NAME} PRIVATE
     ${LIB_NAME}
-    fmt::fmt
     Boost::program_options
 )
 
