@@ -17,7 +17,7 @@ on:
 jobs:
   analyze:
     name: Analyze with CodeQL
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       actions: read
       contents: read
@@ -39,7 +39,7 @@ jobs:
         queries: +security-and-quality
     - name: Installing development packages
       run: |
-        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libfmt-dev libsystemd-dev
+        sudo apt-get -y install linux-libc-dev libboost-program-options-dev libsystemd-dev
     - name: Perform automatic build
       uses: github/codeql-action/autobuild@v3
     - name: Perform CodeQL Analysis
