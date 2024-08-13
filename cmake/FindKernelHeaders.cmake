@@ -9,5 +9,5 @@ find_path(KERNELHEADERS_PATH
 )
 
 if (NOT KERNELHEADERS_PATH)
-    message(FATAL_ERROR "Linux kernel headers were not found.")
+    message(FATAL_ERROR "Kernel headers were not found.")
 endif()
