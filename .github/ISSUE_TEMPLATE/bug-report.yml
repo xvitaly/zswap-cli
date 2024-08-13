@@ -49,16 +49,16 @@ body:
       required: true
   - type: input
     attributes:
-      label: GNU/Linux distribution
+      label: Distribution name
       description: >
         Please specify distribution name and version.
     validations:
       required: true
   - type: input
     attributes:
-      label: Linux kernel version
+      label: Kernel version
       description: >
-        Please specify Linux kernel version.
+        Please specify kernel version.
     validations:
       required: true
   - type: dropdown
