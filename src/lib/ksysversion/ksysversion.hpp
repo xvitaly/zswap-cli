@@ -8,14 +8,14 @@
 #define KSYSVERSION_HPP
 
 /** @file ksysversion/ksysversion.hpp
- *  This file gets the Linux kernel version using its API.
+ *  This file gets the kernel version using its API.
  */
 
 #include <string>
 #include <sys/utsname.h>
 
 /**
- *  Class with properties and methods for working with the Linux
+ *  Class with properties and methods for working with the
  *  kernel version information.
 */
 class KSysVersion
@@ -28,7 +28,7 @@ public:
     KSysVersion();
 
     /**
-     *  Gets fully qualified Linux kernel version in semver format.
+     *  Gets fully qualified kernel version in semver format.
     */
     std::string GetKernelVersion() const;
 private:
@@ -39,7 +39,7 @@ private:
 
     /**
      *  Parses and extracts version number in semver format from fully
-     *  qualified Linux kernel version string.
+     *  qualified kernel version string.
     */
     std::string ParseKernelVersion(const std::string&) const;
 };

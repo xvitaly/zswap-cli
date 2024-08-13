@@ -8,13 +8,13 @@
 #define KSYSTYPE_HPP
 
 /** @file ksysinfo/ksystype.hpp
- *  This file works with private Linux kernel types.
+ *  This file works with private kernel types.
  */
 
 #include <linux/types.h>
 
 /**
- *  Namespace with definition of private Linux kernel types.
+ *  Namespace with definition of private kernel types.
 */
 namespace ksystype {
     /**

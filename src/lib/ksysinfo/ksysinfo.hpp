@@ -8,7 +8,7 @@
 #define KSYSINFO_HPP
 
 /** @file ksysinfo/ksysinfo.hpp
- *  This file gets memory information using Linux kernel API.
+ *  This file gets memory information using the kernel API.
  */
 
 #include <linux/sysinfo.h>
@@ -17,7 +17,7 @@
 
 /**
  *  Class with properties and methods for working with memory
- * information using Linux kernel API.
+ * information using the kernel API.
 */
 class KSysInfo
 {
