@@ -13,8 +13,6 @@
 
 #include <string>
 
-#include <sys/utsname.h>
-
 /**
  *  Class with properties and methods for working with the
  *  kernel version information.
@@ -24,31 +22,46 @@ class KSysVersion
 public:
     /**
      *  Constructor of the KSysVersion class.
-     * @exception Raises an instance of std::runtime_error on error.
     */
     KSysVersion();
 
     /**
      *  Gets fully qualified kernel version in semver format.
     */
-    std::string GetKernelVersion() const;
+    std::string& GetKernelVersion();
 
     /**
      *  Gets fully qualified compile time kernel headers version
      *  in semver format.
     */
-    std::string GetHeadersVersion() const;
+    std::string& GetHeadersVersion();
 private:
-    /**
-     *  Stores an instance of the utsname structure.
-    */
-    struct utsname UTSName;
-
     /**
      *  Parses and extracts version number in semver format from fully
      *  qualified kernel version string.
     */
     std::string ParseKernelVersion(const std::string&) const;
+
+    /**
+     *  Reads the kernel version string into the class field.
+     * @exception Raises an instance of the std::runtime_error on error.
+    */
+    void ReadKernelVersion();
+
+    /**
+     *  Reads the kernel headers version string into the class field.
+    */
+    void ReadHeadersVersion();
+
+    /**
+     *  Stores the kernel version string.
+    */
+    std::string KernelVersion;
+
+    /**
+     *  Stores the kernel headers version string.
+    */
+    std::string HeadersVersion;
 };
 
 #endif // KSYSVERSION_HPP
