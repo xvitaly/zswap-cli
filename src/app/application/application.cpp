@@ -24,6 +24,7 @@
 #include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 #include "ksysinfo/ksysinfo.hpp"
+#include "ksysversion/ksysversion.hpp"
 
 void Application::PrintDebugInfo()
 {
@@ -152,9 +153,13 @@ int Application::PrintHelp()
 
 int Application::PrintVersion()
 {
-    std::cout << std::format("{0} project version: {1}.",
+    std::unique_ptr<KSysVersion> SysVersion = std::make_unique<KSysVersion>();
+    std::cout << std::format("{0} project version: {1}.\n"
+                             "Kernel API version: {2} (build), {3} (runtime).",
                              AppConstants::ProductNameInternal,
-                             AppConstants::ProductVersion)
+                             AppConstants::ProductVersion,
+                             SysVersion -> GetHeadersVersion(),
+                             SysVersion -> GetKernelVersion())
               << std::endl;
     return 0;
 }

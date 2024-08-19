@@ -31,6 +31,12 @@ public:
      *  Gets fully qualified kernel version in semver format.
     */
     std::string GetKernelVersion() const;
+
+    /**
+     *  Gets fully qualified compile time kernel headers version
+     *  in semver format.
+    */
+    std::string GetHeadersVersion() const;
 private:
     /**
      *  Stores an instance of the utsname structure.
