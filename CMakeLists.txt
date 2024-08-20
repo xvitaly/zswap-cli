@@ -26,6 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_DOC "Build documentation." OFF)
 option(BUILD_MANPAGE "Build manpage." OFF)
+option(LINK_ALL_STATICALLY "Link against all libraries statically." OFF)
 option(LINK_BOOST_STATICALLY "Link against Boost statically." OFF)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 
@@ -59,7 +60,10 @@ include(cmake/FindGlibcHeaders.cmake)
 # ================== Boost detection ===================
 # ======================================================
 
-set(Boost_USE_STATIC_LIBS ${LINK_BOOST_STATICALLY})
+if (LINK_BOOST_STATICALLY OR LINK_ALL_STATICALLY)
+    set(Boost_USE_STATIC_LIBS ON)
+endif()
+
 find_package(Boost 1.65.0 COMPONENTS program_options REQUIRED)
 
 # ======================================================
@@ -156,6 +160,12 @@ target_include_directories(${LIB_NAME} PUBLIC
 target_link_libraries(${LIB_NAME} PUBLIC
     semver::semver
 )
+
+if (LINK_ALL_STATICALLY)
+    target_link_libraries(${LIB_NAME} PUBLIC
+        -static
+    )
+endif()
 
 # ======================================================
 # ================= Application target =================
