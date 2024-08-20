@@ -11,10 +11,6 @@
  *  This file gets memory information using the kernel API.
  */
 
-#include <linux/sysinfo.h>
-
-#include "ksysinfo/ksystype.hpp"
-
 /**
  *  Class with properties and methods for working with memory
  * information using the kernel API.
@@ -31,73 +27,128 @@ public:
      *  Gets current uptime (in seconds since boot).
      * @returns Current uptime.
     */
-    ksystype::long_t& GetUptime();
+    long& GetUptime();
 
     /**
      *  Gets total usable main memory size in bytes.
      * @returns Total usable main memory size.
     */
-    ksystype::ulong_t& GetTotalRam();
+    unsigned long& GetTotalRam();
 
     /**
      *  Gets available memory size in bytes.
      * @returns Available memory size.
     */
-    ksystype::ulong_t& GetFreeRam();
+    unsigned long& GetFreeRam();
 
     /**
      *  Gets amount of shared memory in bytes.
      * @returns Amount of shared memory.
     */
-    ksystype::ulong_t& GetSharedRam();
+    unsigned long& GetSharedRam();
 
     /**
      *  Gets amount of memory used by buffers in bytes.
      * @returns Amount of memory used by buffers.
     */
-    ksystype::ulong_t& GetBufferedRam();
+    unsigned long& GetBufferedRam();
 
     /**
      *  Gets total swap space size in bytes.
      * @returns Total swap space size.
     */
-    ksystype::ulong_t& GetTotalSwap();
+    unsigned long& GetTotalSwap();
 
     /**
      *  Gets available swap space in bytes.
      * @returns Available swap space.
     */
-    ksystype::ulong_t& GetFreeSwap();
+    unsigned long& GetFreeSwap();
 
     /**
      *  Gets the number of current processes.
      * @returns The number of current processes.
     */
-    ksystype::ushort_t& GetProcessesCount();
+    unsigned short& GetProcessesCount();
 
     /**
      *  Gets total high memory size in bytes.
      * @returns Total high memory size.
     */
-    ksystype::ulong_t& GetTotalHighMem();
+    unsigned long& GetTotalHighMem();
 
     /**
      *  Gets available high memory size in bytes.
      * @returns Available high memory size.
     */
-    ksystype::ulong_t& GetFreeHighMem();
+    unsigned long& GetFreeHighMem();
 
     /**
      *  Gets memory unit size in bytes.
      * @returns Memory unit size.
     */
-    ksystype::uint_t& GetMemUnitSize();
+    unsigned int& GetMemUnitSize();
 private:
     /**
-     *  Stores instance of sysinfo structure.
+     *  Reads the sysinfo structure into the class fields.
      * @exception Raises an instance of std::runtime_error on error.
     */
-    struct sysinfo SysInfo;
+    void ReadSysInfo();
+
+    /**
+     *  Stores current uptime (in seconds since boot) value.
+    */
+    long Uptime;
+
+    /**
+     *  Stores total usable main memory size in bytes value.
+    */
+    unsigned long TotalRam;
+
+    /**
+     *  Stores the available memory size in bytes value.
+    */
+    unsigned long FreeRam;
+
+    /**
+     *  Stores the amount of shared memory in bytes value.
+    */
+    unsigned long SharedRam;
+
+    /**
+     *  Stores the amount of memory used by buffers in bytes value.
+    */
+    unsigned long BufferedRam;
+
+    /**
+     *  Stores the amount of memory used by buffers in bytes value.
+    */
+    unsigned long TotalSwap;
+
+    /**
+     *  Stores available swap space in bytes value.
+    */
+    unsigned long FreeSwap;
+
+    /**
+     *  Stores the number of current processes value.
+    */
+    unsigned short ProcessesCount;
+
+    /**
+     *  Stores total high memory size in bytes value.
+    */
+    unsigned long TotalHighMem;
+
+    /**
+     *  Stores the available high memory size in bytes value.
+    */
+    unsigned long FreeHighMem;
+
+    /**
+     *  Stores memory unit size in bytes value.
+    */
+    unsigned int MemUnitSize;
 };
 
 #endif // KSYSINFO_HPP

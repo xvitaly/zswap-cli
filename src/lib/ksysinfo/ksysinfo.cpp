@@ -5,68 +5,85 @@
 */
 
 #include <stdexcept>
+
 #include <linux/sysinfo.h>
 #include <sys/sysinfo.h>
 
-#include "ksysinfo/ksystype.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 
-ksystype::long_t& KSysInfo::GetUptime()
+long& KSysInfo::GetUptime()
 {
-    return SysInfo.uptime;
+    return Uptime;
 }
 
-ksystype::ulong_t& KSysInfo::GetTotalRam()
+unsigned long& KSysInfo::GetTotalRam()
 {
-    return SysInfo.totalram;
+    return TotalRam;
 }
 
-ksystype::ulong_t& KSysInfo::GetFreeRam()
+unsigned long& KSysInfo::GetFreeRam()
 {
-    return SysInfo.freeram;
+    return FreeRam;
 }
 
-ksystype::ulong_t& KSysInfo::GetSharedRam()
+unsigned long& KSysInfo::GetSharedRam()
 {
-    return SysInfo.sharedram;
+    return SharedRam;
 }
 
-ksystype::ulong_t& KSysInfo::GetBufferedRam()
+unsigned long& KSysInfo::GetBufferedRam()
 {
-    return SysInfo.bufferram;
+    return BufferedRam;
 }
 
-ksystype::ulong_t& KSysInfo::GetTotalSwap()
+unsigned long& KSysInfo::GetTotalSwap()
 {
-    return SysInfo.totalswap;
+    return TotalSwap;
 }
 
-ksystype::ulong_t& KSysInfo::GetFreeSwap()
+unsigned long& KSysInfo::GetFreeSwap()
 {
-    return SysInfo.freeswap;
+    return FreeSwap;
 }
 
-ksystype::ushort_t& KSysInfo::GetProcessesCount()
+unsigned short& KSysInfo::GetProcessesCount()
 {
-    return SysInfo.procs;
+    return ProcessesCount;
 }
 
-ksystype::ulong_t& KSysInfo::GetTotalHighMem()
+unsigned long& KSysInfo::GetTotalHighMem()
 {
-    return SysInfo.totalhigh;
+    return TotalHighMem;
 }
 
-ksystype::ulong_t& KSysInfo::GetFreeHighMem()
+unsigned long& KSysInfo::GetFreeHighMem()
 {
-    return SysInfo.freehigh;
+    return FreeHighMem;
 }
 
-ksystype::uint_t& KSysInfo::GetMemUnitSize()
+unsigned int& KSysInfo::GetMemUnitSize()
 {
-    return SysInfo.mem_unit;
+    return MemUnitSize;
+}
+
+void KSysInfo::ReadSysInfo()
+{
+    struct sysinfo SysInfo;
+    if (sysinfo(&SysInfo) == -1) throw std::runtime_error("Got incorrect result by sysinfo() call.");
+    Uptime = static_cast<long>(SysInfo.uptime);
+    TotalRam = static_cast<unsigned long>(SysInfo.totalram);
+    FreeRam = static_cast<unsigned long>(SysInfo.freeram);
+    SharedRam = static_cast<unsigned long>(SysInfo.sharedram);
+    BufferedRam = static_cast<unsigned long>(SysInfo.bufferram);
+    TotalSwap = static_cast<unsigned long>(SysInfo.totalswap);
+    FreeSwap = static_cast<unsigned long>(SysInfo.freeswap);
+    ProcessesCount = static_cast<unsigned short>(SysInfo.procs);
+    TotalHighMem = static_cast<unsigned long>(SysInfo.totalhigh);
+    FreeHighMem = static_cast<unsigned long>(SysInfo.freehigh);
+    MemUnitSize = static_cast<unsigned int>(SysInfo.mem_unit);
 }
 
 KSysInfo::KSysInfo()
 {
-    if (sysinfo(&SysInfo) == -1) throw std::runtime_error("Got incorrect result by sysinfo() call.");
+    ReadSysInfo();
 }
