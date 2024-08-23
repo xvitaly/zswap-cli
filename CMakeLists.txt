@@ -162,7 +162,7 @@ target_link_libraries(${LIB_NAME} PRIVATE
 )
 
 if (LINK_ALL_STATICALLY)
-    target_link_libraries(${LIB_NAME} PUBLIC
+    target_link_libraries(${LIB_NAME} PRIVATE
         -static
     )
 endif()
@@ -193,6 +193,12 @@ target_link_libraries(${APP_NAME} PRIVATE
     ${LIB_NAME}
     Boost::program_options
 )
+
+if (LINK_ALL_STATICALLY)
+    target_link_libraries(${APP_NAME} PRIVATE
+        -static
+    )
+endif()
 
 install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_SBINDIR})
 
