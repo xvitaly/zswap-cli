@@ -37,6 +37,9 @@ jobs:
       with:
         languages: ${{ matrix.language }}
         queries: +security-and-quality
+    - name: Updating apt package metadata
+      run: |
+        sudo apt-get update
     - name: Installing development packages
       run: |
         sudo apt-get -y install linux-libc-dev libboost-program-options-dev libsystemd-dev
