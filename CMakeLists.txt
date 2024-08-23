@@ -157,7 +157,7 @@ target_include_directories(${LIB_NAME} PUBLIC
     "${CMAKE_CURRENT_BINARY_DIR}/generated"
 )
 
-target_link_libraries(${LIB_NAME} PUBLIC
+target_link_libraries(${LIB_NAME} PRIVATE
     semver::semver
 )
 
