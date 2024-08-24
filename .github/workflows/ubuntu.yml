@@ -53,6 +53,7 @@ jobs:
             -DCMAKE_C_COMPILER=${{ matrix.cc }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
             -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON \
+            -DCMAKE_INTERPROCEDURAL_OPTIMIZATION:BOOL=ON \
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
             -DCMAKE_INSTALL_PREFIX:PATH=/usr \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
