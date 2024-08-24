@@ -57,6 +57,16 @@ include(cmake/FindKernelHeaders.cmake)
 include(cmake/FindGlibcHeaders.cmake)
 
 # ======================================================
+# =========== Link time optimizations checks ===========
+# ======================================================
+
+include(CheckIPOSupported)
+include(CheckPIESupported)
+
+check_ipo_supported(RESULT CMAKE_CXX_LINK_IPO_SUPPORTED LANGUAGES CXX)
+check_pie_supported(LANGUAGES CXX)
+
+# ======================================================
 # ================== Boost detection ===================
 # ======================================================
 
@@ -161,6 +171,18 @@ target_link_libraries(${LIB_NAME} PRIVATE
     semver::semver
 )
 
+if (CMAKE_CXX_LINK_IPO_SUPPORTED)
+    set_target_properties(${LIB_NAME}
+        PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON
+    )
+endif()
+
+if (CMAKE_CXX_LINK_PIE_SUPPORTED)
+    set_target_properties(${LIB_NAME}
+        PROPERTIES POSITION_INDEPENDENT_CODE ON
+    )
+endif()
+
 if (LINK_ALL_STATICALLY)
     target_link_libraries(${LIB_NAME} PRIVATE
         -static
@@ -193,6 +215,18 @@ target_link_libraries(${APP_NAME} PRIVATE
     ${LIB_NAME}
     Boost::program_options
 )
+
+if (CMAKE_CXX_LINK_IPO_SUPPORTED)
+    set_target_properties(${APP_NAME}
+        PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON
+    )
+endif()
+
+if (CMAKE_CXX_LINK_PIE_SUPPORTED)
+    set_target_properties(${APP_NAME}
+        PROPERTIES POSITION_INDEPENDENT_CODE ON
+    )
+endif()
 
 if (LINK_ALL_STATICALLY)
     target_link_libraries(${APP_NAME} PRIVATE
