@@ -12,7 +12,7 @@
 
 std::string CWrappers::GetEnv(const std::string& KeyName)
 {
-    char const* EnvValue = getenv(KeyName.c_str());
+    const char* EnvValue = getenv(KeyName.c_str());
     return EnvValue != nullptr ? std::string(EnvValue) : std::string();
 }
 
