@@ -4,10 +4,18 @@
 # SPDX-License-Identifier: MIT
 #
 
-find_path(KERNELHEADERS_PATH
-    NAMES "linux/kernel.h"
+include(CheckIncludeFileCXX)
+
+CHECK_INCLUDE_FILE_CXX(
+    "linux/sysinfo.h"
+    KERNELHEADERS_SYSINFO_FOUND
 )
 
-if (NOT KERNELHEADERS_PATH)
+CHECK_INCLUDE_FILE_CXX(
+    "linux/version.h"
+    KERNELHEADERS_VERSION_FOUND
+)
+
+if (NOT (KERNELHEADERS_SYSINFO_FOUND AND KERNELHEADERS_VERSION_FOUND))
     message(FATAL_ERROR "Kernel headers were not found.")
 endif()

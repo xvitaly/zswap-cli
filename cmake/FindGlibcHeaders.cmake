@@ -4,10 +4,18 @@
 # SPDX-License-Identifier: MIT
 #
 
-find_path(GLIBCHEADERS_PATH
-    NAMES "sys/sysinfo.h"
+include(CheckIncludeFileCXX)
+
+CHECK_INCLUDE_FILE_CXX(
+    "sys/sysinfo.h"
+    GLIBCHEADERS_SYSINFO_FOUND
 )
 
-if (NOT GLIBCHEADERS_PATH)
+CHECK_INCLUDE_FILE_CXX(
+    "sys/utsname.h"
+    GLIBCHEADERS_UTSNAME_FOUND
+)
+
+if (NOT (GLIBCHEADERS_SYSINFO_FOUND AND GLIBCHEADERS_UTSNAME_FOUND))
     message(FATAL_ERROR "GLibc headers were not found.")
 endif()
