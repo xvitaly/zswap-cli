@@ -11,7 +11,7 @@ You need the following versions:
   * GCC: 13+;
   * Clang: 16+;
   * CMake: 3.14+;
-  * Boost: 1.65.0+;
+  * Boost: 1.70.0+;
   * semver: 0.3.0+ (optional);
   * doxygen (for building documentation);
   * pandoc (for generating manpage).
