@@ -11,6 +11,6 @@ CHECK_INCLUDE_FILE_CXX(
     FORMAT_HEADER_FOUND
 )
 
-if(NOT FORMAT_HEADER_FOUND)
+if (NOT FORMAT_HEADER_FOUND)
     message(FATAL_ERROR "Current C++ compiler has no <format> support!")
 endif()
