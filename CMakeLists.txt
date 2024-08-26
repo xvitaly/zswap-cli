@@ -51,6 +51,7 @@ include(FetchContent)
 # ============= External custom imports ================
 # ======================================================
 
+include(cmake/FindFileSystem.cmake)
 include(cmake/FindFormat.cmake)
 include(cmake/FindPandoc.cmake)
 include(cmake/FindKernelHeaders.cmake)
