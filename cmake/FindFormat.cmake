@@ -4,17 +4,13 @@
 # SPDX-License-Identifier: MIT
 #
 
-include(CheckCXXSourceCompiles)
+include(CheckIncludeFileCXX)
 
-check_cxx_source_compiles(
-    "#if __has_include(<format>)
-    #include <format>
-    #else
-    #error Header <format> is not available.
-    #endif
-    int main() { return 0; }"
-    _FORMAT_HEADER_CHECK)
+CHECK_INCLUDE_FILE_CXX(
+    "format"
+    FORMAT_HEADER_FOUND
+)
 
-if(NOT _FORMAT_HEADER_CHECK)
+if(NOT FORMAT_HEADER_FOUND)
     message(FATAL_ERROR "Current C++ compiler has no <format> support!")
 endif()
