@@ -28,6 +28,7 @@ option(BUILD_DOC "Build documentation." OFF)
 option(BUILD_MANPAGE "Build manpage." OFF)
 option(LINK_ALL_STATICALLY "Link against all libraries statically." OFF)
 option(LINK_BOOST_STATICALLY "Link against Boost statically." OFF)
+option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations." ON)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 
 # ======================================================
@@ -172,13 +173,13 @@ target_link_libraries(${LIB_NAME} PRIVATE
     semver::semver
 )
 
-if (CMAKE_CXX_LINK_IPO_SUPPORTED)
+if (LINK_ENABLE_OPTIMIZATIONS AND CMAKE_CXX_LINK_IPO_SUPPORTED)
     set_target_properties(${LIB_NAME}
         PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON
     )
 endif()
 
-if (CMAKE_CXX_LINK_PIE_SUPPORTED)
+if (LINK_ENABLE_OPTIMIZATIONS AND CMAKE_CXX_LINK_PIE_SUPPORTED)
     set_target_properties(${LIB_NAME}
         PROPERTIES POSITION_INDEPENDENT_CODE ON
     )
@@ -217,13 +218,13 @@ target_link_libraries(${APP_NAME} PRIVATE
     Boost::program_options
 )
 
-if (CMAKE_CXX_LINK_IPO_SUPPORTED)
+if (LINK_ENABLE_OPTIMIZATIONS AND CMAKE_CXX_LINK_IPO_SUPPORTED)
     set_target_properties(${APP_NAME}
         PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON
     )
 endif()
 
-if (CMAKE_CXX_LINK_PIE_SUPPORTED)
+if (LINK_ENABLE_OPTIMIZATIONS AND CMAKE_CXX_LINK_PIE_SUPPORTED)
     set_target_properties(${APP_NAME}
         PROPERTIES POSITION_INDEPENDENT_CODE ON
     )
