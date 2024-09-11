@@ -18,6 +18,21 @@ You need the following versions:
 
 If no packaged version of the optional dependencies were found, the bundled version will be used.
 
+## Configuration options
+
+This project supports the following configuration options, which can be enabled or disabled using `-DOPTION_NAME=ON/OFF`:
+
+| Name | Description | Default |
+| ------- | ------- | ------- |
+| BUILD_DOC | Build and install API and application documentation in HTML format. | OFF |
+| BUILD_MANPAGE | Build and install manpage with documentation. | OFF |
+| LINK_ALL_STATICALLY | Link the program against all libraries statically (no dependencies mode). | OFF |
+| LINK_BOOST_STATICALLY | Link the program against Boost library statically (removes dependency on it). | OFF |
+| LINK_ENABLE_OPTIMIZATIONS | Enable link-time optimizations if supported by current C++ compiler. | ON |
+| SYSTEMD_INTEGRATION | Generate and install systemd units. | ON |
+
+Any other non-default options are not supported and should not be used.
+
 ## Downloading sources
 
 Download sources using Git:
