@@ -90,7 +90,7 @@ public:
      * @returns Kernel module debug path.
     */
     static const std::string& GetModulePath();
-protected:
+private:
     /**
      *  Stores the number of the duplicate entries.
     */
@@ -145,7 +145,7 @@ protected:
      *  Stores the kernel module debug path.
     */
     static inline const std::string ModuleDebugPath = "/sys/kernel/debug/zswap/";
-private:
+
     /**
      *  Reads the ZSwap kernel module debug values.
     */
