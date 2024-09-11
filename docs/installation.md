@@ -20,7 +20,7 @@ If no packaged version of the optional dependencies were found, the bundled vers
 
 ## Configuration options
 
-This project supports the following configuration options, which can be enabled or disabled using `-DOPTION_NAME=ON/OFF`:
+This project supports the following build-time configuration options, which can be enabled or disabled using `-DOPTION_NAME=ON/OFF`:
 
 | Name | Description | Default |
 | ------- | ------- | ------- |
@@ -31,7 +31,7 @@ This project supports the following configuration options, which can be enabled 
 | LINK_ENABLE_OPTIMIZATIONS | Enable link-time optimizations if supported by current C++ compiler. | ON |
 | SYSTEMD_INTEGRATION | Generate and install systemd units. | ON |
 
-Any other non-default options are not supported and should not be used.
+Any other non-default options related to external dependencies are not supported and should not be used.
 
 ## Downloading sources
 
