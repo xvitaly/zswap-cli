@@ -156,7 +156,7 @@ public:
      * the proposed value.
     */
     void SetZSwapShrinkerEnabled(const std::string&);
-protected:
+private:
     /**
      *  Stores the ZSwap enabled value.
     */
@@ -300,7 +300,7 @@ protected:
      *  value.
     */
     const std::string ZSwapShrinkerEnabledRequiredKernelVersion = "6.8.0";
-private:
+
     /**
      *  Stores the current kernel version in string format.
     */
