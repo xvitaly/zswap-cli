@@ -8,8 +8,7 @@ Install the Git client, CMake, GCC/Clang compiler, and library dependencies from
 
 You need the following versions:
 
-  * GCC: 13+;
-  * Clang: 16+;
+  * C++20 capable compiler: GCC 13+ or Clang 16+;
   * CMake: 3.14+;
   * Boost: 1.70.0+;
   * semver: 0.3.0+ (optional);
