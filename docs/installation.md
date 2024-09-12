@@ -2,7 +2,7 @@
 
 ## Pre-requirements
 
-Install the Git client, CMake, GCC/Clang compiler, and library dependencies from your distribution's repositories.
+Install the Git client, CMake, GCC/Clang compiler with standard library, kernel and libc development packages, and external project dependencies from your distribution's repositories.
 
 ## Versions
 
