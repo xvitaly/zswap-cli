@@ -37,7 +37,7 @@ Any other non-default options related to external dependencies are not supported
 Download sources using Git:
 
 ```
-git clone --depth=1 --recursive https://github.com/xvitaly/zswap-cli.git zswap-cli
+git clone --depth=1 https://github.com/xvitaly/zswap-cli.git zswap-cli
 ```
 
 You can also use the [release tarballs](https://github.com/xvitaly/zswap-cli/releases).
