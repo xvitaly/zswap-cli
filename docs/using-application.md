@@ -2,12 +2,51 @@
 
 This application can be used in two ways:
 
-  * as a systemd unit;
-  * as a command-line tool.
+  * as a command-line tool;
+  * as a systemd unit.
+
+## Using as a CLI tool
+
+### Available command-line options
+
+#### General options
+
+  * `--help` - print help message and exit.
+  * `--version` - print version information and exit.
+
+#### Application configuration options
+
+  * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline.
+  * `--env` - get options from the [environment variables](environment-options.md) instead of the cmdline.
+  * `--stats` - show statistics and current settings of the ZSwap kernel module. Supported values:
+    * `0` (default) - print everything: kernel module settings, usage summary, and debug information.
+    * `1` - print kernel module settings.
+    * `2` - print kernel module usage summary.
+    * `3` - print kernel module debug information.
+
+#### Kernel module configuration options
+
+  * `-e` or `--enabled` - enable (`Y`) or disable (`N`) the ZSwap kernel module.
+  * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
+  * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
+  * `-c` or `--compressor` - the algorithm used to compress memory pages.
+  * `-z` or `--zpool` - the kernel's zpool type.
+  * `-a` or `--accept_threshold_percent` (requires kernel `5.6.0` or higher) - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
+  * `-n` or `--non_same_filled_pages_enabled` (requires kernel `5.18.0` or higher) - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
+  * `-x` or `--exclusive_loads` (requires kernel `6.5.0` or higher) - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
+  * `-r` or `--shrinker_enabled` (requires kernel `6.8.0` or higher) - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
+
+### Forwarding options
+
+Start the application with at least one command-line argument:
+
+```
+sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor lzo --zpool z3fold --accept_threshold_percent 40 --non_same_filled_pages_enabled Y --exclusive_loads Y --shrinker_enabled Y
+```
 
 ## Using with systemd
 
-After [installation](installation.md), the systemd unit `zswap-cli.service` will be added.
+After [installation](installation.md) with systemd integration enabled, the `zswap-cli.service` unit file will be created.
 
 ### Changing settings
 
@@ -45,43 +84,4 @@ Stop the unit and disable ZSwap:
 
 ```
 sudo systemctl stop zswap-cli.service
-```
-
-## Using as CLI
-
-### Available command-line options
-
-#### General options
-
-  * `--help` - print help message and exit.
-  * `--version` - print version information and exit.
-
-#### Application configuration options
-
-  * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline.
-  * `--env` - get options from the [environment variables](environment-options.md) instead of the cmdline.
-  * `--stats` - show statistics and current settings of the ZSwap kernel module. Supported values:
-    * `0` (default) - print everything: kernel module settings, usage summary, and debug information.
-    * `1` - print kernel module settings.
-    * `2` - print kernel module usage summary.
-    * `3` - print kernel module debug information.
-
-#### Kernel module configuration options
-
-  * `-e` or `--enabled` - enable (`Y`) or disable (`N`) the ZSwap kernel module.
-  * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
-  * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
-  * `-c` or `--compressor` - the algorithm used to compress memory pages.
-  * `-z` or `--zpool` - the kernel's zpool type.
-  * `-a` or `--accept_threshold_percent` (requires kernel `5.6.0` or higher) - the threshold at which ZSwap would start accepting pages again after it became full (integer from `1` to `100`).
-  * `-n` or `--non_same_filled_pages_enabled` (requires kernel `5.18.0` or higher) - enable (`Y`) or disable (`N`) accepting non same filled memory pages.
-  * `-x` or `--exclusive_loads` (requires kernel `6.5.0` or higher) - enable (`Y`) or disable (`N`) entries invalidation when memory pages are loaded from compressed pool.
-  * `-r` or `--shrinker_enabled` (requires kernel `6.8.0` or higher) - enable (`Y`) or disable (`N`) pool shrinking based on memory pressure.
-
-### Forwarding options
-
-Start the application with at least one command-line argument:
-
-```
-sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor lzo --zpool z3fold --accept_threshold_percent 40 --non_same_filled_pages_enabled Y --exclusive_loads Y --shrinker_enabled Y
 ```
