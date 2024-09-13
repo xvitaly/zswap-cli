@@ -236,7 +236,7 @@ if (LINK_ALL_STATICALLY)
     )
 endif()
 
-install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_SBINDIR})
+install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # ======================================================
 # =================== Assets target ====================
