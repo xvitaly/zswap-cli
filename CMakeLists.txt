@@ -39,7 +39,13 @@ set(APP_NAME "${CMAKE_PROJECT_NAME}")
 set(LIB_NAME "${CMAKE_PROJECT_NAME}-lib")
 set(DOCS_NAME "${CMAKE_PROJECT_NAME}-docs")
 set(MAN_NAME "${CMAKE_PROJECT_NAME}-man")
-set(UNIT_NAME "${CMAKE_PROJECT_NAME}")
+
+# ======================================================
+# ===================== File names =====================
+# ======================================================
+
+set(CONF_FILE_NAME "${CMAKE_PROJECT_NAME}.conf")
+set(UNIT_FILE_NAME "${CMAKE_PROJECT_NAME}.service")
 
 # ======================================================
 # ================= Internal imports ===================
@@ -248,15 +254,15 @@ if (BUILD_DOC)
 endif()
 
 if (BUILD_MANPAGE)
-    configure_file("assets/manpage/${CMAKE_PROJECT_NAME}.md.in" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.md" @ONLY)
-    add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" COMMAND "${Pandoc_EXECUTABLE}" ARGS "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.md" -s -t man -o "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" COMMENT "Building manpage using Pandoc." VERBATIM)
+    configure_file("assets/manpage/${APP_NAME}.md.in" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.md" @ONLY)
+    add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" COMMAND "${Pandoc_EXECUTABLE}" ARGS "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.md" -s -t man -o "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" COMMENT "Building manpage using Pandoc." VERBATIM)
     add_custom_target(${MAN_NAME} ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1")
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
 endif()
 
 if (SYSTEMD_INTEGRATION)
-    configure_file("assets/systemd/${CMAKE_PROJECT_NAME}.service.in" "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.service" @ONLY)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.service" DESTINATION "${SYSTEMD_UNITDIR}" RENAME "${UNIT_NAME}.service")
+    configure_file("assets/systemd/${UNIT_FILE_NAME}.in" "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" @ONLY)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}")
 endif()
 
-install(FILES "assets/config/${CMAKE_PROJECT_NAME}.conf" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" RENAME "${APP_NAME}.conf")
+install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}")

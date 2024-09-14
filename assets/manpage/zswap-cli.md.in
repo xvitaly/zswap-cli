@@ -148,7 +148,7 @@ sudo @APP_NAME@ --env
 Start the application with the `--config` command-line argument:
 
 ```
-sudo @APP_NAME@ --config /path/to/@APP_NAME@.conf
+sudo @APP_NAME@ --config /path/to/@CONF_FILE_NAME@
 ```
 
 # EXIT STATUS
@@ -159,18 +159,18 @@ sudo @APP_NAME@ --config /path/to/@APP_NAME@.conf
 
 # SYSTEMD UNIT
 
-After installation, the systemd unit **@CMAKE_PROJECT_NAME@.service** will be added.
+After installation, the systemd unit **@UNIT_FILE_NAME@** will be added.
 
 ## Changing settings
 
-All settings are stored in the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@APP_NAME@.conf** configuration file. It uses standard key-value syntax and can be edited by the user.
+All settings are stored in the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@APP_NAME@/@CONF_FILE_NAME@** configuration file. It uses standard key-value syntax and can be edited by the user.
 
 ## Enabling unit
 
 Enable the systemd unit to allow it to run at system startup:
 
 ```
-sudo systemctl enable --now @CMAKE_PROJECT_NAME@.service
+sudo systemctl enable --now @UNIT_FILE_NAME@
 ```
 
 ## Disabling unit
@@ -178,7 +178,7 @@ sudo systemctl enable --now @CMAKE_PROJECT_NAME@.service
 Disable the systemd unit and stop it from running at system startup:
 
 ```
-sudo systemctl disable @CMAKE_PROJECT_NAME@.service
+sudo systemctl disable @UNIT_FILE_NAME@
 ```
 
 ## Running unit
@@ -188,13 +188,13 @@ It is also possible to start the systemd unit without adding it to startup.
 Start the unit and enable ZSwap:
 
 ```
-sudo systemctl start @CMAKE_PROJECT_NAME@.service
+sudo systemctl start @UNIT_FILE_NAME@
 ```
 
 Stop the unit and disable ZSwap:
 
 ```
-sudo systemctl stop @CMAKE_PROJECT_NAME@.service
+sudo systemctl stop @UNIT_FILE_NAME@
 ```
 
 # AUTHORS
