@@ -33,7 +33,6 @@ public:
 
     /**
      *  Runs an application and return exit code.
-     * @param CmdLine Instance of command-line arguments parser.
      * @returns Exit code.
     */
     int Run();
@@ -99,7 +98,6 @@ private:
 
     /**
      *  Gets parameters from command-line arguments.
-     * @param CmdLine Instance of command-line arguments parser.
      * @returns Exit code.
     */
     int ExecuteCmdLine();
