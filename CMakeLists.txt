@@ -106,7 +106,7 @@ if (BUILD_DOC)
     set(DOXYGEN_SHOW_INCLUDE_FILES YES)
     set(DOXYGEN_BINARY_TOC YES)
     set(DOXYGEN_TOC_EXPAND YES)
-    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "README.md")
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "docs/README.md")
 endif()
 
 # ======================================================
