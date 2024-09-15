@@ -24,11 +24,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ================== Project options ===================
 # ======================================================
 
-option(BUILD_DOC "Build documentation." OFF)
-option(BUILD_MANPAGE "Build manpage." OFF)
-option(LINK_ALL_STATICALLY "Link against all libraries statically." OFF)
-option(LINK_BOOST_STATICALLY "Link against Boost statically." OFF)
-option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations." ON)
+option(BUILD_DOC "Build and install API and application documentation in HTML format." OFF)
+option(BUILD_MANPAGE "Build and install manpage with documentation." OFF)
+option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
+option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
+option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 
 # ======================================================
