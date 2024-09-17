@@ -35,3 +35,18 @@ Start the application with the `--env` command-line argument:
 ```
 sudo zswap-cli --env
 ```
+
+Note that most distributions are configured by default not to pass user-defined ENV settings when using sudo. In such cases, you can explicitly specify them all in one command:
+
+```
+sudo ZSWAP_ENABLED_VALUE=Y \
+     ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE=Y \
+     ZSWAP_MAX_POOL_PERCENT_VALUE=60 \
+     ZSWAP_COMPRESSOR_VALUE=lzo \
+     ZSWAP_ZPOOL_VALUE=z3fold \
+     ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE=40 \
+     ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE=Y \
+     ZSWAP_EXCLUSIVE_LOADS_VALUE=Y \
+     ZSWAP_SHRINKER_ENABLED_VALUE=Y \
+     zswap-cli --env
+```
