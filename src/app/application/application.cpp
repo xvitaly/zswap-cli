@@ -30,7 +30,7 @@ void Application::PrintDebugInfo()
 {
     if (!std::filesystem::exists(ZSwapDebug::GetModulePath()))
     {
-        std::cout << "ZSwap is not running or access to debug is denied." << std::endl;
+        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
         return;
     }
 
