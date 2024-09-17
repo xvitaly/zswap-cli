@@ -237,7 +237,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
     {
         try
         {
-            if (Config -> count(Key)) Handler(CmdLine -> at(Key).as<std::string>());
+            if (Config -> count(Key)) Handler(Config -> at(Key).as<std::string>());
         }
         catch (std::exception& e)
         {
