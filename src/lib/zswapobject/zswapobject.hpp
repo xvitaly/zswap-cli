@@ -365,6 +365,17 @@ private:
      * @retval false Otherwise.
     */
     bool CheckKernelVersion(const std::string&);
+
+    /**
+     *  Checks if the current version is lower than the required minimum
+     *  version and higher than the required maximum version.
+     * @param MinKernelVersion The required minimum kernel version to check.
+     * @param MaxKernelVersion The required maximum kernel version to check.
+     * @returns Check results.
+     * @retval true If the current version is out of version range.
+     * @retval false Otherwise.
+    */
+    bool CheckKernelVersionRange(const std::string&, const std::string&);
 };
 
 #endif // ZSWAPOBJECT_HPP
