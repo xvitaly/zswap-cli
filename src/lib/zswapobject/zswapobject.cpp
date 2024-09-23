@@ -161,7 +161,7 @@ std::string& ZSwapObject::GetZSwapExclusiveLoads()
 
 void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapExclusiveLoadsRequiredKernelVersion)) throw std::runtime_error(std::vformat(ZSwapErrorKernel, std::make_format_args(ZSwapExclusiveLoadsName, ZSwapExclusiveLoadsRequiredKernelVersion)));
+    if (CheckKernelVersionRange(ZSwapExclusiveLoadsRequiredKernelVersion, ZSwapExclusiveLoadsUnavailableKernelVersion)) throw std::runtime_error(std::vformat(ZSwapErrorKernelRange, std::make_format_args(ZSwapExclusiveLoadsName, ZSwapExclusiveLoadsRequiredKernelVersion, ZSwapExclusiveLoadsUnavailableKernelVersion)));
     if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapExclusiveLoadsName)));
     WriteLogEntry(ZSwapExclusiveLoadsName, Value, ZSwapExclusiveLoads);
     ZSwapExclusiveLoads = Value;
@@ -196,7 +196,7 @@ void ZSwapObject::ReadValues()
     ZSwapZpool = ReadZSwapValue(ZSwapZpoolName);
     ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
     ZSwapNonSameFilledPages = CheckKernelVersion(ZSwapNonSameFilledPagesRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
-    ZSwapExclusiveLoads = CheckKernelVersion(ZSwapExclusiveLoadsRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
+    ZSwapExclusiveLoads = CheckKernelVersionRange(ZSwapExclusiveLoadsRequiredKernelVersion, ZSwapExclusiveLoadsUnavailableKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
     ZSwapShrinkerEnabled = CheckKernelVersion(ZSwapShrinkerEnabledRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName);
 }
 

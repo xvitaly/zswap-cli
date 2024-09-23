@@ -297,6 +297,12 @@ private:
     const std::string ZSwapExclusiveLoadsRequiredKernelVersion = "6.5.0";
 
     /**
+     *  Stores the kernel version after which the exclusive loads value will
+     *  no longer be available.
+    */
+    const std::string ZSwapExclusiveLoadsUnavailableKernelVersion = "6.9.0";
+
+    /**
      *  Stores the shrinker enabled internal parameter name.
     */
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
