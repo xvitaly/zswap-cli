@@ -228,6 +228,12 @@ private:
     const std::string ZSwapErrorKernel = "Configuring the \"{0}\" variable requires kernel \"{1}\" or later.";
 
     /**
+     *  Stores the ZSwap error message template for the kernel version
+     *  that doesn't match the required range.
+    */
+    const std::string ZSwapErrorKernelRange = "Configuring the \"{0}\" variable requires kernel version from \"{1}\" to \"{2}\".";
+
+    /**
      *  Stores the ZSwap kernel module parameters path.
     */
     const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
