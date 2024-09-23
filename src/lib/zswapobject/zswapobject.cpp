@@ -147,7 +147,7 @@ std::string& ZSwapObject::GetZSwapNonSameFilledPages()
 
 void ZSwapObject::SetZSwapNonSameFilledPages(const std::string& Value)
 {
-    if (CheckKernelVersion(ZSwapNonSameFilledPagesRequiredKernelVersion)) throw std::runtime_error(std::vformat(ZSwapErrorKernel, std::make_format_args(ZSwapNonSameFilledPagesName, ZSwapNonSameFilledPagesRequiredKernelVersion)));
+    if (CheckKernelVersionRange(ZSwapNonSameFilledPagesRequiredKernelVersion, ZSwapNonSameFilledPagesUnavailableKernelVersion)) throw std::runtime_error(std::vformat(ZSwapErrorKernelRange, std::make_format_args(ZSwapNonSameFilledPagesName, ZSwapNonSameFilledPagesRequiredKernelVersion, ZSwapNonSameFilledPagesUnavailableKernelVersion)));
     if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapNonSameFilledPagesName)));
     WriteLogEntry(ZSwapNonSameFilledPagesName, Value, ZSwapNonSameFilledPages);
     ZSwapNonSameFilledPages = Value;
@@ -195,7 +195,7 @@ void ZSwapObject::ReadValues()
     ZSwapCompressor = ReadZSwapValue(ZSwapCompressorName);
     ZSwapZpool = ReadZSwapValue(ZSwapZpoolName);
     ZSwapAcceptThresholdPercent = CheckKernelVersion(ZSwapAcceptThresholdRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapAcceptThresholdPercentName);
-    ZSwapNonSameFilledPages = CheckKernelVersion(ZSwapNonSameFilledPagesRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
+    ZSwapNonSameFilledPages = CheckKernelVersionRange(ZSwapNonSameFilledPagesRequiredKernelVersion, ZSwapNonSameFilledPagesUnavailableKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapNonSameFilledPagesName);
     ZSwapExclusiveLoads = CheckKernelVersionRange(ZSwapExclusiveLoadsRequiredKernelVersion, ZSwapExclusiveLoadsUnavailableKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapExclusiveLoadsName);
     ZSwapShrinkerEnabled = CheckKernelVersion(ZSwapShrinkerEnabledRequiredKernelVersion) ? "N/A" : ReadZSwapValue(ZSwapObject::ZSwapShrinkerEnabledName);
 }

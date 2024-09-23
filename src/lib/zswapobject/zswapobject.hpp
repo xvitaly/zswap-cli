@@ -286,6 +286,12 @@ private:
     const std::string ZSwapNonSameFilledPagesRequiredKernelVersion = "5.18.0";
 
     /**
+     *  Stores the kernel version after which the non same filled pages enabled
+     *  value will no longer be available.
+    */
+    const std::string ZSwapNonSameFilledPagesUnavailableKernelVersion = "6.10.0";
+
+    /**
      *  Stores the exclusive loads enabled internal parameter name.
     */
     const std::string ZSwapExclusiveLoadsName = "exclusive_loads";
