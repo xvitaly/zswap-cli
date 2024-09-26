@@ -411,6 +411,11 @@ private:
     void ReadValues();
 
     /**
+     *  Reads the availability of ZSwap kernel options.
+    */
+    void ReadAvailability();
+
+    /**
      *  Checks if the value matches the specified criteria [0..100].
      * @param Value Value to check.
      * @returns Check results.
