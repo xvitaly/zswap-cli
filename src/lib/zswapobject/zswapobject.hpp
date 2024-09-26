@@ -163,9 +163,20 @@ private:
     std::string ZSwapEnabled;
 
     /**
+     *  Determines whether the ZSwap enabled value is available.
+    */
+    bool ZSwapEnabledAvailable;
+
+    /**
      *  Stores the same filled pages enabled value.
     */
     std::string ZSwapSameFilledPages;
+
+    /**
+     *  Determines whether the same filled pages enabled value
+     *  is available.
+    */
+    bool ZSwapSameFilledPagesAvailable;
 
     /**
      *  Stores the maximum pool percentage value.
@@ -173,9 +184,21 @@ private:
     std::string ZSwapMaxPoolPercent;
 
     /**
+     *  Determines whether the maximum pool percentage value
+     *  is available.
+    */
+    bool ZSwapMaxPoolPercentAvailable;
+
+    /**
      *  Stores the compression algorithm name.
     */
     std::string ZSwapCompressor;
+
+    /**
+     *  Determines whether the compression algorithm name value
+     *  is available.
+    */
+    bool ZSwapCompressorAvailable;
 
     /**
      *  Stores the kernel's zpool type.
@@ -183,9 +206,21 @@ private:
     std::string ZSwapZpool;
 
     /**
+     *  Determines whether the kernel's zpool type value
+     *  is available.
+    */
+    bool ZSwapZpoolAvailable;
+
+    /**
      *  Stores the accept threshold percentage value.
     */
     std::string ZSwapAcceptThresholdPercent;
+
+    /**
+     *  Determines whether the accept threshold percentage value
+     *  is available.
+    */
+    bool ZSwapAcceptThresholdPercentAvailable;
 
     /**
      *  Stores the non same filled pages enabled value.
@@ -193,14 +228,32 @@ private:
     std::string ZSwapNonSameFilledPages;
 
     /**
+     *  Determines whether the non same filled pages enabled value
+     *  is available.
+    */
+    bool ZSwapNonSameFilledPagesAvailable;
+
+    /**
      *  Stores the exclusive loads enabled value.
     */
     std::string ZSwapExclusiveLoads;
 
     /**
+     *  Determines whether the exclusive loads enabled value
+     *  is available.
+    */
+    bool ZSwapExclusiveLoadsAvailable;
+
+    /**
      *  Stores the shrinker enabled value.
     */
     std::string ZSwapShrinkerEnabled;
+
+    /**
+     *  Determines whether the shrinker enabled value
+     *  is available.
+    */
+    bool ZSwapShrinkerEnabledAvailable;
 
     /**
      *  Stores the ZSwap log message template.
