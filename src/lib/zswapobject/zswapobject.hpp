@@ -302,6 +302,18 @@ private:
     const std::string ZSwapSameFilledPagesName = "same_filled_pages_enabled";
 
     /**
+     *  Stores the required kernel version to work non same filled pages
+     *  enabled value.
+    */
+    const std::string ZSwapSameFilledPagesRequiredKernelVersion = "4.16.0";
+
+    /**
+     *  Stores the kernel version after which the same filled pages enabled
+     *  value will no longer be available.
+    */
+    const std::string ZSwapSameFilledPagesUnavailableKernelVersion = "6.10.0";
+
+    /**
      *  Stores the maximum pool percentage internal parameter name.
     */
     const std::string ZSwapMaxPoolPercentName = "max_pool_percent";
