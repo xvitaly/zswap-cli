@@ -434,7 +434,8 @@ private:
     bool CheckEnabled(const std::string&);
 
     /**
-     *  Checks if the required kernel version lower than current version.
+     *  Checks if the kernel version is higher or equal the required
+     *  version.
      * @param RequiredKernelVersion The required kernel version to check.
      * @returns Check results.
      * @retval true If the required kernel version lower than current version.
@@ -443,8 +444,8 @@ private:
     bool CheckKernelVersion(const std::string&);
 
     /**
-     *  Checks if the current version is lower than the required minimum
-     *  version and higher than the required maximum version.
+     *  Checks if the kernel version is higher or equal the required
+     *  minimum version and less than the required maximum version.
      * @param MinKernelVersion The required minimum kernel version to check.
      * @param MaxKernelVersion The required maximum kernel version to check.
      * @returns Check results.

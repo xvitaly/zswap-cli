@@ -31,13 +31,13 @@ bool ZSwapObject::CheckEnabled(const std::string& Value)
 
 bool ZSwapObject::CheckKernelVersion(const std::string& RequiredKernelVersion)
 {
-    return semver::from_string(KernelVersion) < semver::from_string(RequiredKernelVersion);
+    return semver::from_string(KernelVersion) >= semver::from_string(RequiredKernelVersion);
 }
 
 bool ZSwapObject::CheckKernelVersionRange(const std::string& MinKernelVersion, const std::string& MaxKernelVersion)
 {
-    return semver::from_string(KernelVersion) < semver::from_string(MinKernelVersion) ||
-           semver::from_string(KernelVersion) > semver::from_string(MaxKernelVersion);
+    return semver::from_string(KernelVersion) >= semver::from_string(MinKernelVersion) &&
+           semver::from_string(KernelVersion) < semver::from_string(MaxKernelVersion);
 }
 
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue)
@@ -189,10 +189,10 @@ void ZSwapObject::ReadAvailability()
     ZSwapMaxPoolPercentAvailable = true;
     ZSwapCompressorAvailable = true;
     ZSwapZpoolAvailable = true;
-    ZSwapAcceptThresholdPercentAvailable = !CheckKernelVersion(ZSwapAcceptThresholdRequiredKernelVersion);
-    ZSwapNonSameFilledPagesAvailable = !CheckKernelVersionRange(ZSwapNonSameFilledPagesRequiredKernelVersion, ZSwapNonSameFilledPagesUnavailableKernelVersion);
-    ZSwapExclusiveLoadsAvailable = !CheckKernelVersionRange(ZSwapExclusiveLoadsRequiredKernelVersion, ZSwapExclusiveLoadsUnavailableKernelVersion);
-    ZSwapShrinkerEnabledAvailable = !CheckKernelVersion(ZSwapShrinkerEnabledRequiredKernelVersion);
+    ZSwapAcceptThresholdPercentAvailable = CheckKernelVersion(ZSwapAcceptThresholdRequiredKernelVersion);
+    ZSwapNonSameFilledPagesAvailable = CheckKernelVersionRange(ZSwapNonSameFilledPagesRequiredKernelVersion, ZSwapNonSameFilledPagesUnavailableKernelVersion);
+    ZSwapExclusiveLoadsAvailable = CheckKernelVersionRange(ZSwapExclusiveLoadsRequiredKernelVersion, ZSwapExclusiveLoadsUnavailableKernelVersion);
+    ZSwapShrinkerEnabledAvailable = CheckKernelVersion(ZSwapShrinkerEnabledRequiredKernelVersion);
 }
 
 void ZSwapObject::ReadKernelVersion()
