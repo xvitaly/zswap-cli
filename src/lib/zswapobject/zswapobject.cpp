@@ -81,6 +81,7 @@ std::string& ZSwapObject::GetZSwapSameFilledPages()
 
 void ZSwapObject::SetZSwapSameFilledPages(const std::string& Value)
 {
+    if (!ZSwapSameFilledPagesAvailable) throw std::runtime_error(std::vformat(ZSwapErrorKernelRange, std::make_format_args(ZSwapSameFilledPagesName, ZSwapSameFilledPagesRequiredKernelVersion, ZSwapSameFilledPagesUnavailableKernelVersion)));
     if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapSameFilledPagesName)));
     WriteLogEntry(ZSwapSameFilledPagesName, Value, ZSwapSameFilledPages);
     ZSwapSameFilledPages = Value;
@@ -185,7 +186,7 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value)
 void ZSwapObject::ReadAvailability()
 {
     ZSwapEnabledAvailable = true;
-    ZSwapSameFilledPagesAvailable = true;
+    ZSwapSameFilledPagesAvailable = CheckKernelVersionRange(ZSwapSameFilledPagesRequiredKernelVersion, ZSwapSameFilledPagesUnavailableKernelVersion);
     ZSwapMaxPoolPercentAvailable = true;
     ZSwapCompressorAvailable = true;
     ZSwapZpoolAvailable = true;
