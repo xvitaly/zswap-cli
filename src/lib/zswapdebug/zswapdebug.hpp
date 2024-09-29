@@ -29,67 +29,67 @@ public:
      *  Gets the number of the duplicate entries.
      * @returns Duplicate entries count.
     */
-    long GetDuplicateEntry();
+    long GetDuplicateEntry() const;
 
     /**
      *  Gets the pool limit hits.
      * @returns Pool limit hits.
     */
-    long GetPoolLimitHit();
+    long GetPoolLimitHit() const;
 
     /**
      *  Gets the pool total size value.
      * @returns Pool total size.
     */
-    long GetPoolTotalSize();
+    long GetPoolTotalSize() const;
 
     /**
      *  Gets the number of reject allocation failures.
      * @returns Reject allocation failures.
     */
-    long GetRejectAllocFail();
+    long GetRejectAllocFail() const;
 
     /**
      *  Gets the reject compression poor value.
      * @returns Reject compression poor value.
     */
-    long GetRejectCompressPoor();
+    long GetRejectCompressPoor() const;
 
     /**
      *  Gets the number of reject Kmemcache failures.
      * @returns Reject Kmemcache failures.
     */
-    long GetRejectKmemCacheFail();
+    long GetRejectKmemCacheFail() const;
 
     /**
      *  Gets the number of reject reclaim failures.
      * @returns Reject reclaim failures.
     */
-    long GetRejectReclaimFail();
+    long GetRejectReclaimFail() const;
 
     /**
      *  Gets the number of the same filled pages.
      * @returns Same filled pages count.
     */
-    long GetSameFilledPages();
+    long GetSameFilledPages() const;
 
     /**
      *  Gets the number of the stored pages.
      * @returns Stored pages count.
     */
-    long GetStoredPages();
+    long GetStoredPages() const;
 
     /**
      *  Gets the number of the written back pages.
      * @returns Written back pages count.
     */
-    long GetWrittenBackPages();
+    long GetWrittenBackPages() const;
 
     /**
      *  Gets the kernel module debug path.
      * @returns Kernel module debug path.
     */
-    bool IsDebugAvailable();
+    bool IsDebugAvailable() const;
 private:
     /**
      *  Stores the kernel module debug path.
@@ -101,7 +101,7 @@ private:
      * @param Name Debug value name.
      * @returns Value.
     */
-    long ReadModuleDebugValue(const std::string&);
+    long ReadModuleDebugValue(const std::string&) const;
 };
 
 #endif // ZSWAPDEBUG_HPP
