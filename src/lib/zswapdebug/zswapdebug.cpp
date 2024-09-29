@@ -4,64 +4,65 @@
  * SPDX-License-Identifier: MIT
 */
 
+#include <filesystem>
 #include <fstream>
 #include <string>
 
 #include "zswapdebug/zswapdebug.hpp"
 
-long& ZSwapDebug::GetDuplicateEntry()
+long ZSwapDebug::GetDuplicateEntry()
 {
-    return DuplicateEntry;
+    return ReadModuleDebugValue("duplicate_entry");
 }
 
-long& ZSwapDebug::GetPoolLimitHit()
+long ZSwapDebug::GetPoolLimitHit()
 {
-    return PoolLimitHit;
+    return ReadModuleDebugValue("pool_limit_hit");
 }
 
-long& ZSwapDebug::GetPoolTotalSize()
+long ZSwapDebug::GetPoolTotalSize()
 {
-    return PoolTotalSize;
+    return ReadModuleDebugValue("pool_total_size");
 }
 
-long& ZSwapDebug::GetRejectAllocFail()
+long ZSwapDebug::GetRejectAllocFail()
 {
-    return RejectAllocFail;
+    return ReadModuleDebugValue("reject_alloc_fail");
 }
 
-long& ZSwapDebug::GetRejectCompressPoor()
+long ZSwapDebug::GetRejectCompressPoor()
 {
-    return RejectCompressPoor;
+    return ReadModuleDebugValue("reject_compress_poor");
 }
 
-long& ZSwapDebug::GetRejectKmemCacheFail()
+long ZSwapDebug::GetRejectKmemCacheFail()
 {
-    return RejectKmemCacheFail;
+    return ReadModuleDebugValue("reject_kmemcache_fail");
 }
 
-long& ZSwapDebug::GetRejectReclaimFail()
+long ZSwapDebug::GetRejectReclaimFail()
 {
-    return RejectReclaimFail;
+    return ReadModuleDebugValue("reject_reclaim_fail");
 }
 
-long& ZSwapDebug::GetSameFilledPages()
+long ZSwapDebug::GetSameFilledPages()
 {
-    return SameFilledPages;
+    return ReadModuleDebugValue("same_filled_pages");
 }
 
-long& ZSwapDebug::GetStoredPages()
+long ZSwapDebug::GetStoredPages()
 {
-    return StoredPages;
+    return ReadModuleDebugValue("stored_pages");
 }
 
-long& ZSwapDebug::GetWrittenBackPages()
+long ZSwapDebug::GetWrittenBackPages()
 {
-    return WrittenBackPages;
+    return ReadModuleDebugValue("written_back_pages");
 }
 
-const std::string& ZSwapDebug::GetModulePath()
+bool ZSwapDebug::IsDebugAvailable()
 {
-    return ModuleDebugPath;
+    return std::filesystem::exists(ModuleDebugPath);
 }
 
 long ZSwapDebug::ReadModuleDebugValue(const std::string& Name)
@@ -71,23 +72,4 @@ long ZSwapDebug::ReadModuleDebugValue(const std::string& Name)
     ZSwapSysFs >> Result;
     ZSwapSysFs.close();
     return Result;
-}
-
-void ZSwapDebug::ReadDebugValues()
-{
-    DuplicateEntry = ReadModuleDebugValue("duplicate_entry");
-    PoolLimitHit = ReadModuleDebugValue("pool_limit_hit");
-    PoolTotalSize = ReadModuleDebugValue("pool_total_size");
-    RejectAllocFail = ReadModuleDebugValue("reject_alloc_fail");
-    RejectCompressPoor = ReadModuleDebugValue("reject_compress_poor");
-    RejectKmemCacheFail = ReadModuleDebugValue("reject_kmemcache_fail");
-    RejectReclaimFail = ReadModuleDebugValue("reject_reclaim_fail");
-    SameFilledPages = ReadModuleDebugValue("same_filled_pages");
-    StoredPages = ReadModuleDebugValue("stored_pages");
-    WrittenBackPages = ReadModuleDebugValue("written_back_pages");
-}
-
-ZSwapDebug::ZSwapDebug()
-{
-    ReadDebugValues();
 }
