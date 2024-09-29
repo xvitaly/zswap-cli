@@ -46,6 +46,8 @@ Enable or disable memory pages deduplication.
 
 Supported values: **Y**, **N**.
 
+Required kernel version: **4.16.0** to **6.10.0**.
+
 #### -p, \-\-max_pool_percent
 The maximum percentage of memory that the compressed pool can occupy.
 
@@ -96,7 +98,7 @@ Required kernel version: **6.8.0** or higher.
 ## Supported options
 
   * **ZSWAP_ENABLED_VALUE** - enable (**Y**) or disable (**N**) the ZSwap kernel module.
-  * **ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE** - enable (**Y**) or disable (**N**) memory pages deduplication.
+  * **ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE** (requires kernel **4.16.0** to **6.10.0**) - enable (**Y**) or disable (**N**) memory pages deduplication.
   * **ZSWAP_MAX_POOL_PERCENT_VALUE** - the maximum percentage of memory that the compressed pool can occupy (integer from **1** to **100**).
   * **ZSWAP_COMPRESSOR_VALUE** - the algorithm used to compress memory pages.
   * **ZSWAP_ZPOOL_VALUE** - the kernel's zpool type.
@@ -149,7 +151,7 @@ sudo ZSWAP_ENABLED_VALUE=Y \
 ## Supported options
 
   * **enabled** - enable (**Y**) or disable (**N**) the ZSwap kernel module.
-  * **same_filled_pages_enabled** - enable (**Y**) or disable (**N**) memory pages deduplication.
+  * **same_filled_pages_enabled** (requires kernel **4.16.0** to **6.10.0**) - enable (**Y**) or disable (**N**) memory pages deduplication.
   * **max_pool_percent** - the maximum percentage of memory that the compressed pool can occupy (integer from **1** to **100**).
   * **compressor** - the algorithm used to compress memory pages.
   * **zpool** - the kernel's zpool type.

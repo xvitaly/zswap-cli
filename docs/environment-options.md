@@ -5,7 +5,7 @@ This project support of getting options from the environment variables.
 ## Supported options
 
   * `ZSWAP_ENABLED_VALUE` - enable (`Y`) or disable (`N`) the ZSwap kernel module.
-  * `ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE` - enable (`Y`) or disable (`N`) memory pages deduplication.
+  * `ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE` (requires kernel `4.16.0` to `6.10.0`) - enable (`Y`) or disable (`N`) memory pages deduplication.
   * `ZSWAP_MAX_POOL_PERCENT_VALUE` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
   * `ZSWAP_COMPRESSOR_VALUE` - the algorithm used to compress memory pages.
   * `ZSWAP_ZPOOL_VALUE` - the kernel's zpool type.

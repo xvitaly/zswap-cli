@@ -5,7 +5,7 @@ This project support of getting options from the configuration files.
 ## Supported options
 
   * `enabled` - enable (`Y`) or disable (`N`) the ZSwap kernel module.
-  * `same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
+  * `same_filled_pages_enabled` (requires kernel `4.16.0` to `6.10.0`) - enable (`Y`) or disable (`N`) memory pages deduplication.
   * `max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
   * `compressor` - the algorithm used to compress memory pages.
   * `zpool` - the kernel's zpool type.

@@ -27,7 +27,7 @@ This application can be used in two ways:
 #### Kernel module configuration options
 
   * `-e` or `--enabled` - enable (`Y`) or disable (`N`) the ZSwap kernel module.
-  * `-s` or `--same_filled_pages_enabled` - enable (`Y`) or disable (`N`) memory pages deduplication.
+  * `-s` or `--same_filled_pages_enabled` (requires kernel `4.16.0` to `6.10.0`) - enable (`Y`) or disable (`N`) memory pages deduplication.
   * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy (integer from `1` to `100`).
   * `-c` or `--compressor` - the algorithm used to compress memory pages.
   * `-z` or `--zpool` - the kernel's zpool type.
