@@ -67,9 +67,15 @@ bool ZSwapDebug::IsDebugAvailable() const
 
 long ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
 {
+    const std::string FullPath = ModuleDebugPath + Name;
     long Result = 0;
-    std::ifstream ZSwapSysFs(ModuleDebugPath + Name);
-    ZSwapSysFs >> Result;
-    ZSwapSysFs.close();
+
+    if (std::filesystem::exists(FullPath))
+    {
+        std::ifstream ZSwapSysFs(FullPath);
+        ZSwapSysFs >> Result;
+        ZSwapSysFs.close();
+    }
+
     return Result;
 }
