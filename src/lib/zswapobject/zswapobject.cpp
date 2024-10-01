@@ -75,7 +75,7 @@ void ZSwapObject::SetZSwapEnabled(const std::string& Value)
 
 std::string ZSwapObject::GetZSwapSameFilledPages()
 {
-    return ReadZSwapValue(ZSwapSameFilledPagesName);
+    return ZSwapSameFilledPagesAvailable ? ReadZSwapValue(ZSwapSameFilledPagesName) : "N/A";
 }
 
 void ZSwapObject::SetZSwapSameFilledPages(const std::string& Value)
