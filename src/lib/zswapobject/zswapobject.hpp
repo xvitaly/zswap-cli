@@ -23,7 +23,7 @@ public:
     /**
      *  Constructor of the ZSwapObject class.
     */
-    ZSwapObject();
+    ZSwapObject() = default;
 
     /**
      *  Gets the ZSwap enabled value.
@@ -158,57 +158,6 @@ public:
     void SetZSwapShrinkerEnabled(const std::string&);
 private:
     /**
-     *  Determines whether the ZSwap enabled value is available.
-    */
-    bool ZSwapEnabledAvailable;
-    /**
-     *  Determines whether the same filled pages enabled value
-     *  is available.
-    */
-    bool ZSwapSameFilledPagesAvailable;
-    /**
-     *  Determines whether the maximum pool percentage value
-     *  is available.
-    */
-    bool ZSwapMaxPoolPercentAvailable;
-
-    /**
-     *  Determines whether the compression algorithm name value
-     *  is available.
-    */
-    bool ZSwapCompressorAvailable;
-
-    /**
-     *  Determines whether the kernel's zpool type value
-     *  is available.
-    */
-    bool ZSwapZpoolAvailable;
-
-    /**
-     *  Determines whether the accept threshold percentage value
-     *  is available.
-    */
-    bool ZSwapAcceptThresholdPercentAvailable;
-
-    /**
-     *  Determines whether the non same filled pages enabled value
-     *  is available.
-    */
-    bool ZSwapNonSameFilledPagesAvailable;
-
-    /**
-     *  Determines whether the exclusive loads enabled value
-     *  is available.
-    */
-    bool ZSwapExclusiveLoadsAvailable;
-
-    /**
-     *  Determines whether the shrinker enabled value
-     *  is available.
-    */
-    bool ZSwapShrinkerEnabledAvailable;
-
-    /**
      *  Stores the ZSwap log message template.
     */
     const std::string ZSwapMessageLog = "Writing a new value \"{1}\" to the \"{0}\" variable.";
@@ -231,13 +180,7 @@ private:
     /**
      *  Stores the ZSwap error message template for incorrect kernel version.
     */
-    const std::string ZSwapErrorKernel = "Configuring the \"{0}\" variable requires kernel \"{1}\" or later.";
-
-    /**
-     *  Stores the ZSwap error message template for the kernel version
-     *  that doesn't match the required range.
-    */
-    const std::string ZSwapErrorKernelRange = "Configuring the \"{0}\" variable requires kernel version from \"{1}\" to \"{2}\".";
+    const std::string ZSwapErrorKernel = "Configuring the \"{0}\" variable is not possible on current kernel!";
 
     /**
      *  Stores the ZSwap kernel module parameters path.
@@ -253,18 +196,6 @@ private:
      *  Stores the same filled pages enabled internal parameter name.
     */
     const std::string ZSwapSameFilledPagesName = "same_filled_pages_enabled";
-
-    /**
-     *  Stores the required kernel version to work non same filled pages
-     *  enabled value.
-    */
-    const std::string ZSwapSameFilledPagesRequiredKernelVersion = "4.16.0";
-
-    /**
-     *  Stores the kernel version after which the same filled pages enabled
-     *  value will no longer be available.
-    */
-    const std::string ZSwapSameFilledPagesUnavailableKernelVersion = "6.10.0";
 
     /**
      *  Stores the maximum pool percentage internal parameter name.
@@ -287,27 +218,9 @@ private:
     const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 
     /**
-     *  Stores the required kernel version to work with accept threshold
-     *  percentage values.
-    */
-    const std::string ZSwapAcceptThresholdRequiredKernelVersion = "5.6.0";
-
-    /**
      *  Stores the non same filled pages enabled internal parameter name.
     */
     const std::string ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
-
-    /**
-     *  Stores the required kernel version to work with non same filled pages
-     *  enabled value.
-    */
-    const std::string ZSwapNonSameFilledPagesRequiredKernelVersion = "5.18.0";
-
-    /**
-     *  Stores the kernel version after which the non same filled pages enabled
-     *  value will no longer be available.
-    */
-    const std::string ZSwapNonSameFilledPagesUnavailableKernelVersion = "6.10.0";
 
     /**
      *  Stores the exclusive loads enabled internal parameter name.
@@ -315,27 +228,9 @@ private:
     const std::string ZSwapExclusiveLoadsName = "exclusive_loads";
 
     /**
-     *  Stores the required kernel version to work with exclusive loads
-     *  value.
-    */
-    const std::string ZSwapExclusiveLoadsRequiredKernelVersion = "6.5.0";
-
-    /**
-     *  Stores the kernel version after which the exclusive loads value will
-     *  no longer be available.
-    */
-    const std::string ZSwapExclusiveLoadsUnavailableKernelVersion = "6.9.0";
-
-    /**
      *  Stores the shrinker enabled internal parameter name.
     */
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
-
-    /**
-     *  Stores the required kernel version to work with shrinker enabled
-     *  value.
-    */
-    const std::string ZSwapShrinkerEnabledRequiredKernelVersion = "6.8.0";
 
     /**
      *  Stores the current kernel version in string format.
@@ -364,17 +259,6 @@ private:
     void WriteLogEntry(const std::string&, const std::string&);
 
     /**
-     *  Reads the current kernel version and and stores it in a private
-     *  field.
-    */
-    void ReadKernelVersion();
-
-    /**
-     *  Reads the availability of ZSwap kernel options.
-    */
-    void ReadAvailability();
-
-    /**
      *  Checks if the value matches the specified criteria [0..100].
      * @param Value Value to check.
      * @returns Check results.
@@ -391,27 +275,6 @@ private:
      * @retval false Otherwise.
     */
     bool CheckEnabled(const std::string&);
-
-    /**
-     *  Checks if the kernel version is higher or equal the required
-     *  version.
-     * @param RequiredKernelVersion The required kernel version to check.
-     * @returns Check results.
-     * @retval true If the required kernel version lower than current version.
-     * @retval false Otherwise.
-    */
-    bool CheckKernelVersion(const std::string&);
-
-    /**
-     *  Checks if the kernel version is higher or equal the required
-     *  minimum version and less than the required maximum version.
-     * @param MinKernelVersion The required minimum kernel version to check.
-     * @param MaxKernelVersion The required maximum kernel version to check.
-     * @returns Check results.
-     * @retval true If the current version is out of version range.
-     * @retval false Otherwise.
-    */
-    bool CheckKernelVersionRange(const std::string&, const std::string&);
 };
 
 #endif // ZSWAPOBJECT_HPP
