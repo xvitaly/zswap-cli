@@ -111,22 +111,6 @@ if (BUILD_DOC)
 endif()
 
 # ======================================================
-# ================= semver detection ===================
-# ======================================================
-
-find_package(semver 0.3.0 QUIET)
-
-if (NOT semver_FOUND)
-    message(STATUS "Using bundled version of semver library.")
-    FetchContent_Declare(
-        semver
-        GIT_REPOSITORY "https://github.com/Neargye/semver.git"
-        GIT_TAG "v0.3.1"
-    )
-    FetchContent_MakeAvailable(semver)
-endif()
-
-# ======================================================
 # ================= systemd detection ==================
 # ======================================================
 
@@ -174,10 +158,6 @@ add_library(${LIB_NAME} OBJECT
 target_include_directories(${LIB_NAME} PUBLIC
     src/lib
     "${CMAKE_CURRENT_BINARY_DIR}/generated"
-)
-
-target_link_libraries(${LIB_NAME} PRIVATE
-    semver::semver
 )
 
 if (LINK_ENABLE_OPTIMIZATIONS AND CMAKE_CXX_LINK_IPO_SUPPORTED)
