@@ -29,7 +29,7 @@ public:
      *  Gets the ZSwap enabled value.
      * @returns ZSwap enabled value.
     */
-    std::string& GetZSwapEnabled();
+    std::string GetZSwapEnabled();
 
     /**
      *  Sets the ZSwap enabled value.
@@ -43,7 +43,7 @@ public:
      *  Gets the same filled pages enabled value.
      * @returns Same filled pages enabled value.
     */
-    std::string& GetZSwapSameFilledPages();
+    std::string GetZSwapSameFilledPages();
 
     /**
      *  Sets the same filled pages enabled value.
@@ -57,7 +57,7 @@ public:
      *  Gets the maximum pool percentage value.
      * @returns Maximum pool percentage value.
     */
-    std::string& GetZSwapMaxPoolPercent();
+    std::string GetZSwapMaxPoolPercent();
 
     /**
      *  Sets the maximum pool percentage value.
@@ -71,7 +71,7 @@ public:
      *  Gets the compression algorithm name.
      * @returns Compression algorithm name.
     */
-    std::string& GetZSwapCompressor();
+    std::string GetZSwapCompressor();
 
     /**
      *  Sets the compression algorithm name.
@@ -85,7 +85,7 @@ public:
      *  Gets the kernel's zpool type.
      * @returns Kernel's zpool type.
     */
-    std::string& GetZSwapZpool();
+    std::string GetZSwapZpool();
 
     /**
      *  Sets the kernel's zpool type.
@@ -99,7 +99,7 @@ public:
      *  Gets the accept threshold percentage value.
      * @returns Accept threshold percentage value.
     */
-    std::string& GetZSwapAcceptThresholdPercent();
+    std::string GetZSwapAcceptThresholdPercent();
 
     /**
      *  Sets the accept threshold percentage value.
@@ -115,7 +115,7 @@ public:
      *  Gets the non same filled pages enabled value.
      * @returns Non same filled pages enabled value.
     */
-    std::string& GetZSwapNonSameFilledPages();
+    std::string GetZSwapNonSameFilledPages();
 
     /**
      *  Sets the non same filled pages enabled value.
@@ -129,7 +129,7 @@ public:
      *  Gets the exclusive loads enabled value.
      * @returns Exclusive loads enabled value.
     */
-    std::string& GetZSwapExclusiveLoads();
+    std::string GetZSwapExclusiveLoads();
 
     /**
      *  Sets the exclusive loads enabled value.
@@ -145,7 +145,7 @@ public:
      *  Gets the shrinker enabled value.
      * @returns Shrinker enabled value.
     */
-    std::string& GetZSwapShrinkerEnabled();
+    std::string GetZSwapShrinkerEnabled();
 
     /**
      *  Sets the shrinker enabled value.
@@ -158,41 +158,19 @@ public:
     void SetZSwapShrinkerEnabled(const std::string&);
 private:
     /**
-     *  Stores the ZSwap enabled value.
-    */
-    std::string ZSwapEnabled;
-
-    /**
      *  Determines whether the ZSwap enabled value is available.
     */
     bool ZSwapEnabledAvailable;
-
-    /**
-     *  Stores the same filled pages enabled value.
-    */
-    std::string ZSwapSameFilledPages;
-
     /**
      *  Determines whether the same filled pages enabled value
      *  is available.
     */
     bool ZSwapSameFilledPagesAvailable;
-
-    /**
-     *  Stores the maximum pool percentage value.
-    */
-    std::string ZSwapMaxPoolPercent;
-
     /**
      *  Determines whether the maximum pool percentage value
      *  is available.
     */
     bool ZSwapMaxPoolPercentAvailable;
-
-    /**
-     *  Stores the compression algorithm name.
-    */
-    std::string ZSwapCompressor;
 
     /**
      *  Determines whether the compression algorithm name value
@@ -201,20 +179,10 @@ private:
     bool ZSwapCompressorAvailable;
 
     /**
-     *  Stores the kernel's zpool type.
-    */
-    std::string ZSwapZpool;
-
-    /**
      *  Determines whether the kernel's zpool type value
      *  is available.
     */
     bool ZSwapZpoolAvailable;
-
-    /**
-     *  Stores the accept threshold percentage value.
-    */
-    std::string ZSwapAcceptThresholdPercent;
 
     /**
      *  Determines whether the accept threshold percentage value
@@ -223,31 +191,16 @@ private:
     bool ZSwapAcceptThresholdPercentAvailable;
 
     /**
-     *  Stores the non same filled pages enabled value.
-    */
-    std::string ZSwapNonSameFilledPages;
-
-    /**
      *  Determines whether the non same filled pages enabled value
      *  is available.
     */
     bool ZSwapNonSameFilledPagesAvailable;
 
     /**
-     *  Stores the exclusive loads enabled value.
-    */
-    std::string ZSwapExclusiveLoads;
-
-    /**
      *  Determines whether the exclusive loads enabled value
      *  is available.
     */
     bool ZSwapExclusiveLoadsAvailable;
-
-    /**
-     *  Stores the shrinker enabled value.
-    */
-    std::string ZSwapShrinkerEnabled;
 
     /**
      *  Determines whether the shrinker enabled value
@@ -258,7 +211,7 @@ private:
     /**
      *  Stores the ZSwap log message template.
     */
-    const std::string ZSwapMessageLog = "Writing a new value \"{1}\" to the \"{0}\" variable. The old value was: \"{2}\".";
+    const std::string ZSwapMessageLog = "Writing a new value \"{1}\" to the \"{0}\" variable.";
 
     /**
      *  Stores the ZSwap error message template for Y or N values.
@@ -406,21 +359,15 @@ private:
     /**
      *  Prints log entry to the standard output.
      * @param Name Parameter name.
-     * @param NewValue New value.
-     * @param OldValue Old value.
+     * @param Value Parameter value.
     */
-    void WriteLogEntry(const std::string&, const std::string&, const std::string&);
+    void WriteLogEntry(const std::string&, const std::string&);
 
     /**
      *  Reads the current kernel version and and stores it in a private
      *  field.
     */
     void ReadKernelVersion();
-
-    /**
-     *  Reads the ZSwap kernel module values.
-    */
-    void ReadValues();
 
     /**
      *  Reads the availability of ZSwap kernel options.
