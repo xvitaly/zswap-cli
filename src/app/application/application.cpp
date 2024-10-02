@@ -88,9 +88,9 @@ void Application::PrintSummary()
     std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
     std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
 
-    if (ZSwapDebugger -> GetPoolTotalSize() == 0)
+    if (!ZSwapDebugger -> IsDebugAvailable())
     {
-        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
+        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
         return;
     }
 
