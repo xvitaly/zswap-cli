@@ -28,8 +28,6 @@
 
 void Application::PrintDebugInfo()
 {
-    std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
-
     if (!ZSwapDebugger -> IsDebugAvailable())
     {
         std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
@@ -85,7 +83,6 @@ void Application::PrintSettings()
 
 void Application::PrintSummary()
 {
-    std::unique_ptr<ZSwapDebug> ZSwapDebugger = std::make_unique<ZSwapDebug>();
     std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
 
     if (!ZSwapDebugger -> IsDebugAvailable())
@@ -305,6 +302,7 @@ void Application::InitClassMembers()
     CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control the ZSwap kernel module");
     CmdLine = std::make_unique<boost::program_options::variables_map>();
     ZSwap = std::make_unique<ZSwapObject>();
+    ZSwapDebugger = std::make_unique<ZSwapDebug>();
 }
 
 void Application::InitCmdLineOptions()

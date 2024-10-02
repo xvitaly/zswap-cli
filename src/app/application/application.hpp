@@ -17,6 +17,7 @@
 #include <boost/program_options.hpp>
 
 #include "zswapobject/zswapobject.hpp"
+#include "zswapdebug/zswapdebug.hpp"
 
 /**
  *  Main class of application.
@@ -38,9 +39,14 @@ public:
     int Run();
 private:
     /**
-     *  Stores an instance of ZSwapObject class.
+     *  Stores an instance of the ZSwapObject class.
     */
     std::unique_ptr<ZSwapObject> ZSwap;
+
+    /**
+     *  Stores an instance of the ZSwapDebug class.
+    */
+    std::unique_ptr<ZSwapDebug> ZSwapDebugger;
 
     /**
      *  Stores the list of available command-line arguments with
