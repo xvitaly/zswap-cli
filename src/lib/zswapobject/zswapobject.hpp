@@ -104,8 +104,6 @@ public:
     /**
      *  Sets the accept threshold percentage value.
      * @param Value New value.
-     * @exception Raises an instance of std::runtime_error if the kernel
-     * version is too old.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
@@ -134,8 +132,6 @@ public:
     /**
      *  Sets the exclusive loads enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::runtime_error if the kernel
-     * version is too old.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
@@ -150,8 +146,6 @@ public:
     /**
      *  Sets the shrinker enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::runtime_error if the kernel
-     * version is too old.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
@@ -247,6 +241,8 @@ private:
     /**
      *  Reads the value of the ZSwap kernel module by specified name.
      * @param Name Value name.
+     * @exception Raises an instance of std::invalid_argument if cannot set
+     * the proposed value.
      * @returns Value.
     */
     std::string ReadZSwapValue(const std::string&);
