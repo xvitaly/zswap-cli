@@ -10,6 +10,7 @@
 #include <sys/sysinfo.h>
 
 #include "ksysinfo/ksysinfo.hpp"
+#include "cwrappers/cwrappers.hpp"
 
 long& KSysInfo::GetUptime()
 {
@@ -66,6 +67,11 @@ unsigned int& KSysInfo::GetMemUnitSize()
     return MemUnitSize;
 }
 
+long& KSysInfo::GetPageSize()
+{
+    return PageSize;
+}
+
 void KSysInfo::ReadSysInfo()
 {
     struct sysinfo SysInfo;
@@ -83,7 +89,13 @@ void KSysInfo::ReadSysInfo()
     MemUnitSize = static_cast<unsigned int>(SysInfo.mem_unit);
 }
 
+void KSysInfo::ReadPageSize()
+{
+    PageSize = CWrappers::GetSCPageSize();
+}
+
 KSysInfo::KSysInfo()
 {
     ReadSysInfo();
+    ReadPageSize();
 }

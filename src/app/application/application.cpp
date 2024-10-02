@@ -94,8 +94,8 @@ void Application::PrintSummary()
     constexpr const long Power = 1024 << 10;
     const float PoolSizeMB = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize()) / Power;
     const float MemTotalPercent = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize()) / static_cast<float>(SysInfo -> GetTotalRam()) * 100.f;
-    const float StoredPagesMB = static_cast<float>(ZSwapDebugger -> GetStoredPages() * CWrappers::GetSCPageSize()) / Power;
-    const float SwapUsedPercent = static_cast<float>(ZSwapDebugger -> GetStoredPages() * CWrappers::GetSCPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
+    const float StoredPagesMB = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize()) / Power;
+    const float SwapUsedPercent = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
     std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"

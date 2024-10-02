@@ -88,12 +88,23 @@ public:
      * @returns Memory unit size.
     */
     unsigned int& GetMemUnitSize();
+
+    /**
+     *  Gets system page size value.
+     * @returns System page size value.
+    */
+    long& GetPageSize();
 private:
     /**
      *  Reads the sysinfo structure into the class fields.
      * @exception Raises an instance of std::runtime_error on error.
     */
     void ReadSysInfo();
+
+    /**
+     *  Reads the SC_PAGESIZE system variable value.
+    */
+    void ReadPageSize();
 
     /**
      *  Stores current uptime (in seconds since boot) value.
@@ -149,6 +160,11 @@ private:
      *  Stores memory unit size in bytes value.
     */
     unsigned int MemUnitSize;
+
+    /**
+     *  Stores the system page size value.
+    */
+    long PageSize;
 };
 
 #endif // KSYSINFO_HPP
