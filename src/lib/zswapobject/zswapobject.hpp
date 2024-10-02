@@ -227,11 +227,6 @@ private:
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
-     *  Stores the current kernel version in string format.
-    */
-    std::string KernelVersion;
-
-    /**
      *  Writes the ZSwap kernel module value.
      * @param Name Name.
      * @param Value Value.
