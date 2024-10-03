@@ -29,7 +29,7 @@ public:
      *  Gets the ZSwap enabled value.
      * @returns ZSwap enabled value.
     */
-    std::string GetZSwapEnabled();
+    std::string GetZSwapEnabled() const;
 
     /**
      *  Sets the ZSwap enabled value.
@@ -37,13 +37,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapEnabled(const std::string&);
+    void SetZSwapEnabled(const std::string&) const;
 
     /**
      *  Gets the same filled pages enabled value.
      * @returns Same filled pages enabled value.
     */
-    std::string GetZSwapSameFilledPages();
+    std::string GetZSwapSameFilledPages() const;
 
     /**
      *  Sets the same filled pages enabled value.
@@ -51,13 +51,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapSameFilledPages(const std::string&);
+    void SetZSwapSameFilledPages(const std::string&) const;
 
     /**
      *  Gets the maximum pool percentage value.
      * @returns Maximum pool percentage value.
     */
-    std::string GetZSwapMaxPoolPercent();
+    std::string GetZSwapMaxPoolPercent() const;
 
     /**
      *  Sets the maximum pool percentage value.
@@ -65,13 +65,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapMaxPoolPercent(const std::string&);
+    void SetZSwapMaxPoolPercent(const std::string&) const;
 
     /**
      *  Gets the compression algorithm name.
      * @returns Compression algorithm name.
     */
-    std::string GetZSwapCompressor();
+    std::string GetZSwapCompressor() const;
 
     /**
      *  Sets the compression algorithm name.
@@ -79,13 +79,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapCompressor(const std::string&);
+    void SetZSwapCompressor(const std::string&) const;
 
     /**
      *  Gets the kernel's zpool type.
      * @returns Kernel's zpool type.
     */
-    std::string GetZSwapZpool();
+    std::string GetZSwapZpool() const;
 
     /**
      *  Sets the kernel's zpool type.
@@ -93,13 +93,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapZpool(const std::string&);
+    void SetZSwapZpool(const std::string&) const;
 
     /**
      *  Gets the accept threshold percentage value.
      * @returns Accept threshold percentage value.
     */
-    std::string GetZSwapAcceptThresholdPercent();
+    std::string GetZSwapAcceptThresholdPercent() const;
 
     /**
      *  Sets the accept threshold percentage value.
@@ -107,13 +107,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapAcceptThresholdPercent(const std::string&);
+    void SetZSwapAcceptThresholdPercent(const std::string&) const;
 
     /**
      *  Gets the non same filled pages enabled value.
      * @returns Non same filled pages enabled value.
     */
-    std::string GetZSwapNonSameFilledPages();
+    std::string GetZSwapNonSameFilledPages() const;
 
     /**
      *  Sets the non same filled pages enabled value.
@@ -121,13 +121,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapNonSameFilledPages(const std::string&);
+    void SetZSwapNonSameFilledPages(const std::string&) const;
 
     /**
      *  Gets the exclusive loads enabled value.
      * @returns Exclusive loads enabled value.
     */
-    std::string GetZSwapExclusiveLoads();
+    std::string GetZSwapExclusiveLoads() const;
 
     /**
      *  Sets the exclusive loads enabled value.
@@ -135,13 +135,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapExclusiveLoads(const std::string&);
+    void SetZSwapExclusiveLoads(const std::string&) const;
 
     /**
      *  Gets the shrinker enabled value.
      * @returns Shrinker enabled value.
     */
-    std::string GetZSwapShrinkerEnabled();
+    std::string GetZSwapShrinkerEnabled() const;
 
     /**
      *  Sets the shrinker enabled value.
@@ -149,13 +149,13 @@ public:
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
     */
-    void SetZSwapShrinkerEnabled(const std::string&);
+    void SetZSwapShrinkerEnabled(const std::string&) const;
 
     /**
      *  Checks if the ZSwap module is loaded and available for use.
      * @returns ZSwap module availability.
     */
-    bool IsAvailable();
+    bool IsAvailable() const;
 private:
     /**
      *  Stores the ZSwap log message template.
@@ -237,7 +237,7 @@ private:
      * @param Name Name.
      * @param Value Value.
     */
-    void WriteZSwapValue(const std::string&, const std::string&);
+    void WriteZSwapValue(const std::string&, const std::string&) const;
 
     /**
      *  Reads the value of the ZSwap kernel module by specified name.
@@ -246,14 +246,14 @@ private:
      * the proposed value.
      * @returns Value.
     */
-    std::string ReadZSwapValue(const std::string&);
+    std::string ReadZSwapValue(const std::string&) const;
 
     /**
      *  Prints log entry to the standard output.
      * @param Name Parameter name.
      * @param Value Parameter value.
     */
-    void WriteLogEntry(const std::string&, const std::string&);
+    void WriteLogEntry(const std::string&, const std::string&) const;
 
     /**
      *  Checks if the value matches the specified criteria [0..100].
@@ -262,7 +262,7 @@ private:
      * @retval true If the value belongs to [0..100] range.
      * @retval false Otherwise.
     */
-    bool CheckPercent(const std::string&);
+    bool CheckPercent(const std::string&) const;
 
     /**
      *  Checks if the value matches the specified criteria (Y or N).
@@ -271,7 +271,7 @@ private:
      * @retval true If the value matches the specified criteria.
      * @retval false Otherwise.
     */
-    bool CheckEnabled(const std::string&);
+    bool CheckEnabled(const std::string&) const;
 };
 
 #endif // ZSWAPOBJECT_HPP
