@@ -86,8 +86,8 @@ public:
     long GetWrittenBackPages() const;
 
     /**
-     *  Gets the kernel module debug path.
-     * @returns Kernel module debug path.
+     *  Checks if the debug interface is available for use.
+     * @returns Debug interface availability.
     */
     bool IsDebugAvailable() const;
 private:
