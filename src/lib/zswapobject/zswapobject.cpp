@@ -158,3 +158,8 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value)
     WriteLogEntry(ZSwapShrinkerEnabledName, Value);
     WriteZSwapValue(ZSwapShrinkerEnabledName, Value);
 }
+
+bool ZSwapObject::IsAvailable()
+{
+    return std::filesystem::exists(ZSwapModuleParametersPath);
+}

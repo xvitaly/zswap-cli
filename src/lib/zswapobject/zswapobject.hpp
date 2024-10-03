@@ -150,6 +150,12 @@ public:
      * the proposed value.
     */
     void SetZSwapShrinkerEnabled(const std::string&);
+
+    /**
+     *  Checks if the ZSwap module is loaded and available for use.
+     * @returns ZSwap module availability.
+    */
+    bool IsAvailable();
 private:
     /**
      *  Stores the ZSwap log message template.
