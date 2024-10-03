@@ -60,6 +60,12 @@ void Application::PrintDebugInfo()
 
 void Application::PrintSettings()
 {
+    if (!ZSwap -> IsAvailable())
+    {
+        std::cout << "ZSwap module is not loaded." << std::endl;
+        return;
+    }
+
     std::cout << std::format("ZSwap enabled: {0}.\n"
                              "Same filled pages enabled: {1}.\n"
                              "Maximum pool percentage: {2}.\n"
