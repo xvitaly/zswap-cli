@@ -36,7 +36,7 @@ public:
      *  Runs an application and return exit code.
      * @returns Exit code.
     */
-    int Run();
+    int Run() const;
 private:
     /**
      *  Stores an instance of the ZSwapObject class.
@@ -83,14 +83,14 @@ private:
      * @exception Raises an instance of std::runtime_error on missing
      * super-user privileges.
     */
-    void CheckIfRunningBySuperUser();
+    void CheckIfRunningBySuperUser() const;
 
     /**
      *  Handles \-\-env command-line argument. Gets parameters from
      * the environment variables.
      * @returns Exit code.
     */
-    int ExecuteEnv();
+    int ExecuteEnv() const;
 
     /**
      *  Handles \-\-config command-line argument. Gets parameters from
@@ -100,33 +100,33 @@ private:
      * if incorrect file path was specified.
      * @returns Exit code.
     */
-    int ExecuteConfig(const std::string&);
+    int ExecuteConfig(const std::string&) const;
 
     /**
      *  Gets parameters from command-line arguments.
      * @returns Exit code.
     */
-    int ExecuteCmdLine();
+    int ExecuteCmdLine() const;
 
     /**
      *  Prints ZSwap kernel module debug information.
     */
-    void PrintDebugInfo();
+    void PrintDebugInfo() const;
 
     /**
      *  Prints ZSwap kernel module current settings.
     */
-    void PrintSettings();
+    void PrintSettings() const;
 
     /**
      *  Prints ZSwap kernel module usage summary.
     */
-    void PrintSummary();
+    void PrintSummary() const;
 
     /**
      *  Prints all available information about ZSwap kernel module.
     */
-    void PrintCombined();
+    void PrintCombined() const;
 
     /**
      *  Handles \-\-stats command-line argument. Prints requested by
@@ -137,21 +137,21 @@ private:
      * if incorrect request code was specified.
      * @returns Exit code.
     */
-    int PrintStats(int);
+    int PrintStats(int) const;
 
     /**
      *  Handles \-\-help command-line argument. Prints useful documentation
      * about using this application.
      * @returns Exit code.
     */
-    int PrintHelp();
+    int PrintHelp() const;
 
     /**
      *  Handles \-\-version command-line argument. Prints version
      * information.
      * @returns Exit code.
     */
-    int PrintVersion();
+    int PrintVersion() const;
 };
 
 #endif // APPLICATION_HPP

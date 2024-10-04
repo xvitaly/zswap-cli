@@ -26,7 +26,7 @@
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
 
-void Application::PrintDebugInfo()
+void Application::PrintDebugInfo() const
 {
     if (!ZSwapDebugger -> IsDebugAvailable())
     {
@@ -58,7 +58,7 @@ void Application::PrintDebugInfo()
               << std::endl;
 }
 
-void Application::PrintSettings()
+void Application::PrintSettings() const
 {
     if (!ZSwap -> IsAvailable())
     {
@@ -87,7 +87,7 @@ void Application::PrintSettings()
               << std::endl;
 }
 
-void Application::PrintSummary()
+void Application::PrintSummary() const
 {
     std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
 
@@ -115,7 +115,7 @@ void Application::PrintSummary()
               << std::endl;
 }
 
-void Application::PrintCombined()
+void Application::PrintCombined() const
 {
     std::cout << "ZSWAP KERNEL MODULE SETTINGS:" << std::endl;
     PrintSettings();
@@ -127,7 +127,7 @@ void Application::PrintCombined()
     PrintDebugInfo();
 }
 
-int Application::PrintStats(const int Value)
+int Application::PrintStats(const int Value) const
 {
     switch (Value)
     {
@@ -149,13 +149,13 @@ int Application::PrintStats(const int Value)
     return 0;
 }
 
-int Application::PrintHelp()
+int Application::PrintHelp() const
 {
     CmdLineOptions -> print(std::cout);
     return 0;
 }
 
-int Application::PrintVersion()
+int Application::PrintVersion() const
 {
     std::unique_ptr<KSysVersion> SysVersion = std::make_unique<KSysVersion>();
     std::cout << std::format("{0} project version: {1}.\n"
@@ -168,7 +168,7 @@ int Application::PrintVersion()
     return 0;
 }
 
-int Application::ExecuteEnv()
+int Application::ExecuteEnv() const
 {
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
@@ -201,7 +201,7 @@ int Application::ExecuteEnv()
     return !Result;
 }
 
-int Application::ExecuteConfig(const std::string& ConfigFile)
+int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
     std::unique_ptr<boost::program_options::variables_map> Config = std::make_unique<boost::program_options::variables_map>();
     std::unique_ptr<boost::program_options::options_description> ConfigOptions = std::make_unique<boost::program_options::options_description>("Configuration file options.");
@@ -253,7 +253,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile)
     return !Result;
 }
 
-int Application::ExecuteCmdLine()
+int Application::ExecuteCmdLine() const
 {
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
@@ -285,7 +285,7 @@ int Application::ExecuteCmdLine()
     return !Result;
 }
 
-int Application::Run()
+int Application::Run() const
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("version")) return PrintVersion();
@@ -295,7 +295,7 @@ int Application::Run()
     return ExecuteCmdLine();
 }
 
-void Application::CheckIfRunningBySuperUser()
+void Application::CheckIfRunningBySuperUser() const
 {
     if (CWrappers::CheckRoot())
     {
