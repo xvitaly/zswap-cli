@@ -95,6 +95,12 @@ void Application::PrintSummary() const
         return;
     }
 
+    if (ZSwapDebugger -> GetPoolTotalSize() == 0)
+    {
+        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
+        return;
+    }
+
     std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
     const float PoolSize = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize());
     const float StoredPages = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize());
