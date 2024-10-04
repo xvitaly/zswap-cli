@@ -95,20 +95,20 @@ void Application::PrintSummary() const
         return;
     }
 
-    if (ZSwapDebugger -> GetPoolTotalSize() == 0)
+    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
+    const long PoolSize = ZSwapDebugger -> GetPoolTotalSize();
+    const long StoredPages = ZSwapDebugger -> GetStoredPages();
+
+    if (PoolSize == 0)
     {
         std::cout << "ZSwap is not working. The pool is empty." << std::endl;
         return;
     }
 
-    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
-    const float PoolSize = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize());
-    const float StoredPages = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize());
-
-    const float PoolSizeMB = PoolSize / 1048576.f;
-    const float MemTotalPercent = PoolSize / static_cast<float>(SysInfo -> GetTotalRam()) * 100.f;
-    const float StoredPagesMB = StoredPages / 1048576.f;
-    const float SwapUsedPercent = StoredPages / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
+    const float PoolSizeMB = static_cast<float>(PoolSize) / 1048576.f;
+    const float MemTotalPercent = static_cast<float>(PoolSize) / static_cast<float>(SysInfo -> GetTotalRam()) * 100.f;
+    const float StoredPagesMB = static_cast<float>(StoredPages * SysInfo -> GetPageSize()) / 1048576.f;
+    const float SwapUsedPercent = static_cast<float>(StoredPages * SysInfo -> GetPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
     std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
