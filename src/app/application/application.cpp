@@ -89,19 +89,21 @@ void Application::PrintSettings() const
 
 void Application::PrintSummary() const
 {
-    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
-
     if (!ZSwapDebugger -> IsDebugAvailable())
     {
         std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
         return;
     }
 
+    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
     constexpr const long Power = 1024 << 10;
-    const float PoolSizeMB = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize()) / Power;
-    const float MemTotalPercent = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize()) / static_cast<float>(SysInfo -> GetTotalRam()) * 100.f;
-    const float StoredPagesMB = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize()) / Power;
-    const float SwapUsedPercent = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
+    const float PoolSize = static_cast<float>(ZSwapDebugger -> GetPoolTotalSize());
+    const float StoredPages = static_cast<float>(ZSwapDebugger -> GetStoredPages() * SysInfo -> GetPageSize());
+
+    const float PoolSizeMB = PoolSize / Power;
+    const float MemTotalPercent = PoolSize / static_cast<float>(SysInfo -> GetTotalRam()) * 100.f;
+    const float StoredPagesMB = StoredPages / Power;
+    const float SwapUsedPercent = StoredPages / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
     std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
