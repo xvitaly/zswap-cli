@@ -41,7 +41,16 @@ This application can be used in two ways:
 Start the application with at least one command-line argument:
 
 ```
-sudo zswap-cli --enabled Y --same_filled_pages_enabled Y --max_pool_percent 60 --compressor lzo --zpool z3fold --accept_threshold_percent 40 --non_same_filled_pages_enabled Y --exclusive_loads Y --shrinker_enabled Y
+sudo zswap-cli \
+    --enabled Y \
+    --same_filled_pages_enabled Y \
+    --max_pool_percent 60 \
+    --compressor lzo \
+    --zpool z3fold \
+    --accept_threshold_percent 40 \
+    --non_same_filled_pages_enabled Y \
+    --exclusive_loads Y \
+    --shrinker_enabled Y
 ```
 
 ## Using with systemd
