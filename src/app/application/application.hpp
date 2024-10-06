@@ -95,6 +95,11 @@ private:
     void ParseCmdLine(int, char**);
 
     /**
+     *  Reads and parses the specified configuration file.
+    */
+    void ParseConfigFile(const std::string&) const;
+
+    /**
      *  Checks of current application is running with super-user
      * privileges.
      * @exception Raises an instance of std::runtime_error on missing

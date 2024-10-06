@@ -210,11 +210,7 @@ int Application::ExecuteEnv() const
 
 int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
-    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
-    std::ifstream ConfigFileFs(ConfigFile);
-    boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
-    Config -> notify();
-    ConfigFileFs.close();
+    ParseConfigFile(ConfigFile);
 
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
@@ -356,6 +352,15 @@ void Application::ParseCmdLine(int argc, char** argv)
 {
     boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
     CmdLine -> notify();
+}
+
+void Application::ParseConfigFile(const std::string& ConfigFile) const
+{
+    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
+    std::ifstream ConfigFileFs(ConfigFile);
+    boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
+    Config -> notify();
+    ConfigFileFs.close();
 }
 
 Application::Application(int argc, char** argv)
