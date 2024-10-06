@@ -210,20 +210,6 @@ int Application::ExecuteEnv() const
 
 int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
-    std::unique_ptr<boost::program_options::variables_map> Config = std::make_unique<boost::program_options::variables_map>();
-    std::unique_ptr<boost::program_options::options_description> ConfigOptions = std::make_unique<boost::program_options::options_description>("Configuration file options.");
-    ConfigOptions -> add_options()
-        ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
-        ("zswap.same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
-        ("zswap.max_pool_percent", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
-        ("zswap.compressor", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
-        ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
-        ("zswap.accept_threshold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
-        ("zswap.non_same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
-        ("zswap.exclusive_loads", boost::program_options::value<std::string>(), "Enable or disable entries invalidation when memory pages are loaded from compressed pool.")
-        ("zswap.shrinker_enabled", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
-        ;
-
     if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
@@ -313,7 +299,9 @@ void Application::CheckIfRunningBySuperUser() const
 void Application::InitClassMembers()
 {
     CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control the ZSwap kernel module");
+    ConfigOptions = std::make_unique<boost::program_options::options_description>("Configuration file options");
     CmdLine = std::make_unique<boost::program_options::variables_map>();
+    Config = std::make_unique<boost::program_options::variables_map>();
     ZSwap = std::make_unique<ZSwapObject>();
     ZSwapDebugger = std::make_unique<ZSwapDebug>();
 }
@@ -349,6 +337,21 @@ void Application::InitCmdLineOptions()
     CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
 }
 
+void Application::InitConfigOptions()
+{
+    ConfigOptions -> add_options()
+        ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
+        ("zswap.same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
+        ("zswap.max_pool_percent", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("zswap.compressor", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
+        ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
+        ("zswap.accept_threshold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
+        ("zswap.non_same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("zswap.exclusive_loads", boost::program_options::value<std::string>(), "Enable or disable entries invalidation when memory pages are loaded from compressed pool.")
+        ("zswap.shrinker_enabled", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
+        ;
+}
+
 void Application::ParseCmdLine(int argc, char** argv)
 {
     boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
@@ -360,5 +363,6 @@ Application::Application(int argc, char** argv)
     CheckIfRunningBySuperUser();
     InitClassMembers();
     InitCmdLineOptions();
+    InitConfigOptions();
     ParseCmdLine(argc, argv);
 }

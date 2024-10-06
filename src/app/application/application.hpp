@@ -55,9 +55,20 @@ private:
     std::unique_ptr<boost::program_options::options_description> CmdLineOptions;
 
     /**
+     *  Stores the list of available configuration file options with
+     * their descriptions.
+    */
+    std::unique_ptr<boost::program_options::options_description> ConfigOptions;
+
+    /**
      *  Stores the parsed map of the specified command-line arguments.
     */
     std::unique_ptr<boost::program_options::variables_map> CmdLine;
+
+    /**
+     *  Stores the parsed map of the specified configuration file.
+    */
+    std::unique_ptr<boost::program_options::variables_map> Config;
 
     /**
      *  Initializes private class members.
@@ -66,9 +77,15 @@ private:
 
     /**
      *  Initializes the list of available command-line options
-     * with full descriptions.
+     * with their descriptions.
     */
     void InitCmdLineOptions();
+
+    /**
+     *  Initializes the list of available configuration file options
+     * with their descriptions.
+    */
+    void InitConfigOptions();
 
     /**
      *  Parses command-line arguments to the map.
