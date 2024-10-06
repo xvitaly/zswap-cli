@@ -79,20 +79,20 @@ private:
      *  Initializes the list of available command-line options
      * with their descriptions.
     */
-    void InitCmdLineOptions();
+    void InitCmdLineOptions() const;
 
     /**
      *  Initializes the list of available configuration file options
      * with their descriptions.
     */
-    void InitConfigOptions();
+    void InitConfigOptions() const;
 
     /**
      *  Parses command-line arguments to the map.
      * @param argc Command-line arguments count.
      * @param argv Command-line arguments array.
     */
-    void ParseCmdLine(int, char**);
+    void ParseCmdLine(int, char**) const;
 
     /**
      *  Reads and parses the specified configuration file.

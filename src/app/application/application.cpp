@@ -302,7 +302,7 @@ void Application::InitClassMembers()
     ZSwapDebugger = std::make_unique<ZSwapDebug>();
 }
 
-void Application::InitCmdLineOptions()
+void Application::InitCmdLineOptions() const
 {
     boost::program_options::options_description OptionsGeneral("General options");
     OptionsGeneral.add_options()
@@ -333,7 +333,7 @@ void Application::InitCmdLineOptions()
     CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
 }
 
-void Application::InitConfigOptions()
+void Application::InitConfigOptions() const
 {
     ConfigOptions -> add_options()
         ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
@@ -348,7 +348,7 @@ void Application::InitConfigOptions()
         ;
 }
 
-void Application::ParseCmdLine(int argc, char** argv)
+void Application::ParseCmdLine(int argc, char** argv) const
 {
     boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
     CmdLine -> notify();
