@@ -16,6 +16,21 @@ This project support of getting options from the configuration files.
 
 ## Forwarding options
 
+Create a configuration file:
+
+```
+[zswap]
+enabled=Y
+same_filled_pages_enabled=Y
+max_pool_percent=60
+compressor=lzo
+zpool=z3fold
+accept_threshold_percent=90
+non_same_filled_pages_enabled=Y
+exclusive_loads=Y
+shrinker_enabled=Y
+```
+
 Start the application with the `--config` command-line argument:
 
 ```
