@@ -191,12 +191,6 @@ Start the application with the `--config` command-line argument:
 sudo @APP_NAME@ --config /path/to/@CONF_FILE_NAME@
 ```
 
-# EXIT STATUS
-
-**0**: Successful exit.
-
-**1**: Insuffient access rights.
-
 # SYSTEMD UNIT
 
 After installation, the systemd unit **@UNIT_FILE_NAME@** will be added.
@@ -236,6 +230,12 @@ Stop the unit and disable ZSwap:
 ```
 sudo systemctl stop @UNIT_FILE_NAME@
 ```
+
+# EXIT STATUS
+
+**0**: Successful exit.
+
+**1**: An error occurred.
 
 # AUTHORS
 
