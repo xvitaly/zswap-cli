@@ -16,9 +16,7 @@
 
 bool ZSwapObject::CheckPercent(const std::string& Value) const
 {
-    if (Value.empty()) return true;
-    const int ValueInt = std::stoi(Value);
-    return (ValueInt < 0) || (ValueInt > 100);
+    return !std::regex_match(Value, std::regex("^\\d{1,2}|100$"));
 }
 
 bool ZSwapObject::CheckEnabled(const std::string& Value) const
