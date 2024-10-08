@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
+/** @file ksysinfo/ksysinfo.cpp
+ *  Contains the KSysInfo class implementation.
+ */
+
 #include <stdexcept>
 
 #include <linux/sysinfo.h>

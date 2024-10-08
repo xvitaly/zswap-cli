@@ -8,12 +8,12 @@
 #define KSYSINFO_HPP
 
 /** @file ksysinfo/ksysinfo.hpp
- *  This file gets memory information using the kernel API.
+ *  Contains the KSysInfo class definition.
  */
 
 /**
- *  Class with properties and methods for working with memory
- * information using the kernel API.
+ *  Class for working with memory information using the
+ * kernel API.
 */
 class KSysInfo
 {
@@ -30,37 +30,37 @@ public:
     long& GetUptime();
 
     /**
-     *  Gets total usable main memory size in bytes.
-     * @returns Total usable main memory size.
+     *  Gets the total amount of usable memory size in bytes.
+     * @returns Total usable memory size.
     */
     unsigned long& GetTotalRam();
 
     /**
-     *  Gets available memory size in bytes.
-     * @returns Available memory size.
+     *  Gets the amount of free memory in bytes.
+     * @returns Free memory size.
     */
     unsigned long& GetFreeRam();
 
     /**
-     *  Gets amount of shared memory in bytes.
-     * @returns Amount of shared memory.
+     *  Gets the amount of shared memory in bytes.
+     * @returns Shared memory size.
     */
     unsigned long& GetSharedRam();
 
     /**
-     *  Gets amount of memory used by buffers in bytes.
-     * @returns Amount of memory used by buffers.
+     *  Gets the amount of memory used by buffers in bytes.
+     * @returns Memory used by buffers size.
     */
     unsigned long& GetBufferedRam();
 
     /**
-     *  Gets total swap space size in bytes.
-     * @returns Total swap space size.
+     *  Gets the total size of the swap space in bytes.
+     * @returns Total size of the swap space.
     */
     unsigned long& GetTotalSwap();
 
     /**
-     *  Gets available swap space in bytes.
+     *  Gets the amount of free swap space in bytes.
      * @returns Available swap space.
     */
     unsigned long& GetFreeSwap();
@@ -72,26 +72,26 @@ public:
     unsigned short& GetProcessesCount();
 
     /**
-     *  Gets total high memory size in bytes.
+     *  Gets the amount of total high memory size in bytes.
      * @returns Total high memory size.
     */
     unsigned long& GetTotalHighMem();
 
     /**
-     *  Gets available high memory size in bytes.
-     * @returns Available high memory size.
+     *  Gets the amount of free high memory in bytes.
+     * @returns Free high memory size.
     */
     unsigned long& GetFreeHighMem();
 
     /**
-     *  Gets memory unit size in bytes.
+     *  Gets the memory unit size in bytes.
      * @returns Memory unit size.
     */
     unsigned int& GetMemUnitSize();
 
     /**
-     *  Gets system page size value.
-     * @returns System page size value.
+     *  Gets the value of the system memory page size.
+     * @returns System memory page size.
     */
     long& GetPageSize();
 private:
@@ -112,12 +112,12 @@ private:
     long Uptime;
 
     /**
-     *  Stores total usable main memory size in bytes value.
+     *  Stores the total amount of usable memory size in bytes value.
     */
     unsigned long TotalRam;
 
     /**
-     *  Stores the available memory size in bytes value.
+     *  Stores the amount of free memory in bytes value.
     */
     unsigned long FreeRam;
 
@@ -132,37 +132,37 @@ private:
     unsigned long BufferedRam;
 
     /**
-     *  Stores the amount of memory used by buffers in bytes value.
+     *  Stores the total size of the swap space in bytes value.
     */
     unsigned long TotalSwap;
 
     /**
-     *  Stores available swap space in bytes value.
+     *  Stores the amount of free swap space in bytes value.
     */
     unsigned long FreeSwap;
 
     /**
-     *  Stores the number of current processes value.
+     *  Stores the number of current processes value value.
     */
     unsigned short ProcessesCount;
 
     /**
-     *  Stores total high memory size in bytes value.
+     *  Stores the amount of total high memory size in bytes value.
     */
     unsigned long TotalHighMem;
 
     /**
-     *  Stores the available high memory size in bytes value.
+     *  Stores the amount of free high memory in bytes value.
     */
     unsigned long FreeHighMem;
 
     /**
-     *  Stores memory unit size in bytes value.
+     *  Stores the memory unit size in bytes value.
     */
     unsigned int MemUnitSize;
 
     /**
-     *  Stores the system page size value.
+     *  Stores the system memory page size value.
     */
     long PageSize;
 };
