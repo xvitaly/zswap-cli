@@ -8,7 +8,7 @@
 #define CWRAPPERS_HPP
 
 /** @file cwrappers/cwrappers.hpp
- *  This file contains different wrappers for plain C functions.
+ *  Contains the CWrappers class definition.
  */
 
 #include <string>
