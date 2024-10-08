@@ -8,14 +8,13 @@
 #define KSYSVERSION_HPP
 
 /** @file ksysversion/ksysversion.hpp
- *  This file gets the kernel version using its API.
+ *  Contains the KSysVersion class definition.
  */
 
 #include <string>
 
 /**
- *  Class with properties and methods for working with the
- *  kernel version information.
+ *  Class for working with kernel version information.
 */
 class KSysVersion
 {
@@ -26,25 +25,24 @@ public:
     KSysVersion();
 
     /**
-     *  Gets fully qualified kernel version in semver format.
+     *  Gets the kernel version.
     */
     std::string& GetKernelVersion();
 
     /**
-     *  Gets fully qualified compile time kernel headers version
-     *  in semver format.
+     *  Gets the compile time kernel headers version.
     */
     std::string& GetHeadersVersion();
 private:
     /**
-     *  Parses and extracts version number in semver format from fully
-     *  qualified kernel version string.
+     *  Parses and extracts the kernel version from fully
+     * qualified kernel version string.
     */
     std::string ParseKernelVersion(const std::string&) const;
 
     /**
      *  Reads the kernel version string into the class field.
-     * @exception Raises an instance of the std::runtime_error on error.
+     * @exception Raises an instance of std::runtime_error on error.
     */
     void ReadKernelVersion();
 
