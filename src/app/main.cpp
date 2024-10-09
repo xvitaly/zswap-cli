@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
-/** @file main.cpp
- *  Contains the main entry point implementation.
- */
+/**
+ * @file main.cpp
+ * Contains the main entry point implementation.
+*/
 
 #include <exception>
 #include <iostream>

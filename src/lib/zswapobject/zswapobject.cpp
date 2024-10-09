@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
-/** @file zswapobject/zswapobject.cpp
- *  Contains the ZSwapObject class implementation.
- */
+/**
+ * @file zswapobject/zswapobject.cpp
+ * Contains the ZSwapObject class implementation.
+*/
 
 #include <format>
 #include <filesystem>

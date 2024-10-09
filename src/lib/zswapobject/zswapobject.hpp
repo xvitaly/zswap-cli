@@ -7,31 +7,32 @@
 #ifndef ZSWAPOBJECT_HPP
 #define ZSWAPOBJECT_HPP
 
-/** @file zswapobject/zswapobject.hpp
- *  Contains the ZSwapObject class definition.
- */
+/**
+ * @file zswapobject/zswapobject.hpp
+ * Contains the ZSwapObject class definition.
+*/
 
 #include <string>
 
 /**
- *  Class for working with the ZSwap kernel module.
+ * Class for working with the ZSwap kernel module.
 */
 class ZSwapObject
 {
 public:
     /**
-     *  Constructor of the ZSwapObject class.
+     * Constructor of the ZSwapObject class.
     */
     ZSwapObject() = default;
 
     /**
-     *  Gets the ZSwap enabled value.
+     * Gets the ZSwap enabled value.
      * @returns ZSwap enabled value.
     */
     std::string GetZSwapEnabled() const;
 
     /**
-     *  Sets the ZSwap enabled value.
+     * Sets the ZSwap enabled value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -39,13 +40,13 @@ public:
     void SetZSwapEnabled(const std::string&) const;
 
     /**
-     *  Gets the same filled pages enabled value.
+     * Gets the same filled pages enabled value.
      * @returns Same filled pages enabled value.
     */
     std::string GetZSwapSameFilledPages() const;
 
     /**
-     *  Sets the same filled pages enabled value.
+     * Sets the same filled pages enabled value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -53,13 +54,13 @@ public:
     void SetZSwapSameFilledPages(const std::string&) const;
 
     /**
-     *  Gets the maximum pool percentage value.
+     * Gets the maximum pool percentage value.
      * @returns Maximum pool percentage value.
     */
     std::string GetZSwapMaxPoolPercent() const;
 
     /**
-     *  Sets the maximum pool percentage value.
+     * Sets the maximum pool percentage value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -67,13 +68,13 @@ public:
     void SetZSwapMaxPoolPercent(const std::string&) const;
 
     /**
-     *  Gets the compression algorithm name.
+     * Gets the compression algorithm name.
      * @returns Compression algorithm name.
     */
     std::string GetZSwapCompressor() const;
 
     /**
-     *  Sets the compression algorithm name.
+     * Sets the compression algorithm name.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -81,13 +82,13 @@ public:
     void SetZSwapCompressor(const std::string&) const;
 
     /**
-     *  Gets the kernel's zpool type.
+     * Gets the kernel's zpool type.
      * @returns Kernel's zpool type.
     */
     std::string GetZSwapZpool() const;
 
     /**
-     *  Sets the kernel's zpool type.
+     * Sets the kernel's zpool type.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -95,13 +96,13 @@ public:
     void SetZSwapZpool(const std::string&) const;
 
     /**
-     *  Gets the accept threshold percentage value.
+     * Gets the accept threshold percentage value.
      * @returns Accept threshold percentage value.
     */
     std::string GetZSwapAcceptThresholdPercent() const;
 
     /**
-     *  Sets the accept threshold percentage value.
+     * Sets the accept threshold percentage value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -109,13 +110,13 @@ public:
     void SetZSwapAcceptThresholdPercent(const std::string&) const;
 
     /**
-     *  Gets the non same filled pages enabled value.
+     * Gets the non same filled pages enabled value.
      * @returns Non same filled pages enabled value.
     */
     std::string GetZSwapNonSameFilledPages() const;
 
     /**
-     *  Sets the non same filled pages enabled value.
+     * Sets the non same filled pages enabled value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -123,13 +124,13 @@ public:
     void SetZSwapNonSameFilledPages(const std::string&) const;
 
     /**
-     *  Gets the exclusive loads enabled value.
+     * Gets the exclusive loads enabled value.
      * @returns Exclusive loads enabled value.
     */
     std::string GetZSwapExclusiveLoads() const;
 
     /**
-     *  Sets the exclusive loads enabled value.
+     * Sets the exclusive loads enabled value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -137,13 +138,13 @@ public:
     void SetZSwapExclusiveLoads(const std::string&) const;
 
     /**
-     *  Gets the shrinker enabled value.
+     * Gets the shrinker enabled value.
      * @returns Shrinker enabled value.
     */
     std::string GetZSwapShrinkerEnabled() const;
 
     /**
-     *  Sets the shrinker enabled value.
+     * Sets the shrinker enabled value.
      * @param Value New value.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -151,95 +152,95 @@ public:
     void SetZSwapShrinkerEnabled(const std::string&) const;
 
     /**
-     *  Checks if the ZSwap module is loaded and available for use.
+     * Checks if the ZSwap module is loaded and available for use.
      * @returns ZSwap module availability.
     */
     bool IsAvailable() const;
 private:
     /**
-     *  Stores the ZSwap log message template.
+     * Stores the ZSwap log message template.
     */
     const std::string ZSwapMessageLog = "Writing a new value \"{1}\" to the \"{0}\" variable.";
 
     /**
-     *  Stores the ZSwap error message template for Y or N values.
+     * Stores the ZSwap error message template for Y or N values.
     */
     const std::string ZSwapErrorBool = "The requested value for the \"{0}\" variable is incorrect (only Y or N are supported).";
 
     /**
-     *  Stores the ZSwap error message template for range values.
+     * Stores the ZSwap error message template for range values.
     */
     const std::string ZSwapErrorRange = "The requested value for the \"{0}\" variable is out of range [0..100].";
 
     /**
-     *  Stores the ZSwap error message template for empty values.
+     * Stores the ZSwap error message template for empty values.
     */
     const std::string ZSwapErrorEmpty = "The requested value for the \"{0}\" variable is empty.";
 
     /**
-     *  Stores the ZSwap error message template for incorrect kernel version.
+     * Stores the ZSwap error message template for incorrect kernel version.
     */
     const std::string ZSwapErrorKernel = "Configuring the \"{0}\" variable is not possible on current kernel!";
 
     /**
-     *  Stores the ZSwap kernel module parameters path.
+     * Stores the ZSwap kernel module parameters path.
     */
     const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
 
     /**
-     *  Stores the ZSwap enabled internal parameter name.
+     * Stores the ZSwap enabled internal parameter name.
     */
     const std::string ZSwapEnabledName = "enabled";
 
     /**
-     *  Stores the same filled pages enabled internal parameter name.
+     * Stores the same filled pages enabled internal parameter name.
     */
     const std::string ZSwapSameFilledPagesName = "same_filled_pages_enabled";
 
     /**
-     *  Stores the maximum pool percentage internal parameter name.
+     * Stores the maximum pool percentage internal parameter name.
     */
     const std::string ZSwapMaxPoolPercentName = "max_pool_percent";
 
     /**
-     *  Stores the compression algorithm internal parameter name.
+     * Stores the compression algorithm internal parameter name.
     */
     const std::string ZSwapCompressorName = "compressor";
 
     /**
-     *  Stores the kernel's zpool type internal parameter name.
+     * Stores the kernel's zpool type internal parameter name.
     */
     const std::string ZSwapZpoolName = "zpool";
 
     /**
-     *  Stores the accept threshold percentage internal parameter name.
+     * Stores the accept threshold percentage internal parameter name.
     */
     const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 
     /**
-     *  Stores the non same filled pages enabled internal parameter name.
+     * Stores the non same filled pages enabled internal parameter name.
     */
     const std::string ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
 
     /**
-     *  Stores the exclusive loads enabled internal parameter name.
+     * Stores the exclusive loads enabled internal parameter name.
     */
     const std::string ZSwapExclusiveLoadsName = "exclusive_loads";
 
     /**
-     *  Stores the shrinker enabled internal parameter name.
+     * Stores the shrinker enabled internal parameter name.
     */
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
-     *  Writes the ZSwap kernel module value.
+     * Writes the ZSwap kernel module value.
      * @param Name Name.
      * @param Value Value.
     */
     void WriteZSwapValue(const std::string&, const std::string&) const;
 
     /**
-     *  Reads the value of the ZSwap kernel module by the specified name.
+     * Reads the value of the ZSwap kernel module by the specified name.
      * @param Name Value name.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -248,14 +249,14 @@ private:
     std::string ReadZSwapValue(const std::string&) const;
 
     /**
-     *  Prints the log entry to the standard output.
+     * Prints the log entry to the standard output.
      * @param Name Parameter name.
      * @param Value Parameter value.
     */
     void WriteLogEntry(const std::string&, const std::string&) const;
 
     /**
-     *  Checks if the value is in the [0..100] range.
+     * Checks if the value is in the [0..100] range.
      * @param Value Value to check.
      * @returns Check results.
      * @retval true If the value is outside the [0..100] range.
@@ -264,7 +265,7 @@ private:
     bool CheckPercent(const std::string&) const;
 
     /**
-     *  Checks if the value is Y or N.
+     * Checks if the value is Y or N.
      * @param Value Value to check.
      * @returns Check results.
      * @retval true If the value does not meet the specified criteria.

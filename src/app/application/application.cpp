@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
-/** @file application/application.cpp
- *  Contains the Application class implementation.
- */
+/**
+ * @file application/application.cpp
+ * Contains the Application class implementation.
+*/
 
 #include <algorithm>
 #include <exception>

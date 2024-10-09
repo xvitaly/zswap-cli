@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
-/** @file ksysversion/ksysversion.cpp
- *  Contains the KSysVersion class implementation.
- */
+/**
+ * @file ksysversion/ksysversion.cpp
+ * Contains the KSysVersion class implementation.
+*/
 
 #include <format>
 #include <string>

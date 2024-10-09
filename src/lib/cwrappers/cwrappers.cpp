@@ -4,9 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
-/** @file cwrappers/cwrappers.cpp
- *  Contains the CWrappers class implementation.
- */
+/**
+ * @file cwrappers/cwrappers.cpp
+ * Contains the CWrappers class implementation.
+*/
 
 #include <string>
 #include <stdlib.h>

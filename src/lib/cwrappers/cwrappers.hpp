@@ -7,27 +7,28 @@
 #ifndef CWRAPPERS_HPP
 #define CWRAPPERS_HPP
 
-/** @file cwrappers/cwrappers.hpp
- *  Contains the CWrappers class definition.
- */
+/**
+ * @file cwrappers/cwrappers.hpp
+ * Contains the CWrappers class definition.
+*/
 
 #include <string>
 
 /**
- *  Static class with wrappers for plain C functions.
+ * Static class with wrappers for plain C functions.
 */
 class CWrappers
 {
 public:
     /**
-     *  Gets the value of the environment variable, specified by name.
+     * Gets the value of the environment variable, specified by name.
      * @param KeyName Environment variable name.
      * @returns Environment variable value.
     */
     static std::string GetEnv(const std::string&);
 
     /**
-     *  Checks if the program is running with super-user privileges.
+     * Checks if the program is running with super-user privileges.
      * @returns Check results.
      * @retval true Super-user privileges were detected.
      * @retval false Otherwise.
@@ -35,13 +36,13 @@ public:
     static bool CheckRoot();
 
     /**
-     *  Gets the value of the SC_PAGESIZE.
+     * Gets the value of the SC_PAGESIZE.
      * @returns SC_PAGESIZE value.
     */
     static long GetSCPageSize();
 private:
     /**
-     *  Default constructor of the CWrappers class. No one should use it.
+     * Default constructor of the CWrappers class. No one should use it.
     */
     CWrappers() = default;
 };
