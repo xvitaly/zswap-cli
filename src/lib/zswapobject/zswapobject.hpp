@@ -8,14 +8,13 @@
 #define ZSWAPOBJECT_HPP
 
 /** @file zswapobject/zswapobject.hpp
- *  This file gets information from the ZSwap kernel module.
+ *  Contains the ZSwapObject class definition.
  */
 
 #include <string>
 
 /**
- *  Class with properties and methods for working with the ZSwap kernel
- * module.
+ *  Class for working with the ZSwap kernel module.
 */
 class ZSwapObject
 {
@@ -240,7 +239,7 @@ private:
     void WriteZSwapValue(const std::string&, const std::string&) const;
 
     /**
-     *  Reads the value of the ZSwap kernel module by specified name.
+     *  Reads the value of the ZSwap kernel module by the specified name.
      * @param Name Value name.
      * @exception Raises an instance of std::invalid_argument if cannot set
      * the proposed value.
@@ -249,26 +248,26 @@ private:
     std::string ReadZSwapValue(const std::string&) const;
 
     /**
-     *  Prints log entry to the standard output.
+     *  Prints the log entry to the standard output.
      * @param Name Parameter name.
      * @param Value Parameter value.
     */
     void WriteLogEntry(const std::string&, const std::string&) const;
 
     /**
-     *  Checks if the value matches the specified criteria [0..100].
+     *  Checks if the value is in the [0..100] range.
      * @param Value Value to check.
      * @returns Check results.
-     * @retval true If the value belongs to [0..100] range.
+     * @retval true If the value is outside the [0..100] range.
      * @retval false Otherwise.
     */
     bool CheckPercent(const std::string&) const;
 
     /**
-     *  Checks if the value matches the specified criteria (Y or N).
+     *  Checks if the value is Y or N.
      * @param Value Value to check.
      * @returns Check results.
-     * @retval true If the value matches the specified criteria.
+     * @retval true If the value does not meet the specified criteria.
      * @retval false Otherwise.
     */
     bool CheckEnabled(const std::string&) const;
