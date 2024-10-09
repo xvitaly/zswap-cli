@@ -8,14 +8,14 @@
 #define ZSWAPDEBUG_HPP
 
 /** @file zswapdebug/zswapdebug.hpp
- *  This file gets debug information from the ZSwap kernel module.
+ *  Contains the ZSwapDebug class definition.
  */
 
 #include <string>
 
 /**
- *  Class with properties and methods for working with the ZSwap kernel
- * module debug information.
+ *  Class for working with the ZSwap kernel module
+ * debug information.
 */
 class ZSwapDebug
 {
@@ -26,26 +26,26 @@ public:
     ZSwapDebug() = default;
 
     /**
-     *  Gets the number of the duplicate entries.
+     *  Gets the number of duplicate entries.
      * @returns Duplicate entries count.
     */
     long GetDuplicateEntry() const;
 
     /**
      *  Gets the pool limit hits.
-     * @returns Pool limit hits.
+     * @returns Pool limit hits count.
     */
     long GetPoolLimitHit() const;
 
     /**
-     *  Gets the pool total size value.
-     * @returns Pool total size.
+     *  Gets the pool total size.
+     * @returns Pool total size count.
     */
     long GetPoolTotalSize() const;
 
     /**
      *  Gets the number of reject allocation failures.
-     * @returns Reject allocation failures.
+     * @returns Reject allocation failures count.
     */
     long GetRejectAllocFail() const;
 
@@ -57,30 +57,30 @@ public:
 
     /**
      *  Gets the number of reject Kmemcache failures.
-     * @returns Reject Kmemcache failures.
+     * @returns Reject Kmemcache failures count.
     */
     long GetRejectKmemCacheFail() const;
 
     /**
      *  Gets the number of reject reclaim failures.
-     * @returns Reject reclaim failures.
+     * @returns Reject reclaim failures count.
     */
     long GetRejectReclaimFail() const;
 
     /**
-     *  Gets the number of the same filled pages.
+     *  Gets the number of same filled pages.
      * @returns Same filled pages count.
     */
     long GetSameFilledPages() const;
 
     /**
-     *  Gets the number of the stored pages.
+     *  Gets the number of stored pages.
      * @returns Stored pages count.
     */
     long GetStoredPages() const;
 
     /**
-     *  Gets the number of the written back pages.
+     *  Gets the number of written back pages.
      * @returns Written back pages count.
     */
     long GetWrittenBackPages() const;
@@ -97,7 +97,8 @@ private:
     const std::string ModuleDebugPath = "/sys/kernel/debug/zswap/";
 
     /**
-     *  Reads the debug value of the ZSwap kernel module by specified name.
+     *  Reads the debug value of the ZSwap kernel module by the
+     * specified name.
      * @param Name Debug value name.
      * @returns Value.
     */

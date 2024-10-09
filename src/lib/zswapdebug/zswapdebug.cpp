@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: MIT
 */
 
+/** @file zswapdebug/zswapdebug.cpp
+ *  Contains the ZSwapDebug class implementation.
+ */
+
 #include <filesystem>
 #include <fstream>
 #include <string>
