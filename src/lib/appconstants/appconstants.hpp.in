@@ -7,8 +7,9 @@
 #ifndef APPCONSTANTS_H
 #define APPCONSTANTS_H
 
-/** @file lib/appconstants/appconstants.h
- * This file contains AppConstants namespace.
+/**
+ * @file appconstants/appconstants.hpp
+ * Contains the AppConstants namespace definition.
 */
 
 #include <string_view>
@@ -18,12 +19,12 @@
 */
 namespace AppConstants {
     /**
-     * Stores application internal name.
+     * Stores the application internal name as a string.
     */
     inline constexpr std::string_view ProductNameInternal = "@CMAKE_PROJECT_NAME@";
 
     /**
-     * Stores application version number as string.
+     * Stores the application version number as a string.
     */
     inline constexpr std::string_view ProductVersion = "@CMAKE_PROJECT_VERSION@";
 }
