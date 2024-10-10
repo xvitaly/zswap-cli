@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
 */
 
-#ifndef APPCONSTANTS_H
-#define APPCONSTANTS_H
+#ifndef APPCONSTANTS_HPP
+#define APPCONSTANTS_HPP
 
 /**
  * @file appconstants/appconstants.hpp
@@ -29,4 +29,4 @@ namespace AppConstants {
     inline constexpr std::string_view ProductVersion = "@CMAKE_PROJECT_VERSION@";
 }
 
-#endif // APPCONSTANTS_H
+#endif // APPCONSTANTS_HPP
