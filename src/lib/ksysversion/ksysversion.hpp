@@ -23,44 +23,24 @@ public:
     /**
      * Constructor of the KSysVersion class.
     */
-    KSysVersion();
+    KSysVersion() = default;
 
     /**
      * Gets the kernel version.
+     * @exception Raises an instance of std::runtime_error on error.
     */
-    std::string& GetKernelVersion();
+    std::string GetKernelVersion() const;
 
     /**
      * Gets the compile time kernel headers version.
     */
-    std::string& GetHeadersVersion();
+    std::string GetHeadersVersion() const;
 private:
     /**
      * Parses and extracts the kernel version from fully
      * qualified kernel version string.
     */
     std::string ParseKernelVersion(const std::string&) const;
-
-    /**
-     * Reads the kernel version string into the class field.
-     * @exception Raises an instance of std::runtime_error on error.
-    */
-    void ReadKernelVersion();
-
-    /**
-     * Reads the kernel headers version string into the class field.
-    */
-    void ReadHeadersVersion();
-
-    /**
-     * Stores the kernel version string.
-    */
-    std::string KernelVersion;
-
-    /**
-     * Stores the kernel headers version string.
-    */
-    std::string HeadersVersion;
 };
 
 #endif // KSYSVERSION_HPP
