@@ -17,62 +17,62 @@
 #include "ksysinfo/ksysinfo.hpp"
 #include "cwrappers/cwrappers.hpp"
 
-long& KSysInfo::GetUptime()
+long KSysInfo::GetUptime() const
 {
     return Uptime;
 }
 
-unsigned long& KSysInfo::GetTotalRam()
+unsigned long KSysInfo::GetTotalRam() const
 {
     return TotalRam;
 }
 
-unsigned long& KSysInfo::GetFreeRam()
+unsigned long KSysInfo::GetFreeRam() const
 {
     return FreeRam;
 }
 
-unsigned long& KSysInfo::GetSharedRam()
+unsigned long KSysInfo::GetSharedRam() const
 {
     return SharedRam;
 }
 
-unsigned long& KSysInfo::GetBufferedRam()
+unsigned long KSysInfo::GetBufferedRam() const
 {
     return BufferedRam;
 }
 
-unsigned long& KSysInfo::GetTotalSwap()
+unsigned long KSysInfo::GetTotalSwap() const
 {
     return TotalSwap;
 }
 
-unsigned long& KSysInfo::GetFreeSwap()
+unsigned long KSysInfo::GetFreeSwap() const
 {
     return FreeSwap;
 }
 
-unsigned short& KSysInfo::GetProcessesCount()
+unsigned short KSysInfo::GetProcessesCount() const
 {
     return ProcessesCount;
 }
 
-unsigned long& KSysInfo::GetTotalHighMem()
+unsigned long KSysInfo::GetTotalHighMem() const
 {
     return TotalHighMem;
 }
 
-unsigned long& KSysInfo::GetFreeHighMem()
+unsigned long KSysInfo::GetFreeHighMem() const
 {
     return FreeHighMem;
 }
 
-unsigned int& KSysInfo::GetMemUnitSize()
+unsigned int KSysInfo::GetMemUnitSize() const
 {
     return MemUnitSize;
 }
 
-long& KSysInfo::GetPageSize()
+long KSysInfo::GetPageSize() const
 {
     return PageSize;
 }

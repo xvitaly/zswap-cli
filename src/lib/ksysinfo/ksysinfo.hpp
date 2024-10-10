@@ -28,73 +28,73 @@ public:
      * Gets current uptime (in seconds since boot).
      * @returns Current uptime.
     */
-    long& GetUptime();
+    long GetUptime() const;
 
     /**
      * Gets the total amount of usable memory size in bytes.
      * @returns Total usable memory size.
     */
-    unsigned long& GetTotalRam();
+    unsigned long GetTotalRam() const;
 
     /**
      * Gets the amount of free memory in bytes.
      * @returns Free memory size.
     */
-    unsigned long& GetFreeRam();
+    unsigned long GetFreeRam() const;
 
     /**
      * Gets the amount of shared memory in bytes.
      * @returns Shared memory size.
     */
-    unsigned long& GetSharedRam();
+    unsigned long GetSharedRam() const;
 
     /**
      * Gets the amount of memory used by buffers in bytes.
      * @returns Memory used by buffers size.
     */
-    unsigned long& GetBufferedRam();
+    unsigned long GetBufferedRam() const;
 
     /**
      * Gets the total size of the swap space in bytes.
      * @returns Total size of the swap space.
     */
-    unsigned long& GetTotalSwap();
+    unsigned long GetTotalSwap() const;
 
     /**
      * Gets the amount of free swap space in bytes.
      * @returns Available swap space.
     */
-    unsigned long& GetFreeSwap();
+    unsigned long GetFreeSwap() const;
 
     /**
      * Gets the number of current processes.
      * @returns The number of current processes.
     */
-    unsigned short& GetProcessesCount();
+    unsigned short GetProcessesCount() const;
 
     /**
      * Gets the amount of total high memory size in bytes.
      * @returns Total high memory size.
     */
-    unsigned long& GetTotalHighMem();
+    unsigned long GetTotalHighMem() const;
 
     /**
      * Gets the amount of free high memory in bytes.
      * @returns Free high memory size.
     */
-    unsigned long& GetFreeHighMem();
+    unsigned long GetFreeHighMem() const;
 
     /**
      * Gets the memory unit size in bytes.
      * @returns Memory unit size.
     */
-    unsigned int& GetMemUnitSize();
+    unsigned int GetMemUnitSize() const;
 
     /**
      * Gets the value of the system memory page size.
      * @returns System memory page size.
     */
-    long& GetPageSize();
+    long GetPageSize() const;
 private:
     /**
      * Reads the sysinfo structure into the class fields.
