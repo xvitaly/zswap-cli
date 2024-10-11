@@ -34,8 +34,6 @@ public:
     /**
      * Sets the ZSwap enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapEnabled(const std::string&) const;
 
@@ -48,8 +46,6 @@ public:
     /**
      * Sets the same filled pages enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapSameFilledPages(const std::string&) const;
 
@@ -62,8 +58,6 @@ public:
     /**
      * Sets the maximum pool percentage value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapMaxPoolPercent(const std::string&) const;
 
@@ -76,8 +70,6 @@ public:
     /**
      * Sets the compression algorithm name.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapCompressor(const std::string&) const;
 
@@ -90,8 +82,6 @@ public:
     /**
      * Sets the kernel's zpool type.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapZpool(const std::string&) const;
 
@@ -104,8 +94,6 @@ public:
     /**
      * Sets the accept threshold percentage value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapAcceptThresholdPercent(const std::string&) const;
 
@@ -118,8 +106,6 @@ public:
     /**
      * Sets the non same filled pages enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapNonSameFilledPages(const std::string&) const;
 
@@ -132,8 +118,6 @@ public:
     /**
      * Sets the exclusive loads enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapExclusiveLoads(const std::string&) const;
 
@@ -146,8 +130,6 @@ public:
     /**
      * Sets the shrinker enabled value.
      * @param Value New value.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
     */
     void SetZSwapShrinkerEnabled(const std::string&) const;
 
@@ -157,31 +139,6 @@ public:
     */
     bool IsAvailable() const;
 private:
-    /**
-     * Stores the ZSwap log message template.
-    */
-    const std::string ZSwapMessageLog = "Writing a new value \"{1}\" to the \"{0}\" variable.";
-
-    /**
-     * Stores the ZSwap error message template for Y or N values.
-    */
-    const std::string ZSwapErrorBool = "The requested value for the \"{0}\" variable is incorrect (only Y or N are supported).";
-
-    /**
-     * Stores the ZSwap error message template for range values.
-    */
-    const std::string ZSwapErrorRange = "The requested value for the \"{0}\" variable is out of range [0..100].";
-
-    /**
-     * Stores the ZSwap error message template for empty values.
-    */
-    const std::string ZSwapErrorEmpty = "The requested value for the \"{0}\" variable is empty.";
-
-    /**
-     * Stores the ZSwap error message template for incorrect kernel version.
-    */
-    const std::string ZSwapErrorKernel = "Configuring the \"{0}\" variable is not possible on current kernel!";
-
     /**
      * Stores the ZSwap kernel module parameters path.
     */
@@ -233,45 +190,55 @@ private:
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
-     * Writes the ZSwap kernel module value.
-     * @param Name Name.
-     * @param Value Value.
+     * Writes a new value to the specified ZSwap kernel module variable.
+     * @param Name Variable name.
+     * @param Value Variable value.
+     * @exception Raises an instance of std::runtime_error if the kernel
+     * module variable is not available.
     */
     void WriteZSwapValue(const std::string&, const std::string&) const;
 
     /**
-     * Reads the value of the ZSwap kernel module by the specified name.
-     * @param Name Value name.
-     * @exception Raises an instance of std::invalid_argument if cannot set
-     * the proposed value.
-     * @returns Value.
+     * Reads the value of the ZSwap kernel module variable by the specified
+     * name.
+     * @param Name Variable name.
+     * @returns Variable value or N/A if not available.
     */
     std::string ReadZSwapValue(const std::string&) const;
 
     /**
      * Prints the log entry to the standard output.
-     * @param Name Parameter name.
-     * @param Value Parameter value.
+     * @param Name Variable name.
+     * @param Value Variable value.
     */
     void WriteLogEntry(const std::string&, const std::string&) const;
 
     /**
-     * Checks if the value is in the [0..100] range.
-     * @param Value Value to check.
-     * @returns Check results.
-     * @retval true If the value is outside the [0..100] range.
-     * @retval false Otherwise.
+     * Checks if the value is Y or N.
+     * @param Name Variable name.
+     * @param Value Variable value to check.
+     * @exception Raises an instance of std::invalid_argument if the
+     * value does not meet the criteria.
     */
-    bool CheckPercent(const std::string&) const;
+    void CheckValueBool(const std::string&, const std::string&) const;
 
     /**
-     * Checks if the value is Y or N.
-     * @param Value Value to check.
-     * @returns Check results.
-     * @retval true If the value does not meet the specified criteria.
-     * @retval false Otherwise.
+     * Checks if the value is empty.
+     * @param Name Variable name.
+     * @param Value Variable value to check.
+     * @exception Raises an instance of std::invalid_argument if the
+     * value does not meet the criteria.
     */
-    bool CheckEnabled(const std::string&) const;
+    void CheckValueEmpty(const std::string&, const std::string&) const;
+
+    /**
+     * Checks if the value is in the [0..100] range.
+     * @param Name Variable name.
+     * @param Value Variable value to check.
+     * @exception Raises an instance of std::invalid_argument if the
+     * value does not meet the criteria.
+    */
+    void CheckValueRange(const std::string&, const std::string&) const;
 };
 
 #endif // ZSWAPOBJECT_HPP

@@ -19,25 +19,30 @@
 
 #include "zswapobject/zswapobject.hpp"
 
-bool ZSwapObject::CheckPercent(const std::string& Value) const
+void ZSwapObject::CheckValueBool(const std::string& Name, const std::string& Value) const
 {
-    return !std::regex_match(Value, std::regex("^\\d{1,2}|100$"));
+    if (!std::regex_match(Value, std::regex("^[YN]$"))) throw std::invalid_argument(std::format("The requested value for the \"{0}\" variable is incorrect (only Y or N are supported).", Name));
 }
 
-bool ZSwapObject::CheckEnabled(const std::string& Value) const
+void ZSwapObject::CheckValueEmpty(const std::string& Name, const std::string& Value) const
 {
-    return !std::regex_match(Value, std::regex("^[YN]$"));
+    if (Value.empty()) throw std::invalid_argument(std::format("The requested value for the \"{0}\" variable is empty.", Name));
+}
+
+void ZSwapObject::CheckValueRange(const std::string& Name, const std::string& Value) const
+{
+    if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$"))) throw std::invalid_argument(std::format("The requested value for the \"{0}\" variable is out of range [0..100].", Name));
 }
 
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& Value) const
 {
-    std::cout << std::vformat(ZSwapMessageLog, std::make_format_args(Name, Value)) << std::endl;
+    std::cout << std::format("Writing a new value \"{1}\" to the \"{0}\" variable.", Name, Value) << std::endl;
 }
 
 void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value) const
 {
     const std::string FullPath = ZSwapModuleParametersPath + Name;
-    if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::vformat(ZSwapErrorKernel, std::make_format_args(Name)));
+    if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the \"{0}\" variable is not possible on current kernel!", Name));
     std::ofstream ZSwapSysFs(FullPath);
     ZSwapSysFs << Value;
     ZSwapSysFs.close();
@@ -61,7 +66,7 @@ std::string ZSwapObject::GetZSwapEnabled() const
 
 void ZSwapObject::SetZSwapEnabled(const std::string& Value) const
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapEnabledName)));
+    CheckValueBool(ZSwapEnabledName, Value);
     WriteZSwapValue(ZSwapEnabledName, Value);
     WriteLogEntry(ZSwapEnabledName, Value);
 }
@@ -73,7 +78,7 @@ std::string ZSwapObject::GetZSwapSameFilledPages() const
 
 void ZSwapObject::SetZSwapSameFilledPages(const std::string& Value) const
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapSameFilledPagesName)));
+    CheckValueBool(ZSwapSameFilledPagesName, Value);
     WriteZSwapValue(ZSwapSameFilledPagesName, Value);
     WriteLogEntry(ZSwapSameFilledPagesName, Value);
 }
@@ -85,7 +90,7 @@ std::string ZSwapObject::GetZSwapMaxPoolPercent() const
 
 void ZSwapObject::SetZSwapMaxPoolPercent(const std::string& Value) const
 {
-    if (CheckPercent(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorRange, std::make_format_args(ZSwapMaxPoolPercentName)));
+    CheckValueRange(ZSwapMaxPoolPercentName, Value);
     WriteZSwapValue(ZSwapMaxPoolPercentName, Value);
     WriteLogEntry(ZSwapMaxPoolPercentName, Value);
 }
@@ -97,7 +102,7 @@ std::string ZSwapObject::GetZSwapCompressor() const
 
 void ZSwapObject::SetZSwapCompressor(const std::string& Value) const
 {
-    if (Value.empty()) throw std::invalid_argument(std::vformat(ZSwapErrorEmpty, std::make_format_args(ZSwapCompressorName)));
+    CheckValueEmpty(ZSwapCompressorName, Value);
     WriteZSwapValue(ZSwapCompressorName, Value);
     WriteLogEntry(ZSwapCompressorName, Value);
 }
@@ -109,7 +114,7 @@ std::string ZSwapObject::GetZSwapZpool() const
 
 void ZSwapObject::SetZSwapZpool(const std::string& Value) const
 {
-    if (Value.empty()) throw std::invalid_argument(std::vformat(ZSwapErrorEmpty, std::make_format_args(ZSwapZpoolName)));
+    CheckValueEmpty(ZSwapZpoolName, Value);
     WriteZSwapValue(ZSwapZpoolName, Value);
     WriteLogEntry(ZSwapZpoolName, Value);
 }
@@ -121,7 +126,7 @@ std::string ZSwapObject::GetZSwapAcceptThresholdPercent() const
 
 void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value) const
 {
-    if (CheckPercent(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorRange, std::make_format_args(ZSwapAcceptThresholdPercentName)));
+    CheckValueRange(ZSwapAcceptThresholdPercentName, Value);
     WriteZSwapValue(ZSwapAcceptThresholdPercentName, Value);
     WriteLogEntry(ZSwapAcceptThresholdPercentName, Value);
 }
@@ -133,7 +138,7 @@ std::string ZSwapObject::GetZSwapNonSameFilledPages() const
 
 void ZSwapObject::SetZSwapNonSameFilledPages(const std::string& Value) const
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapNonSameFilledPagesName)));
+    CheckValueBool(ZSwapNonSameFilledPagesName, Value);
     WriteZSwapValue(ZSwapNonSameFilledPagesName, Value);
     WriteLogEntry(ZSwapNonSameFilledPagesName, Value);
 }
@@ -145,7 +150,7 @@ std::string ZSwapObject::GetZSwapExclusiveLoads() const
 
 void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value) const
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapExclusiveLoadsName)));
+    CheckValueBool(ZSwapExclusiveLoadsName, Value);
     WriteZSwapValue(ZSwapExclusiveLoadsName, Value);
     WriteLogEntry(ZSwapExclusiveLoadsName, Value);
 }
@@ -157,7 +162,7 @@ std::string ZSwapObject::GetZSwapShrinkerEnabled() const
 
 void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value) const
 {
-    if (CheckEnabled(Value)) throw std::invalid_argument(std::vformat(ZSwapErrorBool, std::make_format_args(ZSwapShrinkerEnabledName)));
+    CheckValueBool(ZSwapShrinkerEnabledName, Value);
     WriteZSwapValue(ZSwapShrinkerEnabledName, Value);
     WriteLogEntry(ZSwapShrinkerEnabledName, Value);
 }
