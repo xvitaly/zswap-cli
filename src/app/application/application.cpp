@@ -67,7 +67,7 @@ void Application::PrintSettings() const
 {
     if (!ZSwap -> IsAvailable())
     {
-        std::cout << "ZSwap module is not loaded." << std::endl;
+        std::cout << "ZSwap kernel module is not loaded." << std::endl;
         return;
     }
 
@@ -156,7 +156,7 @@ int Application::PrintStats(const int Value) const
             PrintDebugInfo();
             break;
         default:
-            throw std::invalid_argument("Incorrect value of --stats command-line option was specified.");
+            throw std::invalid_argument("Incorrect value of the --stats command-line option was specified.");
     }
     return 0;
 }
@@ -299,7 +299,7 @@ void Application::CheckIfRunningBySuperUser() const
 
 void Application::InitClassMembers()
 {
-    CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control the ZSwap kernel module");
+    CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control the ZSwap kernel module options");
     ConfigOptions = std::make_unique<boost::program_options::options_description>("Configuration file options");
     CmdLine = std::make_unique<boost::program_options::variables_map>();
     Config = std::make_unique<boost::program_options::variables_map>();
@@ -361,7 +361,7 @@ void Application::ParseCmdLine(int argc, char** argv) const
 
 void Application::ParseConfigFile(const std::string& ConfigFile) const
 {
-    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("Configuration file does not exist!");
+    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("The specified configuration file does not exist!");
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
