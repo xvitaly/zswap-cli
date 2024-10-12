@@ -140,83 +140,83 @@ public:
     bool IsAvailable() const;
 private:
     /**
-     * Stores the ZSwap kernel module parameters path.
+     * Stores the ZSwap kernel module options path.
     */
     const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
 
     /**
-     * Stores the ZSwap enabled internal parameter name.
+     * Stores the ZSwap enabled internal option name.
     */
     const std::string ZSwapEnabledName = "enabled";
 
     /**
-     * Stores the same filled pages enabled internal parameter name.
+     * Stores the same filled pages enabled internal option name.
     */
     const std::string ZSwapSameFilledPagesName = "same_filled_pages_enabled";
 
     /**
-     * Stores the maximum pool percentage internal parameter name.
+     * Stores the maximum pool percentage internal option name.
     */
     const std::string ZSwapMaxPoolPercentName = "max_pool_percent";
 
     /**
-     * Stores the compression algorithm internal parameter name.
+     * Stores the compression algorithm internal option name.
     */
     const std::string ZSwapCompressorName = "compressor";
 
     /**
-     * Stores the kernel's zpool type internal parameter name.
+     * Stores the kernel's zpool type internal option name.
     */
     const std::string ZSwapZpoolName = "zpool";
 
     /**
-     * Stores the accept threshold percentage internal parameter name.
+     * Stores the accept threshold percentage internal option name.
     */
     const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 
     /**
-     * Stores the non same filled pages enabled internal parameter name.
+     * Stores the non same filled pages enabled internal option name.
     */
     const std::string ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
 
     /**
-     * Stores the exclusive loads enabled internal parameter name.
+     * Stores the exclusive loads enabled internal option name.
     */
     const std::string ZSwapExclusiveLoadsName = "exclusive_loads";
 
     /**
-     * Stores the shrinker enabled internal parameter name.
+     * Stores the shrinker enabled internal option name.
     */
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
-     * Writes a new value to the specified ZSwap kernel module variable.
-     * @param Name Variable name.
-     * @param Value Variable value.
+     * Writes a new value to the specified ZSwap kernel module option.
+     * @param Name Option name.
+     * @param Value Option value.
      * @exception Raises an instance of std::runtime_error if the kernel
-     * module variable is not available.
+     * module option is not available.
     */
     void WriteZSwapValue(const std::string&, const std::string&) const;
 
     /**
-     * Reads the value of the ZSwap kernel module variable by the specified
-     * name.
-     * @param Name Variable name.
-     * @returns Variable value or N/A if not available.
+     * Reads the value of the ZSwap kernel module option by the
+     * specified name.
+     * @param Name Option name.
+     * @returns Option value or N/A if not available.
     */
     std::string ReadZSwapValue(const std::string&) const;
 
     /**
      * Prints the log entry to the standard output.
-     * @param Name Variable name.
-     * @param Value Variable value.
+     * @param Name Option name.
+     * @param Value Option value.
     */
     void WriteLogEntry(const std::string&, const std::string&) const;
 
     /**
      * Checks if the value is Y or N.
-     * @param Name Variable name.
-     * @param Value Variable value to check.
+     * @param Name Option name.
+     * @param Value Option value to check.
      * @exception Raises an instance of std::invalid_argument if the
      * value does not meet the criteria.
     */
@@ -224,8 +224,8 @@ private:
 
     /**
      * Checks if the value is empty.
-     * @param Name Variable name.
-     * @param Value Variable value to check.
+     * @param Name Option name.
+     * @param Value Option value to check.
      * @exception Raises an instance of std::invalid_argument if the
      * value does not meet the criteria.
     */
@@ -233,8 +233,8 @@ private:
 
     /**
      * Checks if the value is in the [0..100] range.
-     * @param Name Variable name.
-     * @param Value Variable value to check.
+     * @param Name Option name.
+     * @param Value Option value to check.
      * @exception Raises an instance of std::invalid_argument if the
      * value does not meet the criteria.
     */
