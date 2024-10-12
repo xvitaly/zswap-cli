@@ -170,8 +170,10 @@ int Application::PrintHelp() const
 int Application::PrintVersion() const
 {
     std::unique_ptr<KSysVersion> SysVersion = std::make_unique<KSysVersion>();
-    std::cout << std::format("{0} project version: {1}.\n"
-                             "Kernel API version: {2} (build), {3} (runtime).",
+    std::cout << std::format("{0} version: {1}\n"
+                             "Kernel API version:\n"
+                             "  build: {2}\n"
+                             "  runtime: {3}",
                              AppConstants::ProductNameInternal,
                              AppConstants::ProductVersion,
                              SysVersion -> GetHeadersVersion(),
