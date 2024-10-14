@@ -1,6 +1,6 @@
 # Features
 
-Supported options:
+Supported kernel module options:
 
 | Name | Value | Status | Kernel version |
 | ------- | ------- | ------- | ------- |
