@@ -53,7 +53,6 @@ set(UNIT_FILE_NAME "${CMAKE_PROJECT_NAME}.service")
 # ======================================================
 
 include(GNUInstallDirs)
-include(FetchContent)
 
 # ======================================================
 # ============= External custom imports ================
