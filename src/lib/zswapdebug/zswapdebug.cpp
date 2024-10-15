@@ -50,6 +50,11 @@ long ZSwapDebug::GetRejectReclaimFail() const
     return ReadModuleDebugValue("reject_reclaim_fail");
 }
 
+long ZSwapDebug::GetRejectCompressFail() const
+{
+    return ReadModuleDebugValue("reject_compress_fail");
+}
+
 long ZSwapDebug::GetSameFilledPages() const
 {
     return ReadModuleDebugValue("same_filled_pages");

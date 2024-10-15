@@ -69,6 +69,12 @@ public:
     long GetRejectReclaimFail() const;
 
     /**
+     * Gets the number of compression failures.
+     * @returns Reject compression failures count.
+    */
+    long GetRejectCompressFail() const;
+
+    /**
      * Gets the number of same filled pages.
      * @returns Same filled pages count.
     */
