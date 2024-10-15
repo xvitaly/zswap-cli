@@ -46,9 +46,10 @@ void Application::PrintDebugInfo() const
                              "Reject compression poor: {4}.\n"
                              "Reject Kmemcache failures: {5}.\n"
                              "Reject reclaim failures: {6}.\n"
-                             "Same filled pages count: {7}.\n"
-                             "Stored pages count: {8}.\n"
-                             "Written back pages count: {9}.",
+                             "Reject compression failures: {7}.\n"
+                             "Same filled pages count: {8}.\n"
+                             "Stored pages count: {9}.\n"
+                             "Written back pages count: {10}.",
                              ZSwapDebugger -> GetDuplicateEntry(),
                              ZSwapDebugger -> GetPoolLimitHit(),
                              ZSwapDebugger -> GetPoolTotalSize(),
@@ -56,6 +57,7 @@ void Application::PrintDebugInfo() const
                              ZSwapDebugger -> GetRejectCompressPoor(),
                              ZSwapDebugger -> GetRejectKmemCacheFail(),
                              ZSwapDebugger -> GetRejectReclaimFail(),
+                             ZSwapDebugger -> GetRejectCompressFail(),
                              ZSwapDebugger -> GetSameFilledPages(),
                              ZSwapDebugger -> GetSameFilledPages(),
                              ZSwapDebugger -> GetStoredPages(),
