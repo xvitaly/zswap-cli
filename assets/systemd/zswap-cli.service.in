@@ -5,7 +5,7 @@ Documentation=man:@APP_NAME@(1) @CMAKE_PROJECT_HOMEPAGE_URL@
 [Service]
 Type=oneshot
 ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ --config @CMAKE_INSTALL_FULL_SYSCONFDIR@/@APP_NAME@/@CONF_FILE_NAME@
-ExecStop=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ -e N
+ExecStop=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ --enable N
 RemainAfterExit=yes
 ProtectSystem=strict
 ProtectHome=true
