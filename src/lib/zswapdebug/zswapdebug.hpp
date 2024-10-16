@@ -28,6 +28,7 @@ public:
 
     /**
      * Gets the number of duplicate entries.
+     * Deprecated. Removed in kernel 6.9.0.
      * @returns Duplicate entries count.
     */
     long GetDuplicateEntry() const;
@@ -76,6 +77,7 @@ public:
 
     /**
      * Gets the number of same filled pages.
+     * Deprecated. Removed in kernel 6.12.0.
      * @returns Same filled pages count.
     */
     long GetSameFilledPages() const;
