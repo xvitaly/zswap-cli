@@ -15,59 +15,59 @@
 
 #include "zswapdebug/zswapdebug.hpp"
 
-long ZSwapDebug::GetDuplicateEntry() const
+unsigned long ZSwapDebug::GetDuplicateEntry() const
 {
-    return ReadModuleDebugValue("duplicate_entry");
+    return ReadModuleDebugValueUnsigned("duplicate_entry");
 }
 
-long ZSwapDebug::GetPoolLimitHit() const
+unsigned long ZSwapDebug::GetPoolLimitHit() const
 {
-    return ReadModuleDebugValue("pool_limit_hit");
+    return ReadModuleDebugValueUnsigned("pool_limit_hit");
 }
 
-long ZSwapDebug::GetPoolTotalSize() const
+unsigned long ZSwapDebug::GetPoolTotalSize() const
 {
-    return ReadModuleDebugValue("pool_total_size");
+    return ReadModuleDebugValueUnsigned("pool_total_size");
 }
 
-long ZSwapDebug::GetRejectAllocFail() const
+unsigned long ZSwapDebug::GetRejectAllocFail() const
 {
-    return ReadModuleDebugValue("reject_alloc_fail");
+    return ReadModuleDebugValueUnsigned("reject_alloc_fail");
 }
 
-long ZSwapDebug::GetRejectCompressPoor() const
+unsigned long ZSwapDebug::GetRejectCompressPoor() const
 {
-    return ReadModuleDebugValue("reject_compress_poor");
+    return ReadModuleDebugValueUnsigned("reject_compress_poor");
 }
 
-long ZSwapDebug::GetRejectKmemCacheFail() const
+unsigned long ZSwapDebug::GetRejectKmemCacheFail() const
 {
-    return ReadModuleDebugValue("reject_kmemcache_fail");
+    return ReadModuleDebugValueUnsigned("reject_kmemcache_fail");
 }
 
-long ZSwapDebug::GetRejectReclaimFail() const
+unsigned long ZSwapDebug::GetRejectReclaimFail() const
 {
-    return ReadModuleDebugValue("reject_reclaim_fail");
+    return ReadModuleDebugValueUnsigned("reject_reclaim_fail");
 }
 
-long ZSwapDebug::GetRejectCompressFail() const
+unsigned long ZSwapDebug::GetRejectCompressFail() const
 {
-    return ReadModuleDebugValue("reject_compress_fail");
+    return ReadModuleDebugValueUnsigned("reject_compress_fail");
 }
 
 long ZSwapDebug::GetSameFilledPages() const
 {
-    return ReadModuleDebugValue("same_filled_pages");
+    return ReadModuleDebugValueSigned("same_filled_pages");
 }
 
 long ZSwapDebug::GetStoredPages() const
 {
-    return ReadModuleDebugValue("stored_pages");
+    return ReadModuleDebugValueSigned("stored_pages");
 }
 
-long ZSwapDebug::GetWrittenBackPages() const
+unsigned long ZSwapDebug::GetWrittenBackPages() const
 {
-    return ReadModuleDebugValue("written_back_pages");
+    return ReadModuleDebugValueUnsigned("written_back_pages");
 }
 
 bool ZSwapDebug::IsDebugAvailable() const
@@ -75,10 +75,11 @@ bool ZSwapDebug::IsDebugAvailable() const
     return std::filesystem::exists(ModuleDebugPath);
 }
 
-long ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+template <typename T>
+T ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
 {
     const std::string FullPath = ModuleDebugPath + Name;
-    long Result = 0;
+    T Result = 0;
 
     if (std::filesystem::exists(FullPath))
     {
@@ -88,4 +89,14 @@ long ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
     }
 
     return Result;
+}
+
+long ZSwapDebug::ReadModuleDebugValueSigned(const std::string& Name) const
+{
+    return ReadModuleDebugValue<long>(Name);
+}
+
+unsigned long ZSwapDebug::ReadModuleDebugValueUnsigned(const std::string& Name) const
+{
+    return ReadModuleDebugValue<unsigned long>(Name);
 }

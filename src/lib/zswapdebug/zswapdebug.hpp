@@ -31,49 +31,49 @@ public:
      * Deprecated. Removed in kernel 6.9.0.
      * @returns Duplicate entries count.
     */
-    long GetDuplicateEntry() const;
+    unsigned long GetDuplicateEntry() const;
 
     /**
      * Gets the pool limit hits.
      * @returns Pool limit hits count.
     */
-    long GetPoolLimitHit() const;
+    unsigned long GetPoolLimitHit() const;
 
     /**
      * Gets the pool total size.
      * @returns Pool total size count.
     */
-    long GetPoolTotalSize() const;
+    unsigned long GetPoolTotalSize() const;
 
     /**
      * Gets the number of reject allocation failures.
      * @returns Reject allocation failures count.
     */
-    long GetRejectAllocFail() const;
+    unsigned long GetRejectAllocFail() const;
 
     /**
      * Gets the reject compression poor value.
      * @returns Reject compression poor value.
     */
-    long GetRejectCompressPoor() const;
+    unsigned long GetRejectCompressPoor() const;
 
     /**
      * Gets the number of reject Kmemcache failures.
      * @returns Reject Kmemcache failures count.
     */
-    long GetRejectKmemCacheFail() const;
+    unsigned long GetRejectKmemCacheFail() const;
 
     /**
      * Gets the number of reject reclaim failures.
      * @returns Reject reclaim failures count.
     */
-    long GetRejectReclaimFail() const;
+    unsigned long GetRejectReclaimFail() const;
 
     /**
      * Gets the number of compression failures.
      * @returns Reject compression failures count.
     */
-    long GetRejectCompressFail() const;
+    unsigned long GetRejectCompressFail() const;
 
     /**
      * Gets the number of same filled pages.
@@ -92,7 +92,7 @@ public:
      * Gets the number of written back pages.
      * @returns Written back pages count.
     */
-    long GetWrittenBackPages() const;
+    unsigned long GetWrittenBackPages() const;
 
     /**
      * Checks if the debug interface is available for use.
@@ -107,11 +107,28 @@ private:
 
     /**
      * Reads the debug value of the ZSwap kernel module by the
-     * specified name.
+     * specified name as a signed integer.
      * @param Name Debug value name.
      * @returns Value.
     */
-    long ReadModuleDebugValue(const std::string&) const;
+    long ReadModuleDebugValueSigned(const std::string&) const;
+
+    /**
+     * Reads the debug value of the ZSwap kernel module by the
+     * specified name as an unsigned integer.
+     * @param Name Debug value name.
+     * @returns Value.
+    */
+    unsigned long ReadModuleDebugValueUnsigned(const std::string&) const;
+
+    /**
+     * Reads the debug value of the ZSwap kernel module by the
+     * specified name. Template function.
+     * @param Name Debug value name.
+     * @returns Value of the specified type.
+    */
+    template <typename T>
+    T ReadModuleDebugValue(const std::string&) const;
 };
 
 #endif // ZSWAPDEBUG_HPP
