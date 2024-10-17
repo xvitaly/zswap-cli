@@ -45,7 +45,6 @@ void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Va
     if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the \"{0}\" variable is not possible on current kernel!", Name));
     std::ofstream ZSwapSysFs(FullPath);
     ZSwapSysFs << Value;
-    ZSwapSysFs.close();
 }
 
 std::string ZSwapObject::ReadZSwapValue(const std::string& Name) const
@@ -55,7 +54,6 @@ std::string ZSwapObject::ReadZSwapValue(const std::string& Name) const
     std::string Result;
     std::ifstream ZSwapSysFs(FullPath);
     ZSwapSysFs >> Result;
-    ZSwapSysFs.close();
     return Result;
 }
 

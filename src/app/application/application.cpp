@@ -369,7 +369,6 @@ void Application::ParseConfigFile(const std::string& ConfigFile) const
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
-    ConfigFileFs.close();
 }
 
 Application::Application(int argc, char** argv)

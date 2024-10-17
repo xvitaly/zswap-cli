@@ -85,7 +85,6 @@ T ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
     {
         std::ifstream ZSwapSysFs(FullPath);
         ZSwapSysFs >> Result;
-        ZSwapSysFs.close();
     }
 
     return Result;
