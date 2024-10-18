@@ -125,10 +125,11 @@ private:
      * Reads the debug value of the ZSwap kernel module by the
      * specified name. Template function.
      * @param Name Debug value name.
+     * @param Default Default value.
      * @returns Value of the specified type.
     */
     template <typename T>
-    T ReadModuleDebugValue(const std::string&) const;
+    T ReadModuleDebugValue(const std::string&, const T&) const;
 };
 
 #endif // ZSWAPDEBUG_HPP

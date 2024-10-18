@@ -76,10 +76,10 @@ bool ZSwapDebug::IsDebugAvailable() const
 }
 
 template <typename T>
-T ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+T ZSwapDebug::ReadModuleDebugValue(const std::string& Name, const T& Default) const
 {
     const std::string FullPath = ModuleDebugPath + Name;
-    T Result = 0;
+    T Result = Default;
 
     if (std::filesystem::exists(FullPath))
     {
@@ -92,10 +92,10 @@ T ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
 
 long ZSwapDebug::ReadModuleDebugValueSigned(const std::string& Name) const
 {
-    return ReadModuleDebugValue<long>(Name);
+    return ReadModuleDebugValue<long>(Name, 0U);
 }
 
 unsigned long ZSwapDebug::ReadModuleDebugValueUnsigned(const std::string& Name) const
 {
-    return ReadModuleDebugValue<unsigned long>(Name);
+    return ReadModuleDebugValue<unsigned long>(Name, 0UL);
 }
