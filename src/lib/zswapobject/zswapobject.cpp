@@ -21,17 +21,17 @@
 
 void ZSwapObject::CheckValueBool(const std::string& Name, const std::string& Value) const
 {
-    if (!std::regex_match(Value, std::regex("^[YN]$"))) throw std::invalid_argument(std::format("The requested value for the \"{0}\" variable is incorrect (only Y or N are supported).", Name));
+    if (!std::regex_match(Value, std::regex("^[YN]$"))) throw std::invalid_argument(std::format("The requested value for the variable \"{0}\" is incorrect (only Y or N are supported)!", Name));
 }
 
 void ZSwapObject::CheckValueEmpty(const std::string& Name, const std::string& Value) const
 {
-    if (Value.empty()) throw std::invalid_argument(std::format("The requested value for the \"{0}\" variable is empty.", Name));
+    if (Value.empty()) throw std::invalid_argument(std::format("The requested value for the variable \"{0}\" is empty!", Name));
 }
 
 void ZSwapObject::CheckValueRange(const std::string& Name, const std::string& Value) const
 {
-    if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$"))) throw std::invalid_argument(std::format("The requested value for the \"{0}\" variable is out of range [0..100].", Name));
+    if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$"))) throw std::invalid_argument(std::format("The requested value for the variable \"{0}\" is out of range [0..100]!", Name));
 }
 
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& Value) const
@@ -42,7 +42,7 @@ void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& Valu
 void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value) const
 {
     const std::string FullPath = ZSwapModuleParametersPath + Name;
-    if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the \"{0}\" variable is not possible on current kernel!", Name));
+    if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the variable \"{0}\" is not possible on the current kernel!", Name));
     std::ofstream ZSwapSysFs(FullPath);
     ZSwapSysFs << Value;
 }
