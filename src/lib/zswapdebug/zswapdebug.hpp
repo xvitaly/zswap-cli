@@ -107,23 +107,7 @@ private:
 
     /**
      * Reads the debug value of the ZSwap kernel module by the
-     * specified name as a signed integer.
-     * @param Name Debug value name.
-     * @returns Value.
-    */
-    long ReadModuleDebugValueSigned(const std::string&) const;
-
-    /**
-     * Reads the debug value of the ZSwap kernel module by the
-     * specified name as an unsigned integer.
-     * @param Name Debug value name.
-     * @returns Value.
-    */
-    unsigned long ReadModuleDebugValueUnsigned(const std::string&) const;
-
-    /**
-     * Template method for reading the debug value of the ZSwap
-     * kernel module by the specified name as the specified type.
+     * specified name as the specified type.
      * @param Name Debug value name.
      * @param Default Default value if cannot be read.
      * @returns Value of the specified type.

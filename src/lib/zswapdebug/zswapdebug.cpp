@@ -17,57 +17,57 @@
 
 unsigned long ZSwapDebug::GetDuplicateEntry() const
 {
-    return ReadModuleDebugValueUnsigned("duplicate_entry");
+    return ReadModuleDebugValue<unsigned long>("duplicate_entry", 0UL);
 }
 
 unsigned long ZSwapDebug::GetPoolLimitHit() const
 {
-    return ReadModuleDebugValueUnsigned("pool_limit_hit");
+    return ReadModuleDebugValue<unsigned long>("pool_limit_hit", 0UL);
 }
 
 unsigned long ZSwapDebug::GetPoolTotalSize() const
 {
-    return ReadModuleDebugValueUnsigned("pool_total_size");
+    return ReadModuleDebugValue<unsigned long>("pool_total_size", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectAllocFail() const
 {
-    return ReadModuleDebugValueUnsigned("reject_alloc_fail");
+    return ReadModuleDebugValue<unsigned long>("reject_alloc_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectCompressPoor() const
 {
-    return ReadModuleDebugValueUnsigned("reject_compress_poor");
+    return ReadModuleDebugValue<unsigned long>("reject_compress_poor", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectKmemCacheFail() const
 {
-    return ReadModuleDebugValueUnsigned("reject_kmemcache_fail");
+    return ReadModuleDebugValue<unsigned long>("reject_kmemcache_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectReclaimFail() const
 {
-    return ReadModuleDebugValueUnsigned("reject_reclaim_fail");
+    return ReadModuleDebugValue<unsigned long>("reject_reclaim_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectCompressFail() const
 {
-    return ReadModuleDebugValueUnsigned("reject_compress_fail");
+    return ReadModuleDebugValue<unsigned long>("reject_compress_fail", 0UL);
 }
 
 long ZSwapDebug::GetSameFilledPages() const
 {
-    return ReadModuleDebugValueSigned("same_filled_pages");
+    return ReadModuleDebugValue<long>("same_filled_pages", 0L);
 }
 
 long ZSwapDebug::GetStoredPages() const
 {
-    return ReadModuleDebugValueSigned("stored_pages");
+    return ReadModuleDebugValue<long>("stored_pages", 0L);
 }
 
 unsigned long ZSwapDebug::GetWrittenBackPages() const
 {
-    return ReadModuleDebugValueUnsigned("written_back_pages");
+    return ReadModuleDebugValue<unsigned long>("written_back_pages", 0UL);
 }
 
 bool ZSwapDebug::IsDebugAvailable() const
@@ -88,14 +88,4 @@ T ZSwapDebug::ReadModuleDebugValue(const std::string& Name, const T& Default) co
     }
 
     return Result;
-}
-
-long ZSwapDebug::ReadModuleDebugValueSigned(const std::string& Name) const
-{
-    return ReadModuleDebugValue<long>(Name, 0U);
-}
-
-unsigned long ZSwapDebug::ReadModuleDebugValueUnsigned(const std::string& Name) const
-{
-    return ReadModuleDebugValue<unsigned long>(Name, 0UL);
 }
