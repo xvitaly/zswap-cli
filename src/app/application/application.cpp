@@ -59,7 +59,6 @@ void Application::PrintDebugInfo() const
                              ZSwapDebugger -> GetRejectReclaimFail(),
                              ZSwapDebugger -> GetRejectCompressFail(),
                              ZSwapDebugger -> GetSameFilledPages(),
-                             ZSwapDebugger -> GetSameFilledPages(),
                              ZSwapDebugger -> GetStoredPages(),
                              ZSwapDebugger -> GetWrittenBackPages())
               << std::endl;
