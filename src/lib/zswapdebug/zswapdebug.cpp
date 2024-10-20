@@ -15,11 +15,6 @@
 
 #include "zswapdebug/zswapdebug.hpp"
 
-unsigned long ZSwapDebug::GetDuplicateEntry() const
-{
-    return ReadModuleDebugValue<unsigned long>("duplicate_entry", 0UL);
-}
-
 unsigned long ZSwapDebug::GetPoolLimitHit() const
 {
     return ReadModuleDebugValue<unsigned long>("pool_limit_hit", 0UL);

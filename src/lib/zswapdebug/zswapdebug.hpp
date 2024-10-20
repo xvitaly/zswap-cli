@@ -27,13 +27,6 @@ public:
     ZSwapDebug() = default;
 
     /**
-     * Gets the number of duplicate entries.
-     * Deprecated. Removed in kernel 6.9.0.
-     * @returns Duplicate entries count.
-    */
-    unsigned long GetDuplicateEntry() const;
-
-    /**
      * Gets the pool limit hits.
      * @returns Pool limit hits count.
     */

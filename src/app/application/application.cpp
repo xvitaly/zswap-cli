@@ -39,18 +39,16 @@ void Application::PrintDebugInfo() const
         return;
     }
 
-    std::cout << std::format("Duplicate entries count: {0}.\n"
-                             "Pool limit hit: {1}.\n"
-                             "Pool total size: {2}.\n"
-                             "Reject allocation failures: {3}.\n"
-                             "Reject compression poor: {4}.\n"
-                             "Reject Kmemcache failures: {5}.\n"
-                             "Reject reclaim failures: {6}.\n"
-                             "Reject compression failures: {7}.\n"
-                             "Same filled pages count: {8}.\n"
-                             "Stored pages count: {9}.\n"
-                             "Written back pages count: {10}.",
-                             ZSwapDebugger -> GetDuplicateEntry(),
+    std::cout << std::format("Pool limit hit: {0}.\n"
+                             "Pool total size: {1}.\n"
+                             "Reject allocation failures: {2}.\n"
+                             "Reject compression poor: {3}.\n"
+                             "Reject Kmemcache failures: {4}.\n"
+                             "Reject reclaim failures: {5}.\n"
+                             "Reject compression failures: {6}.\n"
+                             "Same filled pages count: {7}.\n"
+                             "Stored pages count: {8}.\n"
+                             "Written back pages count: {9}.",
                              ZSwapDebugger -> GetPoolLimitHit(),
                              ZSwapDebugger -> GetPoolTotalSize(),
                              ZSwapDebugger -> GetRejectAllocFail(),
