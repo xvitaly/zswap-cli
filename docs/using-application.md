@@ -47,7 +47,7 @@ sudo zswap-cli \
     --max_pool_percent 60 \
     --compressor lzo \
     --zpool z3fold \
-    --accept_threshold_percent 40 \
+    --accept_threshold_percent 90 \
     --non_same_filled_pages_enabled Y \
     --exclusive_loads Y \
     --shrinker_enabled Y
