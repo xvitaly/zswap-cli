@@ -97,17 +97,6 @@ public:
     long GetPageSize() const;
 private:
     /**
-     * Reads the sysinfo structure into the class fields.
-     * @exception Raises an instance of std::runtime_error on error.
-    */
-    void ReadSysInfo();
-
-    /**
-     * Reads the SC_PAGESIZE system variable value.
-    */
-    void ReadPageSize();
-
-    /**
      * Stores current uptime (in seconds since boot) value.
     */
     long Uptime;
@@ -166,6 +155,17 @@ private:
      * Stores the system memory page size value.
     */
     long PageSize;
+
+    /**
+     * Reads the sysinfo structure into the class fields.
+     * @exception Raises an instance of std::runtime_error on error.
+    */
+    void ReadSysInfo();
+
+    /**
+     * Reads the SC_PAGESIZE system variable value.
+    */
+    void ReadPageSize();
 };
 
 #endif // KSYSINFO_HPP
