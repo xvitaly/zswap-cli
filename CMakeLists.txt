@@ -8,7 +8,7 @@
 # =============== Project initialization ===============
 # ======================================================
 
-cmake_minimum_required(VERSION 3.14...4.0)
+cmake_minimum_required(VERSION 3.28...4.0)
 
 project(zswap-cli
     VERSION 1.0.0
@@ -114,13 +114,9 @@ endif()
 # ======================================================
 
 if (SYSTEMD_INTEGRATION)
-    if (CMAKE_VERSION VERSION_LESS "3.28")
-        set(SYSTEMD_UNITDIR "lib/systemd/system")
-    else()
-        find_package(PkgConfig REQUIRED)
-        pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET systemd)
-        pkg_get_variable(SYSTEMD_UNITDIR systemd "systemdsystemunitdir" DEFINE_VARIABLES "prefix=${CMAKE_INSTALL_PREFIX}" "rootprefix=${CMAKE_INSTALL_PREFIX}")
-    endif()
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET systemd)
+    pkg_get_variable(SYSTEMD_UNITDIR systemd "systemdsystemunitdir" DEFINE_VARIABLES "prefix=${CMAKE_INSTALL_PREFIX}" "rootprefix=${CMAKE_INSTALL_PREFIX}")
 endif()
 
 # ======================================================
