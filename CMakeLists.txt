@@ -8,7 +8,7 @@
 # =============== Project initialization ===============
 # ======================================================
 
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.14...4.0)
 
 project(zswap-cli
     VERSION 1.0.0
