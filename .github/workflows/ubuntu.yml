@@ -26,18 +26,20 @@ jobs:
           - compiler: 'clang'
             cc: 'clang'
             cxx: 'clang++'
+            packages: 'clang'
           - compiler: 'gcc'
             cc: 'gcc'
             cxx: 'g++'
+            packages: 'gcc'
     steps:
     - name: Fetching sources
       uses: actions/checkout@v4
     - name: Updating apt package metadata
       run: |
         sudo apt-get update
-    - name: Installing compiler ${{ matrix.compiler }}
+    - name: Installing ${{ matrix.compiler }} compiler packages
       run: |
-        sudo apt-get -y install ${{ matrix.compiler }}
+        sudo apt-get -y install ${{ matrix.packages }}
     - name: Installing build system
       run: |
         sudo apt-get -y install cmake make

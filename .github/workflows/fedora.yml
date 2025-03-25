@@ -27,18 +27,20 @@ jobs:
           - compiler: 'clang'
             cc: 'clang'
             cxx: 'clang++'
+            packages: 'clang clang-devel'
           - compiler: 'gcc'
             cc: 'gcc'
             cxx: 'g++'
+            packages: 'gcc gcc-c++'
     steps:
     - name: Installing core packages
       run: |
         sudo dnf -y install git-core
     - name: Fetching sources
       uses: actions/checkout@v4
-    - name: Installing compiler ${{ matrix.compiler }}
+    - name: Installing ${{ matrix.compiler }} compiler packages
       run: |
-        sudo dnf -y install '/usr/bin/${{ matrix.cc }}' '/usr/bin/${{ matrix.cxx }}'
+        sudo dnf -y install ${{ matrix.packages }}
     - name: Installing build system
       run: |
         sudo dnf -y install cmake ninja-build
