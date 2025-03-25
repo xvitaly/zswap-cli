@@ -54,9 +54,9 @@ jobs:
       run: |
         cmake -S . -B build \
             -GNinja \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_C_COMPILER=${{ matrix.cc }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
-            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_INSTALL_PREFIX:PATH=/usr \
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
             -DBUILD_DOC:BOOL=ON \
