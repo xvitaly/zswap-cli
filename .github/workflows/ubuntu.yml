@@ -59,6 +59,9 @@ jobs:
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
             -DBUILD_DOC:BOOL=ON \
             -DBUILD_MANPAGE:BOOL=ON \
+            -DLINK_ALL_STATICALLY:BOOL=OFF \
+            -DLINK_BOOST_STATICALLY:BOOL=OFF \
+            -DLINK_ENABLE_OPTIMIZATIONS:BOOL=ON \
             -DSYSTEMD_INTEGRATION:BOOL=ON
         cmake --build build
       env:
