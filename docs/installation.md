@@ -9,7 +9,7 @@ Install the Git client, CMake, GCC/Clang compiler with standard library, kernel 
 You need the following versions:
 
   * C++20 capable compiler: GCC 13+ or Clang 16+;
-  * CMake: 3.14+;
+  * CMake: 3.28+;
   * Boost: 1.70.0+;
   * doxygen (for building documentation);
   * pandoc (for generating manpage).

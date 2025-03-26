@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     name: Build and install project
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -26,18 +26,20 @@ jobs:
           - compiler: 'clang'
             cc: 'clang'
             cxx: 'clang++'
+            packages: 'clang'
           - compiler: 'gcc'
             cc: 'gcc'
             cxx: 'g++'
+            packages: 'gcc'
     steps:
     - name: Fetching sources
       uses: actions/checkout@v4
     - name: Updating apt package metadata
       run: |
         sudo apt-get update
-    - name: Installing compiler ${{ matrix.compiler }}
+    - name: Installing ${{ matrix.compiler }} compiler packages
       run: |
-        sudo apt-get -y install ${{ matrix.compiler }}
+        sudo apt-get -y install ${{ matrix.packages }}
     - name: Installing build system
       run: |
         sudo apt-get -y install cmake make
@@ -50,13 +52,16 @@ jobs:
     - name: Building project with CMake
       run: |
         cmake -S . -B build \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_C_COMPILER=${{ matrix.cc }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
-            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_INSTALL_PREFIX:PATH=/usr \
             -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
             -DBUILD_DOC:BOOL=ON \
             -DBUILD_MANPAGE:BOOL=ON \
+            -DLINK_ALL_STATICALLY:BOOL=OFF \
+            -DLINK_BOOST_STATICALLY:BOOL=OFF \
+            -DLINK_ENABLE_OPTIMIZATIONS:BOOL=ON \
             -DSYSTEMD_INTEGRATION:BOOL=ON
         cmake --build build
       env:
