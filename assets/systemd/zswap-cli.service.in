@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2025 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 [Unit]
 Description=@CMAKE_PROJECT_DESCRIPTION@
 Documentation=man:@APP_NAME@(1) @CMAKE_PROJECT_HOMEPAGE_URL@
