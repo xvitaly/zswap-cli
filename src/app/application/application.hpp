@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: 2020-2024 EasyCoding Team and contributors
+ * SPDX-FileCopyrightText: 2020-2025 EasyCoding Team and contributors
  *
  * SPDX-License-Identifier: MIT
 */
