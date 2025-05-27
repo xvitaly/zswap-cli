@@ -13,6 +13,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <regex>
 #include <stdexcept>
 #include <string>
@@ -47,17 +48,17 @@ void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Va
     ZSwapSysFs << Value;
 }
 
-std::string ZSwapObject::ReadZSwapValue(const std::string& Name) const
+std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::string& Name) const
 {
     const std::string FullPath = ZSwapModuleParametersPath + Name;
-    if (!std::filesystem::exists(FullPath)) return "N/A";
+    if (!std::filesystem::exists(FullPath)) return std::nullopt;
     std::string Result;
     std::ifstream ZSwapSysFs(FullPath);
     ZSwapSysFs >> Result;
     return Result;
 }
 
-std::string ZSwapObject::GetZSwapEnabled() const
+std::optional<std::string> ZSwapObject::GetZSwapEnabled() const
 {
     return ReadZSwapValue(ZSwapEnabledName);
 }
@@ -69,7 +70,7 @@ void ZSwapObject::SetZSwapEnabled(const std::string& Value) const
     WriteLogEntry(ZSwapEnabledName, Value);
 }
 
-std::string ZSwapObject::GetZSwapSameFilledPages() const
+std::optional<std::string> ZSwapObject::GetZSwapSameFilledPages() const
 {
     return ReadZSwapValue(ZSwapSameFilledPagesName);
 }
@@ -81,7 +82,7 @@ void ZSwapObject::SetZSwapSameFilledPages(const std::string& Value) const
     WriteLogEntry(ZSwapSameFilledPagesName, Value);
 }
 
-std::string ZSwapObject::GetZSwapMaxPoolPercent() const
+std::optional<std::string> ZSwapObject::GetZSwapMaxPoolPercent() const
 {
     return ReadZSwapValue(ZSwapMaxPoolPercentName);
 }
@@ -93,7 +94,7 @@ void ZSwapObject::SetZSwapMaxPoolPercent(const std::string& Value) const
     WriteLogEntry(ZSwapMaxPoolPercentName, Value);
 }
 
-std::string ZSwapObject::GetZSwapCompressor() const
+std::optional<std::string> ZSwapObject::GetZSwapCompressor() const
 {
     return ReadZSwapValue(ZSwapCompressorName);
 }
@@ -105,7 +106,7 @@ void ZSwapObject::SetZSwapCompressor(const std::string& Value) const
     WriteLogEntry(ZSwapCompressorName, Value);
 }
 
-std::string ZSwapObject::GetZSwapZpool() const
+std::optional<std::string> ZSwapObject::GetZSwapZpool() const
 {
     return ReadZSwapValue(ZSwapZpoolName);
 }
@@ -117,7 +118,7 @@ void ZSwapObject::SetZSwapZpool(const std::string& Value) const
     WriteLogEntry(ZSwapZpoolName, Value);
 }
 
-std::string ZSwapObject::GetZSwapAcceptThresholdPercent() const
+std::optional<std::string> ZSwapObject::GetZSwapAcceptThresholdPercent() const
 {
     return ReadZSwapValue(ZSwapAcceptThresholdPercentName);
 }
@@ -129,7 +130,7 @@ void ZSwapObject::SetZSwapAcceptThresholdPercent(const std::string& Value) const
     WriteLogEntry(ZSwapAcceptThresholdPercentName, Value);
 }
 
-std::string ZSwapObject::GetZSwapNonSameFilledPages() const
+std::optional<std::string> ZSwapObject::GetZSwapNonSameFilledPages() const
 {
     return ReadZSwapValue(ZSwapNonSameFilledPagesName);
 }
@@ -141,7 +142,7 @@ void ZSwapObject::SetZSwapNonSameFilledPages(const std::string& Value) const
     WriteLogEntry(ZSwapNonSameFilledPagesName, Value);
 }
 
-std::string ZSwapObject::GetZSwapExclusiveLoads() const
+std::optional<std::string> ZSwapObject::GetZSwapExclusiveLoads() const
 {
     return ReadZSwapValue(ZSwapExclusiveLoadsName);
 }
@@ -153,7 +154,7 @@ void ZSwapObject::SetZSwapExclusiveLoads(const std::string& Value) const
     WriteLogEntry(ZSwapExclusiveLoadsName, Value);
 }
 
-std::string ZSwapObject::GetZSwapShrinkerEnabled() const
+std::optional<std::string> ZSwapObject::GetZSwapShrinkerEnabled() const
 {
     return ReadZSwapValue(ZSwapShrinkerEnabledName);
 }
