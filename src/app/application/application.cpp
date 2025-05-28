@@ -70,25 +70,27 @@ void Application::PrintSettings() const
         return;
     }
 
-    std::cout << std::format("ZSwap enabled: {0}.\n"
-                             "Same filled pages enabled: {1}.\n"
-                             "Maximum pool percentage: {2}.\n"
-                             "Compression algorithm: {3}.\n"
-                             "Kernel's zpool type: {4}.\n"
-                             "Accept threshold percentage: {5}.\n"
-                             "Non same filled pages enabled: {6}.\n"
-                             "Exclusive loads: {7}.\n"
-                             "Shrinker enabled: {8}.",
-                             ZSwap -> GetZSwapEnabled(),
-                             ZSwap -> GetZSwapSameFilledPages(),
-                             ZSwap -> GetZSwapMaxPoolPercent(),
-                             ZSwap -> GetZSwapCompressor(),
-                             ZSwap -> GetZSwapZpool(),
-                             ZSwap -> GetZSwapAcceptThresholdPercent(),
-                             ZSwap -> GetZSwapNonSameFilledPages(),
-                             ZSwap -> GetZSwapExclusiveLoads(),
-                             ZSwap -> GetZSwapShrinkerEnabled())
-              << std::endl;
+    const std::vector<std::pair<std::string, std::optional<std::string>>> Handlers
+    {
+        { "ZSwap enabled: {0}.", ZSwap -> GetZSwapEnabled() },
+        { "Same filled pages enabled: {0}.", ZSwap -> GetZSwapSameFilledPages() },
+        { "Maximum pool percentage: {0}.", ZSwap -> GetZSwapMaxPoolPercent() },
+        { "Compression algorithm: {0}.", ZSwap -> GetZSwapCompressor() },
+        { "Kernel's zpool type: {0}.", ZSwap -> GetZSwapZpool() },
+        { "Accept threshold percentage: {0}.", ZSwap -> GetZSwapAcceptThresholdPercent() },
+        { "Non same filled pages enabled: {0}.", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Exclusive loads: {0}.", ZSwap -> GetZSwapExclusiveLoads() },
+        { "Shrinker enabled: {0}.", ZSwap -> GetZSwapShrinkerEnabled() },
+    };
+
+    for (const auto& [Template, Value] : Handlers)
+    {
+        if (Value)
+        {
+            const std::string RealValue = Value.value();
+            std::cout << std::vformat(Template, std::make_format_args(RealValue)) << std::endl;
+        }
+    }
 }
 
 void Application::PrintSummary() const
