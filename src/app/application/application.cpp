@@ -87,8 +87,7 @@ void Application::PrintSettings() const
     {
         if (Value)
         {
-            const std::string RealValue = Value.value();
-            std::cout << std::vformat(Template, std::make_format_args(RealValue)) << std::endl;
+            std::cout << std::vformat(Template, std::make_format_args(Value.value())) << std::endl;
         }
     }
 }
