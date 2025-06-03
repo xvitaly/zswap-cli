@@ -73,22 +73,22 @@ void Application::PrintSettings() const
 
     const std::vector<std::pair<std::string, std::optional<std::string>>> Handlers
     {
-        { "ZSwap enabled: {0}.", ZSwap -> GetZSwapEnabled() },
-        { "Same filled pages enabled: {0}.", ZSwap -> GetZSwapSameFilledPages() },
-        { "Maximum pool percentage: {0}.", ZSwap -> GetZSwapMaxPoolPercent() },
-        { "Compression algorithm: {0}.", ZSwap -> GetZSwapCompressor() },
-        { "Kernel's zpool type: {0}.", ZSwap -> GetZSwapZpool() },
-        { "Accept threshold percentage: {0}.", ZSwap -> GetZSwapAcceptThresholdPercent() },
-        { "Non same filled pages enabled: {0}.", ZSwap -> GetZSwapNonSameFilledPages() },
-        { "Exclusive loads: {0}.", ZSwap -> GetZSwapExclusiveLoads() },
-        { "Shrinker enabled: {0}.", ZSwap -> GetZSwapShrinkerEnabled() },
+        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
+        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
+        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
+        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
+        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
+        { "Accept threshold percentage", ZSwap -> GetZSwapAcceptThresholdPercent() },
+        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Exclusive loads", ZSwap -> GetZSwapExclusiveLoads() },
+        { "Shrinker enabled", ZSwap -> GetZSwapShrinkerEnabled() },
     };
 
-    for (const auto& [Template, Value] : Handlers)
+    for (const auto& [Name, Value] : Handlers)
     {
         if (Value)
         {
-            std::cout << std::vformat(Template, std::make_format_args(Value.value())) << std::endl;
+            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
         }
     }
 }
