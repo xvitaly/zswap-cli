@@ -17,6 +17,7 @@
 #include <functional>
 #include <iostream>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <utility>
 #include <vector>
@@ -70,25 +71,26 @@ void Application::PrintSettings() const
         return;
     }
 
-    std::cout << std::format("ZSwap enabled: {0}.\n"
-                             "Same filled pages enabled: {1}.\n"
-                             "Maximum pool percentage: {2}.\n"
-                             "Compression algorithm: {3}.\n"
-                             "Kernel's zpool type: {4}.\n"
-                             "Accept threshold percentage: {5}.\n"
-                             "Non same filled pages enabled: {6}.\n"
-                             "Exclusive loads: {7}.\n"
-                             "Shrinker enabled: {8}.",
-                             ZSwap -> GetZSwapEnabled(),
-                             ZSwap -> GetZSwapSameFilledPages(),
-                             ZSwap -> GetZSwapMaxPoolPercent(),
-                             ZSwap -> GetZSwapCompressor(),
-                             ZSwap -> GetZSwapZpool(),
-                             ZSwap -> GetZSwapAcceptThresholdPercent(),
-                             ZSwap -> GetZSwapNonSameFilledPages(),
-                             ZSwap -> GetZSwapExclusiveLoads(),
-                             ZSwap -> GetZSwapShrinkerEnabled())
-              << std::endl;
+    const std::vector<std::pair<std::string, std::optional<std::string>>> Handlers
+    {
+        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
+        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
+        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
+        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
+        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
+        { "Accept threshold percentage", ZSwap -> GetZSwapAcceptThresholdPercent() },
+        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Exclusive loads", ZSwap -> GetZSwapExclusiveLoads() },
+        { "Shrinker enabled", ZSwap -> GetZSwapShrinkerEnabled() },
+    };
+
+    for (const auto& [Name, Value] : Handlers)
+    {
+        if (Value)
+        {
+            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        }
+    }
 }
 
 void Application::PrintSummary() const
