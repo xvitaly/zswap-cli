@@ -20,6 +20,7 @@
 #include <optional>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -72,7 +73,7 @@ void Application::PrintSettings() const
         return;
     }
 
-    const std::vector<std::pair<std::string, std::optional<std::string>>> Handlers
+    const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
         { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
         { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
