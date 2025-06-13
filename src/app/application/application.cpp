@@ -19,6 +19,8 @@
 #include <memory>
 #include <optional>
 #include <stdexcept>
+#include <string>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -71,7 +73,7 @@ void Application::PrintSettings() const
         return;
     }
 
-    const std::vector<std::pair<std::string, std::optional<std::string>>> Handlers
+    const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
         { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
         { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
@@ -86,10 +88,7 @@ void Application::PrintSettings() const
 
     for (const auto& [Name, Value] : Handlers)
     {
-        if (Value)
-        {
-            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
-        }
+        if (Value) std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
     }
 }
 
