@@ -50,14 +50,14 @@ unsigned long ZSwapDebug::GetRejectCompressFail() const
     return ReadModuleDebugValue<unsigned long>("reject_compress_fail", 0UL);
 }
 
-long ZSwapDebug::GetSameFilledPages() const
+unsigned long ZSwapDebug::GetSameFilledPages() const
 {
-    return ReadModuleDebugValue<long>("same_filled_pages", 0L);
+    return ReadModuleDebugValue<unsigned long>("same_filled_pages", 0UL);
 }
 
-long ZSwapDebug::GetStoredPages() const
+unsigned long ZSwapDebug::GetStoredPages() const
 {
-    return ReadModuleDebugValue<long>("stored_pages", 0L);
+    return ReadModuleDebugValue<unsigned long>("stored_pages", 0UL);
 }
 
 unsigned long ZSwapDebug::GetWrittenBackPages() const

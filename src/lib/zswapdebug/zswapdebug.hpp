@@ -73,13 +73,13 @@ public:
      * Deprecated. Removed in kernel 6.12.0.
      * @returns Same filled pages count.
     */
-    long GetSameFilledPages() const;
+    unsigned long GetSameFilledPages() const;
 
     /**
      * Gets the number of stored pages.
      * @returns Stored pages count.
     */
-    long GetStoredPages() const;
+    unsigned long GetStoredPages() const;
 
     /**
      * Gets the number of written back pages.
