@@ -17,52 +17,52 @@
 
 unsigned long ZSwapDebug::GetPoolLimitHit() const
 {
-    return ReadModuleDebugValue<unsigned long>("pool_limit_hit", 0UL);
+    return ReadModuleDebugValue("pool_limit_hit", 0UL);
 }
 
 unsigned long ZSwapDebug::GetPoolTotalSize() const
 {
-    return ReadModuleDebugValue<unsigned long>("pool_total_size", 0UL);
+    return ReadModuleDebugValue("pool_total_size", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectAllocFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_alloc_fail", 0UL);
+    return ReadModuleDebugValue("reject_alloc_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectCompressPoor() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_compress_poor", 0UL);
+    return ReadModuleDebugValue("reject_compress_poor", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectKmemCacheFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_kmemcache_fail", 0UL);
+    return ReadModuleDebugValue("reject_kmemcache_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectReclaimFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_reclaim_fail", 0UL);
+    return ReadModuleDebugValue("reject_reclaim_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetRejectCompressFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_compress_fail", 0UL);
+    return ReadModuleDebugValue("reject_compress_fail", 0UL);
 }
 
 unsigned long ZSwapDebug::GetSameFilledPages() const
 {
-    return ReadModuleDebugValue<unsigned long>("same_filled_pages", 0UL);
+    return ReadModuleDebugValue("same_filled_pages", 0UL);
 }
 
 unsigned long ZSwapDebug::GetStoredPages() const
 {
-    return ReadModuleDebugValue<unsigned long>("stored_pages", 0UL);
+    return ReadModuleDebugValue("stored_pages", 0UL);
 }
 
 unsigned long ZSwapDebug::GetWrittenBackPages() const
 {
-    return ReadModuleDebugValue<unsigned long>("written_back_pages", 0UL);
+    return ReadModuleDebugValue("written_back_pages", 0UL);
 }
 
 bool ZSwapDebug::IsDebugAvailable() const
@@ -70,11 +70,10 @@ bool ZSwapDebug::IsDebugAvailable() const
     return std::filesystem::exists(ModuleDebugPath);
 }
 
-template <typename T>
-T ZSwapDebug::ReadModuleDebugValue(const std::string& Name, const T& Default) const
+unsigned long ZSwapDebug::ReadModuleDebugValue(const std::string& Name, const unsigned long& Default) const
 {
     const std::string FullPath = ModuleDebugPath + Name;
-    T Result = Default;
+    unsigned long Result = Default;
 
     if (std::filesystem::exists(FullPath))
     {

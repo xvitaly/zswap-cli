@@ -105,8 +105,7 @@ private:
      * @param Default Default value if cannot be read.
      * @returns Value of the specified type.
     */
-    template <typename T>
-    T ReadModuleDebugValue(const std::string&, const T&) const;
+    unsigned long ReadModuleDebugValue(const std::string&, const unsigned long&) const;
 };
 
 #endif // ZSWAPDEBUG_HPP
