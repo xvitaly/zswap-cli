@@ -105,7 +105,7 @@ private:
      * @param Default Default value if cannot be read.
      * @returns Value of the specified type.
     */
-    unsigned long ReadModuleDebugValue(const std::string&, const unsigned long&) const;
+    unsigned long ReadModuleDebugValue(const std::string&) const;
 };
 
 #endif // ZSWAPDEBUG_HPP
