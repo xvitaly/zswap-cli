@@ -98,8 +98,8 @@ void Application::PrintSummary() const
     }
 
     std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
-    const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize();
-    const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages();
+    const unsigned long PoolSize = (ZSwapDebugger -> GetPoolTotalSize()).value_or(0UL);
+    const unsigned long StoredPages = (ZSwapDebugger -> GetStoredPages()).value_or(0UL);
 
     if (SysInfo -> GetTotalSwap() == 0)
     {
