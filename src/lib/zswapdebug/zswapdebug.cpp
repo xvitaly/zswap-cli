@@ -16,6 +16,16 @@
 
 #include "zswapdebug/zswapdebug.hpp"
 
+std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+{
+    const std::string FullPath = ModuleDebugPath + Name;
+    if (!std::filesystem::exists(FullPath)) return std::nullopt;
+    unsigned long Result;
+    std::ifstream ZSwapSysFs(FullPath);
+    ZSwapSysFs >> Result;
+    return Result;
+}
+
 std::optional<unsigned long> ZSwapDebug::GetPoolLimitHit() const
 {
     return ReadModuleDebugValue("pool_limit_hit");
@@ -69,14 +79,4 @@ std::optional<unsigned long> ZSwapDebug::GetWrittenBackPages() const
 bool ZSwapDebug::IsDebugAvailable() const
 {
     return std::filesystem::exists(ModuleDebugPath);
-}
-
-std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
-{
-    const std::string FullPath = ModuleDebugPath + Name;
-    if (!std::filesystem::exists(FullPath)) return std::nullopt;
-    unsigned long Result;
-    std::ifstream ZSwapSysFs(FullPath);
-    ZSwapSysFs >> Result;
-    return Result;
 }
