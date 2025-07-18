@@ -61,6 +61,11 @@ std::optional<unsigned long> ZSwapDebug::GetRejectCompressFail() const
     return ReadModuleDebugValue("reject_compress_fail");
 }
 
+std::optional<unsigned long> ZSwapDebug::GetDecompressFail() const
+{
+    return ReadModuleDebugValue("decompress_fail");
+}
+
 std::optional<unsigned long> ZSwapDebug::GetSameFilledPages() const
 {
     return ReadModuleDebugValue("same_filled_pages");

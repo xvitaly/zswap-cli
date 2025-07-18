@@ -70,6 +70,12 @@ public:
     std::optional<unsigned long> GetRejectCompressFail() const;
 
     /**
+     * Gets the number of decompression failures.
+     * @returns Decompression failures count.
+    */
+    std::optional<unsigned long> GetDecompressFail() const;
+
+    /**
      * Gets the number of same filled pages.
      * Deprecated. Removed in kernel 6.12.0.
      * @returns Same filled pages count.
