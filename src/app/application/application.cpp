@@ -51,6 +51,7 @@ void Application::PrintDebugInfo() const
         { "Reject Kmemcache failures", ZSwapDebugger -> GetRejectKmemCacheFail() },
         { "Reject reclaim failures", ZSwapDebugger -> GetRejectReclaimFail() },
         { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
+        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
         { "Same filled pages count", ZSwapDebugger -> GetSameFilledPages() },
         { "Stored pages count", ZSwapDebugger -> GetStoredPages() },
         { "Written back pages count", ZSwapDebugger -> GetWrittenBackPages() },
