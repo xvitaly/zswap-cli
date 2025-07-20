@@ -42,27 +42,25 @@ void Application::PrintDebugInfo() const
         return;
     }
 
-    std::cout << std::format("Pool limit hit: {0}.\n"
-                             "Pool total size: {1}.\n"
-                             "Reject allocation failures: {2}.\n"
-                             "Reject compression poor: {3}.\n"
-                             "Reject Kmemcache failures: {4}.\n"
-                             "Reject reclaim failures: {5}.\n"
-                             "Reject compression failures: {6}.\n"
-                             "Same filled pages count: {7}.\n"
-                             "Stored pages count: {8}.\n"
-                             "Written back pages count: {9}.",
-                             ZSwapDebugger -> GetPoolLimitHit(),
-                             ZSwapDebugger -> GetPoolTotalSize(),
-                             ZSwapDebugger -> GetRejectAllocFail(),
-                             ZSwapDebugger -> GetRejectCompressPoor(),
-                             ZSwapDebugger -> GetRejectKmemCacheFail(),
-                             ZSwapDebugger -> GetRejectReclaimFail(),
-                             ZSwapDebugger -> GetRejectCompressFail(),
-                             ZSwapDebugger -> GetSameFilledPages(),
-                             ZSwapDebugger -> GetStoredPages(),
-                             ZSwapDebugger -> GetWrittenBackPages())
-              << std::endl;
+    const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
+    {
+        { "Pool limit hit", ZSwapDebugger -> GetPoolLimitHit() },
+        { "Pool total size", ZSwapDebugger -> GetPoolTotalSize() },
+        { "Reject allocation failures", ZSwapDebugger -> GetRejectAllocFail() },
+        { "Reject compression poor", ZSwapDebugger -> GetRejectCompressPoor() },
+        { "Reject Kmemcache failures", ZSwapDebugger -> GetRejectKmemCacheFail() },
+        { "Reject reclaim failures", ZSwapDebugger -> GetRejectReclaimFail() },
+        { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
+        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
+        { "Same filled pages count", ZSwapDebugger -> GetSameFilledPages() },
+        { "Stored pages count", ZSwapDebugger -> GetStoredPages() },
+        { "Written back pages count", ZSwapDebugger -> GetWrittenBackPages() },
+    };
+
+    for (const auto& [Name, Value] : Handlers)
+    {
+        if (Value) std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+    }
 }
 
 void Application::PrintSettings() const
@@ -101,8 +99,8 @@ void Application::PrintSummary() const
     }
 
     std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
-    const long PoolSize = ZSwapDebugger -> GetPoolTotalSize();
-    const long StoredPages = ZSwapDebugger -> GetStoredPages();
+    const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
+    const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
 
     if (SysInfo -> GetTotalSwap() == 0)
     {

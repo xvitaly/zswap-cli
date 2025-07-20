@@ -11,76 +11,77 @@
 
 #include <filesystem>
 #include <fstream>
+#include <optional>
 #include <string>
 
 #include "zswapdebug/zswapdebug.hpp"
 
-unsigned long ZSwapDebug::GetPoolLimitHit() const
+std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
 {
-    return ReadModuleDebugValue<unsigned long>("pool_limit_hit", 0UL);
+    const std::string FullPath = ModuleDebugPath + Name;
+    if (!std::filesystem::exists(FullPath)) return std::nullopt;
+    unsigned long Result;
+    std::ifstream ZSwapSysFs(FullPath);
+    ZSwapSysFs >> Result;
+    return Result;
 }
 
-unsigned long ZSwapDebug::GetPoolTotalSize() const
+std::optional<unsigned long> ZSwapDebug::GetPoolLimitHit() const
 {
-    return ReadModuleDebugValue<unsigned long>("pool_total_size", 0UL);
+    return ReadModuleDebugValue("pool_limit_hit");
 }
 
-unsigned long ZSwapDebug::GetRejectAllocFail() const
+std::optional<unsigned long> ZSwapDebug::GetPoolTotalSize() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_alloc_fail", 0UL);
+    return ReadModuleDebugValue("pool_total_size");
 }
 
-unsigned long ZSwapDebug::GetRejectCompressPoor() const
+std::optional<unsigned long> ZSwapDebug::GetRejectAllocFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_compress_poor", 0UL);
+    return ReadModuleDebugValue("reject_alloc_fail");
 }
 
-unsigned long ZSwapDebug::GetRejectKmemCacheFail() const
+std::optional<unsigned long> ZSwapDebug::GetRejectCompressPoor() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_kmemcache_fail", 0UL);
+    return ReadModuleDebugValue("reject_compress_poor");
 }
 
-unsigned long ZSwapDebug::GetRejectReclaimFail() const
+std::optional<unsigned long> ZSwapDebug::GetRejectKmemCacheFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_reclaim_fail", 0UL);
+    return ReadModuleDebugValue("reject_kmemcache_fail");
 }
 
-unsigned long ZSwapDebug::GetRejectCompressFail() const
+std::optional<unsigned long> ZSwapDebug::GetRejectReclaimFail() const
 {
-    return ReadModuleDebugValue<unsigned long>("reject_compress_fail", 0UL);
+    return ReadModuleDebugValue("reject_reclaim_fail");
 }
 
-long ZSwapDebug::GetSameFilledPages() const
+std::optional<unsigned long> ZSwapDebug::GetRejectCompressFail() const
 {
-    return ReadModuleDebugValue<long>("same_filled_pages", 0L);
+    return ReadModuleDebugValue("reject_compress_fail");
 }
 
-long ZSwapDebug::GetStoredPages() const
+std::optional<unsigned long> ZSwapDebug::GetDecompressFail() const
 {
-    return ReadModuleDebugValue<long>("stored_pages", 0L);
+    return ReadModuleDebugValue("decompress_fail");
 }
 
-unsigned long ZSwapDebug::GetWrittenBackPages() const
+std::optional<unsigned long> ZSwapDebug::GetSameFilledPages() const
 {
-    return ReadModuleDebugValue<unsigned long>("written_back_pages", 0UL);
+    return ReadModuleDebugValue("same_filled_pages");
+}
+
+std::optional<unsigned long> ZSwapDebug::GetStoredPages() const
+{
+    return ReadModuleDebugValue("stored_pages");
+}
+
+std::optional<unsigned long> ZSwapDebug::GetWrittenBackPages() const
+{
+    return ReadModuleDebugValue("written_back_pages");
 }
 
 bool ZSwapDebug::IsDebugAvailable() const
 {
     return std::filesystem::exists(ModuleDebugPath);
-}
-
-template <typename T>
-T ZSwapDebug::ReadModuleDebugValue(const std::string& Name, const T& Default) const
-{
-    const std::string FullPath = ModuleDebugPath + Name;
-    T Result = Default;
-
-    if (std::filesystem::exists(FullPath))
-    {
-        std::ifstream ZSwapSysFs(FullPath);
-        ZSwapSysFs >> Result;
-    }
-
-    return Result;
 }

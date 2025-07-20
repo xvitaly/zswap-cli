@@ -12,6 +12,7 @@
  * Contains the ZSwapDebug class definition.
 */
 
+#include <optional>
 #include <string>
 
 /**
@@ -30,62 +31,68 @@ public:
      * Gets the pool limit hits.
      * @returns Pool limit hits count.
     */
-    unsigned long GetPoolLimitHit() const;
+    std::optional<unsigned long> GetPoolLimitHit() const;
 
     /**
      * Gets the pool total size.
      * @returns Pool total size count.
     */
-    unsigned long GetPoolTotalSize() const;
+    std::optional<unsigned long> GetPoolTotalSize() const;
 
     /**
      * Gets the number of reject allocation failures.
      * @returns Reject allocation failures count.
     */
-    unsigned long GetRejectAllocFail() const;
+    std::optional<unsigned long> GetRejectAllocFail() const;
 
     /**
      * Gets the reject compression poor value.
      * @returns Reject compression poor value.
     */
-    unsigned long GetRejectCompressPoor() const;
+    std::optional<unsigned long> GetRejectCompressPoor() const;
 
     /**
      * Gets the number of reject Kmemcache failures.
      * @returns Reject Kmemcache failures count.
     */
-    unsigned long GetRejectKmemCacheFail() const;
+    std::optional<unsigned long> GetRejectKmemCacheFail() const;
 
     /**
      * Gets the number of reject reclaim failures.
      * @returns Reject reclaim failures count.
     */
-    unsigned long GetRejectReclaimFail() const;
+    std::optional<unsigned long> GetRejectReclaimFail() const;
 
     /**
      * Gets the number of compression failures.
      * @returns Reject compression failures count.
     */
-    unsigned long GetRejectCompressFail() const;
+    std::optional<unsigned long> GetRejectCompressFail() const;
+
+    /**
+     * Gets the number of decompression failures.
+     * @returns Decompression failures count.
+    */
+    std::optional<unsigned long> GetDecompressFail() const;
 
     /**
      * Gets the number of same filled pages.
      * Deprecated. Removed in kernel 6.12.0.
      * @returns Same filled pages count.
     */
-    long GetSameFilledPages() const;
+    std::optional<unsigned long> GetSameFilledPages() const;
 
     /**
      * Gets the number of stored pages.
      * @returns Stored pages count.
     */
-    long GetStoredPages() const;
+    std::optional<unsigned long> GetStoredPages() const;
 
     /**
      * Gets the number of written back pages.
      * @returns Written back pages count.
     */
-    unsigned long GetWrittenBackPages() const;
+    std::optional<unsigned long> GetWrittenBackPages() const;
 
     /**
      * Checks if the debug interface is available for use.
@@ -102,11 +109,9 @@ private:
      * Reads the debug value of the ZSwap kernel module by the
      * specified name as the specified type.
      * @param Name Debug value name.
-     * @param Default Default value if cannot be read.
      * @returns Value of the specified type.
     */
-    template <typename T>
-    T ReadModuleDebugValue(const std::string&, const T&) const;
+    std::optional<unsigned long> ReadModuleDebugValue(const std::string&) const;
 };
 
 #endif // ZSWAPDEBUG_HPP
