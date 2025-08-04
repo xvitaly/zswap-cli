@@ -128,16 +128,16 @@ set(LIBRARY_HEADERS
     src/lib/cwrappers/cwrappers.hpp
     src/lib/ksysinfo/ksysinfo.hpp
     src/lib/ksysversion/ksysversion.hpp
-    src/lib/zswapobject/zswapobject.hpp
     src/lib/zswapdebug/zswapdebug.hpp
+    src/lib/zswapobject/zswapobject.hpp
 )
 
 set(LIBRARY_SOURCES
     src/lib/cwrappers/cwrappers.cpp
     src/lib/ksysinfo/ksysinfo.cpp
     src/lib/ksysversion/ksysversion.cpp
-    src/lib/zswapobject/zswapobject.cpp
     src/lib/zswapdebug/zswapdebug.cpp
+    src/lib/zswapobject/zswapobject.cpp
 )
 
 configure_file(
