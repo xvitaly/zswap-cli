@@ -41,6 +41,7 @@ set(APP_NAME "${CMAKE_PROJECT_NAME}")
 set(LIB_NAME "${CMAKE_PROJECT_NAME}-lib")
 set(DOCS_NAME "${CMAKE_PROJECT_NAME}-docs")
 set(MAN_NAME "${CMAKE_PROJECT_NAME}-man")
+set(UNIT_NAME "${CMAKE_PROJECT_NAME}-unit")
 
 # ======================================================
 # ===================== File names =====================
@@ -128,16 +129,16 @@ set(LIBRARY_HEADERS
     src/lib/cwrappers/cwrappers.hpp
     src/lib/ksysinfo/ksysinfo.hpp
     src/lib/ksysversion/ksysversion.hpp
-    src/lib/zswapobject/zswapobject.hpp
     src/lib/zswapdebug/zswapdebug.hpp
+    src/lib/zswapobject/zswapobject.hpp
 )
 
 set(LIBRARY_SOURCES
     src/lib/cwrappers/cwrappers.cpp
     src/lib/ksysinfo/ksysinfo.cpp
     src/lib/ksysversion/ksysversion.cpp
-    src/lib/zswapobject/zswapobject.cpp
     src/lib/zswapdebug/zswapdebug.cpp
+    src/lib/zswapobject/zswapobject.cpp
 )
 
 configure_file(
@@ -219,7 +220,7 @@ if (LINK_ALL_STATICALLY)
     )
 endif()
 
-install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${APP_NAME})
 
 # ======================================================
 # =================== Assets target ====================
@@ -227,18 +228,18 @@ install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if (BUILD_DOC)
     doxygen_add_docs(${DOCS_NAME} src docs ALL WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Building documentation with Doxygen.")
-    install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION ${CMAKE_INSTALL_DOCDIR})
+    install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT ${DOCS_NAME})
 endif()
 
 if (BUILD_MANPAGE)
     configure_file("assets/manpage/${APP_NAME}.md.in" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.md" @ONLY)
     pandoc_build_manpage("${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.md" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1")
     add_custom_target(${MAN_NAME} ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1")
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1" COMPONENT ${MAN_NAME})
 endif()
 
 if (SYSTEMD_INTEGRATION)
     configure_file("assets/systemd/${UNIT_FILE_NAME}.in" "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" @ONLY)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}")
-    install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}")
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}" COMPONENT ${UNIT_NAME})
+    install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}" COMPONENT ${UNIT_NAME})
 endif()
