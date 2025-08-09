@@ -117,7 +117,7 @@ void Application::PrintSummary() const
     const float PoolSizeMB = static_cast<float>(PoolSize) / 1048576.f;
     const float MemTotalPercent = static_cast<float>(PoolSize) / (static_cast<float>(SysInfo -> GetTotalRam()) * static_cast<float>(SysInfo -> GetMemUnitSize())) * 100.f;
     const float StoredPagesMB = static_cast<float>(StoredPages * SysInfo -> GetPageSize()) / 1048576.f;
-    const float SwapUsedPercent = static_cast<float>(StoredPages * SysInfo -> GetPageSize()) / static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * 100.f;
+    const float SwapUsedPercent = static_cast<float>(StoredPages * SysInfo -> GetPageSize()) / (static_cast<float>(SysInfo -> GetTotalSwap() - SysInfo -> GetFreeSwap()) * static_cast<float>(SysInfo -> GetMemUnitSize())) * 100.f;
     const float CompressionRatio = StoredPagesMB / PoolSizeMB;
 
     std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
