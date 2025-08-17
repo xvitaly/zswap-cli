@@ -9,7 +9,7 @@ _zswap_cli()
     local cur prev words cword comp_args
     _comp_initialize -- "$@" || return
 
-    case $prev in
+    case "$prev" in
         -a | --accept_threshold_percent | -p | --max_pool_percent)
             _comp_compgen -- -W "{1..100}"
             return
@@ -31,11 +31,11 @@ _zswap_cli()
             ;;
     esac
 
-    if [[ $cur == -* ]]; then
+    if [[ "$cur" == -* ]]; then
         _comp_compgen -- -W "-a -p -e -s -n -x -r -c -z"
         _comp_compgen -a -- -W "--accept_threshold_percent --max_pool_percent --enabled --same_filled_pages_enabled --non_same_filled_pages_enabled --exclusive_loads --shrinker_enabled --compressor --zpool"
         _comp_compgen -a -- -W "--config --env --stats --version --help"
-        [[ ${COMPREPLY-} == *= ]] && compopt -o nospace
+        [[ "${COMPREPLY-}" == *= ]] && compopt -o nospace
     fi
 } &&
     complete -F _zswap_cli @APP_NAME@
