@@ -10,15 +10,17 @@
 */
 
 #include <filesystem>
+#include <format>
 #include <fstream>
 #include <optional>
 #include <string>
+#include <string_view>
 
 #include "zswapdebug/zswapdebug.hpp"
 
-std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(std::string_view Name) const
 {
-    const std::string FullPath = ModuleDebugPath + Name;
+    const std::string FullPath = std::format("{0}/{1}", ModuleDebugPath, Name);
     if (!std::filesystem::exists(FullPath)) return std::nullopt;
     unsigned long Result;
     std::ifstream ZSwapSysFs(FullPath);

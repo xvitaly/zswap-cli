@@ -14,6 +14,7 @@
 
 #include <optional>
 #include <string>
+#include <string_view>
 
 /**
  * Class for working with the ZSwap kernel module
@@ -103,7 +104,7 @@ private:
     /**
      * Stores the kernel module debug path.
     */
-    const std::string ModuleDebugPath = "/sys/kernel/debug/zswap/";
+    const std::string ModuleDebugPath = "/sys/kernel/debug/zswap";
 
     /**
      * Reads the debug value of the ZSwap kernel module by the
@@ -111,7 +112,7 @@ private:
      * @param Name Debug value name.
      * @returns Value of the specified type.
     */
-    std::optional<unsigned long> ReadModuleDebugValue(const std::string&) const;
+    std::optional<unsigned long> ReadModuleDebugValue(std::string_view) const;
 };
 
 #endif // ZSWAPDEBUG_HPP
