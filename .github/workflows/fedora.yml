@@ -37,7 +37,7 @@ jobs:
       run: |
         sudo dnf -y install git-core
     - name: Fetching sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Installing ${{ matrix.compiler }} compiler packages
       run: |
         sudo dnf -y install ${{ matrix.packages }}
