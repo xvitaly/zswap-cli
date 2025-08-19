@@ -15,6 +15,9 @@
 /**
  * Class for working with memory information using the
  * kernel API.
+ * Attention! The return values of all methods that operate
+ * on RAM and swap values must be multiplied by MemUnitSize
+ * before use.
 */
 class KSysInfo
 {
