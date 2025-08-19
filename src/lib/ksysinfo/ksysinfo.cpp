@@ -27,9 +27,19 @@ unsigned long KSysInfo::GetTotalRam() const
     return TotalRam;
 }
 
+float KSysInfo::GetTotalRamF() const
+{
+    return static_cast<float>(TotalRam) * static_cast<float>(MemUnitSize);
+}
+
 unsigned long KSysInfo::GetFreeRam() const
 {
     return FreeRam;
+}
+
+float KSysInfo::GetFreeRamF() const
+{
+    return static_cast<float>(FreeRam) * static_cast<float>(MemUnitSize);
 }
 
 unsigned long KSysInfo::GetSharedRam() const
@@ -37,9 +47,19 @@ unsigned long KSysInfo::GetSharedRam() const
     return SharedRam;
 }
 
+float KSysInfo::GetSharedRamF() const
+{
+    return static_cast<float>(SharedRam) * static_cast<float>(MemUnitSize);
+}
+
 unsigned long KSysInfo::GetBufferedRam() const
 {
     return BufferedRam;
+}
+
+float KSysInfo::GetBufferedRamF() const
+{
+    return static_cast<float>(BufferedRam) * static_cast<float>(MemUnitSize);
 }
 
 unsigned long KSysInfo::GetTotalSwap() const
@@ -47,9 +67,19 @@ unsigned long KSysInfo::GetTotalSwap() const
     return TotalSwap;
 }
 
+float KSysInfo::GetTotalSwapF() const
+{
+    return static_cast<float>(TotalSwap) * static_cast<float>(MemUnitSize);
+}
+
 unsigned long KSysInfo::GetFreeSwap() const
 {
     return FreeSwap;
+}
+
+float KSysInfo::GetFreeSwapF() const
+{
+    return static_cast<float>(FreeSwap) * static_cast<float>(MemUnitSize);
 }
 
 unsigned short KSysInfo::GetProcessesCount() const
@@ -62,9 +92,19 @@ unsigned long KSysInfo::GetTotalHighMem() const
     return TotalHighMem;
 }
 
+float KSysInfo::GetTotalHighMemF() const
+{
+    return static_cast<float>(TotalHighMem) * static_cast<float>(MemUnitSize);
+}
+
 unsigned long KSysInfo::GetFreeHighMem() const
 {
     return FreeHighMem;
+}
+
+float KSysInfo::GetFreeHighMemF() const
+{
+    return static_cast<float>(FreeHighMem) * static_cast<float>(MemUnitSize);
 }
 
 unsigned int KSysInfo::GetMemUnitSize() const

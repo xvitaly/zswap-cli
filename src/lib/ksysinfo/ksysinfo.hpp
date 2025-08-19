@@ -17,12 +17,13 @@
  * kernel API.
  *
  * Attention! The return values of all methods that operate
- * on RAM and swap values must be multiplied by MemUnitSize
- * before use.
- *
- * We don't do this automatically because some architectures
- * may have more memory than the unsigned long type can
+ * on RAM and swap integer values must be multiplied by
+ * MemUnitSize before use because some architectures may
+ * have more memory than the unsigned long type can
  * address.
+ *
+ * All getters with the F suffix are already multiplied by
+ * MemUnitSize and return values as floating point numbers.
 */
 class KSysInfo
 {
@@ -45,10 +46,24 @@ public:
     unsigned long GetTotalRam() const;
 
     /**
+     * Gets the total amount of usable memory size in bytes
+     * as a floating point number.
+     * @returns Total usable memory size.
+    */
+    float GetTotalRamF() const;
+
+    /**
      * Gets the amount of free memory in bytes.
      * @returns Free memory size.
     */
     unsigned long GetFreeRam() const;
+
+    /**
+     * Gets the amount of free memory in bytes as a floating
+     * point number.
+     * @returns Free memory size.
+    */
+    float GetFreeRamF() const;
 
     /**
      * Gets the amount of shared memory in bytes.
@@ -57,10 +72,24 @@ public:
     unsigned long GetSharedRam() const;
 
     /**
+     * Gets the amount of shared memory in bytes as a floating
+     * point number.
+     * @returns Shared memory size.
+    */
+    float GetSharedRamF() const;
+
+    /**
      * Gets the amount of memory used by buffers in bytes.
      * @returns Memory used by buffers size.
     */
     unsigned long GetBufferedRam() const;
+
+    /**
+     * Gets the amount of memory used by buffers in bytes
+     * as a floating point number.
+     * @returns Memory used by buffers size.
+    */
+    float GetBufferedRamF() const;
 
     /**
      * Gets the total size of the swap space in bytes.
@@ -69,10 +98,24 @@ public:
     unsigned long GetTotalSwap() const;
 
     /**
+     * Gets the total size of the swap space in bytes as
+     * a floating point number.
+     * @returns Total size of the swap space.
+    */
+    float GetTotalSwapF() const;
+
+    /**
      * Gets the amount of free swap space in bytes.
      * @returns Available swap space.
     */
     unsigned long GetFreeSwap() const;
+
+    /**
+     * Gets the amount of free swap space in bytes as a
+     * floating point number.
+     * @returns Available swap space.
+    */
+    float GetFreeSwapF() const;
 
     /**
      * Gets the number of current processes.
@@ -87,10 +130,24 @@ public:
     unsigned long GetTotalHighMem() const;
 
     /**
+     * Gets the amount of total high memory size in bytes
+     * as a floating point number.
+     * @returns Total high memory size.
+    */
+    float GetTotalHighMemF() const;
+
+    /**
      * Gets the amount of free high memory in bytes.
      * @returns Free high memory size.
     */
     unsigned long GetFreeHighMem() const;
+
+    /**
+     * Gets the amount of free high memory in bytes as
+     * a floating point number.
+     * @returns Free high memory size.
+    */
+    float GetFreeHighMemF() const;
 
     /**
      * Gets the memory unit size in bytes.
