@@ -17,12 +17,13 @@
  * kernel API.
  *
  * Attention! The return values of all methods that operate
- * on RAM and swap values must be multiplied by MemUnitSize
- * before use.
- *
- * We don't do this automatically because some architectures
- * may have more memory than the unsigned long type can
+ * on RAM and swap integer values must be multiplied by
+ * MemUnitSize before use because some architectures may
+ * have more memory than the unsigned long type can
  * address.
+ *
+ * All getters with the F suffix are already multiplied by
+ * MemUnitSize and return values as floating point numbers.
 */
 class KSysInfo
 {
