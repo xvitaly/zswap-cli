@@ -160,6 +160,12 @@ public:
      * @returns System memory page size.
     */
     long GetPageSize() const;
+
+    /**
+     * Checks if the swap space is available.
+     * @returns Swap space availability.
+    */
+    bool IsSwapAvailable() const;
 private:
     /**
      * Stores current uptime (in seconds since boot) value.
