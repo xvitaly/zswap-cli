@@ -102,7 +102,7 @@ void Application::PrintSummary() const
     const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
     const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
 
-    if (SysInfo -> GetTotalSwap() == 0)
+    if (!SysInfo -> IsSwapAvailable())
     {
         std::cout << "ZSwap is not functional due to missing swap file or partition." << std::endl;
         return;

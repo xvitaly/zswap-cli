@@ -117,6 +117,11 @@ long KSysInfo::GetPageSize() const
     return PageSize;
 }
 
+bool KSysInfo::IsSwapAvailable() const
+{
+    return TotalSwap != 0UL;
+}
+
 void KSysInfo::ReadSysInfo()
 {
     struct sysinfo SysInfo;
