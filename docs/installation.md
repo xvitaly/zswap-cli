@@ -24,7 +24,7 @@ This project supports the following build-time configuration options, which can 
 | ------- | ------- | ------- |
 | BUILD_DOC | Build and install API and application documentation in HTML format. | OFF |
 | BUILD_MANPAGE | Build and install manpage with documentation. | OFF |
-| BUILD_SHELL_COMPLETION | Build and install shell completion helper files. | OFF |
+| BUILD_SHELL_COMPLETION | Build and install shell completion helper files. | ON |
 | LINK_ALL_STATICALLY | Link the program against all libraries statically (no dependencies mode). | OFF |
 | LINK_BOOST_STATICALLY | Link the program against Boost library statically (removes dependency on it). | OFF |
 | LINK_ENABLE_OPTIMIZATIONS | Enable link-time optimizations if supported by current C++ compiler. | ON |
