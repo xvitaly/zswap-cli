@@ -28,7 +28,7 @@ set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
 option(BUILD_DOC "Build and install API and application documentation in HTML format." OFF)
 option(BUILD_MANPAGE "Build and install manpage with documentation." OFF)
-option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." OFF)
+option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." ON)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
