@@ -57,6 +57,7 @@ We cannot accept pull requests with commits without this signature.
 ### Some important warnings
 
  * Don't mix different line endings.
+ * Don't add automatically generated code.
  * Don't upload any binary files to the repository.
  * Don't add and upload any temporary files.
  * Don't use any libraries incompatible with [current license](../LICENSE).
