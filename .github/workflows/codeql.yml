@@ -33,7 +33,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v5
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
+      uses: github/codeql-action/init@v4
       with:
         languages: ${{ matrix.language }}
         queries: +security-and-quality
@@ -44,8 +44,8 @@ jobs:
       run: |
         sudo apt-get -y install linux-libc-dev libboost-program-options-dev libsystemd-dev
     - name: Perform automatic build
-      uses: github/codeql-action/autobuild@v3
+      uses: github/codeql-action/autobuild@v4
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      uses: github/codeql-action/analyze@v4
       with:
           category: "/language:${{ matrix.language }}"
