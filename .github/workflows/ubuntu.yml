@@ -33,7 +33,7 @@ jobs:
             packages: 'gcc'
     steps:
     - name: Fetching sources
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
     - name: Updating apt package metadata
       run: |
         sudo apt-get update
