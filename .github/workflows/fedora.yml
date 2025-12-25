@@ -46,7 +46,7 @@ jobs:
         sudo dnf -y install cmake ninja-build
     - name: Installing development packages
       run: |
-        sudo dnf -y install boost-devel glibc-headers kernel-headers systemd-devel
+        sudo dnf -y install boost-devel glibc-headers kernel-headers systemd systemd-devel
     - name: Installing helper tools
       run: |
         sudo dnf -y install doxygen pandoc

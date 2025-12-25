@@ -8,7 +8,7 @@ Supported kernel module options:
 | same_filled_pages_enabled | **Y** (enable) or **N** (disable) | Deprecated | 4.16.0 to 6.10.0 |
 | max_pool_percent | integer from **1** to **100** | Active | Any |
 | compressor | from supported by kernel | Active | Any |
-| zpool | from supported by kernel | Active | Any |
+| zpool | from supported by kernel | Deprecated | 3.17.0 to 6.18.0 |
 | accept_threshold_percent | integer from **1** to **100** | Active | 5.6.0 or higher |
 | non_same_filled_pages_enabled | **Y** (enable) or **N** (disable) | Deprecated | 5.18.0 to 6.10.0 |
 | exclusive_loads | **Y** (enable) or **N** (disable) | Deprecated | 6.5.0 to 6.9.0 |

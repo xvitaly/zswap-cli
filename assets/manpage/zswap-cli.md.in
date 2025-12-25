@@ -22,7 +22,7 @@ Supported kernel module options:
 | same_filled_pages_enabled | **Y** (enable) or **N** (disable) | Deprecated | 4.16.0 to 6.10.0 |
 | max_pool_percent | integer from **1** to **100** | Active | Any |
 | compressor | from supported by kernel | Active | Any |
-| zpool | from supported by kernel | Active | Any |
+| zpool | from supported by kernel | Deprecated | 3.17.0 to 6.18.0 |
 | accept_threshold_percent | integer from **1** to **100** | Active | 5.6.0 or higher |
 | non_same_filled_pages_enabled | **Y** (enable) or **N** (disable) | Deprecated | 5.18.0 to 6.10.0 |
 | exclusive_loads | **Y** (enable) or **N** (disable) | Deprecated | 6.5.0 to 6.9.0 |
@@ -124,7 +124,7 @@ export ZSWAP_ENABLED_VALUE=Y
 export ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE=Y
 export ZSWAP_MAX_POOL_PERCENT_VALUE=60
 export ZSWAP_COMPRESSOR_VALUE=lzo
-export ZSWAP_ZPOOL_VALUE=z3fold
+export ZSWAP_ZPOOL_VALUE=zsmalloc
 export ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE=90
 export ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE=Y
 export ZSWAP_EXCLUSIVE_LOADS_VALUE=Y
@@ -144,7 +144,7 @@ sudo ZSWAP_ENABLED_VALUE=Y \
      ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE=Y \
      ZSWAP_MAX_POOL_PERCENT_VALUE=60 \
      ZSWAP_COMPRESSOR_VALUE=lzo \
-     ZSWAP_ZPOOL_VALUE=z3fold \
+     ZSWAP_ZPOOL_VALUE=zsmalloc \
      ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE=90 \
      ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE=Y \
      ZSWAP_EXCLUSIVE_LOADS_VALUE=Y \
@@ -178,7 +178,7 @@ enabled=Y
 same_filled_pages_enabled=Y
 max_pool_percent=60
 compressor=lzo
-zpool=z3fold
+zpool=zsmalloc
 accept_threshold_percent=90
 non_same_filled_pages_enabled=Y
 exclusive_loads=Y
