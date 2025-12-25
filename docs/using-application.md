@@ -46,7 +46,7 @@ sudo zswap-cli \
     --same_filled_pages_enabled Y \
     --max_pool_percent 60 \
     --compressor lzo \
-    --zpool z3fold \
+    --zpool zsmalloc \
     --accept_threshold_percent 90 \
     --non_same_filled_pages_enabled Y \
     --exclusive_loads Y \
