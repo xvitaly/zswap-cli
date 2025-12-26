@@ -55,6 +55,7 @@ void Application::PrintDebugInfo() const
         { "Same filled pages count", ZSwapDebugger -> GetSameFilledPages() },
         { "Stored pages count", ZSwapDebugger -> GetStoredPages() },
         { "Written back pages count", ZSwapDebugger -> GetWrittenBackPages() },
+        { "Incompressible pages count", ZSwapDebugger -> GetIncompressiblePages() },
     };
 
     for (const auto& [Name, Value] : Handlers)
