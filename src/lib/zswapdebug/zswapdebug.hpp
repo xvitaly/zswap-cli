@@ -95,6 +95,12 @@ public:
     std::optional<unsigned long> GetWrittenBackPages() const;
 
     /**
+     * Gets the number of incompressible pages.
+     * @returns Incompressible pages count.
+    */
+    std::optional<unsigned long> GetIncompressiblePages() const;
+
+    /**
      * Checks if the debug interface is available for use.
      * @returns Debug interface availability.
     */

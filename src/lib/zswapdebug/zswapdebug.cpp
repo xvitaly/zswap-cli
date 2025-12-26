@@ -81,6 +81,11 @@ std::optional<unsigned long> ZSwapDebug::GetWrittenBackPages() const
     return ReadModuleDebugValue("written_back_pages");
 }
 
+std::optional<unsigned long> ZSwapDebug::GetIncompressiblePages() const
+{
+    return ReadModuleDebugValue("stored_incompressible_pages");
+}
+
 bool ZSwapDebug::IsDebugAvailable() const
 {
     return std::filesystem::exists(ModuleDebugPath);
