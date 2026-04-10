@@ -67,11 +67,13 @@ include(GNUInstallDirs)
 # ============= External custom imports ================
 # ======================================================
 
-include(cmake/FindFileSystem.cmake)
-include(cmake/FindFormat.cmake)
-include(cmake/FindPandoc.cmake)
-include(cmake/FindKernelHeaders.cmake)
-include(cmake/FindGlibcHeaders.cmake)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(FindFileSystem)
+include(FindFormat)
+include(FindPandoc)
+include(FindKernelHeaders)
+include(FindGlibcHeaders)
 
 # ======================================================
 # =========== Link time optimizations checks ===========
