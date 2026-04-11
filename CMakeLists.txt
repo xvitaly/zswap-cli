@@ -134,7 +134,14 @@ endif()
 # ================== Library target ====================
 # ======================================================
 
+configure_file(
+    src/lib/appconstants/appconstants.cpp.in
+    appconstants/appconstants.cpp
+    @ONLY
+)
+
 set(LIBRARY_HEADERS
+    src/lib/appconstants/appconstants.hpp
     src/lib/cwrappers/cwrappers.hpp
     src/lib/ksysinfo/ksysinfo.hpp
     src/lib/ksysversion/ksysversion.hpp
@@ -148,12 +155,7 @@ set(LIBRARY_SOURCES
     src/lib/ksysversion/ksysversion.cpp
     src/lib/zswapdebug/zswapdebug.cpp
     src/lib/zswapobject/zswapobject.cpp
-)
-
-configure_file(
-    src/lib/appconstants/appconstants.hpp.in
-    generated/appconstants/appconstants.hpp
-    @ONLY
+    "${CMAKE_CURRENT_BINARY_DIR}/appconstants/appconstants.cpp"
 )
 
 add_library(${LIB_NAME} OBJECT
@@ -163,7 +165,6 @@ add_library(${LIB_NAME} OBJECT
 
 target_include_directories(${LIB_NAME} PUBLIC
     src/lib
-    "${CMAKE_CURRENT_BINARY_DIR}/generated"
 )
 
 if (LINK_ENABLE_OPTIMIZATIONS AND CMAKE_CXX_LINK_IPO_SUPPORTED)
