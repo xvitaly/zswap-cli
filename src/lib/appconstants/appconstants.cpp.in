@@ -1,0 +1,24 @@
+/**
+ * SPDX-FileCopyrightText: 2020-2026 EasyCoding Team and contributors
+ *
+ * SPDX-License-Identifier: MIT
+*/
+
+/**
+ * @file appconstants/appconstants.cpp
+ * Contains the AppConstants namespace implementation.
+*/
+
+#include <string_view>
+
+#include "appconstants/appconstants.hpp"
+
+std::string_view AppConstants::ProductNameInternal()
+{
+    return "@CMAKE_PROJECT_NAME@";
+}
+
+std::string_view AppConstants::ProductVersionInternal()
+{
+    return "@CMAKE_PROJECT_VERSION@";
+}

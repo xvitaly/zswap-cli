@@ -19,14 +19,14 @@
 */
 namespace AppConstants {
     /**
-     * Stores the application internal name as a string.
+     * Returns the application internal name as a string.
     */
-    inline constexpr std::string_view ProductNameInternal = "@CMAKE_PROJECT_NAME@";
+    std::string_view ProductNameInternal();
 
     /**
-     * Stores the application version number as a string.
+     * Returns the application version number as a string.
     */
-    inline constexpr std::string_view ProductVersion = "@CMAKE_PROJECT_VERSION@";
+    std::string_view ProductVersionInternal();
 }
 
 #endif // APPCONSTANTS_HPP
