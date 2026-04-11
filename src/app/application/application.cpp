@@ -180,8 +180,8 @@ int Application::PrintVersion() const
                              "Kernel API version:\n"
                              "  build: {2}\n"
                              "  runtime: {3}",
-                             AppConstants::ProductNameInternal,
-                             AppConstants::ProductVersion,
+                             AppConstants::ProductNameInternal(),
+                             AppConstants::ProductVersionInternal(),
                              SysVersion -> GetHeadersVersion(),
                              SysVersion -> GetKernelVersion())
               << std::endl;
