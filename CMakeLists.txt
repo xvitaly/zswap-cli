@@ -67,7 +67,7 @@ include(GNUInstallDirs)
 # ============= External custom imports ================
 # ======================================================
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 include(FindFileSystem)
 include(FindFormat)
