@@ -155,12 +155,16 @@ set(LIBRARY_SOURCES
     src/lib/ksysversion/ksysversion.cpp
     src/lib/zswapdebug/zswapdebug.cpp
     src/lib/zswapobject/zswapobject.cpp
+)
+
+set (LIBRARY_CFG_SOURCES
     "${CMAKE_CURRENT_BINARY_DIR}/appconstants/appconstants.cpp"
 )
 
 add_library(${LIB_NAME} OBJECT
     ${LIBRARY_HEADERS}
     ${LIBRARY_SOURCES}
+    ${LIBRARY_CFG_SOURCES}
 )
 
 target_include_directories(${LIB_NAME} PUBLIC
