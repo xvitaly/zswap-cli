@@ -134,12 +134,6 @@ endif()
 # ================== Library target ====================
 # ======================================================
 
-configure_file(
-    src/lib/appconstants/appconstants.cpp.in
-    appconstants/appconstants.cpp
-    @ONLY
-)
-
 set(LIBRARY_HEADERS
     src/lib/appconstants/appconstants.hpp
     src/lib/cwrappers/cwrappers.hpp
@@ -155,6 +149,12 @@ set(LIBRARY_SOURCES
     src/lib/ksysversion/ksysversion.cpp
     src/lib/zswapdebug/zswapdebug.cpp
     src/lib/zswapobject/zswapobject.cpp
+)
+
+configure_file(
+    src/lib/appconstants/appconstants.cpp.in
+    appconstants/appconstants.cpp
+    @ONLY
 )
 
 set (LIBRARY_CFG_SOURCES
