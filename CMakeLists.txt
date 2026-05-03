@@ -71,7 +71,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 include(FindFileSystem)
 include(FindFormat)
-include(FindPandoc)
 include(FindKernelHeaders)
 include(FindGlibcHeaders)
 
@@ -118,6 +117,14 @@ if (BUILD_DOC)
     set(DOXYGEN_BINARY_TOC YES)
     set(DOXYGEN_TOC_EXPAND YES)
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "docs/README.md")
+endif()
+
+# ======================================================
+# ================== Pandoc detection ==================
+# ======================================================
+
+if (BUILD_MANPAGE)
+    find_package(Pandoc REQUIRED)
 endif()
 
 # ======================================================
