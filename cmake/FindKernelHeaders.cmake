@@ -5,17 +5,20 @@
 #
 
 include(CheckIncludeFileCXX)
+include(FindPackageHandleStandardArgs)
 
-CHECK_INCLUDE_FILE_CXX(
+check_include_file_cxx(
     "linux/sysinfo.h"
-    KERNELHEADERS_SYSINFO_FOUND
+    KERNEL_SYSINFO_HEADER
 )
 
-CHECK_INCLUDE_FILE_CXX(
+check_include_file_cxx(
     "linux/version.h"
-    KERNELHEADERS_VERSION_FOUND
+    KERNEL_VERSION_HEADER
 )
 
-if (NOT KERNELHEADERS_SYSINFO_FOUND OR NOT KERNELHEADERS_VERSION_FOUND)
-    message(FATAL_ERROR "Kernel headers were not found.")
-endif()
+find_package_handle_standard_args(
+    KernelHeaders
+    REQUIRED_VARS KERNEL_SYSINFO_HEADER KERNEL_VERSION_HEADER
+    REASON_FAILURE_MESSAGE "Kernel headers were not found!"
+)
