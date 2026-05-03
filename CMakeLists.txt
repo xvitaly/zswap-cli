@@ -69,11 +69,6 @@ include(GNUInstallDirs)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-include(FindFileSystem)
-include(FindFormat)
-include(FindKernelHeaders)
-include(FindGlibcHeaders)
-
 # ======================================================
 # =========== Link time optimizations checks ===========
 # ======================================================
@@ -83,6 +78,15 @@ include(CheckPIESupported)
 
 check_ipo_supported(RESULT CMAKE_CXX_LINK_IPO_SUPPORTED LANGUAGES CXX)
 check_pie_supported(LANGUAGES CXX)
+
+# ======================================================
+# ================= Headers detection ==================
+# ======================================================
+
+find_package(FileSystemHeader QUIET REQUIRED)
+find_package(FormatHeader QUIET REQUIRED)
+find_package(KernelHeaders QUIET REQUIRED)
+find_package(GlibcHeaders QUIET REQUIRED)
 
 # ======================================================
 # ================== Boost detection ===================
