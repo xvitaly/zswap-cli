@@ -18,7 +18,7 @@ check_include_file_cxx(
 )
 
 find_package_handle_standard_args(
-    FileSystemHeader
+    StdHeaders
     REQUIRED_VARS FILESYSTEM_HEADER FORMAT_HEADER
     REASON_FAILURE_MESSAGE "Current C++ standard library has no C++20 support!"
 )
