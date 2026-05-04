@@ -83,8 +83,7 @@ check_pie_supported(LANGUAGES CXX)
 # ================= Headers detection ==================
 # ======================================================
 
-find_package(FileSystemHeader QUIET REQUIRED)
-find_package(FormatHeader QUIET REQUIRED)
+find_package(StdHeaders QUIET REQUIRED)
 find_package(KernelHeaders QUIET REQUIRED)
 find_package(GlibcHeaders QUIET REQUIRED)
 

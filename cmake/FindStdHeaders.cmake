@@ -8,12 +8,17 @@ include(CheckIncludeFileCXX)
 include(FindPackageHandleStandardArgs)
 
 check_include_file_cxx(
+    "filesystem"
+    FILESYSTEM_HEADER
+)
+
+check_include_file_cxx(
     "format"
     FORMAT_HEADER
 )
 
 find_package_handle_standard_args(
-    FormatHeader
-    REQUIRED_VARS FORMAT_HEADER
-    REASON_FAILURE_MESSAGE "Current C++ compiler has no <format> support!"
+    FileSystemHeader
+    REQUIRED_VARS FILESYSTEM_HEADER FORMAT_HEADER
+    REASON_FAILURE_MESSAGE "Current C++ standard library has no C++20 support!"
 )
