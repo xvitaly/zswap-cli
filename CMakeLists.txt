@@ -67,13 +67,7 @@ include(GNUInstallDirs)
 # ============= External custom imports ================
 # ======================================================
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-include(FindFileSystem)
-include(FindFormat)
-include(FindPandoc)
-include(FindKernelHeaders)
-include(FindGlibcHeaders)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 # ======================================================
 # =========== Link time optimizations checks ===========
@@ -84,6 +78,14 @@ include(CheckPIESupported)
 
 check_ipo_supported(RESULT CMAKE_CXX_LINK_IPO_SUPPORTED LANGUAGES CXX)
 check_pie_supported(LANGUAGES CXX)
+
+# ======================================================
+# ================= Headers detection ==================
+# ======================================================
+
+find_package(StdHeaders QUIET REQUIRED)
+find_package(KernelHeaders QUIET REQUIRED)
+find_package(GlibcHeaders QUIET REQUIRED)
 
 # ======================================================
 # ================== Boost detection ===================
@@ -121,6 +123,14 @@ if (BUILD_DOC)
 endif()
 
 # ======================================================
+# ================== Pandoc detection ==================
+# ======================================================
+
+if (BUILD_MANPAGE)
+    find_package(Pandoc REQUIRED)
+endif()
+
+# ======================================================
 # ================= systemd detection ==================
 # ======================================================
 
@@ -133,12 +143,6 @@ endif()
 # ======================================================
 # ================== Library target ====================
 # ======================================================
-
-configure_file(
-    src/lib/appconstants/appconstants.cpp.in
-    appconstants/appconstants.cpp
-    @ONLY
-)
 
 set(LIBRARY_HEADERS
     src/lib/appconstants/appconstants.hpp
@@ -155,12 +159,22 @@ set(LIBRARY_SOURCES
     src/lib/ksysversion/ksysversion.cpp
     src/lib/zswapdebug/zswapdebug.cpp
     src/lib/zswapobject/zswapobject.cpp
+)
+
+configure_file(
+    src/lib/appconstants/appconstants.cpp.in
+    appconstants/appconstants.cpp
+    @ONLY
+)
+
+set (LIBRARY_CFG_SOURCES
     "${CMAKE_CURRENT_BINARY_DIR}/appconstants/appconstants.cpp"
 )
 
 add_library(${LIB_NAME} OBJECT
     ${LIBRARY_HEADERS}
     ${LIBRARY_SOURCES}
+    ${LIBRARY_CFG_SOURCES}
 )
 
 target_include_directories(${LIB_NAME} PUBLIC

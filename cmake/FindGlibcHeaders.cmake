@@ -5,17 +5,20 @@
 #
 
 include(CheckIncludeFileCXX)
+include(FindPackageHandleStandardArgs)
 
-CHECK_INCLUDE_FILE_CXX(
+check_include_file_cxx(
     "sys/sysinfo.h"
-    GLIBCHEADERS_SYSINFO_FOUND
+    GLIBC_SYSINFO_HEADER
 )
 
-CHECK_INCLUDE_FILE_CXX(
+check_include_file_cxx(
     "sys/utsname.h"
-    GLIBCHEADERS_UTSNAME_FOUND
+    GLIBC_UTSNAME_HEADER
 )
 
-if (NOT GLIBCHEADERS_SYSINFO_FOUND OR NOT GLIBCHEADERS_UTSNAME_FOUND)
-    message(FATAL_ERROR "GLibc headers were not found.")
-endif()
+find_package_handle_standard_args(
+    GlibcHeaders
+    REQUIRED_VARS GLIBC_SYSINFO_HEADER GLIBC_UTSNAME_HEADER
+    REASON_FAILURE_MESSAGE "GLibc headers were not found!"
+)

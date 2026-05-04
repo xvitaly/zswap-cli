@@ -8,17 +8,17 @@ include(CheckIncludeFileCXX)
 include(FindPackageHandleStandardArgs)
 
 check_include_file_cxx(
-    "linux/sysinfo.h"
-    KERNEL_SYSINFO_HEADER
+    "filesystem"
+    FILESYSTEM_HEADER
 )
 
 check_include_file_cxx(
-    "linux/version.h"
-    KERNEL_VERSION_HEADER
+    "format"
+    FORMAT_HEADER
 )
 
 find_package_handle_standard_args(
-    KernelHeaders
-    REQUIRED_VARS KERNEL_SYSINFO_HEADER KERNEL_VERSION_HEADER
-    REASON_FAILURE_MESSAGE "Kernel headers were not found!"
+    FileSystemHeader
+    REQUIRED_VARS FILESYSTEM_HEADER FORMAT_HEADER
+    REASON_FAILURE_MESSAGE "Current C++ standard library has no C++20 support!"
 )
