@@ -9,7 +9,7 @@ include(FindPackageHandleStandardArgs)
 
 check_include_file_cxx(
     "filesystem"
-    FILESYSTEM_HEADER
+    STD_FILESYSTEM_HEADER
 )
 
 check_include_file_cxx(
@@ -19,6 +19,6 @@ check_include_file_cxx(
 
 find_package_handle_standard_args(
     StdHeaders
-    REQUIRED_VARS FILESYSTEM_HEADER FORMAT_HEADER
+    REQUIRED_VARS STD_FILESYSTEM_HEADER FORMAT_HEADER
     REASON_FAILURE_MESSAGE "Current C++ standard library has no C++20 support!"
 )
