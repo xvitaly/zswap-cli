@@ -14,8 +14,6 @@ You need the following versions:
   * doxygen (for building documentation);
   * pandoc (for generating manpage).
 
-If no packaged version of the optional dependencies were found, the bundled version will be used.
-
 ## Configuration options
 
 This project supports the following build-time configuration options, which can be enabled or disabled using `-DOPTION_NAME=ON/OFF`:
