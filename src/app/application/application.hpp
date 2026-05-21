@@ -17,6 +17,7 @@
 
 #include <boost/program_options.hpp>
 
+#include "ksysinfo/ksysinfo.hpp"
 #include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 
@@ -48,6 +49,11 @@ private:
      * Stores an instance of the ZSwapDebug class.
     */
     std::unique_ptr<ZSwapDebug> ZSwapDebugger;
+
+    /**
+     * Stores an instance of the KSysInfo class.
+    */
+    std::unique_ptr<KSysInfo> SysInfo;
 
     /**
      * Stores the list of available command-line arguments with
