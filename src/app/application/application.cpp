@@ -99,7 +99,6 @@ void Application::PrintSummary() const
         return;
     }
 
-    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
     const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
     const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
 
@@ -190,7 +189,6 @@ int Application::PrintVersion() const
 
 int Application::ExecuteEnv() const
 {
-    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
     if (!SysInfo -> IsSwapAvailable())
     {
         std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
@@ -232,7 +230,6 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
     ParseConfigFile(ConfigFile);
 
-    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
     if (!SysInfo -> IsSwapAvailable())
     {
         std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
@@ -327,6 +324,7 @@ void Application::InitClassMembers()
     Config = std::make_unique<boost::program_options::variables_map>();
     ZSwap = std::make_unique<ZSwapObject>();
     ZSwapDebugger = std::make_unique<ZSwapDebug>();
+    SysInfo = std::make_unique<KSysInfo>();
 }
 
 void Application::InitCmdLineOptions() const
