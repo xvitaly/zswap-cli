@@ -190,6 +190,13 @@ int Application::PrintVersion() const
 
 int Application::ExecuteEnv() const
 {
+    std::unique_ptr<KSysInfo> SysInfo = std::make_unique<KSysInfo>();
+    if (!SysInfo -> IsSwapAvailable())
+    {
+        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
+        return 1;
+    }
+
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
