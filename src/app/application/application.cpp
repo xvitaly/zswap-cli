@@ -316,6 +316,16 @@ void Application::CheckIfRunningBySuperUser() const
     }
 }
 
+bool Application::CheckIfSwapAvailable() const
+{
+    if (!SysInfo -> IsSwapAvailable())
+    {
+        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
+        return false;
+    }
+    return true;
+}
+
 void Application::InitClassMembers()
 {
     CmdLineOptions = std::make_unique<boost::program_options::options_description>("Command-line tool to control the ZSwap kernel module options");
