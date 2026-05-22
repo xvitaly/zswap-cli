@@ -189,13 +189,7 @@ int Application::PrintVersion() const
 
 int Application::ExecuteEnv() const
 {
-    if (!SysInfo -> IsSwapAvailable())
-    {
-        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
-        return 1;
-    }
-
-    bool Result = true;
+    bool Result = CheckIfSwapAvailable();
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
@@ -230,13 +224,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
     ParseConfigFile(ConfigFile);
 
-    if (!SysInfo -> IsSwapAvailable())
-    {
-        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
-        return 1;
-    }
-
-    bool Result = true;
+    bool Result = CheckIfSwapAvailable();
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "zswap.enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
@@ -268,7 +256,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 
 int Application::ExecuteCmdLine() const
 {
-    bool Result = true;
+    bool Result = CheckIfSwapAvailable();
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
@@ -314,6 +302,16 @@ void Application::CheckIfRunningBySuperUser() const
     {
         throw std::runtime_error("This program must be run by the super-user. Terminating.");
     }
+}
+
+bool Application::CheckIfSwapAvailable() const
+{
+    if (!SysInfo -> IsSwapAvailable())
+    {
+        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
+        return false;
+    }
+    return true;
 }
 
 void Application::InitClassMembers()

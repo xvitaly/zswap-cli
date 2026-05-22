@@ -115,6 +115,12 @@ private:
     void CheckIfRunningBySuperUser() const;
 
     /**
+     * Checks whether the swap file or partition is available.
+     * @returns Whether the swap file or partition is available.
+    */
+    bool CheckIfSwapAvailable() const;
+
+    /**
      * Handles the \-\-env command-line argument. Gets parameters from
      * the environment variables.
      * @returns Exit code.
