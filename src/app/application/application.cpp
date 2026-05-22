@@ -256,7 +256,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 
 int Application::ExecuteCmdLine() const
 {
-    bool Result = true;
+    bool Result = CheckIfSwapAvailable();
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
