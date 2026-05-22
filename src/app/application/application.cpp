@@ -230,13 +230,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
     ParseConfigFile(ConfigFile);
 
-    if (!SysInfo -> IsSwapAvailable())
-    {
-        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
-        return 1;
-    }
-
-    bool Result = true;
+    bool Result = CheckIfSwapAvailable();
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "zswap.enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
