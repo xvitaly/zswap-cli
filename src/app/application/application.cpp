@@ -189,13 +189,7 @@ int Application::PrintVersion() const
 
 int Application::ExecuteEnv() const
 {
-    if (!SysInfo -> IsSwapAvailable())
-    {
-        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
-        return 1;
-    }
-
-    bool Result = true;
+    bool Result = CheckIfSwapAvailable();
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
