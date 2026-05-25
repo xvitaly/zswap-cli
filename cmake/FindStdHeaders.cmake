@@ -30,5 +30,5 @@ check_include_file_cxx(
 find_package_handle_standard_args(
     StdHeaders
     REQUIRED_VARS STD_FILESYSTEM_HEADER STD_FORMAT_HEADER STD_OPTIONAL_HEADER STD_STRING_VIEW_HEADER
-    REASON_FAILURE_MESSAGE "C++ standard library has no C++20 support!"
+    REASON_FAILURE_MESSAGE "Standard library has no modern C++ support!"
 )
