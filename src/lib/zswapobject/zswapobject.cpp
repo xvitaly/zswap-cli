@@ -40,6 +40,11 @@ void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& Valu
     std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\".", Name, Value) << std::endl;
 }
 
+void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue) const
+{
+    std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, NewValue, OldValue) << std::endl;
+}
+
 void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value) const
 {
     const std::string FullPath = ZSwapModuleParametersPath + Name;
