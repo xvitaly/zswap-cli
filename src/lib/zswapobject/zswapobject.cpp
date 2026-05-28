@@ -35,11 +35,6 @@ void ZSwapObject::CheckValueRange(const std::string& Name, const std::string& Va
     if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is out of range [0..100]!", Name));
 }
 
-void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& Value) const
-{
-    std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\".", Name, Value) << std::endl;
-}
-
 void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue) const
 {
     std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, NewValue, OldValue) << std::endl;
