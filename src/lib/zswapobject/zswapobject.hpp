@@ -210,9 +210,10 @@ private:
     /**
      * Prints the log entry to the standard output.
      * @param Name Option name.
-     * @param Value Option value.
+     * @param NewValue New option value.
+     * @param OldValue Old option value.
     */
-    void WriteLogEntry(const std::string&, const std::string&) const;
+    void WriteLogEntry(const std::string&, const std::string&, const std::string&) const;
 
     /**
      * Checks if the value is Y or N.
