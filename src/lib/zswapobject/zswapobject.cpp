@@ -40,13 +40,18 @@ void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewV
     std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, NewValue, OldValue) << std::endl;
 }
 
+void ZSwapObject::WriteValue(const std::string& FullPath, const std::string& Value) const
+{
+    std::ofstream ZSwapSysFs(FullPath);
+    ZSwapSysFs << Value;
+}
+
 void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value) const
 {
     const std::string FullPath = ZSwapModuleParametersPath + Name;
     if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
     const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
-    std::ofstream ZSwapSysFs(FullPath);
-    ZSwapSysFs << Value;
+    WriteValue(FullPath, Value);
     if (ReadZSwapValue(Name) != Value) throw std::runtime_error(std::format("Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
     WriteLogEntry(Name, Value, OldValue);
 }
