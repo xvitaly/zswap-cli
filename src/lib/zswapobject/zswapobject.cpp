@@ -56,14 +56,19 @@ void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Va
     WriteLogEntry(Name, Value, OldValue);
 }
 
-std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::string& Name) const
+std::string ZSwapObject::ReadValue(const std::string& FullPath) const
 {
-    const std::string FullPath = ZSwapModuleParametersPath + Name;
-    if (!std::filesystem::exists(FullPath)) return std::nullopt;
     std::string Result;
     std::ifstream ZSwapSysFs(FullPath);
     ZSwapSysFs >> Result;
     return Result;
+}
+
+std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::string& Name) const
+{
+    const std::string FullPath = ZSwapModuleParametersPath + Name;
+    if (!std::filesystem::exists(FullPath)) return std::nullopt;
+    return ReadValue(FullPath);
 }
 
 std::optional<std::string> ZSwapObject::GetZSwapEnabled() const

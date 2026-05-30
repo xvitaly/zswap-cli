@@ -208,6 +208,13 @@ private:
     void WriteZSwapValue(const std::string&, const std::string&) const;
 
     /**
+     * Reads the value of the ZSwap kernel module option.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @returns Option value.
+    */
+    std::string ReadValue(const std::string&) const;
+
+    /**
      * Reads the value of the ZSwap kernel module option by the
      * specified name.
      * @param Name Option name.
