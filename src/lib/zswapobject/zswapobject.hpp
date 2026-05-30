@@ -192,12 +192,27 @@ private:
 
     /**
      * Writes a new value to the specified ZSwap kernel module option.
+     * Internal implementation.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @param Value Option value.
+    */
+    void WriteValue(const std::string&, const std::string&) const;
+
+    /**
+     * Writes a new value to the specified ZSwap kernel module option.
      * @param Name Option name.
      * @param Value Option value.
      * @exception Raises an instance of std::runtime_error if the kernel
      * module option is not available.
     */
     void WriteZSwapValue(const std::string&, const std::string&) const;
+
+    /**
+     * Reads the value of the ZSwap kernel module option.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @returns Option value.
+    */
+    std::string ReadValue(const std::string&) const;
 
     /**
      * Reads the value of the ZSwap kernel module option by the
