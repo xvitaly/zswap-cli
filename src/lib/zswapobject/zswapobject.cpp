@@ -47,6 +47,7 @@ void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Va
     const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
     std::ofstream ZSwapSysFs(FullPath);
     ZSwapSysFs << Value;
+    if (ReadZSwapValue(Name) != Value) throw std::runtime_error(std::format("Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
     WriteLogEntry(Name, Value, OldValue);
 }
 
