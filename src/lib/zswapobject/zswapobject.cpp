@@ -44,9 +44,10 @@ void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Va
 {
     const std::string FullPath = ZSwapModuleParametersPath + Name;
     if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
+    const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
     std::ofstream ZSwapSysFs(FullPath);
     ZSwapSysFs << Value;
-    WriteLogEntry(Name, Value, ReadZSwapValue(Name).value());
+    WriteLogEntry(Name, Value, OldValue);
 }
 
 std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::string& Name) const
