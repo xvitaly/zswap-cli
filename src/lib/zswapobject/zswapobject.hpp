@@ -191,36 +191,31 @@ private:
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
-     * Writes a new value to the specified ZSwap kernel module option.
-     * Internal implementation.
-     * @param FullPath Full path to the ZSwap kernel module option.
-     * @param Value Option value.
-    */
-    void WriteValue(const std::string&, const std::string&) const;
-
-    /**
-     * Writes a new value to the specified ZSwap kernel module option.
+     * Checks whether the value is Y or N.
      * @param Name Option name.
-     * @param Value Option value.
-     * @exception Raises an instance of std::runtime_error if the kernel
-     * module option is not available.
+     * @param Value Option value to check.
+     * @exception Raises an instance of std::invalid_argument if the
+     * value does not meet the criteria.
     */
-    void WriteZSwapValue(const std::string&, const std::string&) const;
+    void CheckValueBool(const std::string&, const std::string&) const;
 
     /**
-     * Reads the value of the ZSwap kernel module option.
-     * @param FullPath Full path to the ZSwap kernel module option.
-     * @returns Option value.
-    */
-    std::string ReadValue(const std::string&) const;
-
-    /**
-     * Reads the value of the ZSwap kernel module option by the
-     * specified name.
+     * Checks whether the value is empty.
      * @param Name Option name.
-     * @returns Option value or N/A if not available.
+     * @param Value Option value to check.
+     * @exception Raises an instance of std::invalid_argument if the
+     * value does not meet the criteria.
     */
-    std::optional<std::string> ReadZSwapValue(const std::string&) const;
+    void CheckValueEmpty(const std::string&, const std::string&) const;
+
+    /**
+     * Checks whether the value is within the [0..100] range.
+     * @param Name Option name.
+     * @param Value Option value to check.
+     * @exception Raises an instance of std::invalid_argument if the
+     * value does not meet the criteria.
+    */
+    void CheckValueRange(const std::string&, const std::string&) const;
 
     /**
      * Prints the log entry to the standard output.
@@ -231,31 +226,36 @@ private:
     void WriteLogEntry(const std::string&, const std::string&, const std::string&) const;
 
     /**
-     * Checks if the value is Y or N.
-     * @param Name Option name.
-     * @param Value Option value to check.
-     * @exception Raises an instance of std::invalid_argument if the
-     * value does not meet the criteria.
+     * Reads the value of the ZSwap kernel module option from the
+     * specified full path.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @returns Option value.
     */
-    void CheckValueBool(const std::string&, const std::string&) const;
+    std::string ReadValue(const std::string&) const;
 
     /**
-     * Checks if the value is empty.
-     * @param Name Option name.
-     * @param Value Option value to check.
-     * @exception Raises an instance of std::invalid_argument if the
-     * value does not meet the criteria.
+     * Writes a new value to the specified ZSwap kernel module option
+     * from the specified full path.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @param Value Option value.
     */
-    void CheckValueEmpty(const std::string&, const std::string&) const;
+    void WriteValue(const std::string&, const std::string&) const;
 
     /**
-     * Checks if the value is in the [0..100] range.
+     * Reads the value of the specified ZSwap kernel module option.
      * @param Name Option name.
-     * @param Value Option value to check.
-     * @exception Raises an instance of std::invalid_argument if the
-     * value does not meet the criteria.
+     * @returns Option value or std::nullopt if not available.
     */
-    void CheckValueRange(const std::string&, const std::string&) const;
+    std::optional<std::string> ReadZSwapValue(const std::string&) const;
+
+    /**
+     * Writes a new value to the specified ZSwap kernel module option.
+     * @param Name Option name.
+     * @param Value Option value.
+     * @exception Raises an instance of the std::runtime_error if an
+     * error occurs.
+    */
+    void WriteZSwapValue(const std::string&, const std::string&) const;
 };
 
 #endif // ZSWAPOBJECT_HPP
