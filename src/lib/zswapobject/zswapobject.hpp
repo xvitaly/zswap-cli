@@ -191,46 +191,6 @@ private:
     const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
-     * Writes a new value to the specified ZSwap kernel module option.
-     * Internal implementation.
-     * @param FullPath Full path to the ZSwap kernel module option.
-     * @param Value Option value.
-    */
-    void WriteValue(const std::string&, const std::string&) const;
-
-    /**
-     * Writes a new value to the specified ZSwap kernel module option.
-     * @param Name Option name.
-     * @param Value Option value.
-     * @exception Raises an instance of std::runtime_error if the kernel
-     * module option is not available.
-    */
-    void WriteZSwapValue(const std::string&, const std::string&) const;
-
-    /**
-     * Reads the value of the ZSwap kernel module option.
-     * @param FullPath Full path to the ZSwap kernel module option.
-     * @returns Option value.
-    */
-    std::string ReadValue(const std::string&) const;
-
-    /**
-     * Reads the value of the ZSwap kernel module option by the
-     * specified name.
-     * @param Name Option name.
-     * @returns Option value or N/A if not available.
-    */
-    std::optional<std::string> ReadZSwapValue(const std::string&) const;
-
-    /**
-     * Prints the log entry to the standard output.
-     * @param Name Option name.
-     * @param NewValue New option value.
-     * @param OldValue Old option value.
-    */
-    void WriteLogEntry(const std::string&, const std::string&, const std::string&) const;
-
-    /**
      * Checks if the value is Y or N.
      * @param Name Option name.
      * @param Value Option value to check.
@@ -256,6 +216,46 @@ private:
      * value does not meet the criteria.
     */
     void CheckValueRange(const std::string&, const std::string&) const;
+
+    /**
+     * Prints the log entry to the standard output.
+     * @param Name Option name.
+     * @param NewValue New option value.
+     * @param OldValue Old option value.
+    */
+    void WriteLogEntry(const std::string&, const std::string&, const std::string&) const;
+
+    /**
+     * Reads the value of the ZSwap kernel module option.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @returns Option value.
+    */
+    std::string ReadValue(const std::string&) const;
+
+    /**
+     * Writes a new value to the specified ZSwap kernel module option.
+     * Internal implementation.
+     * @param FullPath Full path to the ZSwap kernel module option.
+     * @param Value Option value.
+    */
+    void WriteValue(const std::string&, const std::string&) const;
+
+    /**
+     * Reads the value of the ZSwap kernel module option by the
+     * specified name.
+     * @param Name Option name.
+     * @returns Option value or N/A if not available.
+    */
+    std::optional<std::string> ReadZSwapValue(const std::string&) const;
+
+    /**
+     * Writes a new value to the specified ZSwap kernel module option.
+     * @param Name Option name.
+     * @param Value Option value.
+     * @exception Raises an instance of std::runtime_error if the kernel
+     * module option is not available.
+    */
+    void WriteZSwapValue(const std::string&, const std::string&) const;
 };
 
 #endif // ZSWAPOBJECT_HPP
