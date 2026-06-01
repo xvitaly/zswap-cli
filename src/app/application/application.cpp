@@ -60,7 +60,10 @@ void Application::PrintDebugInfo() const
 
     for (const auto& [Name, Value] : Handlers)
     {
-        if (Value) std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        if (Value)
+            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        else if (IsVerbose)
+            std::cout << std::format("{0}: NOT SUPPORTED.", Name) << std::endl;
     }
 }
 
