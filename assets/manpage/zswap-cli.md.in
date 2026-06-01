@@ -54,6 +54,9 @@ Supported values:
   * **2** - print kernel module usage summary.
   * **3** - print kernel module debug information.
 
+#### \-\-verbose
+Enable verbose mode to display additional information for debugging or informational purposes.
+
 #### -e, \-\-enabled
 Enable or disable the ZSwap kernel module.
 
