@@ -78,6 +78,11 @@ private:
     std::unique_ptr<boost::program_options::variables_map> Config;
 
     /**
+     * Stores whether the verbose logging mode is enabled.
+    */
+    bool IsVerbose = false;
+
+    /**
      * Initializes the private class members.
     */
     void InitClassMembers();
@@ -106,6 +111,11 @@ private:
      * @param ConfigFile Full path to the configuration file.
     */
     void ParseConfigFile(const std::string&) const;
+
+    /**
+     * Sets the program additional configuration options.
+    */
+    void SetOperatingMode();
 
     /**
      * Checks if the application is running with super-user privileges.
