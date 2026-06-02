@@ -60,7 +60,10 @@ void Application::PrintDebugInfo() const
 
     for (const auto& [Name, Value] : Handlers)
     {
-        if (Value) std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        if (Value)
+            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        else if (IsVerbose)
+            std::cout << std::format("{0}: NOT SUPPORTED.", Name) << std::endl;
     }
 }
 
@@ -87,7 +90,10 @@ void Application::PrintSettings() const
 
     for (const auto& [Name, Value] : Handlers)
     {
-        if (Value) std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        if (Value)
+            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+        else if (IsVerbose)
+            std::cout << std::format("{0}: NOT SUPPORTED.", Name) << std::endl;
     }
 }
 
@@ -338,6 +344,7 @@ void Application::InitCmdLineOptions() const
         ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Get statistics and current settings of ZSwap kernel module.")
+        ("verbose", "Enable verbose mode to display additional information for debugging or informational purposes.")
         ;
 
     boost::program_options::options_description OptionsZSwap("Kernel module configuration options");
@@ -385,6 +392,11 @@ void Application::ParseConfigFile(const std::string& ConfigFile) const
     Config -> notify();
 }
 
+void Application::SetOperatingMode()
+{
+    if (CmdLine -> count("verbose")) IsVerbose = true;
+}
+
 Application::Application(int argc, char** argv)
 {
     CheckIfRunningBySuperUser();
@@ -392,4 +404,5 @@ Application::Application(int argc, char** argv)
     InitCmdLineOptions();
     InitConfigOptions();
     ParseCmdLine(argc, argv);
+    SetOperatingMode();
 }
