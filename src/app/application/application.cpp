@@ -127,9 +127,9 @@ void Application::PrintSummary() const
     const float SwapUsedPercent = StoredSize / (SysInfo -> GetTotalSwapF() - SysInfo -> GetFreeSwapF()) * 100.f;
     const float CompressionRatio = StoredSizeMB / PoolSizeMB;
 
-    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
-                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed).\n"
-                             "Compression ratio: {4:.2f}.",
+    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
+                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed)\n"
+                             "Compression ratio: {4:.2f}",
                              PoolSizeMB,
                              MemTotalPercent,
                              StoredSizeMB,
