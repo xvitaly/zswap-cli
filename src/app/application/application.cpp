@@ -61,9 +61,9 @@ void Application::PrintDebugInfo() const
     for (const auto& [Name, Value] : Handlers)
     {
         if (Value)
-            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+            std::cout << std::format("{0}: {1}", Name, Value.value()) << std::endl;
         else if (IsVerbose)
-            std::cout << std::format("{0}: NOT SUPPORTED.", Name) << std::endl;
+            std::cout << std::format("{0}: NOT SUPPORTED", Name) << std::endl;
     }
 }
 
@@ -91,9 +91,9 @@ void Application::PrintSettings() const
     for (const auto& [Name, Value] : Handlers)
     {
         if (Value)
-            std::cout << std::format("{0}: {1}.", Name, Value.value()) << std::endl;
+            std::cout << std::format("{0}: {1}", Name, Value.value()) << std::endl;
         else if (IsVerbose)
-            std::cout << std::format("{0}: NOT SUPPORTED.", Name) << std::endl;
+            std::cout << std::format("{0}: NOT SUPPORTED", Name) << std::endl;
     }
 }
 
@@ -127,9 +127,9 @@ void Application::PrintSummary() const
     const float SwapUsedPercent = StoredSize / (SysInfo -> GetTotalSwapF() - SysInfo -> GetFreeSwapF()) * 100.f;
     const float CompressionRatio = StoredSizeMB / PoolSizeMB;
 
-    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal).\n"
-                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed).\n"
-                             "Compression ratio: {4:.2f}.",
+    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
+                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed)\n"
+                             "Compression ratio: {4:.2f}",
                              PoolSizeMB,
                              MemTotalPercent,
                              StoredSizeMB,
