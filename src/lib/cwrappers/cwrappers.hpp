@@ -17,15 +17,14 @@
 /**
  * Static class with wrappers for plain C functions.
 */
-class CWrappers
+namespace CWrappers
 {
-public:
     /**
      * Gets the value of the environment variable, specified by name.
      * @param KeyName Environment variable name.
      * @returns Environment variable value.
     */
-    static std::string GetEnv(const std::string&);
+    std::string GetEnv(const std::string&);
 
     /**
      * Checks if the program is running with super-user privileges.
@@ -33,18 +32,13 @@ public:
      * @retval true Super-user privileges were detected.
      * @retval false Otherwise.
     */
-    static bool CheckRoot();
+    bool CheckRoot();
 
     /**
      * Gets the value of the SC_PAGESIZE.
      * @returns SC_PAGESIZE value.
     */
-    static long GetSCPageSize();
-private:
-    /**
-     * Default constructor of the CWrappers class. No one should use it.
-    */
-    CWrappers() = default;
-};
+    long GetSCPageSize();
+}
 
 #endif // CWRAPPERS_HPP
