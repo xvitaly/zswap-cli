@@ -6,7 +6,7 @@
 
 /**
  * @file cwrappers/cwrappers.cpp
- * Contains the CWrappers class implementation.
+ * Contains the CWrappers namespace implementation.
 */
 
 #include <string>
