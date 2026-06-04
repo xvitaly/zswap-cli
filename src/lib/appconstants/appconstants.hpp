@@ -17,7 +17,8 @@
 /**
  * Namespace for working with various constants used in project.
 */
-namespace AppConstants {
+namespace AppConstants
+{
     /**
      * Returns the application internal name as a string.
     */
