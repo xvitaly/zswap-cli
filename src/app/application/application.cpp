@@ -296,6 +296,7 @@ int Application::Run() const
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("version")) return PrintVersion();
+    CheckIfRunningBySuperUser();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
     if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
     if (CmdLine -> count("env")) return ExecuteEnv();
@@ -306,7 +307,7 @@ void Application::CheckIfRunningBySuperUser() const
 {
     if (CWrappers::CheckRoot())
     {
-        throw std::runtime_error("This program must be run by the super-user. Terminating.");
+        throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
     }
 }
 
@@ -399,7 +400,6 @@ void Application::SetOperatingMode()
 
 Application::Application(int argc, char** argv)
 {
-    CheckIfRunningBySuperUser();
     InitClassMembers();
     InitCmdLineOptions();
     InitConfigOptions();
