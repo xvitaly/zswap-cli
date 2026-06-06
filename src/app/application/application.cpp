@@ -307,7 +307,7 @@ void Application::CheckIfRunningBySuperUser() const
 {
     if (CWrappers::CheckRoot())
     {
-        throw std::runtime_error("This program must be run by the super-user. Terminating.");
+        throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
     }
 }
 
