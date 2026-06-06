@@ -399,7 +399,6 @@ void Application::SetOperatingMode()
 
 Application::Application(int argc, char** argv)
 {
-    CheckIfRunningBySuperUser();
     InitClassMembers();
     InitCmdLineOptions();
     InitConfigOptions();
