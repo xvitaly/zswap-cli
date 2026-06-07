@@ -65,11 +65,7 @@ void Application::PrintDebugInfo() const
 
 void Application::PrintSettings() const
 {
-    if (!ZSwap -> IsAvailable())
-    {
-        std::cout << "ZSwap kernel module is not loaded." << std::endl;
-        return;
-    }
+    if (!CheckIfModuleLoaded()) return;
 
     const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
@@ -319,6 +315,16 @@ bool Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
     if (PoolSize == 0)
     {
         std::cout << "ZSwap is not working. The pool is empty." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Application::CheckIfModuleLoaded() const
+{
+    if (!ZSwap -> IsAvailable())
+    {
+        std::cout << "ZSwap kernel module is not loaded." << std::endl;
         return false;
     }
     return true;

@@ -124,6 +124,12 @@ private:
     bool CheckIfDebugAvailable() const;
 
     /**
+     * Checks whether the ZSwap kernel module is loaded.
+     * @returns Whether the ZSwap kernel module is loaded.
+    */
+    bool CheckIfModuleLoaded() const;
+
+    /**
      * Checks if the application is running with super-user privileges.
      * @exception Raises an instance of std::runtime_error on missing
      * super-user privileges.
