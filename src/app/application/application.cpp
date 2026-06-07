@@ -36,11 +36,7 @@
 
 void Application::PrintDebugInfo() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable())
-    {
-        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
-        return;
-    }
+    if (!CheckIfDebugAvailable()) return;
 
     const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
     {
@@ -99,11 +95,7 @@ void Application::PrintSettings() const
 
 void Application::PrintSummary() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable())
-    {
-        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
-        return;
-    }
+    if (!CheckIfDebugAvailable()) return;
 
     const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
     const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
@@ -316,6 +308,16 @@ bool Application::CheckIfSwapAvailable() const
     if (!SysInfo -> IsSwapAvailable())
     {
         std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Application::CheckIfDebugAvailable() const
+{
+    if (!ZSwapDebugger -> IsDebugAvailable())
+    {
+        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
         return false;
     }
     return true;

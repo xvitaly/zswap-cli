@@ -118,6 +118,12 @@ private:
     void SetOperatingMode();
 
     /**
+     * Checks whether the access to debugfs is allowed.
+     * @returns Whether the access to debugfs is allowed.
+    */
+    bool CheckIfDebugAvailable() const;
+
+    /**
      * Checks if the application is running with super-user privileges.
      * @exception Raises an instance of std::runtime_error on missing
      * super-user privileges.
