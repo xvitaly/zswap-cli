@@ -101,12 +101,7 @@ void Application::PrintSummary() const
     const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
 
     if (!CheckIfSwapAvailable()) return;
-
-    if (PoolSize == 0)
-    {
-        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
-        return;
-    }
+    if (!CheckIfPoolIsNotEmpty(PoolSize)) return;
 
     const float StoredSize = static_cast<float>(StoredPages) * static_cast<float>(SysInfo -> GetPageSize());
     const float PoolSizeMB = static_cast<float>(PoolSize) / 1048576.f;
@@ -314,6 +309,16 @@ bool Application::CheckIfDebugAvailable() const
     if (!ZSwapDebugger -> IsDebugAvailable())
     {
         std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
+{
+    if (PoolSize == 0)
+    {
+        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
         return false;
     }
     return true;

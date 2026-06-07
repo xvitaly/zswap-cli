@@ -137,6 +137,12 @@ private:
     bool CheckIfSwapAvailable() const;
 
     /**
+     * Checks whether the compressed pool is not empty.
+     * @returns Whether the the compressed pool is not empty.
+    */
+    bool CheckIfPoolIsNotEmpty(const unsigned long) const;
+
+    /**
      * Handles the \-\-env command-line argument. Gets parameters from
      * the environment variables.
      * @returns Exit code.
