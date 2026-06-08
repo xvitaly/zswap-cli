@@ -144,6 +144,7 @@ private:
 
     /**
      * Checks whether the compressed pool is not empty.
+     * @param PoolSize Pool size.
      * @returns Whether the the compressed pool is not empty.
     */
     bool CheckIfPoolIsNotEmpty(const unsigned long) const;
