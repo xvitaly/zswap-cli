@@ -36,11 +36,7 @@
 
 void Application::PrintDebugInfo() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable())
-    {
-        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
-        return;
-    }
+    if (!CheckIfDebugAvailable()) return;
 
     const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
     {
@@ -69,11 +65,7 @@ void Application::PrintDebugInfo() const
 
 void Application::PrintSettings() const
 {
-    if (!ZSwap -> IsAvailable())
-    {
-        std::cout << "ZSwap kernel module is not loaded." << std::endl;
-        return;
-    }
+    if (!CheckIfModuleLoaded()) return;
 
     const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
@@ -99,26 +91,13 @@ void Application::PrintSettings() const
 
 void Application::PrintSummary() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable())
-    {
-        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
-        return;
-    }
+    if (!CheckIfDebugAvailable()) return;
 
     const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
     const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
 
-    if (!SysInfo -> IsSwapAvailable())
-    {
-        std::cout << "ZSwap is not functional due to missing swap file or partition." << std::endl;
-        return;
-    }
-
-    if (PoolSize == 0)
-    {
-        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
-        return;
-    }
+    if (!CheckIfSwapAvailable()) return;
+    if (!CheckIfPoolIsNotEmpty(PoolSize)) return;
 
     const float StoredSize = static_cast<float>(StoredPages) * static_cast<float>(SysInfo -> GetPageSize());
     const float PoolSizeMB = static_cast<float>(PoolSize) / 1048576.f;
@@ -315,7 +294,37 @@ bool Application::CheckIfSwapAvailable() const
 {
     if (!SysInfo -> IsSwapAvailable())
     {
-        std::cerr << "ZSwap is not functional due to missing swap file or partition." << std::endl;
+        std::cout << "ZSwap is not functional due to missing swap file or partition." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Application::CheckIfDebugAvailable() const
+{
+    if (!ZSwapDebugger -> IsDebugAvailable())
+    {
+        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
+{
+    if (PoolSize == 0)
+    {
+        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Application::CheckIfModuleLoaded() const
+{
+    if (!ZSwap -> IsAvailable())
+    {
+        std::cout << "ZSwap kernel module is not loaded." << std::endl;
         return false;
     }
     return true;
