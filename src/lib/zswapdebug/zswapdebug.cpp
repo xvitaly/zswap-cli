@@ -28,10 +28,7 @@ std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string&
 {
     const std::string FullPath = ModuleDebugPath + Name;
     if (!std::filesystem::exists(FullPath)) return std::nullopt;
-    unsigned long Result;
-    std::ifstream ZSwapSysFs(FullPath);
-    ZSwapSysFs >> Result;
-    return Result;
+    return ReadDebugValue(FullPath);
 }
 
 std::optional<unsigned long> ZSwapDebug::GetPoolLimitHit() const
