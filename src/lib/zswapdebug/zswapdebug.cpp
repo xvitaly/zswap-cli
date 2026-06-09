@@ -16,14 +16,19 @@
 
 #include "zswapdebug/zswapdebug.hpp"
 
-std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+unsigned long ZSwapDebug::ReadDebugValue(const std::string& FullPath) const
 {
-    const std::string FullPath = ModuleDebugPath + Name;
-    if (!std::filesystem::exists(FullPath)) return std::nullopt;
     unsigned long Result;
     std::ifstream ZSwapSysFs(FullPath);
     ZSwapSysFs >> Result;
     return Result;
+}
+
+std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+{
+    const std::string FullPath = ModuleDebugPath + Name;
+    if (!std::filesystem::exists(FullPath)) return std::nullopt;
+    return ReadDebugValue(FullPath);
 }
 
 std::optional<unsigned long> ZSwapDebug::GetPoolLimitHit() const
