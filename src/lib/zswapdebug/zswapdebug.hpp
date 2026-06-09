@@ -112,6 +112,14 @@ private:
     const std::string ModuleDebugPath = "/sys/kernel/debug/zswap/";
 
     /**
+     * Reads the value of the ZSwap kernel module debug variable from
+     * the specified full path.
+     * @param FullPath Full path to the ZSwap kernel module debug variable.
+     * @returns Value of the specified debug variable.
+    */
+    unsigned long ReadDebugValue(const std::string&) const;
+
+    /**
      * Reads the debug value of the ZSwap kernel module by the
      * specified name as the specified type.
      * @param Name Debug value name.

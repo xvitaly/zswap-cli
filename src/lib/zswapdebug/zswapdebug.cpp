@@ -16,6 +16,14 @@
 
 #include "zswapdebug/zswapdebug.hpp"
 
+unsigned long ZSwapDebug::ReadDebugValue(const std::string& FullPath) const
+{
+    unsigned long Result;
+    std::ifstream ZSwapSysFs(FullPath);
+    ZSwapSysFs >> Result;
+    return Result;
+}
+
 std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
 {
     const std::string FullPath = ModuleDebugPath + Name;
