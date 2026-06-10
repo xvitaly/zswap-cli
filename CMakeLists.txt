@@ -55,8 +55,10 @@ set(ASSETS_COMP_NAME "assets")
 # ===================== File names =====================
 # ======================================================
 
+set(SCHEME_NAME "org.easycoding.${CMAKE_PROJECT_NAME}")
 set(CONF_FILE_NAME "${CMAKE_PROJECT_NAME}.conf")
 set(UNIT_FILE_NAME "${CMAKE_PROJECT_NAME}.service")
+set(METAINFO_FILE_NAME "${SCHEME_NAME}.metainfo.xml")
 
 # ======================================================
 # ================= Internal imports ===================
