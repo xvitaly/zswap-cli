@@ -16,6 +16,7 @@ project(zswap-cli
     HOMEPAGE_URL "https://github.com/xvitaly/zswap-cli"
     LANGUAGES CXX
 )
+set(RELEASE_DATE "2025-12-26")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
