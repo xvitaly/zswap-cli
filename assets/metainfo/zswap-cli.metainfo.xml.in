@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2020-2026 EasyCoding Team and contributors
+SPDX-License-Identifier: CC0-1.0
+-->
+<component type="console-application">
+    <id>@SCHEME_NAME@</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>MIT</project_license>
+    <name>@CMAKE_PROJECT_NAME@</name>
+    <summary>@CMAKE_PROJECT_DESCRIPTION@</summary>
+    <description>
+        <p>Zswap-cli is a command-line tool to control the zswap kernel module options on the fly.</p>
+        <p>Zswap is a compressed cache for swap pages. It takes pages that are in the process of being swapped out to disk and tries to compress them into a RAM-based memory pool with dynamic allocation.</p>
+        <p>It trades CPU cycles for a significant performance boost since reading from a compressed cache is much faster than reading from a swap device.</p>
+        <p>Currently supported features:</p>
+        <ul>
+            <li>CLI, environment variables and configuration files support.</li>
+            <li>Optional systemd integration.</li>
+            <li>Usage statistics and debug information support.</li>
+            <li>Does not require a reboot.</li>
+        </ul>
+    </description>
+    <categories>
+        <category>System</category>
+    </categories>
+    <keywords>
+        <keyword>console</keyword>
+        <keyword>monitoring</keyword>
+        <keyword>performance</keyword>
+        <keyword>statistics</keyword>
+        <keyword>utility</keyword>
+    </keywords>
+    <url type="homepage">@CMAKE_PROJECT_HOMEPAGE_URL@</url>
+    <url type="bugtracker">@CMAKE_PROJECT_HOMEPAGE_URL@/issues</url>
+    <url type="vcs-browser">@CMAKE_PROJECT_HOMEPAGE_URL@</url>
+    <update_contact>@CMAKE_PROJECT_HOMEPAGE_URL@</update_contact>
+    <provides>
+        <binary>@APP_NAME@</binary>
+    </provides>
+    <developer id="org.easycoding">
+        <name>EasyCoding Team and contributors</name>
+    </developer>
+    <content_rating type="oars-1.1" />
+    <branding>
+        <color type="primary" scheme_preference="light">#8ff0a4</color>
+        <color type="primary" scheme_preference="dark">#165b1c</color>
+    </branding>
+    <releases>
+        <release version="@CMAKE_PROJECT_VERSION@" date="@RELEASE_DATE@">
+            <url>@CMAKE_PROJECT_HOMEPAGE_URL@/releases/tag/v@CMAKE_PROJECT_VERSION@</url>
+        </release>
+    </releases>
+</component>
