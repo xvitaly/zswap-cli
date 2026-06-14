@@ -287,3 +287,12 @@ if (SYSTEMD_INTEGRATION)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}" COMPONENT ${ASSETS_COMP_NAME})
     install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 endif()
+
+# ======================================================
+# ==================== Tests target ====================
+# ======================================================
+
+if (BUILD_TESTS)
+    enable_testing()
+    add_test(NAME test-metainfo COMMAND ${APPSTREAMUTIL_EXECUTABLE} ${APPSTREAMUTIL_PARAMETERS} "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml")
+endif()
