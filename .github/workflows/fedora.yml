@@ -49,7 +49,7 @@ jobs:
         sudo dnf -y install boost-devel glibc-headers kernel-headers systemd systemd-devel
     - name: Installing helper tools
       run: |
-        sudo dnf -y install doxygen pandoc
+        sudo dnf -y install libappstream-glib doxygen pandoc
     - name: Building project with CMake
       run: |
         cmake -S . -B build \
@@ -62,15 +62,20 @@ jobs:
             -DBUILD_DOC:BOOL=ON \
             -DBUILD_MANPAGE:BOOL=ON \
             -DBUILD_SHELL_COMPLETION:BOOL=ON \
+            -DBUILD_TESTS:BOOL=ON \
             -DLINK_ALL_STATICALLY:BOOL=OFF \
             -DLINK_BOOST_STATICALLY:BOOL=OFF \
             -DLINK_ENABLE_OPTIMIZATIONS:BOOL=ON \
-            -DSYSTEMD_INTEGRATION:BOOL=ON
+            -DSYSTEMD_INTEGRATION:BOOL=ON \
+            -DTESTS_ENABLE_NETWORK:BOOL=ON
         cmake --build build
       env:
         CFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
         CXXFLAGS: -O2 -fexceptions -pipe -Wall -Wextra -Werror -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fPIC -fstack-protector-strong -fasynchronous-unwind-tables -fcf-protection
         LDFLAGS: -Wl,-z,relro -Wl,--as-needed -Wl,-z,now
+    - name: Running tests with CMake
+      run: |
+        ctest --test-dir build --output-on-failure
     - name: Installing project with CMake
       run: |
         sudo cmake --install build

@@ -16,6 +16,7 @@ project(zswap-cli
     HOMEPAGE_URL "https://github.com/xvitaly/zswap-cli"
     LANGUAGES CXX
 )
+set(RELEASE_DATE "2025-12-26")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,6 +30,7 @@ set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 option(BUILD_DOC "Build and install API and application documentation in HTML format." OFF)
 option(BUILD_MANPAGE "Build and install manpage with documentation." OFF)
 option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." ON)
+option(BUILD_TESTS "Build various tests." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
@@ -54,8 +56,10 @@ set(ASSETS_COMP_NAME "assets")
 # ===================== File names =====================
 # ======================================================
 
+set(SCHEME_NAME "org.easycoding.${CMAKE_PROJECT_NAME}")
 set(CONF_FILE_NAME "${CMAKE_PROJECT_NAME}.conf")
 set(UNIT_FILE_NAME "${CMAKE_PROJECT_NAME}.service")
+set(METAINFO_FILE_NAME "${SCHEME_NAME}.metainfo.xml")
 
 # ======================================================
 # ================= Internal imports ===================
@@ -138,6 +142,14 @@ if (SYSTEMD_INTEGRATION)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET systemd)
     pkg_get_variable(SYSTEMD_UNITDIR systemd "systemdsystemunitdir" DEFINE_VARIABLES "prefix=${CMAKE_INSTALL_PREFIX}" "rootprefix=${CMAKE_INSTALL_PREFIX}")
+endif()
+
+# ======================================================
+# ============= Tests validators detection =============
+# ======================================================
+
+if (BUILD_TESTS)
+    find_package(AppstreamUtil REQUIRED)
 endif()
 
 # ======================================================
@@ -250,6 +262,9 @@ install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${APP_
 # =================== Assets target ====================
 # ======================================================
 
+configure_file("assets/metainfo/${APP_NAME}.metainfo.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml" @ONLY)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo" RENAME ${METAINFO_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
+
 if (BUILD_DOC)
     doxygen_add_docs(${DOCS_NAME} src docs ALL WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Building documentation with Doxygen.")
     install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT ${ASSETS_COMP_NAME})
@@ -271,4 +286,13 @@ if (SYSTEMD_INTEGRATION)
     configure_file("assets/systemd/${UNIT_FILE_NAME}.in" "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" @ONLY)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}" COMPONENT ${ASSETS_COMP_NAME})
     install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+endif()
+
+# ======================================================
+# ==================== Tests target ====================
+# ======================================================
+
+if (BUILD_TESTS)
+    enable_testing()
+    add_test(NAME test-metainfo COMMAND ${APPSTREAMUTIL_EXECUTABLE} ${APPSTREAMUTIL_PARAMETERS} "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml")
 endif()
