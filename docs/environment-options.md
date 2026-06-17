@@ -2,6 +2,9 @@
 
 This project support of getting options from the environment variables.
 
+> [!WARNING]
+> This feature is deprecated and will be removed in future versions. Please consider switching to [configuration files](configuration-files.md) or [CLI options](using-application.md).
+
 ## Supported options
 
   * `ZSWAP_ENABLED_VALUE` - enable or disable the ZSwap kernel module.
