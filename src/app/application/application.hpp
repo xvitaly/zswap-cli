@@ -118,7 +118,8 @@ private:
     void SetOperatingMode();
 
     /**
-     * Checks whether the access to debugfs is allowed.
+     * Checks whether the access to debugfs is allowed,
+     * and prints a message if not.
      * @returns Whether the access to debugfs is allowed.
     */
     bool CheckIfDebugAvailable() const;
