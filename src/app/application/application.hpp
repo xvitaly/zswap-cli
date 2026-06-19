@@ -125,7 +125,8 @@ private:
     bool CheckIfDebugAvailable() const;
 
     /**
-     * Checks whether the ZSwap kernel module is loaded.
+     * Checks whether the ZSwap kernel module is loaded,
+     * and prints a message if not.
      * @returns Whether the ZSwap kernel module is loaded.
     */
     bool CheckIfModuleLoaded() const;
