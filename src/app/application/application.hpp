@@ -140,7 +140,8 @@ private:
     void CheckIfRunningBySuperUser() const;
 
     /**
-     * Checks whether the swap file or partition is available.
+     * Checks whether the swap file or partition is available,
+     * and prints a message if not.
      * @returns Whether the swap file or partition is available.
     */
     bool CheckIfSwapAvailable() const;
