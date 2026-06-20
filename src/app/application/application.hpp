@@ -132,7 +132,8 @@ private:
     bool CheckIfModuleLoaded() const;
 
     /**
-     * Checks if the application is running with super-user privileges.
+     * Checks if the application is running with super-user privileges,
+     * and raises an exception if not.
      * @exception Raises an instance of std::runtime_error on missing
      * super-user privileges.
     */
