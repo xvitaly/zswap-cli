@@ -147,7 +147,8 @@ private:
     bool CheckIfSwapAvailable() const;
 
     /**
-     * Checks whether the compressed pool is not empty.
+     * Checks whether the compressed pool is not empty,
+     * and prints a message if not.
      * @param PoolSize Pool size.
      * @returns Whether the the compressed pool is not empty.
     */
