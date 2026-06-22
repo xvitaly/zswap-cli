@@ -118,32 +118,37 @@ private:
     void SetOperatingMode();
 
     /**
-     * Checks whether the access to debugfs is allowed.
+     * Checks whether the access to debugfs is allowed,
+     * and prints a message if not.
      * @returns Whether the access to debugfs is allowed.
     */
     bool CheckIfDebugAvailable() const;
 
     /**
-     * Checks whether the ZSwap kernel module is loaded.
+     * Checks whether the ZSwap kernel module is loaded,
+     * and prints a message if not.
      * @returns Whether the ZSwap kernel module is loaded.
     */
     bool CheckIfModuleLoaded() const;
 
     /**
-     * Checks if the application is running with super-user privileges.
+     * Checks if the application is running with super-user privileges,
+     * and raises an exception if not.
      * @exception Raises an instance of std::runtime_error on missing
      * super-user privileges.
     */
     void CheckIfRunningBySuperUser() const;
 
     /**
-     * Checks whether the swap file or partition is available.
+     * Checks whether the swap file or partition is available,
+     * and prints a message if not.
      * @returns Whether the swap file or partition is available.
     */
     bool CheckIfSwapAvailable() const;
 
     /**
-     * Checks whether the compressed pool is not empty.
+     * Checks whether the compressed pool is not empty,
+     * and prints a message if not.
      * @param PoolSize Pool size.
      * @returns Whether the the compressed pool is not empty.
     */
