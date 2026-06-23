@@ -29,6 +29,7 @@ SPDX-License-Identifier: CC0-1.0
         <keyword>monitoring</keyword>
         <keyword>performance</keyword>
         <keyword>statistics</keyword>
+        <keyword>swap</keyword>
         <keyword>utility</keyword>
     </keywords>
     <url type="homepage">@CMAKE_PROJECT_HOMEPAGE_URL@</url>
