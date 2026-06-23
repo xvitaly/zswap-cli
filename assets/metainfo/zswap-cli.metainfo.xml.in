@@ -31,6 +31,7 @@ SPDX-License-Identifier: CC0-1.0
         <keyword>statistics</keyword>
         <keyword>swap</keyword>
         <keyword>utility</keyword>
+        <keyword>zswap</keyword>
     </keywords>
     <url type="homepage">@CMAKE_PROJECT_HOMEPAGE_URL@</url>
     <url type="bugtracker">@CMAKE_PROJECT_HOMEPAGE_URL@/issues</url>
