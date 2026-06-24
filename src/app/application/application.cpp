@@ -195,7 +195,7 @@ int Application::ExecuteEnv() const
             const std::string EnvValue = CWrappers::GetEnv(Key);
             if (!EnvValue.empty()) Handler(EnvValue);
         }
-        catch (std::exception& e)
+        catch (const std::exception& e)
         {
             std::cerr << e.what() << std::endl;
             Result &= false;
@@ -229,7 +229,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
         {
             if (Config -> count(Key)) Handler(Config -> at(Key).as<std::string>());
         }
-        catch (std::exception& e)
+        catch (const std::exception& e)
         {
             std::cerr << e.what() << std::endl;
             Result &= false;
@@ -261,7 +261,7 @@ int Application::ExecuteCmdLine() const
         {
             if (CmdLine -> count(Key)) Handler(CmdLine -> at(Key).as<std::string>());
         }
-        catch (std::exception& e)
+        catch (const std::exception& e)
         {
             std::cerr << e.what() << std::endl;
             Result &= false;
