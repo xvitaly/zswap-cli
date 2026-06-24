@@ -28,15 +28,15 @@ int main(int argc, char** argv)
     {
         return std::make_unique<Application>(argc, argv) -> Run();
     }
-    catch (boost::program_options::required_option& e)
+    catch (const boost::program_options::required_option& e)
     {
         std::cerr << "Missing command-line argument: " << e.what() << std::endl;
     }
-    catch (boost::program_options::error& e)
+    catch (const boost::program_options::error& e)
     {
         std::cerr << "Command-line argument error: " << e.what() << std::endl;
     }
-    catch (std::exception& e)
+    catch (const std::exception& e)
     {
         std::cerr << "An error occurred: " << e.what() << std::endl;
     }
