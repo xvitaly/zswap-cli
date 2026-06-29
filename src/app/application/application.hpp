@@ -118,39 +118,43 @@ private:
     void SetOperatingMode();
 
     /**
-     * Checks whether the access to debugfs is allowed,
-     * and prints a message if not.
-     * @returns Whether the access to debugfs is allowed.
+     * Checks whether the access to debugfs is allowed, and raises
+     * an exception if not.
+     * @exception Raises an instance of the std::runtime_error if
+     * the access to debugfs is not allowed.
     */
     void CheckIfDebugAvailable() const;
 
     /**
-     * Checks whether the ZSwap kernel module is loaded,
-     * and prints a message if not.
-     * @returns Whether the ZSwap kernel module is loaded.
+     * Checks whether the ZSwap kernel module is loaded, and raises
+     * an exception if not.
+     * @exception Raises an instance of the std::runtime_error if
+     * the ZSwap kernel module is not loaded.
     */
     void CheckIfModuleLoaded() const;
 
     /**
      * Checks if the application is running with super-user privileges,
      * and raises an exception if not.
-     * @exception Raises an instance of std::runtime_error on missing
+     * @exception Raises an instance of the std::runtime_error on missing
      * super-user privileges.
     */
     void CheckIfRunningBySuperUser() const;
 
     /**
-     * Checks whether the swap file or partition is available,
-     * and prints a message if not.
-     * @returns Whether the swap file or partition is available.
+     * Checks whether the swap file or partition is available, and raises
+     * an exception if not.
+     * @exception Raises an instance of the std::runtime_error if the
+     * swap file or partition is not available.
     */
     void CheckIfSwapAvailable() const;
 
     /**
-     * Checks whether the compressed pool is not empty,
-     * and prints a message if not.
+     * Checks whether the compressed pool is not empty, and raises
+     * an exception if not.
      * @param PoolSize Pool size.
-     * @returns Whether the the compressed pool is not empty.
+     * @exception Raises an instance of the std::runtime_error if the
+     * the compressed pool is empty.
     */
     void CheckIfPoolIsNotEmpty(const unsigned long) const;
 
