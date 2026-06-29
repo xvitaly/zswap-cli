@@ -36,7 +36,7 @@
 
 void Application::PrintDebugInfo() const
 {
-    if (!CheckIfDebugAvailable()) return;
+    CheckIfDebugAvailable();
 
     const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
     {
@@ -65,7 +65,7 @@ void Application::PrintDebugInfo() const
 
 void Application::PrintSettings() const
 {
-    if (!CheckIfModuleLoaded()) return;
+    CheckIfModuleLoaded();
 
     const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
@@ -91,13 +91,13 @@ void Application::PrintSettings() const
 
 void Application::PrintSummary() const
 {
-    if (!CheckIfDebugAvailable()) return;
+    CheckIfDebugAvailable();
+    CheckIfSwapAvailable();
 
     const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
     const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
 
-    if (!CheckIfSwapAvailable()) return;
-    if (!CheckIfPoolIsNotEmpty(PoolSize)) return;
+    CheckIfPoolIsNotEmpty(PoolSize);
 
     const float StoredSize = static_cast<float>(StoredPages) * static_cast<float>(SysInfo -> GetPageSize());
     const float PoolSizeMB = static_cast<float>(PoolSize) / 1048576.f;
@@ -186,7 +186,7 @@ int Application::PrintVersion() const
 
 int Application::ExecuteEnv() const
 {
-    bool Result = CheckIfSwapAvailable();
+    bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
@@ -221,7 +221,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 {
     ParseConfigFile(ConfigFile);
 
-    bool Result = CheckIfSwapAvailable();
+    bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "zswap.enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
@@ -253,7 +253,7 @@ int Application::ExecuteConfig(const std::string& ConfigFile) const
 
 int Application::ExecuteCmdLine() const
 {
-    bool Result = CheckIfSwapAvailable();
+    bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
         { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
@@ -302,44 +302,36 @@ void Application::CheckIfRunningBySuperUser() const
     }
 }
 
-bool Application::CheckIfSwapAvailable() const
+void Application::CheckIfSwapAvailable() const
 {
     if (!SysInfo -> IsSwapAvailable())
     {
-        std::cout << "ZSwap is not functional due to missing swap file or partition." << std::endl;
-        return false;
+        throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
     }
-    return true;
 }
 
-bool Application::CheckIfDebugAvailable() const
+void Application::CheckIfDebugAvailable() const
 {
     if (!ZSwapDebugger -> IsDebugAvailable())
     {
-        std::cout << "ZSwap is not running or access to debugfs is denied." << std::endl;
-        return false;
+        throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
     }
-    return true;
 }
 
-bool Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
+void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 {
     if (PoolSize == 0)
     {
-        std::cout << "ZSwap is not working. The pool is empty." << std::endl;
-        return false;
+        throw std::runtime_error("ZSwap is not working. The pool is empty.");
     }
-    return true;
 }
 
-bool Application::CheckIfModuleLoaded() const
+void Application::CheckIfModuleLoaded() const
 {
     if (!ZSwap -> IsAvailable())
     {
-        std::cout << "ZSwap kernel module is not loaded." << std::endl;
-        return false;
+        throw std::runtime_error("ZSwap kernel module is not loaded.");
     }
-    return true;
 }
 
 void Application::InitClassMembers()

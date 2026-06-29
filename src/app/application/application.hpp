@@ -122,14 +122,14 @@ private:
      * and prints a message if not.
      * @returns Whether the access to debugfs is allowed.
     */
-    bool CheckIfDebugAvailable() const;
+    void CheckIfDebugAvailable() const;
 
     /**
      * Checks whether the ZSwap kernel module is loaded,
      * and prints a message if not.
      * @returns Whether the ZSwap kernel module is loaded.
     */
-    bool CheckIfModuleLoaded() const;
+    void CheckIfModuleLoaded() const;
 
     /**
      * Checks if the application is running with super-user privileges,
@@ -144,7 +144,7 @@ private:
      * and prints a message if not.
      * @returns Whether the swap file or partition is available.
     */
-    bool CheckIfSwapAvailable() const;
+    void CheckIfSwapAvailable() const;
 
     /**
      * Checks whether the compressed pool is not empty,
@@ -152,7 +152,7 @@ private:
      * @param PoolSize Pool size.
      * @returns Whether the the compressed pool is not empty.
     */
-    bool CheckIfPoolIsNotEmpty(const unsigned long) const;
+    void CheckIfPoolIsNotEmpty(const unsigned long) const;
 
     /**
      * Handles the \-\-env command-line argument. Gets parameters from
