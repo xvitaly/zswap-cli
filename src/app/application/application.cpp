@@ -119,14 +119,26 @@ void Application::PrintSummary() const
 
 void Application::PrintCombined() const
 {
-    std::cout << "ZSWAP KERNEL MODULE SETTINGS:" << std::endl;
-    PrintSettings();
-    std::cout << std::endl;
-    std::cout << "ZSWAP KERNEL MODULE USAGE SUMMARY:" << std::endl;
-    PrintSummary();
-    std::cout << std::endl;
-    std::cout << "ZSWAP KERNEL MODULE DEBUG INFO:" << std::endl;
-    PrintDebugInfo();
+    const std::vector<std::pair<std::string, std::function<void()>>> Handlers
+    {
+        { "ZSWAP KERNEL MODULE SETTINGS:", [this] () { PrintSettings(); } },
+        { "ZSWAP KERNEL MODULE USAGE SUMMARY:", [this] () { PrintSummary(); } },
+        { "ZSWAP KERNEL MODULE DEBUG INFO:", [this] () { PrintDebugInfo(); } },
+    };
+
+    for (const auto& [Message, Handler] : Handlers)
+    {
+        try
+        {
+            std::cout << Message << std::endl;
+            Handler();
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+        std::cout << std::endl;
+    }
 }
 
 int Application::PrintStats(const int Value) const
