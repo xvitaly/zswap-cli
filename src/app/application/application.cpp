@@ -119,7 +119,7 @@ void Application::PrintSummary() const
 
 void Application::PrintCombined() const
 {
-    const std::vector<std::pair<std::string, std::function<void()>>> Handlers
+    const std::vector<std::pair<std::string_view, std::function<void()>>> Handlers
     {
         { "ZSWAP KERNEL MODULE SETTINGS:", [this] () { PrintSettings(); } },
         { "ZSWAP KERNEL MODULE USAGE SUMMARY:", [this] () { PrintSummary(); } },
