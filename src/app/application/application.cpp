@@ -119,7 +119,7 @@ void Application::PrintSummary() const
 
 void Application::PrintCombined() const
 {
-    const std::vector<std::pair<std::string, std::function<void()>>> Handlers
+    const std::vector<std::pair<std::string_view, std::function<void()>>> Handlers
     {
         { "ZSWAP KERNEL MODULE SETTINGS:", [this] () { PrintSettings(); } },
         { "ZSWAP KERNEL MODULE USAGE SUMMARY:", [this] () { PrintSummary(); } },
@@ -296,42 +296,27 @@ int Application::Run() const
 
 void Application::CheckIfRunningBySuperUser() const
 {
-    if (CWrappers::CheckRoot())
-    {
-        throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
-    }
+    if (CWrappers::CheckRoot()) throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
 }
 
 void Application::CheckIfSwapAvailable() const
 {
-    if (!SysInfo -> IsSwapAvailable())
-    {
-        throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
-    }
+    if (!SysInfo -> IsSwapAvailable()) throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
 }
 
 void Application::CheckIfDebugAvailable() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable())
-    {
-        throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
-    }
+    if (!ZSwapDebugger -> IsDebugAvailable()) throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
 }
 
 void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 {
-    if (PoolSize == 0)
-    {
-        throw std::runtime_error("ZSwap is not working. The pool is empty.");
-    }
+    if (PoolSize == 0) throw std::runtime_error("ZSwap is not working. The pool is empty.");
 }
 
 void Application::CheckIfModuleLoaded() const
 {
-    if (!ZSwap -> IsAvailable())
-    {
-        throw std::runtime_error("ZSwap kernel module is not loaded.");
-    }
+    if (!ZSwap -> IsAvailable()) throw std::runtime_error("ZSwap kernel module is not loaded.");
 }
 
 void Application::InitClassMembers()
