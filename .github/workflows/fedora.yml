@@ -79,3 +79,6 @@ jobs:
     - name: Installing project with CMake
       run: |
         sudo cmake --install build
+    - name: Running installed project
+      run: |
+        sudo zswap-cli --version
