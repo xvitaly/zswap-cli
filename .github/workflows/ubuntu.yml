@@ -79,4 +79,4 @@ jobs:
         sudo cmake --install build
     - name: Running installed project
       run: |
-        sudo zswap-cli --version
+        zswap-cli --version
