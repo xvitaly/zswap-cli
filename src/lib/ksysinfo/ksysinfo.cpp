@@ -14,8 +14,8 @@
 #include <linux/sysinfo.h>
 #include <sys/sysinfo.h>
 
-#include "ksysinfo/ksysinfo.hpp"
 #include "cwrappers/cwrappers.hpp"
+#include "ksysinfo/ksysinfo.hpp"
 
 long KSysInfo::GetUptime() const
 {

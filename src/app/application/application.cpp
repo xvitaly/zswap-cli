@@ -29,10 +29,10 @@
 #include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
 #include "cwrappers/cwrappers.hpp"
-#include "zswapobject/zswapobject.hpp"
-#include "zswapdebug/zswapdebug.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
+#include "zswapdebug/zswapdebug.hpp"
+#include "zswapobject/zswapobject.hpp"
 
 void Application::PrintDebugInfo() const
 {
@@ -171,7 +171,6 @@ int Application::PrintHelp() const
 
 int Application::PrintVersion() const
 {
-    std::unique_ptr<KSysVersion> SysVersion = std::make_unique<KSysVersion>();
     std::cout << std::format("{0} version: {1}\n"
                              "Kernel API version:\n"
                              "  build: {2}\n"
@@ -328,6 +327,7 @@ void Application::InitClassMembers()
     ZSwap = std::make_unique<ZSwapObject>();
     ZSwapDebugger = std::make_unique<ZSwapDebug>();
     SysInfo = std::make_unique<KSysInfo>();
+    SysVersion = std::make_unique<KSysVersion>();
 }
 
 void Application::InitCmdLineOptions() const
