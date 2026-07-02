@@ -19,8 +19,8 @@
 
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
-#include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
+#include "zswapobject/zswapobject.hpp"
 
 /**
  * Main class of the application.
