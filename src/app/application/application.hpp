@@ -18,6 +18,7 @@
 #include <boost/program_options.hpp>
 
 #include "ksysinfo/ksysinfo.hpp"
+#include "ksysversion/ksysversion.hpp"
 #include "zswapobject/zswapobject.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 
@@ -54,6 +55,11 @@ private:
      * Stores an instance of the KSysInfo class.
     */
     std::unique_ptr<KSysInfo> SysInfo;
+
+    /**
+     * Stores an instance of the SysVersion class.
+    */
+    std::unique_ptr<KSysVersion> SysVersion;
 
     /**
      * Stores the list of available command-line arguments with
