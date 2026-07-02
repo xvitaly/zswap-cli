@@ -29,10 +29,10 @@
 #include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
 #include "cwrappers/cwrappers.hpp"
-#include "zswapobject/zswapobject.hpp"
-#include "zswapdebug/zswapdebug.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
+#include "zswapdebug/zswapdebug.hpp"
+#include "zswapobject/zswapobject.hpp"
 
 void Application::PrintDebugInfo() const
 {
