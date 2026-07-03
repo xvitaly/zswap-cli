@@ -193,7 +193,7 @@ private:
     void PrintDebugInfo() const;
 
     /**
-     * Prints the ZSwap kernel module current settings.
+     * Prints the ZSwap kernel module settings.
     */
     void PrintSettings() const;
 
