@@ -175,8 +175,8 @@ private:
      * Handles the \-\-config command-line argument. Gets parameters
      * from the specified configuration file.
      * @param ConfigFile Full path to the configuration file.
-     * @exception Raises an instance of std::invalid_argument exception
-     * if incorrect file path was specified.
+     * @exception Raises an instance of the std::invalid_argument exception
+     * if an invalid file path was specified.
      * @returns Exit code.
     */
     int ExecuteConfig(const std::string&) const;
