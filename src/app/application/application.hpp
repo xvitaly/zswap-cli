@@ -57,7 +57,7 @@ private:
     std::unique_ptr<KSysInfo> SysInfo;
 
     /**
-     * Stores an instance of the SysVersion class.
+     * Stores an instance of the KSysVersion class.
     */
     std::unique_ptr<KSysVersion> SysVersion;
 
@@ -175,8 +175,8 @@ private:
      * Handles the \-\-config command-line argument. Gets parameters
      * from the specified configuration file.
      * @param ConfigFile Full path to the configuration file.
-     * @exception Raises an instance of std::invalid_argument exception
-     * if incorrect file path was specified.
+     * @exception Raises an instance of the std::invalid_argument exception
+     * if an invalid file path was specified.
      * @returns Exit code.
     */
     int ExecuteConfig(const std::string&) const;
@@ -193,7 +193,7 @@ private:
     void PrintDebugInfo() const;
 
     /**
-     * Prints the ZSwap kernel module current settings.
+     * Prints the ZSwap kernel module settings.
     */
     void PrintSettings() const;
 
@@ -212,8 +212,8 @@ private:
      * diagnostic information about the ZSwap kernel module.
      * @param Value Request code: 0 - all; 1 - settings; 2 - usage stats;
      * 3 - debug.
-     * @exception Raises an instance of std::invalid_argument exception
-     * if incorrect request code was specified.
+     * @exception Raises an instance of the std::invalid_argument exception
+     * if an invalid request code was specified.
      * @returns Exit code.
     */
     int PrintStats(int) const;
