@@ -57,7 +57,7 @@ private:
     std::unique_ptr<KSysInfo> SysInfo;
 
     /**
-     * Stores an instance of the SysVersion class.
+     * Stores an instance of the KSysVersion class.
     */
     std::unique_ptr<KSysVersion> SysVersion;
 
