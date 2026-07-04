@@ -234,7 +234,7 @@ private:
     void ReadSysInfo();
 
     /**
-     * Reads the SC_PAGESIZE system variable value.
+     * Reads the SC_PAGESIZE system constant value.
     */
     void ReadPageSize();
 };
