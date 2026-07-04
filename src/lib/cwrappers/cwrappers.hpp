@@ -35,8 +35,8 @@ namespace CWrappers
     bool CheckRoot();
 
     /**
-     * Returns the value of the SC_PAGESIZE.
-     * @returns SC_PAGESIZE value.
+     * Returns the value of the SC_PAGESIZE constant (memory page size in bytes).
+     * @returns SC_PAGESIZE constant value (memory page size in bytes).
     */
     long GetSCPageSize();
 }
