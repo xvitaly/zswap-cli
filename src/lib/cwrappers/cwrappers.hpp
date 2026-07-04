@@ -28,9 +28,9 @@ namespace CWrappers
 
     /**
      * Returns whether the program is running with super-user privileges.
-     * @returns Check results.
+     * @returns Super-user privileges check results.
      * @retval true Super-user privileges were detected.
-     * @retval false Otherwise.
+     * @retval false Super-user privileges weren't detected.
     */
     bool CheckRoot();
 
