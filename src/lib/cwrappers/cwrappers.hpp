@@ -28,15 +28,15 @@ namespace CWrappers
 
     /**
      * Returns whether the program is running with super-user privileges.
-     * @returns Check results.
+     * @returns Super-user privileges check results.
      * @retval true Super-user privileges were detected.
-     * @retval false Otherwise.
+     * @retval false Super-user privileges weren't detected.
     */
     bool CheckRoot();
 
     /**
-     * Returns the value of the SC_PAGESIZE.
-     * @returns SC_PAGESIZE value.
+     * Returns the value of the SC_PAGESIZE constant (memory page size in bytes).
+     * @returns SC_PAGESIZE constant value (memory page size in bytes).
     */
     long GetSCPageSize();
 }
