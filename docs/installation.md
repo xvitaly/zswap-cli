@@ -22,6 +22,7 @@ This project supports the following build-time configuration options, which can 
 | ------- | ------- | ------- |
 | BUILD_DOC | Build and install API and application documentation in HTML format. | OFF |
 | BUILD_MANPAGE | Build and install manpage with documentation. | OFF |
+| BUILD_METAINFO | Build and install metainfo file for modern package managers. | ON |
 | BUILD_SHELL_COMPLETION | Build and install shell completion helper files. | ON |
 | BUILD_TESTS | Build various tests. | OFF |
 | LINK_ALL_STATICALLY | Link the program against all libraries statically (no dependencies mode). | OFF |

@@ -29,6 +29,7 @@ set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
 option(BUILD_DOC "Build and install API and application documentation in HTML format." OFF)
 option(BUILD_MANPAGE "Build and install manpage with documentation." OFF)
+option(BUILD_METAINFO "Build and install metainfo file for modern package managers." ON)
 option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." ON)
 option(BUILD_TESTS "Build various tests." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
@@ -148,7 +149,7 @@ endif()
 # ============= Tests validators detection =============
 # ======================================================
 
-if (BUILD_TESTS)
+if (BUILD_TESTS AND BUILD_METAINFO)
     find_package(AppstreamUtil REQUIRED)
 endif()
 
@@ -262,9 +263,6 @@ install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${APP_
 # =================== Assets target ====================
 # ======================================================
 
-configure_file("assets/metainfo/${APP_NAME}.metainfo.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml" @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo" RENAME ${METAINFO_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
-
 if (BUILD_DOC)
     doxygen_add_docs(${DOCS_NAME} src docs ALL WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Building documentation with Doxygen.")
     install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT ${ASSETS_COMP_NAME})
@@ -275,6 +273,11 @@ if (BUILD_MANPAGE)
     pandoc_build_manpage("${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.md" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1")
     add_custom_target(${MAN_NAME} ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1")
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1" COMPONENT ${ASSETS_COMP_NAME})
+endif()
+
+if (BUILD_METAINFO)
+    configure_file("assets/metainfo/${APP_NAME}.metainfo.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml" @ONLY)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo" RENAME ${METAINFO_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
 endif()
 
 if (BUILD_SHELL_COMPLETION)
@@ -292,7 +295,7 @@ endif()
 # ==================== Tests target ====================
 # ======================================================
 
-if (BUILD_TESTS)
+if (BUILD_TESTS AND BUILD_METAINFO)
     enable_testing()
     add_test(NAME test-metainfo COMMAND ${APPSTREAMUTIL_EXECUTABLE} ${APPSTREAMUTIL_PARAMETERS} "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.metainfo.xml")
 endif()
