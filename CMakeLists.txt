@@ -11,12 +11,12 @@
 cmake_minimum_required(VERSION 3.28...4.0)
 
 project(zswap-cli
-    VERSION 1.1.2
+    VERSION 1.2.0
     DESCRIPTION "Command-line tool to control the zswap kernel module options"
     HOMEPAGE_URL "https://github.com/xvitaly/zswap-cli"
     LANGUAGES CXX
 )
-set(RELEASE_DATE "2025-12-26")
+set(RELEASE_DATE "2026-07-05")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
