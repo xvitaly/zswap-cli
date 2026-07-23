@@ -13,6 +13,7 @@
 #include <fstream>
 #include <optional>
 #include <string>
+#include <system_error>
 
 #include "zswapdebug/zswapdebug.hpp"
 
