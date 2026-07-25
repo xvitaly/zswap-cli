@@ -9,8 +9,8 @@
  * Contains the ZSwapObject class implementation.
 */
 
-#include <format>
 #include <filesystem>
+#include <format>
 #include <fstream>
 #include <iostream>
 #include <optional>
