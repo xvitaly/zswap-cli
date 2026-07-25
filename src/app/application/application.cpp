@@ -315,7 +315,7 @@ void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 
 void Application::CheckIfModuleLoaded() const
 {
-    if (!ZSwap -> IsAvailable()) throw std::runtime_error("ZSwap kernel module is not loaded.");
+    if (!ZSwap -> IsAvailable()) throw std::runtime_error("ZSwap kernel module is not loaded or access to sysfs is denied.");
 }
 
 void Application::InitClassMembers()
