@@ -286,8 +286,8 @@ int Application::Run() const
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("version")) return PrintVersion();
-    CheckIfRunningBySuperUser();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
+    CheckIfRunningBySuperUser();
     if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
     if (CmdLine -> count("env")) return ExecuteEnv();
     return ExecuteCmdLine();
@@ -315,7 +315,7 @@ void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 
 void Application::CheckIfModuleLoaded() const
 {
-    if (!ZSwap -> IsAvailable()) throw std::runtime_error("ZSwap kernel module is not loaded.");
+    if (!ZSwap -> IsAvailable()) throw std::runtime_error("ZSwap kernel module is not loaded or access to sysfs is denied.");
 }
 
 void Application::InitClassMembers()
