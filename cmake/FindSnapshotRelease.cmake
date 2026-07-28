@@ -30,7 +30,11 @@ execute_process(
     ERROR_QUIET
 )
 
-string(SUBSTRING "${_git_commit_version}" 1 -1 SNAPSHOT_RELEASE_VERSION)
+if (_git_commit_version MATCHES "^v")
+    string(SUBSTRING "${_git_commit_version}" 1 -1 SNAPSHOT_RELEASE_VERSION)
+else()
+    set(SNAPSHOT_RELEASE_VERSION "${_git_commit_version}")
+endif()
 
 set(SNAPSHOT_RELEASE_DATE "${_git_commit_date}")
 set(SNAPSHOT_RELEASE_URL "${CMAKE_PROJECT_HOMEPAGE_URL}/commit/${_git_commit_hash}")
