@@ -67,6 +67,7 @@ jobs:
             -DLINK_ALL_STATICALLY:BOOL=OFF \
             -DLINK_BOOST_STATICALLY:BOOL=OFF \
             -DLINK_ENABLE_OPTIMIZATIONS:BOOL=ON \
+            -DSNAPSHOT_RELEASE:BOOL=ON \
             -DSYSTEMD_INTEGRATION:BOOL=ON \
             -DTESTS_ENABLE_NETWORK:BOOL=ON
         cmake --build build
