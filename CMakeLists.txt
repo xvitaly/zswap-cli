@@ -16,7 +16,10 @@ project(zswap-cli
     HOMEPAGE_URL "https://github.com/xvitaly/zswap-cli"
     LANGUAGES CXX
 )
+
 set(RELEASE_DATE "2026-07-05")
+set(RELEASE_VERSION "${CMAKE_PROJECT_VERSION}")
+set(RELEASE_URL "${CMAKE_PROJECT_HOMEPAGE_URL}/releases/tag/v${CMAKE_PROJECT_VERSION}")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,6 +38,7 @@ option(BUILD_TESTS "Build various tests." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
+option(SNAPSHOT_RELEASE "Retrieve and use project version information from Git." OFF)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 
 # ======================================================
@@ -143,6 +147,17 @@ if (SYSTEMD_INTEGRATION)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET systemd)
     pkg_get_variable(SYSTEMD_UNITDIR systemd "systemdsystemunitdir" DEFINE_VARIABLES "prefix=${CMAKE_INSTALL_PREFIX}" "rootprefix=${CMAKE_INSTALL_PREFIX}")
+endif()
+
+# ======================================================
+# ================== Version detection =================
+# ======================================================
+
+if (SNAPSHOT_RELEASE AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
+    find_package(SnapshotRelease QUIET REQUIRED)
+    set(RELEASE_DATE "${SNAPSHOT_RELEASE_DATE}")
+    set(RELEASE_VERSION "${SNAPSHOT_RELEASE_VERSION}")
+    set(RELEASE_URL "${SNAPSHOT_RELEASE_URL}")
 endif()
 
 # ======================================================

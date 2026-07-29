@@ -36,6 +36,9 @@ jobs:
     - name: Installing core packages
       run: |
         sudo dnf -y install git-core
+    - name: Adjusting version control settings
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - name: Fetching sources
       uses: actions/checkout@v7
     - name: Installing ${{ matrix.compiler }} compiler packages
@@ -67,6 +70,7 @@ jobs:
             -DLINK_ALL_STATICALLY:BOOL=OFF \
             -DLINK_BOOST_STATICALLY:BOOL=OFF \
             -DLINK_ENABLE_OPTIMIZATIONS:BOOL=ON \
+            -DSNAPSHOT_RELEASE:BOOL=ON \
             -DSYSTEMD_INTEGRATION:BOOL=ON \
             -DTESTS_ENABLE_NETWORK:BOOL=ON
         cmake --build build
