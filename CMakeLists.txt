@@ -38,6 +38,7 @@ option(BUILD_TESTS "Build various tests." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
+option(SNAPSHOT_RELEASE "Retrieve and use project version information from Git." OFF)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 
 # ======================================================
@@ -152,7 +153,7 @@ endif()
 # ================== Version detection =================
 # ======================================================
 
-if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
+if (SNAPSHOT_RELEASE AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
     find_package(SnapshotRelease QUIET REQUIRED)
     set(RELEASE_DATE "${SNAPSHOT_RELEASE_DATE}")
     set(RELEASE_VERSION "${SNAPSHOT_RELEASE_VERSION}")
