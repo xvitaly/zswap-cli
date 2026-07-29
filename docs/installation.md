@@ -28,6 +28,7 @@ This project supports the following build-time configuration options, which can 
 | LINK_ALL_STATICALLY | Link the program against all libraries statically (no dependencies mode). | OFF |
 | LINK_BOOST_STATICALLY | Link the program against Boost library statically (removes dependency on it). | OFF |
 | LINK_ENABLE_OPTIMIZATIONS | Enable link-time optimizations if supported by current C++ compiler. | ON |
+| SNAPSHOT_RELEASE | Retrieve and use project version information from Git. | OFF |
 | SYSTEMD_INTEGRATION | Generate and install systemd units. | ON |
 | TESTS_ENABLE_NETWORK | Enable network access for the tests. | OFF |
 
