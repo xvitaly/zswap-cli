@@ -32,6 +32,9 @@ jobs:
             cxx: 'g++'
             packages: 'gcc'
     steps:
+    - name: Adjusting version control settings
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - name: Fetching sources
       uses: actions/checkout@v7
     - name: Updating apt package metadata
