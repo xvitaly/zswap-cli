@@ -9,15 +9,15 @@
  * Contains the CWrappers namespace implementation.
 */
 
+#include <cstdlib>
 #include <string>
-#include <stdlib.h>
 #include <unistd.h>
 
 #include "cwrappers/cwrappers.hpp"
 
 std::string CWrappers::GetEnv(const std::string& KeyName)
 {
-    const char* EnvValue = getenv(KeyName.c_str());
+    const char* EnvValue = std::getenv(KeyName.c_str());
     return EnvValue != nullptr ? std::string(EnvValue) : std::string();
 }
 
