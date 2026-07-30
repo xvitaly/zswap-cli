@@ -45,7 +45,7 @@ Get options from the configuration file instead of the cmdline.
 Get options from the environment variables instead of the cmdline.
 
 #### \-\-stats
-Get statistics and current settings of the ZSwap kernel module.
+Print statistics and current settings of the ZSwap kernel module.
 
 Supported values:
 
