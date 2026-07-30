@@ -18,7 +18,7 @@ This application can be used in two ways:
 
   * `--config` - get options from the [configuration file](configuration-files.md) instead of the cmdline.
   * `--env` - get options from the [environment variables](environment-options.md) instead of the cmdline.
-  * `--stats` - show statistics and current settings of the ZSwap kernel module. Supported values:
+  * `--stats` - print statistics and current settings of the ZSwap kernel module. Supported values:
     * `0` (default) - print everything: kernel module settings, usage summary, and debug information.
     * `1` - print kernel module settings.
     * `2` - print kernel module usage summary.
