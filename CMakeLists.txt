@@ -40,6 +40,7 @@ option(LINK_BOOST_STATICALLY "Link the program against Boost library statically 
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
 option(SNAPSHOT_RELEASE "Retrieve and use project version information from Git." OFF)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
+option(TESTS_ENABLE_NETWORK "Enable network access for the tests." OFF)
 
 # ======================================================
 # ==================== Target names ====================
