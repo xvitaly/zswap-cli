@@ -16,10 +16,7 @@ project(zswap-cli
     HOMEPAGE_URL "https://github.com/xvitaly/zswap-cli"
     LANGUAGES CXX
 )
-
 set(RELEASE_DATE "2026-07-05")
-set(RELEASE_VERSION "${CMAKE_PROJECT_VERSION}")
-set(RELEASE_URL "${CMAKE_PROJECT_HOMEPAGE_URL}/releases/tag/v${CMAKE_PROJECT_VERSION}")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,11 +32,12 @@ option(BUILD_MANPAGE "Build and install manpage with documentation." OFF)
 option(BUILD_METAINFO "Build and install metainfo file for modern package managers." ON)
 option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." ON)
 option(BUILD_TESTS "Build various tests." OFF)
+option(INCLUDE_COMMIT_HASH "Include the Git commit hash to the project version." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
-option(SNAPSHOT_RELEASE "Retrieve and use project version information from Git." OFF)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
+option(TESTS_ENABLE_NETWORK "Enable network access for the tests." OFF)
 
 # ======================================================
 # ==================== Target names ====================
@@ -153,11 +151,10 @@ endif()
 # ================== Version detection =================
 # ======================================================
 
-if (SNAPSHOT_RELEASE AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
+set(RELEASE_VERSION "${CMAKE_PROJECT_VERSION}")
+if (INCLUDE_COMMIT_HASH AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
     find_package(SnapshotRelease QUIET REQUIRED)
-    set(RELEASE_DATE "${SNAPSHOT_RELEASE_DATE}")
-    set(RELEASE_VERSION "${SNAPSHOT_RELEASE_VERSION}")
-    set(RELEASE_URL "${SNAPSHOT_RELEASE_URL}")
+    set(RELEASE_VERSION "${RELEASE_VERSION} (commit ${SNAPSHOT_RELEASE_HASH})")
 endif()
 
 # ======================================================

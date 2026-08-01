@@ -25,10 +25,10 @@ This project supports the following build-time configuration options, which can 
 | BUILD_METAINFO | Build and install metainfo file for modern package managers. | ON |
 | BUILD_SHELL_COMPLETION | Build and install shell completion helper files. | ON |
 | BUILD_TESTS | Build various tests. | OFF |
+| INCLUDE_COMMIT_HASH | Include the Git commit hash to the project version. | OFF |
 | LINK_ALL_STATICALLY | Link the program against all libraries statically (no dependencies mode). | OFF |
 | LINK_BOOST_STATICALLY | Link the program against Boost library statically (removes dependency on it). | OFF |
 | LINK_ENABLE_OPTIMIZATIONS | Enable link-time optimizations if supported by current C++ compiler. | ON |
-| SNAPSHOT_RELEASE | Retrieve and use project version information from Git. | OFF |
 | SYSTEMD_INTEGRATION | Generate and install systemd units. | ON |
 | TESTS_ENABLE_NETWORK | Enable network access for the tests. | OFF |
 
