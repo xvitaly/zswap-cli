@@ -67,10 +67,10 @@ jobs:
             -DBUILD_METAINFO:BOOL=ON \
             -DBUILD_SHELL_COMPLETION:BOOL=ON \
             -DBUILD_TESTS:BOOL=ON \
+            -DINCLUDE_COMMIT_HASH:BOOL=ON \
             -DLINK_ALL_STATICALLY:BOOL=OFF \
             -DLINK_BOOST_STATICALLY:BOOL=OFF \
             -DLINK_ENABLE_OPTIMIZATIONS:BOOL=ON \
-            -DSNAPSHOT_RELEASE:BOOL=ON \
             -DSYSTEMD_INTEGRATION:BOOL=ON \
             -DTESTS_ENABLE_NETWORK:BOOL=ON
         cmake --build build
