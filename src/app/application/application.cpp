@@ -171,12 +171,13 @@ int Application::PrintHelp() const
 
 int Application::PrintVersion() const
 {
-    std::cout << std::format("{0} version: {1}\n"
+    std::cout << std::format("{0} version: {1}{2}\n"
                              "Kernel API version:\n"
-                             "  build: {2}\n"
-                             "  runtime: {3}",
+                             "  build: {3}\n"
+                             "  runtime: {4}",
                              AppConstants::ProductNameInternal(),
                              AppConstants::ProductVersionInternal(),
+                             AppConstants::ProductReleaseInternal(),
                              SysVersion -> GetHeadersVersion(),
                              SysVersion -> GetKernelVersion())
               << std::endl;

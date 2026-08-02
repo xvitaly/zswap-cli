@@ -151,10 +151,9 @@ endif()
 # ================== Version detection =================
 # ======================================================
 
-set(RELEASE_VERSION "${CMAKE_PROJECT_VERSION}")
 if (INCLUDE_COMMIT_HASH AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
     find_package(SnapshotRelease QUIET REQUIRED)
-    set(RELEASE_VERSION "${RELEASE_VERSION} (commit ${SNAPSHOT_RELEASE_HASH})")
+    set(RELEASE_VERSION "-${SNAPSHOT_RELEASE_HASH}")
 endif()
 
 # ======================================================
