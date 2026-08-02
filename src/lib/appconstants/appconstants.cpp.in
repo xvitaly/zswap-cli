@@ -20,5 +20,10 @@ std::string_view AppConstants::ProductNameInternal()
 
 std::string_view AppConstants::ProductVersionInternal()
 {
+    return "@CMAKE_PROJECT_VERSION@";
+}
+
+std::string_view AppConstants::ProductReleaseInternal()
+{
     return "@RELEASE_VERSION@";
 }

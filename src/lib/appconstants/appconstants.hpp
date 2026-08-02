@@ -28,6 +28,11 @@ namespace AppConstants
      * Returns the application version number as a string.
     */
     std::string_view ProductVersionInternal();
+
+    /**
+     * Returns the application release as a string.
+    */
+    std::string_view ProductReleaseInternal();
 }
 
 #endif // APPCONSTANTS_HPP
