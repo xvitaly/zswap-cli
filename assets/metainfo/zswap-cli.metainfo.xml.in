@@ -50,7 +50,7 @@ SPDX-License-Identifier: CC0-1.0
     </branding>
     <releases>
         <release version="@CMAKE_PROJECT_VERSION@" date="@RELEASE_DATE@">
-            <url>@CMAKE_PROJECT_HOMEPAGE_URL@/releases/tag/@CMAKE_PROJECT_VERSION@</url>
+            <url>@CMAKE_PROJECT_HOMEPAGE_URL@/releases/tag/v@CMAKE_PROJECT_VERSION@</url>
         </release>
     </releases>
 </component>
