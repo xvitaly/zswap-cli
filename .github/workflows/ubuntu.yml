@@ -55,6 +55,7 @@ jobs:
     - name: Building project with CMake
       run: |
         cmake -S . -B build \
+            -Wauthor \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_C_COMPILER=${{ matrix.cc }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
