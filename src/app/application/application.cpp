@@ -40,18 +40,18 @@ void Application::PrintDebugInfo() const
 
     const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
     {
+        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
+        { "Incompressible pages count", ZSwapDebugger -> GetIncompressiblePages() },
         { "Pool limit hit", ZSwapDebugger -> GetPoolLimitHit() },
         { "Pool total size", ZSwapDebugger -> GetPoolTotalSize() },
         { "Reject allocation failures", ZSwapDebugger -> GetRejectAllocFail() },
+        { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
         { "Reject compression poor", ZSwapDebugger -> GetRejectCompressPoor() },
         { "Reject Kmemcache failures", ZSwapDebugger -> GetRejectKmemCacheFail() },
         { "Reject reclaim failures", ZSwapDebugger -> GetRejectReclaimFail() },
-        { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
-        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
         { "Same filled pages count", ZSwapDebugger -> GetSameFilledPages() },
         { "Stored pages count", ZSwapDebugger -> GetStoredPages() },
         { "Written back pages count", ZSwapDebugger -> GetWrittenBackPages() },
-        { "Incompressible pages count", ZSwapDebugger -> GetIncompressiblePages() },
     };
 
     for (const auto& [Name, Value] : Handlers)
@@ -69,15 +69,15 @@ void Application::PrintSettings() const
 
     const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
-        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
-        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
-        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
-        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
-        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
         { "Accept threshold percentage", ZSwap -> GetZSwapAcceptThresholdPercent() },
-        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
         { "Exclusive loads", ZSwap -> GetZSwapExclusiveLoads() },
+        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
+        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
+        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
         { "Shrinker enabled", ZSwap -> GetZSwapShrinkerEnabled() },
+        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
     };
 
     for (const auto& [Name, Value] : Handlers)
