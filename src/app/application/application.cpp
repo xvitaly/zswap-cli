@@ -69,15 +69,15 @@ void Application::PrintSettings() const
 
     const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
-        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
-        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
-        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
-        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
-        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
         { "Accept threshold percentage", ZSwap -> GetZSwapAcceptThresholdPercent() },
-        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
         { "Exclusive loads", ZSwap -> GetZSwapExclusiveLoads() },
+        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
+        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
+        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
+        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
         { "Shrinker enabled", ZSwap -> GetZSwapShrinkerEnabled() },
+        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
     };
 
     for (const auto& [Name, Value] : Handlers)
