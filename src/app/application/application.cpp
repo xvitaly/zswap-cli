@@ -40,18 +40,18 @@ void Application::PrintDebugInfo() const
 
     const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
     {
+        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
+        { "Incompressible pages count", ZSwapDebugger -> GetIncompressiblePages() },
         { "Pool limit hit", ZSwapDebugger -> GetPoolLimitHit() },
         { "Pool total size", ZSwapDebugger -> GetPoolTotalSize() },
         { "Reject allocation failures", ZSwapDebugger -> GetRejectAllocFail() },
+        { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
         { "Reject compression poor", ZSwapDebugger -> GetRejectCompressPoor() },
         { "Reject Kmemcache failures", ZSwapDebugger -> GetRejectKmemCacheFail() },
         { "Reject reclaim failures", ZSwapDebugger -> GetRejectReclaimFail() },
-        { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
-        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
         { "Same filled pages count", ZSwapDebugger -> GetSameFilledPages() },
         { "Stored pages count", ZSwapDebugger -> GetStoredPages() },
         { "Written back pages count", ZSwapDebugger -> GetWrittenBackPages() },
-        { "Incompressible pages count", ZSwapDebugger -> GetIncompressiblePages() },
     };
 
     for (const auto& [Name, Value] : Handlers)
