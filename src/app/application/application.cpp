@@ -189,15 +189,15 @@ int Application::ExecuteEnv() const
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
-        { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
-        { "ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
-        { "ZSWAP_MAX_POOL_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
-        { "ZSWAP_COMPRESSOR_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
-        { "ZSWAP_ZPOOL_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
         { "ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
-        { "ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "ZSWAP_COMPRESSOR_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
+        { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
         { "ZSWAP_EXCLUSIVE_LOADS_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
+        { "ZSWAP_MAX_POOL_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
+        { "ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
         { "ZSWAP_SHRINKER_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
+        { "ZSWAP_ZPOOL_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
     };
 
     for (const auto& [Key, Handler] : Handlers)
