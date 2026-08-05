@@ -256,15 +256,15 @@ int Application::ExecuteCmdLine() const
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
-        { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
-        { "same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
-        { "max_pool_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
-        { "compressor", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
-        { "zpool", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
         { "accept_threshold_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
-        { "non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "compressor", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
+        { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
         { "exclusive_loads", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
+        { "max_pool_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
+        { "non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
+        { "same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
         { "shrinker_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
+        { "zpool", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
     };
 
     for (const auto& [Key, Handler] : Handlers)
