@@ -349,15 +349,15 @@ void Application::InitCmdLineOptions() const
 
     boost::program_options::options_description OptionsZSwap("Kernel module configuration options");
     OptionsZSwap.add_options()
-        ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
-        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
-        ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
-        ("compressor,c", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
-        ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ("accept_threshold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
-        ("non_same_filled_pages_enabled,n", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("compressor,c", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
+        ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
         ("exclusive_loads,x", boost::program_options::value<std::string>(), "Enable or disable entries invalidation when memory pages are loaded from compressed pool.")
+        ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("non_same_filled_pages_enabled,n", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
         ("shrinker_enabled,r", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
+        ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ;
 
     CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
