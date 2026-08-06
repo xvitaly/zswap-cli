@@ -349,15 +349,15 @@ void Application::InitCmdLineOptions() const
 
     boost::program_options::options_description OptionsZSwap("Kernel module configuration options");
     OptionsZSwap.add_options()
-        ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
-        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
-        ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
-        ("compressor,c", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
-        ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ("accept_threshold_percent,a", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
-        ("non_same_filled_pages_enabled,n", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("compressor,c", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
+        ("enabled,e", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
         ("exclusive_loads,x", boost::program_options::value<std::string>(), "Enable or disable entries invalidation when memory pages are loaded from compressed pool.")
+        ("max_pool_percent,p", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("non_same_filled_pages_enabled,n", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("same_filled_pages_enabled,s", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
         ("shrinker_enabled,r", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
+        ("zpool,z", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ;
 
     CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
@@ -366,15 +366,15 @@ void Application::InitCmdLineOptions() const
 void Application::InitConfigOptions() const
 {
     ConfigOptions -> add_options()
-        ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
-        ("zswap.same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
-        ("zswap.max_pool_percent", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
-        ("zswap.compressor", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
-        ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ("zswap.accept_threshold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
-        ("zswap.non_same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("zswap.compressor", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
+        ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
         ("zswap.exclusive_loads", boost::program_options::value<std::string>(), "Enable or disable entries invalidation when memory pages are loaded from compressed pool.")
+        ("zswap.max_pool_percent", boost::program_options::value<std::string>(), "The maximum percentage of memory that the compressed pool can occupy.")
+        ("zswap.non_same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable accepting non same filled memory pages.")
+        ("zswap.same_filled_pages_enabled", boost::program_options::value<std::string>(), "Enable or disable memory pages deduplication.")
         ("zswap.shrinker_enabled", boost::program_options::value<std::string>(), "Enable or disable pool shrinking based on memory pressure.")
+        ("zswap.zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ;
 }
 
