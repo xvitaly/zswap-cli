@@ -25,5 +25,5 @@ std::string_view AppConstants::ProductVersionInternal()
 
 std::string_view AppConstants::ProductReleaseInternal()
 {
-    return "@RELEASE_VERSION@";
+    return "@PRODUCT_RELEASE_EXTENDED@";
 }
