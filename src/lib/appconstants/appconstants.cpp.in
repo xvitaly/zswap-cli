@@ -13,17 +13,17 @@
 
 #include "appconstants/appconstants.hpp"
 
-std::string_view AppConstants::ProductNameInternal()
+std::string_view AppConstants::ProductName()
 {
     return "@CMAKE_PROJECT_NAME@";
 }
 
-std::string_view AppConstants::ProductVersionInternal()
+std::string_view AppConstants::ProductVersion()
 {
     return "@CMAKE_PROJECT_VERSION@";
 }
 
-std::string_view AppConstants::ProductReleaseInternal()
+std::string_view AppConstants::ProductRelease()
 {
     return "@PRODUCT_RELEASE_EXTENDED@";
 }

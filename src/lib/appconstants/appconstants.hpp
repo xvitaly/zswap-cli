@@ -23,19 +23,19 @@ namespace AppConstants
      * Returns the application internal name as a string.
      * @returns Application internal name.
     */
-    std::string_view ProductNameInternal();
+    std::string_view ProductName();
 
     /**
      * Returns the application internal version number as a string.
      * @returns Application internal version number.
     */
-    std::string_view ProductVersionInternal();
+    std::string_view ProductVersion();
 
     /**
      * Returns the application internal release as a string.
      * @returns Application internal release.
     */
-    std::string_view ProductReleaseInternal();
+    std::string_view ProductRelease();
 }
 
 #endif // APPCONSTANTS_HPP
