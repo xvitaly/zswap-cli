@@ -13,6 +13,11 @@
 
 #include "appconstants/appconstants.hpp"
 
+std::string_view AppConstants::ConfigDirectorySystem()
+{
+    return "@CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@";
+}
+
 std::string_view AppConstants::ProductName()
 {
     return "@CMAKE_PROJECT_NAME@";
