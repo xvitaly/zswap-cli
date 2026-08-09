@@ -21,6 +21,8 @@ namespace AppConstants
 {
     std::string_view ConfigDirectorySystem();
 
+    std::string_view ConfigDirectoryUser();
+
     /**
      * Returns the application name as a string.
      * @returns Application name.
