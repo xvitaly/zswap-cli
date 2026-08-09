@@ -19,6 +19,11 @@
 */
 namespace AppConstants
 {
+    /**
+     * Returns the full path to the directory containing the configuration
+     * files installed by the package.
+     * @returns Full path to the system config directory.
+    */
     std::string_view ConfigDirectorySystem();
 
     std::string_view ConfigDirectoryUser();
