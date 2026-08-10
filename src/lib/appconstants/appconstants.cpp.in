@@ -23,6 +23,11 @@ std::string_view AppConstants::ConfigDirectoryUser()
     return "@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@";
 }
 
+std::string_view AppConstants::ConfigFileName()
+{
+    return "@CONF_FILE_NAME@";
+}
+
 std::string_view AppConstants::ProductName()
 {
     return "@CMAKE_PROJECT_NAME@";
