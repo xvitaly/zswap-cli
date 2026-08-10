@@ -33,6 +33,10 @@ namespace AppConstants
     */
     std::string_view ConfigDirectoryUser();
 
+    /**
+     * Returns the application configuration file name.
+     * @returns Application configuration file name.
+    */
     std::string_view ConfigFileName();
 
     /**
