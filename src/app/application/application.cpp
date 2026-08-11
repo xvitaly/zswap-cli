@@ -344,6 +344,7 @@ void Application::InitCmdLineOptions() const
         ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Print statistics and current settings of the ZSwap kernel module.")
+        ("system", boost::program_options::value<std::string>(), "Get options from the system configuration file instead of the cmdline.")
         ("verbose", "Enable verbose mode to display additional information for debugging or informational purposes.")
         ;
 
