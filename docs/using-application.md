@@ -23,6 +23,7 @@ This application can be used in two ways:
     * `1` - print kernel module settings.
     * `2` - print kernel module usage summary.
     * `3` - print kernel module debug information.
+  * `--system` - get options from the system configuration file instead of the cmdline.
   * `--verbose` - enable verbose mode to display additional information for debugging or informational purposes.
 
 #### Kernel module configuration options
