@@ -283,6 +283,11 @@ int Application::ExecuteCmdLine() const
     return !Result;
 }
 
+int Application::ExecuteSystemConfig() const
+{
+    return 0;
+}
+
 int Application::Run() const
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();

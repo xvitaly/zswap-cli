@@ -188,6 +188,13 @@ private:
     int ExecuteCmdLine() const;
 
     /**
+     * Handles the \-\-system command-line argument. Gets parameters
+     * from the system configuration file.
+     * @returns Exit code.
+    */
+    int ExecuteSystemConfig() const;
+
+    /**
      * Prints the ZSwap kernel module debug information.
     */
     void PrintDebugInfo() const;
