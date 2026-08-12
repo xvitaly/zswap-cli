@@ -294,6 +294,7 @@ int Application::Run() const
     if (CmdLine -> count("version")) return PrintVersion();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
     CheckIfRunningBySuperUser();
+    if (CmdLine -> count("system")) return ExecuteSystemConfig();
     if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
     if (CmdLine -> count("env")) return ExecuteEnv();
     return ExecuteCmdLine();
