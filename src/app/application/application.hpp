@@ -190,6 +190,8 @@ private:
     /**
      * Handles the \-\-system command-line argument. Gets parameters
      * from the system configuration file.
+     * @exception Raises an instance of the std::runtime_error exception
+     * if no configuration files were found.
      * @returns Exit code.
     */
     int ExecuteSystemConfig() const;
