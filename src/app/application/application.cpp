@@ -285,13 +285,10 @@ int Application::ExecuteCmdLine() const
 
 int Application::ExecuteSystemConfig() const
 {
-    const std::string SystemConfig = std::format("{0}/{1}", AppConstants::ConfigDirectorySystem(), AppConstants::ConfigFileName());
-    const std::string UserConfig = std::format("{0}/{1}", AppConstants::ConfigDirectoryUser(), AppConstants::ConfigFileName());
-
-    if (std::filesystem::exists(SystemConfig))
-        return ExecuteConfig(SystemConfig);
-    else if (std::filesystem::exists(UserConfig))
-        return ExecuteConfig(UserConfig);
+    if (std::filesystem::exists(AppConstants::SystemConfigFile()))
+        return ExecuteConfig(std::string(AppConstants::SystemConfigFile()));
+    else if (std::filesystem::exists(AppConstants::UserConfigFile()))
+        return ExecuteConfig(std::string(AppConstants::UserConfigFile()));
     else
         throw std::runtime_error("System configuration files were not found.");
 }
