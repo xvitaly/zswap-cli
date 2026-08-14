@@ -41,6 +41,13 @@ namespace AppConstants
     std::string_view ConfigDirectoryUser();
 
     /**
+     * Returns the full path to configuration file created and modified
+     * by the user.
+     * @returns Full path to the user configuration file.
+    */
+    std::string_view UserConfigFile();
+
+    /**
      * Returns the application configuration file name.
      * @returns Application configuration file name.
     */
