@@ -18,6 +18,11 @@ std::string_view AppConstants::ConfigDirectorySystem()
     return "@CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@";
 }
 
+std::string_view AppConstants::SystemConfigFile()
+{
+    return "@CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@";
+}
+
 std::string_view AppConstants::ConfigDirectoryUser()
 {
     return "@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@";
