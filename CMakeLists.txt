@@ -274,6 +274,7 @@ install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${APP_
 # =================== Assets target ====================
 # ======================================================
 
+install(DIRECTORY DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 
 if (BUILD_DOC)
