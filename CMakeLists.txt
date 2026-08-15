@@ -274,6 +274,8 @@ install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${APP_
 # =================== Assets target ====================
 # ======================================================
 
+install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+
 if (BUILD_DOC)
     doxygen_add_docs(${DOCS_NAME} src docs ALL WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Building documentation with Doxygen.")
     install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT ${ASSETS_COMP_NAME})
@@ -299,7 +301,6 @@ endif()
 if (SYSTEMD_INTEGRATION)
     configure_file("assets/systemd/${UNIT_FILE_NAME}.in" "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" @ONLY)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}" COMPONENT ${ASSETS_COMP_NAME})
-    install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 endif()
 
 # ======================================================
