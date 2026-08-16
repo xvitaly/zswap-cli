@@ -33,6 +33,7 @@ option(BUILD_METAINFO "Build and install metainfo file for modern package manage
 option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." ON)
 option(BUILD_TESTS "Build various tests." OFF)
 option(INCLUDE_COMMIT_HASH "Include the Git commit hash to the project version." OFF)
+option(INSTALL_CONFIG_FILE "Install the default configuration file." ON)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
@@ -274,9 +275,6 @@ install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${APP_
 # =================== Assets target ====================
 # ======================================================
 
-install(DIRECTORY DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
-install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
-
 if (BUILD_DOC)
     doxygen_add_docs(${DOCS_NAME} src docs ALL WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "Building documentation with Doxygen.")
     install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT ${ASSETS_COMP_NAME})
@@ -297,6 +295,11 @@ endif()
 if (BUILD_SHELL_COMPLETION)
     configure_file("assets/shell-completion/${APP_NAME}.bash.in" "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.bash" @ONLY)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.bash" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/bash-completion/completions" RENAME ${APP_NAME} COMPONENT ${ASSETS_COMP_NAME})
+endif()
+
+if (INSTALL_CONFIG_FILE)
+    install(DIRECTORY DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+    install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 endif()
 
 if (SYSTEMD_INTEGRATION)
