@@ -33,6 +33,10 @@ namespace AppConstants
     */
     std::string_view UserConfigFile();
 
+    /**
+     * Returns the data root directory installation prefix.
+     * @returns Data root directory installation prefix.
+    */
     std::string_view DataRootPrefix();
 
     /**
