@@ -39,6 +39,8 @@ namespace AppConstants
     */
     std::string_view DataRootPrefix();
 
+    std::string_view SysConfPrefix();
+
     /**
      * Returns the application name as a string.
      * @returns Application name.
