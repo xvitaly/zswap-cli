@@ -296,6 +296,7 @@ int Application::ExecuteSystemConfig() const
     for (const auto& Prefix : Prefixes)
     {
         const std::string ConfigFile = std::format("{0}/{1}/{2}", Prefix, AppConstants::ProductName(), AppConstants::ConfigFileName());
+        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
         if (std::filesystem::exists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
