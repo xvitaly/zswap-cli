@@ -285,12 +285,22 @@ int Application::ExecuteCmdLine() const
 
 int Application::ExecuteSystemConfig() const
 {
-    if (std::filesystem::exists(AppConstants::UserConfigFile()))
-        return ExecuteConfig(std::string(AppConstants::UserConfigFile()));
-    else if (std::filesystem::exists(AppConstants::SystemConfigFile()))
-        return ExecuteConfig(std::string(AppConstants::SystemConfigFile()));
-    else
-        throw std::runtime_error("System configuration files were not found.");
+    const std::vector<std::string_view> Prefixes
+    {
+        { AppConstants::SysConfPrefix() },
+        { AppConstants::DataRootPrefix() },
+        { "/etc" },
+        { "/usr/share" },
+    };
+
+    for (const auto& Prefix : Prefixes)
+    {
+        const std::string ConfigFile = std::format("{0}/{1}/{2}", Prefix, AppConstants::ProductName(), AppConstants::ConfigFileName());
+        if (std::filesystem::exists(ConfigFile))
+            return ExecuteConfig(ConfigFile);
+    }
+
+    throw std::runtime_error("System configuration files were not found.");
 }
 
 int Application::Run() const
