@@ -33,6 +33,11 @@ std::string_view AppConstants::SysConfPrefix()
     return "@CMAKE_INSTALL_FULL_SYSCONFDIR@";
 }
 
+std::string_view AppConstants::ConfigFileName()
+{
+    return "@CONF_FILE_NAME@";
+}
+
 std::string_view AppConstants::ProductName()
 {
     return "@CMAKE_PROJECT_NAME@";
