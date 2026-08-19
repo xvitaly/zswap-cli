@@ -51,6 +51,10 @@ namespace AppConstants
     */
     std::string_view StandardDataRootPrefix();
 
+    /**
+     * Returns the standard system configuration directory prefix.
+     * @returns Standard system configuration directory prefix.
+    */
     std::string_view StandardSysConfPrefix();
 
     /**
