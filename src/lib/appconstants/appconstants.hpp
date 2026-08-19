@@ -45,6 +45,8 @@ namespace AppConstants
     */
     std::string_view SysConfPrefix();
 
+    std::string_view StandardDataRootPrefix();
+
     /**
      * Returns the application configuration file name.
      * @returns Application configuration file name.
