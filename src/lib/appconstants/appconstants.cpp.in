@@ -38,6 +38,11 @@ std::string_view AppConstants::StandardDataRootPrefix()
     return "/usr/share";
 }
 
+std::string_view AppConstants::StandardSysConfPrefix()
+{
+    return "/etc";
+}
+
 std::string_view AppConstants::ConfigFileName()
 {
     return "@CONF_FILE_NAME@";
