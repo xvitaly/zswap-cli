@@ -289,8 +289,8 @@ int Application::ExecuteSystemConfig() const
     {
         { AppConstants::SysConfPrefix() },
         { AppConstants::DataRootPrefix() },
-        { "/etc" },
-        { "/usr/share" },
+        { AppConstants::StandardSysConfPrefix() },
+        { AppConstants::StandardDataRootPrefix() },
     };
 
     for (const auto& Prefix : Prefixes)
