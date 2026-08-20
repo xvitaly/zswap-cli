@@ -20,13 +20,6 @@
 namespace AppConstants
 {
     /**
-     * Returns the full path to the configuration file installed
-     * by the package.
-     * @returns Full path to the system configuration file.
-    */
-    std::string_view SystemConfigFile();
-
-    /**
      * Returns the full path to configuration file created and modified
      * by the user.
      * @returns Full path to the user configuration file.
