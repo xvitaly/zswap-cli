@@ -20,13 +20,6 @@
 namespace AppConstants
 {
     /**
-     * Returns the full path to configuration file created and modified
-     * by the user.
-     * @returns Full path to the user configuration file.
-    */
-    std::string_view UserConfigFile();
-
-    /**
      * Returns the data root directory installation prefix.
      * @returns Data root directory installation prefix.
     */

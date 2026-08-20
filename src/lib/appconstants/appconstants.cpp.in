@@ -13,11 +13,6 @@
 
 #include "appconstants/appconstants.hpp"
 
-std::string_view AppConstants::UserConfigFile()
-{
-    return "@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@";
-}
-
 std::string_view AppConstants::DataRootPrefix()
 {
     return "@CMAKE_INSTALL_FULL_DATAROOTDIR@";
