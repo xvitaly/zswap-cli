@@ -20,6 +20,36 @@
 namespace AppConstants
 {
     /**
+     * Returns the data root directory installation prefix.
+     * @returns Data root directory installation prefix.
+    */
+    std::string_view DataRootPrefix();
+
+    /**
+     * Returns the system configuration directory installation prefix.
+     * @returns System configuration directory installation prefix.
+    */
+    std::string_view SysConfPrefix();
+
+    /**
+     * Returns the standard data root directory prefix.
+     * @returns Standard data root directory prefix.
+    */
+    std::string_view StandardDataRootPrefix();
+
+    /**
+     * Returns the standard system configuration directory prefix.
+     * @returns Standard system configuration directory prefix.
+    */
+    std::string_view StandardSysConfPrefix();
+
+    /**
+     * Returns the application configuration file name.
+     * @returns Application configuration file name.
+    */
+    std::string_view ConfigFileName();
+
+    /**
      * Returns the application name as a string.
      * @returns Application name.
     */

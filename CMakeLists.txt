@@ -33,6 +33,7 @@ option(BUILD_METAINFO "Build and install metainfo file for modern package manage
 option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files." ON)
 option(BUILD_TESTS "Build various tests." OFF)
 option(INCLUDE_COMMIT_HASH "Include the Git commit hash to the project version." OFF)
+option(INSTALL_CONFIG_FILE "Install the default configuration file." ON)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
@@ -296,10 +297,14 @@ if (BUILD_SHELL_COMPLETION)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.bash" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/bash-completion/completions" RENAME ${APP_NAME} COMPONENT ${ASSETS_COMP_NAME})
 endif()
 
-if (SYSTEMD_INTEGRATION)
+if (INSTALL_CONFIG_FILE)
+    install(DIRECTORY DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+    install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+endif()
+
+if (SYSTEMD_INTEGRATION AND INSTALL_CONFIG_FILE)
     configure_file("assets/systemd/${UNIT_FILE_NAME}.in" "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" @ONLY)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${UNIT_FILE_NAME}" DESTINATION "${SYSTEMD_UNITDIR}" COMPONENT ${ASSETS_COMP_NAME})
-    install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${APP_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 endif()
 
 # ======================================================

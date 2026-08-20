@@ -283,12 +283,34 @@ int Application::ExecuteCmdLine() const
     return !Result;
 }
 
+int Application::ExecuteSystemConfig() const
+{
+    const std::vector<std::string_view> Prefixes
+    {
+        { AppConstants::SysConfPrefix() },
+        { AppConstants::DataRootPrefix() },
+        { AppConstants::StandardSysConfPrefix() },
+        { AppConstants::StandardDataRootPrefix() },
+    };
+
+    for (const auto& Prefix : Prefixes)
+    {
+        const std::string ConfigFile = std::format("{0}/{1}/{2}", Prefix, AppConstants::ProductName(), AppConstants::ConfigFileName());
+        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
+        if (std::filesystem::exists(ConfigFile))
+            return ExecuteConfig(ConfigFile);
+    }
+
+    throw std::runtime_error("System configuration files were not found.");
+}
+
 int Application::Run() const
 {
     if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
     if (CmdLine -> count("version")) return PrintVersion();
     if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
     CheckIfRunningBySuperUser();
+    if (CmdLine -> count("system")) return ExecuteSystemConfig();
     if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
     if (CmdLine -> count("env")) return ExecuteEnv();
     return ExecuteCmdLine();
@@ -344,6 +366,7 @@ void Application::InitCmdLineOptions() const
         ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Print statistics and current settings of the ZSwap kernel module.")
+        ("system", "Get options from the system configuration file instead of the cmdline.")
         ("verbose", "Enable verbose mode to display additional information for debugging or informational purposes.")
         ;
 
@@ -386,7 +409,8 @@ void Application::ParseCmdLine(int argc, char** argv) const
 
 void Application::ParseConfigFile(const std::string& ConfigFile) const
 {
-    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument("The specified configuration file does not exist!");
+    if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
+    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
