@@ -27,6 +27,7 @@ This project supports the following build-time configuration options, which can 
 | BUILD_TESTS | Build various tests. | OFF |
 | INCLUDE_COMMIT_HASH | Include the Git commit hash to the project version. | OFF |
 | INSTALL_CONFIG_FILE | Install the default configuration file. | ON |
+| INSTALL_CUSTOM_CONFIG_FILE | Install the `custom.conf` configuration file instead of the default one. | OFF |
 | LINK_ALL_STATICALLY | Link the program against all libraries statically (no dependencies mode). | OFF |
 | LINK_BOOST_STATICALLY | Link the program against Boost library statically (removes dependency on it). | OFF |
 | LINK_ENABLE_OPTIMIZATIONS | Enable link-time optimizations if supported by current C++ compiler. | ON |
