@@ -34,6 +34,7 @@ option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files."
 option(BUILD_TESTS "Build various tests." OFF)
 option(INCLUDE_COMMIT_HASH "Include the Git commit hash to the project version." OFF)
 option(INSTALL_CONFIG_FILE "Install the default configuration file." ON)
+option(INSTALL_CUSTOM_CONFIG_FILE "Install the custom.conf configuration file instead of the default one." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
@@ -153,7 +154,7 @@ endif()
 # ================ Config file detection ===============
 # ======================================================
 
-if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/assets/config/${BASE_CONF_NAME}")
+if (INSTALL_CUSTOM_CONFIG_FILE AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/assets/config/${BASE_CONF_NAME}")
     set(BASE_CONF_NAME "custom.conf")
 endif()
 
