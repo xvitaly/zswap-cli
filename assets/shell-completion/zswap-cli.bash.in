@@ -10,15 +10,15 @@ _zswap_cli()
     _comp_initialize -- "$@" || return
 
     case "$prev" in
-        -a | --accept_threshold_percent | -p | --max_pool_percent)
+        --accept_threshold_percent | --max_pool_percent)
             _comp_compgen -- -W "{1..100}"
             return
             ;;
-        -e | --enabled | -s | --same_filled_pages_enabled | -n | --non_same_filled_pages_enabled | -x | --exclusive_loads | -r | --shrinker_enabled)
+        --enabled | --same_filled_pages_enabled | --non_same_filled_pages_enabled | --exclusive_loads | --shrinker_enabled)
             _comp_compgen -- -W "Y N"
             return
             ;;
-        -c | --compressor | -z | --zpool | --env | --system | --version | --help | --verbose)
+        --compressor | --zpool | --env | --system | --version | --help | --verbose)
             return
             ;;
         --config)
@@ -32,7 +32,6 @@ _zswap_cli()
     esac
 
     if [[ "$cur" == -* ]]; then
-        _comp_compgen -- -W "-a -p -e -s -n -x -r -c -z"
         _comp_compgen -a -- -W "--accept_threshold_percent --max_pool_percent --enabled --same_filled_pages_enabled --non_same_filled_pages_enabled --exclusive_loads --shrinker_enabled --compressor --zpool"
         _comp_compgen -a -- -W "--config --env --stats --system --version --help --verbose"
         [[ "${COMPREPLY-}" == *= ]] && compopt -o nospace
