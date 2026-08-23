@@ -28,15 +28,15 @@ This application can be used in two ways:
 
 #### Kernel module configuration options
 
-  * `-e` or `--enabled` - enable or disable the ZSwap kernel module.
-  * `-s` or `--same_filled_pages_enabled` - enable or disable memory pages deduplication.
-  * `-p` or `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy.
-  * `-c` or `--compressor` - the algorithm used to compress memory pages.
-  * `-z` or `--zpool` - the kernel's zpool type.
-  * `-a` or `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full.
-  * `-n` or `--non_same_filled_pages_enabled` - enable or disable accepting non same filled memory pages.
-  * `-x` or `--exclusive_loads` - enable or disable entries invalidation when memory pages are loaded from compressed pool.
-  * `-r` or `--shrinker_enabled` - enable or disable pool shrinking based on memory pressure.
+  * `--enabled` - enable or disable the ZSwap kernel module.
+  * `--same_filled_pages_enabled` - enable or disable memory pages deduplication.
+  * `--max_pool_percent` - the maximum percentage of memory that the compressed pool can occupy.
+  * `--compressor` - the algorithm used to compress memory pages.
+  * `--zpool` - the kernel's zpool type.
+  * `--accept_threshold_percent` - the threshold at which ZSwap would start accepting pages again after it became full.
+  * `--non_same_filled_pages_enabled` - enable or disable accepting non same filled memory pages.
+  * `--exclusive_loads` - enable or disable entries invalidation when memory pages are loaded from compressed pool.
+  * `--shrinker_enabled` - enable or disable pool shrinking based on memory pressure.
 
 ### Forwarding options
 
