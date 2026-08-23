@@ -60,47 +60,47 @@ Get options from the system configuration file instead of the cmdline.
 #### \-\-verbose
 Enable verbose mode to display additional information for debugging or informational purposes.
 
-#### -e, \-\-enabled
+#### \-\-enabled
 Enable or disable the ZSwap kernel module.
 
 Supported values: **Y**, **N**.
 
-#### -s, \-\-same_filled_pages_enabled
+#### \-\-same_filled_pages_enabled
 Enable or disable memory pages deduplication.
 
 Supported values: **Y**, **N**.
 
-#### -p, \-\-max_pool_percent
+#### \-\-max_pool_percent
 The maximum percentage of memory that the compressed pool can occupy.
 
 Supported values: integer from **1** to **100**.
 
-#### -c, \-\-compressor
+#### \-\-compressor
 The algorithm used to compress memory pages.
 
 Supported values: depends on the kernel build time configuration.
 
-#### -z, \-\-zpool
+#### \-\-zpool
 The kernel's zpool type.
 
 Supported values: depends on the kernel build time configuration.
 
-#### -a, \-\-accept_threshold_percent
+#### \-\-accept_threshold_percent
 The threshold at which ZSwap would start accepting pages again after it became full.
 
 Supported values: integer from **1** to **100**.
 
-#### -n, \-\-non_same_filled_pages_enabled
+#### \-\-non_same_filled_pages_enabled
 Enable or disable accepting non same filled memory pages.
 
 Supported values: **Y**, **N**.
 
-#### -x, \-\-exclusive_loads
+#### \-\-exclusive_loads
 Enable or disable entries invalidation when memory pages are loaded from compressed pool.
 
 Supported values: **Y**, **N**.
 
-#### -r, \-\-shrinker_enabled
+#### \-\-shrinker_enabled
 Enable or disable pool shrinking based on memory pressure.
 
 Supported values: **Y**, **N**.
