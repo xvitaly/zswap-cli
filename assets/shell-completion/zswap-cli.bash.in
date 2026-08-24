@@ -18,6 +18,10 @@ _zswap_cli()
             _comp_compgen -- -W "842 deflate lzo lz4 lz4hc zstd"
             return
             ;;
+        --config)
+            _comp_compgen_filedir "@(conf|ini)"
+            return
+            ;;
         --enabled | --same_filled_pages_enabled | --non_same_filled_pages_enabled | --exclusive_loads | --shrinker_enabled)
             _comp_compgen -- -W "Y N"
             return
@@ -25,16 +29,12 @@ _zswap_cli()
         --env | --system | --version | --help | --verbose)
             return
             ;;
-        --zpool)
-            _comp_compgen -- -W "z3fold zbud zsmalloc"
-            return
-            ;;
-        --config)
-            _comp_compgen_filedir "@(conf|ini)"
-            return
-            ;;
         --stats)
             _comp_compgen -- -W "{0..3}"
+            return
+            ;;
+        --zpool)
+            _comp_compgen -- -W "z3fold zbud zsmalloc"
             return
             ;;
     esac
