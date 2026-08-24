@@ -22,7 +22,11 @@ _zswap_cli()
             _comp_compgen -- -W "Y N"
             return
             ;;
-        --zpool | --env | --system | --version | --help | --verbose)
+        --env | --system | --version | --help | --verbose)
+            return
+            ;;
+        --zpool)
+            _comp_compgen -- -W "z3fold zbud zsmalloc"
             return
             ;;
         --config)
