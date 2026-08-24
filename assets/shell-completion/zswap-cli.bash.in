@@ -14,11 +14,15 @@ _zswap_cli()
             _comp_compgen -- -W "{1..100}"
             return
             ;;
+        --compressor)
+            _comp_compgen -- -W "842 deflate lzo lz4 lz4hc zstd"
+            return
+            ;;
         --enabled | --same_filled_pages_enabled | --non_same_filled_pages_enabled | --exclusive_loads | --shrinker_enabled)
             _comp_compgen -- -W "Y N"
             return
             ;;
-        --compressor | --zpool | --env | --system | --version | --help | --verbose)
+        --zpool | --env | --system | --version | --help | --verbose)
             return
             ;;
         --config)
