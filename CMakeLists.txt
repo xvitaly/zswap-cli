@@ -34,12 +34,14 @@ option(BUILD_SHELL_COMPLETION "Build and install shell completion helper files."
 option(BUILD_TESTS "Build various tests." OFF)
 option(INCLUDE_COMMIT_HASH "Include the Git commit hash to the project version." OFF)
 option(INSTALL_CONFIG_FILE "Install the default configuration file." ON)
-option(INSTALL_CUSTOM_CONFIG_FILE "Install the custom.conf configuration file instead of the default one." OFF)
 option(LINK_ALL_STATICALLY "Link the program against all libraries statically (no dependencies mode)." OFF)
 option(LINK_BOOST_STATICALLY "Link the program against Boost library statically (removes dependency on it)." OFF)
 option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by current C++ compiler." ON)
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 option(TESTS_ENABLE_NETWORK "Enable network access for the tests." OFF)
+
+set(CUSTOM_CONFIG_FILE_PATH "" CACHE PATH "Full path to the custom configuration file to be installed instead of the default one.")
+set(CUSTOM_RELEASE_INFO "" CACHE STRING "Additional release information to be added to the --version output.")
 
 # ======================================================
 # ==================== Target names ====================
@@ -62,7 +64,6 @@ set(ASSETS_COMP_NAME "assets")
 # ======================================================
 
 set(SCHEME_NAME "org.easycoding.${CMAKE_PROJECT_NAME}")
-set(BASE_CONF_NAME "${CMAKE_PROJECT_NAME}.conf")
 set(CONF_FILE_NAME "${CMAKE_PROJECT_NAME}.conf")
 set(UNIT_FILE_NAME "${CMAKE_PROJECT_NAME}.service")
 set(METAINFO_FILE_NAME "${SCHEME_NAME}.metainfo.xml")
@@ -151,20 +152,16 @@ if (SYSTEMD_INTEGRATION)
 endif()
 
 # ======================================================
-# ================ Config file detection ===============
-# ======================================================
-
-if (INSTALL_CUSTOM_CONFIG_FILE AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/assets/config/${BASE_CONF_NAME}")
-    set(BASE_CONF_NAME "custom.conf")
-endif()
-
-# ======================================================
 # ================== Version detection =================
 # ======================================================
 
+if (CUSTOM_RELEASE_INFO)
+    set(PRODUCT_RELEASE_EXTENDED "-${CUSTOM_RELEASE_INFO}")
+endif()
+
 if (INCLUDE_COMMIT_HASH AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
     find_package(SnapshotRelease QUIET REQUIRED)
-    set(PRODUCT_RELEASE_EXTENDED "-${SNAPSHOT_RELEASE_HASH}")
+    set(PRODUCT_RELEASE_EXTENDED "${PRODUCT_RELEASE_EXTENDED}-${SNAPSHOT_RELEASE_HASH}")
 endif()
 
 # ======================================================
@@ -308,7 +305,11 @@ if (BUILD_SHELL_COMPLETION)
 endif()
 
 if (INSTALL_CONFIG_FILE)
-    install(FILES "assets/config/${BASE_CONF_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" RENAME ${CONF_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
+    if (CUSTOM_CONFIG_FILE_PATH AND EXISTS ${CUSTOM_CONFIG_FILE_PATH})
+        install(FILES ${CUSTOM_CONFIG_FILE_PATH} DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" RENAME ${CONF_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
+    else()
+        install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+    endif()
     install(DIRECTORY DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 endif()
 
