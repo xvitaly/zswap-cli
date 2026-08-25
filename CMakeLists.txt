@@ -42,6 +42,7 @@ option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 option(TESTS_ENABLE_NETWORK "Enable network access for the tests." OFF)
 
 set(CUSTOM_CONFIG_FILE_PATH "" CACHE PATH "Full path to the custom configuration file.")
+set(CUSTOM_RELEASE_INFO "" CACHE STRING "Additional release information to be added to the --version output.")
 
 # ======================================================
 # ==================== Target names ====================
@@ -155,9 +156,13 @@ endif()
 # ================== Version detection =================
 # ======================================================
 
+if (CUSTOM_RELEASE_INFO)
+    set(PRODUCT_RELEASE_EXTENDED "-${CUSTOM_RELEASE_INFO}")
+endif()
+
 if (INCLUDE_COMMIT_HASH AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
     find_package(SnapshotRelease QUIET REQUIRED)
-    set(PRODUCT_RELEASE_EXTENDED "-${SNAPSHOT_RELEASE_HASH}")
+    set(PRODUCT_RELEASE_EXTENDED "${PRODUCT_RELEASE_EXTENDED}-${SNAPSHOT_RELEASE_HASH}")
 endif()
 
 # ======================================================
