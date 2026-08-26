@@ -66,6 +66,7 @@ jobs:
             -DBUILD_METAINFO:BOOL=ON \
             -DBUILD_SHELL_COMPLETION:BOOL=ON \
             -DBUILD_TESTS:BOOL=ON \
+            -DCUSTOM_RELEASE_INFO:STRING="dev" \
             -DINCLUDE_COMMIT_HASH:BOOL=OFF \
             -DINSTALL_CONFIG_FILE:BOOL=ON \
             -DLINK_ALL_STATICALLY:BOOL=OFF \
