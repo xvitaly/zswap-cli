@@ -37,7 +37,7 @@ The following build-time configuration options can be configured using `-DOPTION
 
 | Name | Description | Type | Default |
 | ------- | ------- | ------- | ------- |
-| CUSTOM_CONFIG_FILE_PATH | Full path to the custom configuration file to be installed instead of the default one. | PATH | EMPTY |
+| CUSTOM_CONFIG_FILE_PATH | Full path to the custom configuration file to be installed instead of the default one. | FILEPATH | EMPTY |
 | CUSTOM_RELEASE_INFO | Additional release information to be added to the --version output. | STRING | EMPTY |
 
 Any other non-default options related to external dependencies are not supported and should not be used.

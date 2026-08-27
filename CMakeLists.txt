@@ -40,7 +40,7 @@ option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 option(TESTS_ENABLE_NETWORK "Enable network access for the tests." OFF)
 
-set(CUSTOM_CONFIG_FILE_PATH "" CACHE PATH "Full path to the custom configuration file to be installed instead of the default one.")
+set(CUSTOM_CONFIG_FILE_PATH "" CACHE FILEPATH "Full path to the custom configuration file to be installed instead of the default one.")
 set(CUSTOM_RELEASE_INFO "" CACHE STRING "Additional release information to be added to the --version output.")
 
 # ======================================================
