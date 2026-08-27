@@ -40,7 +40,7 @@ option(LINK_ENABLE_OPTIMIZATIONS "Enable link-time optimizations if supported by
 option(SYSTEMD_INTEGRATION "Generate and install systemd units." ON)
 option(TESTS_ENABLE_NETWORK "Enable network access for the tests." OFF)
 
-set(CUSTOM_CONFIG_FILE_PATH "" CACHE PATH "Full path to the custom configuration file to be installed instead of the default one.")
+set(CUSTOM_CONFIG_FILE_PATH "" CACHE FILEPATH "Full path to the custom configuration file to be installed instead of the default one.")
 set(CUSTOM_RELEASE_INFO "" CACHE STRING "Additional release information to be added to the --version output.")
 
 # ======================================================
@@ -305,7 +305,15 @@ if (BUILD_SHELL_COMPLETION)
 endif()
 
 if (INSTALL_CONFIG_FILE)
-    if (CUSTOM_CONFIG_FILE_PATH AND EXISTS ${CUSTOM_CONFIG_FILE_PATH})
+    if (CUSTOM_CONFIG_FILE_PATH)
+        if (NOT IS_ABSOLUTE ${CUSTOM_CONFIG_FILE_PATH})
+            get_filename_component(CUSTOM_CONFIG_FILE_ABSOLUTE ${CUSTOM_CONFIG_FILE_PATH} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_LIST_DIR})
+            set(CUSTOM_CONFIG_FILE_PATH ${CUSTOM_CONFIG_FILE_ABSOLUTE})
+            unset(CUSTOM_CONFIG_FILE_ABSOLUTE)
+        endif()
+        if (NOT EXISTS ${CUSTOM_CONFIG_FILE_PATH})
+            message(FATAL_ERROR "The specified in the CUSTOM_CONFIG_FILE_PATH configuration option file does not exist!")
+        endif()
         install(FILES ${CUSTOM_CONFIG_FILE_PATH} DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" RENAME ${CONF_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
     else()
         install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
