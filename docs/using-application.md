@@ -61,9 +61,18 @@ After [installation](installation.md) with systemd integration enabled, the `zsw
 
 ### Changing settings
 
-All settings are stored in the `/etc/zswap-cli/zswap-cli.conf` file. It uses standard key-value syntax and can be edited by the user.
+This application uses a modern way of storing configuration files:
 
-All supported values can be found [here](configuration-files.md).
+  * default read-only config `/usr/share/zswap-cli/zswap-cli.conf`, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
+  * user high-priority config `/etc/zswap-cli/zswap-cli.conf`, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
+
+In order to edit the configuration file, it need to be copied to the `/etc/zswap-cli` directory first:
+
+```
+sudo cp -a /usr/share/zswap-cli/zswap-cli.conf /etc/zswap-cli/zswap-cli.conf
+```
+
+Both configuration files uses the same standard key-value syntax. All supported values can be found [here](configuration-files.md).
 
 ### Enabling unit
 
