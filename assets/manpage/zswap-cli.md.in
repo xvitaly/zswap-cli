@@ -205,7 +205,18 @@ After installation, the systemd unit **@UNIT_FILE_NAME@** will be added.
 
 ## Changing settings
 
-All settings are stored in the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@APP_NAME@/@CONF_FILE_NAME@** configuration file. It uses standard key-value syntax and can be edited by the user.
+This application uses a modern way of storing configuration files:
+
+  * default read-only config **@CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@**, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
+  * user high-priority config **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@**, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
+
+In order to edit the configuration file, it need to be copied to the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@** directory first:
+
+```
+sudo cp -a @CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@ @CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@
+```
+
+Both configuration files uses the same standard key-value syntax.
 
 ## Enabling unit
 
