@@ -1,6 +1,17 @@
 # Configuration files
 
-This project support of getting options from the configuration files.
+This application uses a modern way of storing configuration files for the systemd unit and the `--system` command line option:
+
+  * default read-only config `/usr/share/zswap-cli/zswap-cli.conf`, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
+  * user high-priority config `/etc/zswap-cli/zswap-cli.conf`, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
+
+In order to edit the configuration file, it need to be copied to the `/etc/zswap-cli` directory first:
+
+```
+sudo cp -a /usr/share/zswap-cli/zswap-cli.conf /etc/zswap-cli/zswap-cli.conf
+```
+
+Both configuration files have the same standard key-value syntax.
 
 ## Supported options
 
@@ -16,9 +27,19 @@ This project support of getting options from the configuration files.
 
 ## Forwarding options
 
-Create a configuration file:
+### System config
+
+Start the application with the `--system` command-line argument:
 
 ```
+sudo zswap-cli --system
+```
+
+### Custom config
+
+Create a custom configuration file:
+
+```ini
 [zswap]
 enabled=Y
 same_filled_pages_enabled=Y
