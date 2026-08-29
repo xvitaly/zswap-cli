@@ -162,7 +162,18 @@ sudo ZSWAP_ENABLED_VALUE=Y \
 
 # CONFIGURATION FILES
 
-@APP_NAME@ support of getting options from the configuration files.
+This application uses a modern way of storing configuration files for the systemd unit and the `--system` command line option:
+
+  * default read-only config **@CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@**, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
+  * user high-priority config **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@**, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
+
+In order to edit the configuration file, it need to be copied to the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@** directory first:
+
+```
+sudo cp -a @CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@ @CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@
+```
+
+Both configuration files have the same standard key-value syntax.
 
 ## Supported options
 
@@ -177,6 +188,16 @@ sudo ZSWAP_ENABLED_VALUE=Y \
   * **shrinker_enabled** - enable or disable pool shrinking based on memory pressure.
 
 ## Forwarding options
+
+### System config
+
+Start the application with the `--system` command-line argument:
+
+```
+sudo @APP_NAME@ --system
+```
+
+### Custom config
 
 Create a configuration file:
 
@@ -205,18 +226,7 @@ After installation, the systemd unit **@UNIT_FILE_NAME@** will be added.
 
 ## Changing settings
 
-This application uses a modern way of storing configuration files:
-
-  * default read-only config **@CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@**, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
-  * user high-priority config **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@**, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
-
-In order to edit the configuration file, it need to be copied to the **@CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@** directory first:
-
-```
-sudo cp -a @CMAKE_INSTALL_FULL_DATAROOTDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@ @CMAKE_INSTALL_FULL_SYSCONFDIR@/@CMAKE_PROJECT_NAME@/@CONF_FILE_NAME@
-```
-
-Both configuration files uses the same standard key-value syntax.
+The default settings can be changed by editing the configuration files. More information can be found in the **CONFIGURATION FILES** chapter.
 
 ## Enabling unit
 
