@@ -5,10 +5,15 @@ This application uses a modern way of storing configuration files for the system
   * default read-only config `/usr/share/zswap-cli/zswap-cli.conf`, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
   * user high-priority config `/etc/zswap-cli/zswap-cli.conf`, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
 
-In order to edit the configuration file, it need to be copied to the `/etc/zswap-cli` directory first:
+In order to make changes to the configuration file, it need to be copied to the `/etc/zswap-cli` directory first:
 
 ```
 sudo cp -a /usr/share/zswap-cli/zswap-cli.conf /etc/zswap-cli/zswap-cli.conf
+```
+
+Now this file can be edited:
+```
+sudoedit /etc/zswap-cli/zswap-cli.conf
 ```
 
 Both configuration files have the same standard key-value syntax.
