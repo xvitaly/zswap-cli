@@ -12,8 +12,10 @@
  * Contains the ZSwapObject class definition.
 */
 
+#include <filesystem>
 #include <optional>
 #include <string>
+#include <string_view>
 
 /**
  * Class for working with the ZSwap kernel module.
@@ -143,52 +145,52 @@ private:
     /**
      * Stores the ZSwap kernel module options path.
     */
-    const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
+    const std::string_view ZSwapModuleParametersPath = "/sys/module/zswap/parameters";
 
     /**
      * Stores the ZSwap enabled internal option name.
     */
-    const std::string ZSwapEnabledName = "enabled";
+    const std::string_view ZSwapEnabledName = "enabled";
 
     /**
      * Stores the same filled pages enabled internal option name.
     */
-    const std::string ZSwapSameFilledPagesName = "same_filled_pages_enabled";
+    const std::string_view ZSwapSameFilledPagesName = "same_filled_pages_enabled";
 
     /**
      * Stores the maximum pool percentage internal option name.
     */
-    const std::string ZSwapMaxPoolPercentName = "max_pool_percent";
+    const std::string_view ZSwapMaxPoolPercentName = "max_pool_percent";
 
     /**
      * Stores the compression algorithm internal option name.
     */
-    const std::string ZSwapCompressorName = "compressor";
+    const std::string_view ZSwapCompressorName = "compressor";
 
     /**
      * Stores the kernel's zpool type internal option name.
     */
-    const std::string ZSwapZpoolName = "zpool";
+    const std::string_view ZSwapZpoolName = "zpool";
 
     /**
      * Stores the accept threshold percentage internal option name.
     */
-    const std::string ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
+    const std::string_view ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 
     /**
      * Stores the non same filled pages enabled internal option name.
     */
-    const std::string ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
+    const std::string_view ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
 
     /**
      * Stores the exclusive loads enabled internal option name.
     */
-    const std::string ZSwapExclusiveLoadsName = "exclusive_loads";
+    const std::string_view ZSwapExclusiveLoadsName = "exclusive_loads";
 
     /**
      * Stores the shrinker enabled internal option name.
     */
-    const std::string ZSwapShrinkerEnabledName = "shrinker_enabled";
+    const std::string_view ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
      * Checks whether the value is Y or N.
@@ -197,7 +199,7 @@ private:
      * @exception Raises an instance of std::invalid_argument if the
      * value does not meet the criteria.
     */
-    void CheckValueBool(const std::string&, const std::string&) const;
+    void CheckValueBool(const std::string_view, const std::string&) const;
 
     /**
      * Checks whether the value is empty.
@@ -206,7 +208,7 @@ private:
      * @exception Raises an instance of std::invalid_argument if the
      * value does not meet the criteria.
     */
-    void CheckValueEmpty(const std::string&, const std::string&) const;
+    void CheckValueEmpty(const std::string_view, const std::string&) const;
 
     /**
      * Checks whether the value is within the [0..100] range.
@@ -215,7 +217,7 @@ private:
      * @exception Raises an instance of std::invalid_argument if the
      * value does not meet the criteria.
     */
-    void CheckValueRange(const std::string&, const std::string&) const;
+    void CheckValueRange(const std::string_view, const std::string&) const;
 
     /**
      * Prints the log entry to the standard output.
@@ -223,7 +225,7 @@ private:
      * @param NewValue New option value.
      * @param OldValue Old option value.
     */
-    void WriteLogEntry(const std::string&, const std::string&, const std::string&) const;
+    void WriteLogEntry(const std::string_view, const std::string&, const std::string&) const;
 
     /**
      * Reads the value of the ZSwap kernel module option from the
@@ -231,7 +233,7 @@ private:
      * @param FullPath Full path to the ZSwap kernel module option.
      * @returns Option value.
     */
-    std::string ReadValue(const std::string&) const;
+    std::string ReadValue(const std::filesystem::path&) const;
 
     /**
      * Writes a new value to the specified ZSwap kernel module option
@@ -239,14 +241,14 @@ private:
      * @param FullPath Full path to the ZSwap kernel module option.
      * @param Value Option value.
     */
-    void WriteValue(const std::string&, const std::string&) const;
+    void WriteValue(const std::filesystem::path&, const std::string&) const;
 
     /**
      * Reads the value of the specified ZSwap kernel module option.
      * @param Name Option name.
      * @returns Option value or std::nullopt if not available.
     */
-    std::optional<std::string> ReadZSwapValue(const std::string&) const;
+    std::optional<std::string> ReadZSwapValue(const std::filesystem::path&) const;
 
     /**
      * Writes a new value to the specified ZSwap kernel module option.
@@ -255,7 +257,7 @@ private:
      * @exception Raises an instance of the std::runtime_error if an
      * error occurs.
     */
-    void WriteZSwapValue(const std::string&, const std::string&) const;
+    void WriteZSwapValue(const std::string_view, const std::string&) const;
 };
 
 #endif // ZSWAPOBJECT_HPP
