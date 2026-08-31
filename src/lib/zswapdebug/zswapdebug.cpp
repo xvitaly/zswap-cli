@@ -10,6 +10,7 @@
 */
 
 #include <filesystem>
+#include <format>
 #include <fstream>
 #include <optional>
 #include <string>
@@ -25,9 +26,9 @@ unsigned long ZSwapDebug::ReadDebugValue(const std::string& FullPath) const
     return Result;
 }
 
-std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string& Name) const
+std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string_view Name) const
 {
-    const std::string FullPath = ModuleDebugPath + Name;
+    const std::string FullPath = std::format("{0}/{1}", ModuleDebugPath, Name);
     if (!std::filesystem::exists(FullPath)) return std::nullopt;
     return ReadDebugValue(FullPath);
 }
