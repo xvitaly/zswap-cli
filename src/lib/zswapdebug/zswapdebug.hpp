@@ -12,8 +12,10 @@
  * Contains the ZSwapDebug class definition.
 */
 
+#include <filesystem>
 #include <optional>
 #include <string>
+#include <string_view>
 
 /**
  * Class for working with the ZSwap kernel module
@@ -117,7 +119,7 @@ private:
      * @param FullPath Full path to the ZSwap kernel module debug variable.
      * @returns Value of the specified debug variable.
     */
-    unsigned long ReadDebugValue(const std::string&) const;
+    unsigned long ReadDebugValue(const std::filesystem::path&) const;
 
     /**
      * Reads the debug value of the ZSwap kernel module by the

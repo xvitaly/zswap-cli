@@ -14,11 +14,12 @@
 #include <fstream>
 #include <optional>
 #include <string>
+#include <string_view>
 #include <system_error>
 
 #include "zswapdebug/zswapdebug.hpp"
 
-unsigned long ZSwapDebug::ReadDebugValue(const std::string& FullPath) const
+unsigned long ZSwapDebug::ReadDebugValue(const std::filesystem::path& FullPath) const
 {
     unsigned long Result;
     std::ifstream ZSwapSysFs(FullPath);
@@ -28,7 +29,7 @@ unsigned long ZSwapDebug::ReadDebugValue(const std::string& FullPath) const
 
 std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string_view Name) const
 {
-    const std::string FullPath = std::format("{0}/{1}", ModuleDebugPath, Name);
+    const std::filesystem::path FullPath = std::filesystem::path(ModuleDebugPath) / std::filesystem::path(Name);
     if (!std::filesystem::exists(FullPath)) return std::nullopt;
     return ReadDebugValue(FullPath);
 }
