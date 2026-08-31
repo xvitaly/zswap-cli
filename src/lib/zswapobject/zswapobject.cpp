@@ -21,22 +21,22 @@
 
 #include "zswapobject/zswapobject.hpp"
 
-void ZSwapObject::CheckValueBool(const std::string& Name, const std::string& Value) const
+void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^[YN]$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is incorrect (only Y or N are supported)!", Name));
 }
 
-void ZSwapObject::CheckValueEmpty(const std::string& Name, const std::string& Value) const
+void ZSwapObject::CheckValueEmpty(const std::string_view Name, const std::string& Value) const
 {
     if (Value.empty()) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is empty!", Name));
 }
 
-void ZSwapObject::CheckValueRange(const std::string& Name, const std::string& Value) const
+void ZSwapObject::CheckValueRange(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is out of range [0..100]!", Name));
 }
 
-void ZSwapObject::WriteLogEntry(const std::string& Name, const std::string& NewValue, const std::string& OldValue) const
+void ZSwapObject::WriteLogEntry(const std::string_view Name, const std::string& NewValue, const std::string& OldValue) const
 {
     std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, NewValue, OldValue) << std::endl;
 }
@@ -62,7 +62,7 @@ std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::filesystem::pa
     return ReadValue(FullPath);
 }
 
-void ZSwapObject::WriteZSwapValue(const std::string& Name, const std::string& Value) const
+void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string& Value) const
 {
     const std::filesystem::path FullPath = std::filesystem::path(ZSwapModuleParametersPath) / std::filesystem::path(Name);
     if (!std::filesystem::exists(FullPath)) throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
