@@ -12,6 +12,7 @@
  * Contains the ZSwapObject class definition.
 */
 
+#include <filesystem>
 #include <optional>
 #include <string>
 
@@ -143,7 +144,7 @@ private:
     /**
      * Stores the ZSwap kernel module options path.
     */
-    const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters/";
+    const std::string ZSwapModuleParametersPath = "/sys/module/zswap/parameters";
 
     /**
      * Stores the ZSwap enabled internal option name.
@@ -231,7 +232,7 @@ private:
      * @param FullPath Full path to the ZSwap kernel module option.
      * @returns Option value.
     */
-    std::string ReadValue(const std::string&) const;
+    std::string ReadValue(const std::filesystem::path&) const;
 
     /**
      * Writes a new value to the specified ZSwap kernel module option
@@ -239,14 +240,14 @@ private:
      * @param FullPath Full path to the ZSwap kernel module option.
      * @param Value Option value.
     */
-    void WriteValue(const std::string&, const std::string&) const;
+    void WriteValue(const std::filesystem::path&, const std::string&) const;
 
     /**
      * Reads the value of the specified ZSwap kernel module option.
      * @param Name Option name.
      * @returns Option value or std::nullopt if not available.
     */
-    std::optional<std::string> ReadZSwapValue(const std::string&) const;
+    std::optional<std::string> ReadZSwapValue(const std::filesystem::path&) const;
 
     /**
      * Writes a new value to the specified ZSwap kernel module option.
