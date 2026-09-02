@@ -28,7 +28,9 @@ unsigned long ZSwapDebug::ReadDebugValue(const std::filesystem::path& FullPath) 
 std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string_view Name) const
 {
     const std::filesystem::path FullPath = std::filesystem::path(ModuleDebugPath) / std::filesystem::path(Name);
-    if (!std::filesystem::exists(FullPath)) return std::nullopt;
+    std::error_code error;
+    std::filesystem::file_status status = std::filesystem::status(FullPath, error);
+    if (error || !(std::filesystem::exists(status) && std::filesystem::is_regular_file(status))) return std::nullopt;
     return ReadDebugValue(FullPath);
 }
 
