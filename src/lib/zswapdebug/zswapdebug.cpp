@@ -13,8 +13,8 @@
 #include <fstream>
 #include <optional>
 #include <string_view>
-#include <system_error>
 
+#include "filemanager/filemanager.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 
 unsigned long ZSwapDebug::ReadDebugValue(const std::filesystem::path& FullPath) const
@@ -28,9 +28,7 @@ unsigned long ZSwapDebug::ReadDebugValue(const std::filesystem::path& FullPath) 
 std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string_view Name) const
 {
     const std::filesystem::path FullPath = std::filesystem::path(ModuleDebugPath) / std::filesystem::path(Name);
-    std::error_code error;
-    std::filesystem::file_status status = std::filesystem::status(FullPath, error);
-    if (error || !(std::filesystem::exists(status) && std::filesystem::is_regular_file(status))) return std::nullopt;
+    if (!FileManager::CheckFileExists(FullPath)) return std::nullopt;
     return ReadDebugValue(FullPath);
 }
 
@@ -96,7 +94,5 @@ std::optional<unsigned long> ZSwapDebug::GetIncompressiblePages() const
 
 bool ZSwapDebug::IsDebugAvailable() const
 {
-    std::error_code error;
-    std::filesystem::file_status status = std::filesystem::status(ModuleDebugPath, error);
-    return !error && std::filesystem::exists(status) && std::filesystem::is_directory(status);
+    return FileManager::CheckDirectoryExists(ModuleDebugPath);
 }

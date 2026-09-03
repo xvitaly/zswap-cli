@@ -179,6 +179,7 @@ endif()
 set(LIBRARY_HEADERS
     src/lib/appconstants/appconstants.hpp
     src/lib/cwrappers/cwrappers.hpp
+    src/lib/filemanager/filemanager.hpp
     src/lib/ksysinfo/ksysinfo.hpp
     src/lib/ksysversion/ksysversion.hpp
     src/lib/zswapdebug/zswapdebug.hpp
@@ -187,6 +188,7 @@ set(LIBRARY_HEADERS
 
 set(LIBRARY_SOURCES
     src/lib/cwrappers/cwrappers.cpp
+    src/lib/filemanager/filemanager.cpp
     src/lib/ksysinfo/ksysinfo.cpp
     src/lib/ksysversion/ksysversion.cpp
     src/lib/zswapdebug/zswapdebug.cpp
