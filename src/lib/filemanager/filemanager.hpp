@@ -19,6 +19,13 @@
 */
 namespace FileManager
 {
+    /**
+     * Returns whether the specified file exists.
+     * @returns File existence check results.
+     * @retval true The specified file exists.
+     * @retval false The specified file does not exists.
+    */
+    bool CheckFileExists(const std::filesystem::path&);
 }
 
 #endif // FILEMANAGER_HPP

@@ -10,6 +10,13 @@
 */
 
 #include <filesystem>
+#include <system_error>
 
 #include "filemanager/filemanager.hpp"
 
+bool FileManager::CheckFileExists(const std::filesystem::path& FullPath)
+{
+    std::error_code error;
+    std::filesystem::file_status status = std::filesystem::status(FullPath, error);
+    return !error && std::filesystem::exists(status) && std::filesystem::is_regular_file(status);
+}

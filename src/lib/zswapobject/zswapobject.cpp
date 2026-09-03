@@ -19,6 +19,7 @@
 #include <string>
 #include <system_error>
 
+#include "filemanager/filemanager.hpp"
 #include "zswapobject/zswapobject.hpp"
 
 void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string& Value) const
@@ -58,16 +59,14 @@ void ZSwapObject::WriteValue(const std::filesystem::path& FullPath, const std::s
 std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::filesystem::path& Name) const
 {
     const std::filesystem::path FullPath = std::filesystem::path(ZSwapModuleParametersPath) / std::filesystem::path(Name);
-    if (!std::filesystem::exists(FullPath)) return std::nullopt;
+    if (!FileManager::CheckFileExists(FullPath)) return std::nullopt;
     return ReadValue(FullPath);
 }
 
 void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string& Value) const
 {
     const std::filesystem::path FullPath = std::filesystem::path(ZSwapModuleParametersPath) / std::filesystem::path(Name);
-    std::error_code error;
-    std::filesystem::file_status status = std::filesystem::status(FullPath, error);
-    if (error || !(std::filesystem::exists(status) && std::filesystem::is_regular_file(status))) throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
+    if (!FileManager::CheckFileExists(FullPath)) throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
     const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
     WriteValue(FullPath, Value);
     if (ReadZSwapValue(Name) != Value) throw std::runtime_error(std::format("Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
