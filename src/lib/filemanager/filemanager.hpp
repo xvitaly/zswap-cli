@@ -26,6 +26,14 @@ namespace FileManager
      * @retval false The specified file does not exists.
     */
     bool CheckFileExists(const std::filesystem::path&);
+
+    /**
+     * Returns whether the specified directory exists.
+     * @returns Directory existence check results.
+     * @retval true The specified directory exists.
+     * @retval false The specified directory does not exists.
+    */
+    bool CheckDirectoryExists(const std::filesystem::path&);
 }
 
 #endif // FILEMANAGER_HPP

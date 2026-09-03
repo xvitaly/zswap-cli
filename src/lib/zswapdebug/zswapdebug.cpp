@@ -13,7 +13,6 @@
 #include <fstream>
 #include <optional>
 #include <string_view>
-#include <system_error>
 
 #include "filemanager/filemanager.hpp"
 #include "zswapdebug/zswapdebug.hpp"
@@ -95,7 +94,5 @@ std::optional<unsigned long> ZSwapDebug::GetIncompressiblePages() const
 
 bool ZSwapDebug::IsDebugAvailable() const
 {
-    std::error_code error;
-    std::filesystem::file_status status = std::filesystem::status(ModuleDebugPath, error);
-    return !error && std::filesystem::exists(status) && std::filesystem::is_directory(status);
+    return FileManager::CheckDirectoryExists(ModuleDebugPath);
 }

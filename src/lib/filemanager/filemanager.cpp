@@ -20,3 +20,10 @@ bool FileManager::CheckFileExists(const std::filesystem::path& FullPath)
     std::filesystem::file_status status = std::filesystem::status(FullPath, error);
     return !error && std::filesystem::exists(status) && std::filesystem::is_regular_file(status);
 }
+
+bool FileManager::CheckDirectoryExists(const std::filesystem::path& FullPath)
+{
+    std::error_code error;
+    std::filesystem::file_status status = std::filesystem::status(FullPath, error);
+    return !error && std::filesystem::exists(status) && std::filesystem::is_directory(status);
+}

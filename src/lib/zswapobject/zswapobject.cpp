@@ -17,7 +17,6 @@
 #include <regex>
 #include <stdexcept>
 #include <string>
-#include <system_error>
 
 #include "filemanager/filemanager.hpp"
 #include "zswapobject/zswapobject.hpp"
@@ -174,7 +173,5 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value) const
 
 bool ZSwapObject::IsAvailable() const
 {
-    std::error_code error;
-    std::filesystem::file_status status = std::filesystem::status(ZSwapModuleParametersPath, error);
-    return !error && std::filesystem::exists(status) && std::filesystem::is_directory(status);
+    return FileManager::CheckDirectoryExists(ZSwapModuleParametersPath);
 }
