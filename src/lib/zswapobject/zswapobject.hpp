@@ -145,52 +145,52 @@ private:
     /**
      * Stores the ZSwap kernel module options path.
     */
-    const std::string_view ZSwapModuleParametersPath = "/sys/module/zswap/parameters";
+    static constexpr std::string_view ZSwapModuleParametersPath = "/sys/module/zswap/parameters";
 
     /**
      * Stores the ZSwap enabled internal option name.
     */
-    const std::string_view ZSwapEnabledName = "enabled";
+    static constexpr std::string_view ZSwapEnabledName = "enabled";
 
     /**
      * Stores the same filled pages enabled internal option name.
     */
-    const std::string_view ZSwapSameFilledPagesName = "same_filled_pages_enabled";
+    static constexpr std::string_view ZSwapSameFilledPagesName = "same_filled_pages_enabled";
 
     /**
      * Stores the maximum pool percentage internal option name.
     */
-    const std::string_view ZSwapMaxPoolPercentName = "max_pool_percent";
+    static constexpr std::string_view ZSwapMaxPoolPercentName = "max_pool_percent";
 
     /**
      * Stores the compression algorithm internal option name.
     */
-    const std::string_view ZSwapCompressorName = "compressor";
+    static constexpr std::string_view ZSwapCompressorName = "compressor";
 
     /**
      * Stores the kernel's zpool type internal option name.
     */
-    const std::string_view ZSwapZpoolName = "zpool";
+    static constexpr std::string_view ZSwapZpoolName = "zpool";
 
     /**
      * Stores the accept threshold percentage internal option name.
     */
-    const std::string_view ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
+    static constexpr std::string_view ZSwapAcceptThresholdPercentName = "accept_threshold_percent";
 
     /**
      * Stores the non same filled pages enabled internal option name.
     */
-    const std::string_view ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
+    static constexpr std::string_view ZSwapNonSameFilledPagesName = "non_same_filled_pages_enabled";
 
     /**
      * Stores the exclusive loads enabled internal option name.
     */
-    const std::string_view ZSwapExclusiveLoadsName = "exclusive_loads";
+    static constexpr std::string_view ZSwapExclusiveLoadsName = "exclusive_loads";
 
     /**
      * Stores the shrinker enabled internal option name.
     */
-    const std::string_view ZSwapShrinkerEnabledName = "shrinker_enabled";
+    static constexpr std::string_view ZSwapShrinkerEnabledName = "shrinker_enabled";
 
     /**
      * Checks whether the value is Y or N.
