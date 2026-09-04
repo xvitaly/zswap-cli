@@ -248,7 +248,7 @@ private:
      * @param Name Option name.
      * @returns Option value or std::nullopt if not available.
     */
-    std::optional<std::string> ReadZSwapValue(const std::filesystem::path&) const;
+    std::optional<std::string> ReadZSwapValue(const std::string_view) const;
 
     /**
      * Writes a new value to the specified ZSwap kernel module option.
