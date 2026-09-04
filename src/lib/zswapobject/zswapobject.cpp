@@ -55,7 +55,7 @@ void ZSwapObject::WriteValue(const std::filesystem::path& FullPath, const std::s
     ZSwapSysFs << Value;
 }
 
-std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::filesystem::path& Name) const
+std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::string_view Name) const
 {
     const std::filesystem::path FullPath = std::filesystem::path(ZSwapModuleParametersPath) / std::filesystem::path(Name);
     if (!FileManager::CheckFileExists(FullPath)) return std::nullopt;

@@ -110,7 +110,7 @@ private:
     /**
      * Stores the kernel module debug path.
     */
-    const std::string_view ModuleDebugPath = "/sys/kernel/debug/zswap";
+    static constexpr std::string_view ModuleDebugPath = "/sys/kernel/debug/zswap";
 
     /**
      * Reads the value of the ZSwap kernel module debug variable from
