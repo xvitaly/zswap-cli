@@ -94,5 +94,5 @@ std::optional<unsigned long> ZSwapDebug::GetIncompressiblePages() const
 
 bool ZSwapDebug::IsDebugAvailable() const
 {
-    return FileManager::CheckDirectoryExists(ModuleDebugPath);
+    return FileManager::CheckDirectoryExists(std::filesystem::path(ModuleDebugPath));
 }

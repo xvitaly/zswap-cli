@@ -173,5 +173,5 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value) const
 
 bool ZSwapObject::IsAvailable() const
 {
-    return FileManager::CheckDirectoryExists(ZSwapModuleParametersPath);
+    return FileManager::CheckDirectoryExists(std::filesystem::path(ZSwapModuleParametersPath));
 }
