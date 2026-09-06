@@ -161,7 +161,7 @@ endif()
 
 if (INCLUDE_COMMIT_HASH AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/.git")
     find_package(SnapshotRelease QUIET REQUIRED)
-    set(PRODUCT_RELEASE_EXTENDED "${PRODUCT_RELEASE_EXTENDED}-${SNAPSHOT_RELEASE_HASH}")
+    set(PRODUCT_RELEASE_EXTENDED "${PRODUCT_RELEASE_EXTENDED} (commit ${SNAPSHOT_RELEASE_HASH})")
 endif()
 
 # ======================================================
