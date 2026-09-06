@@ -78,7 +78,6 @@ public:
 
     /**
      * Gets the number of same filled pages.
-     * Deprecated. Removed in kernel 6.12.0.
      * @returns Same filled pages count.
     */
     std::optional<unsigned long> GetSameFilledPages() const;
