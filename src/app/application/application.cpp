@@ -29,6 +29,7 @@
 #include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
 #include "cwrappers/cwrappers.hpp"
+#include "filemanager/filemanager.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
 #include "zswapdebug/zswapdebug.hpp"
@@ -297,7 +298,7 @@ int Application::ExecuteSystemConfig() const
     {
         const std::string ConfigFile = std::format("{0}/{1}/{2}", Prefix, AppConstants::ProductName(), AppConstants::ConfigFileName());
         if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
-        if (std::filesystem::exists(ConfigFile))
+        if (FileManager::CheckFileExists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
 
