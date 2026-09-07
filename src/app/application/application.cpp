@@ -411,7 +411,7 @@ void Application::ParseCmdLine(int argc, char** argv) const
 void Application::ParseConfigFile(const std::string& ConfigFile) const
 {
     if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
-    if (!std::filesystem::exists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
+    if (!FileManager::CheckFileExists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
