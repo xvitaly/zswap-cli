@@ -128,7 +128,7 @@ std::optional<std::string> ZSwapObject::GetZSwapZpool() const
 
 void ZSwapObject::SetZSwapZpool(const std::string& Value) const
 {
-    CheckValueEmpty(ZSwapZpoolName, Value);
+    CheckValueModuleName(ZSwapZpoolName, Value);
     WriteZSwapValue(ZSwapZpoolName, Value);
 }
 
