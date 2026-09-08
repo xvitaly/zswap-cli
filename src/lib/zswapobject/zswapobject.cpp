@@ -117,7 +117,7 @@ std::optional<std::string> ZSwapObject::GetZSwapCompressor() const
 
 void ZSwapObject::SetZSwapCompressor(const std::string& Value) const
 {
-    CheckValueEmpty(ZSwapCompressorName, Value);
+    CheckValueModuleName(ZSwapCompressorName, Value);
     WriteZSwapValue(ZSwapCompressorName, Value);
 }
 
