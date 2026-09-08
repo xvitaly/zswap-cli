@@ -31,6 +31,11 @@ void ZSwapObject::CheckValueEmpty(const std::string_view Name, const std::string
     if (Value.empty()) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is empty!", Name));
 }
 
+void ZSwapObject::CheckValueModuleName(const std::string_view Name, const std::string& Value) const
+{
+    if (!std::regex_match(Value, std::regex("^\\w+$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is incorrect (only alphanumeric characters and underscores are supported)!", Name));
+}
+
 void ZSwapObject::CheckValueRange(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is out of range [0..100]!", Name));
@@ -112,7 +117,7 @@ std::optional<std::string> ZSwapObject::GetZSwapCompressor() const
 
 void ZSwapObject::SetZSwapCompressor(const std::string& Value) const
 {
-    CheckValueEmpty(ZSwapCompressorName, Value);
+    CheckValueModuleName(ZSwapCompressorName, Value);
     WriteZSwapValue(ZSwapCompressorName, Value);
 }
 
@@ -123,7 +128,7 @@ std::optional<std::string> ZSwapObject::GetZSwapZpool() const
 
 void ZSwapObject::SetZSwapZpool(const std::string& Value) const
 {
-    CheckValueEmpty(ZSwapZpoolName, Value);
+    CheckValueModuleName(ZSwapZpoolName, Value);
     WriteZSwapValue(ZSwapZpoolName, Value);
 }
 
