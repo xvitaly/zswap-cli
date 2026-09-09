@@ -57,14 +57,14 @@ void ZSwapObject::WriteValue(const std::filesystem::path& FullPath, const std::s
 
 std::optional<std::string> ZSwapObject::ReadZSwapValue(const std::string_view Name) const
 {
-    const std::filesystem::path FullPath = std::filesystem::path(ZSwapModuleParametersPath) / std::filesystem::path(Name);
+    const std::filesystem::path FullPath = ZSwapModuleParametersPath / Name;
     if (!FileManager::CheckFileExists(FullPath)) return std::nullopt;
     return ReadValue(FullPath);
 }
 
 void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string& Value) const
 {
-    const std::filesystem::path FullPath = std::filesystem::path(ZSwapModuleParametersPath) / std::filesystem::path(Name);
+    const std::filesystem::path FullPath = ZSwapModuleParametersPath / Name;
     if (!FileManager::CheckFileExists(FullPath)) throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
     const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
     WriteValue(FullPath, Value);
@@ -173,5 +173,10 @@ void ZSwapObject::SetZSwapShrinkerEnabled(const std::string& Value) const
 
 bool ZSwapObject::IsAvailable() const
 {
-    return FileManager::CheckDirectoryExists(std::filesystem::path(ZSwapModuleParametersPath));
+    return FileManager::CheckDirectoryExists(ZSwapModuleParametersPath);
+}
+
+ZSwapObject::ZSwapObject()
+{
+    ZSwapModuleParametersPath = std::filesystem::path("/sys/module/zswap/parameters");
 }
