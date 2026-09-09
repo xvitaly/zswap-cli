@@ -202,15 +202,6 @@ private:
     void CheckValueBool(const std::string_view, const std::string&) const;
 
     /**
-     * Checks whether the value is empty.
-     * @param Name Option name.
-     * @param Value Option value to check.
-     * @exception Raises an instance of std::invalid_argument if the
-     * value does not meet the criteria.
-    */
-    void CheckValueEmpty(const std::string_view, const std::string&) const;
-
-    /**
      * Checks whether the value contains a valid kernel module name.
      * @param Name Option name.
      * @param Value Option value to check.

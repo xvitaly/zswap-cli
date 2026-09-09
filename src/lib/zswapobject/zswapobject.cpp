@@ -26,11 +26,6 @@ void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string&
     if (!std::regex_match(Value, std::regex("^[YN]$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is incorrect (only Y or N are supported)!", Name));
 }
 
-void ZSwapObject::CheckValueEmpty(const std::string_view Name, const std::string& Value) const
-{
-    if (Value.empty()) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is empty!", Name));
-}
-
 void ZSwapObject::CheckValueModuleName(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^\\w+$"))) throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is incorrect (only alphanumeric characters and underscores are supported)!", Name));
