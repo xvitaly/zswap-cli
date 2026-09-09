@@ -26,7 +26,7 @@ public:
     /**
      * Constructor of the ZSwapObject class.
     */
-    ZSwapObject() = default;
+    ZSwapObject();
 
     /**
      * Gets the ZSwap enabled value.
@@ -145,7 +145,7 @@ private:
     /**
      * Stores the ZSwap kernel module options path.
     */
-    static constexpr std::string_view ZSwapModuleParametersPath = "/sys/module/zswap/parameters";
+    std::filesystem::path ZSwapModuleParametersPath;
 
     /**
      * Stores the ZSwap enabled internal option name.
@@ -200,15 +200,6 @@ private:
      * value does not meet the criteria.
     */
     void CheckValueBool(const std::string_view, const std::string&) const;
-
-    /**
-     * Checks whether the value is empty.
-     * @param Name Option name.
-     * @param Value Option value to check.
-     * @exception Raises an instance of std::invalid_argument if the
-     * value does not meet the criteria.
-    */
-    void CheckValueEmpty(const std::string_view, const std::string&) const;
 
     /**
      * Checks whether the value contains a valid kernel module name.

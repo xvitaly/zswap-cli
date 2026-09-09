@@ -27,7 +27,7 @@ unsigned long ZSwapDebug::ReadDebugValue(const std::filesystem::path& FullPath) 
 
 std::optional<unsigned long> ZSwapDebug::ReadModuleDebugValue(const std::string_view Name) const
 {
-    const std::filesystem::path FullPath = std::filesystem::path(ModuleDebugPath) / std::filesystem::path(Name);
+    const std::filesystem::path FullPath = ModuleDebugPath / Name;
     if (!FileManager::CheckFileExists(FullPath)) return std::nullopt;
     return ReadDebugValue(FullPath);
 }
@@ -94,5 +94,10 @@ std::optional<unsigned long> ZSwapDebug::GetIncompressiblePages() const
 
 bool ZSwapDebug::IsDebugAvailable() const
 {
-    return FileManager::CheckDirectoryExists(std::filesystem::path(ModuleDebugPath));
+    return FileManager::CheckDirectoryExists(ModuleDebugPath);
+}
+
+ZSwapDebug::ZSwapDebug()
+{
+    ModuleDebugPath = std::filesystem::path("/sys/kernel/debug/zswap");
 }
