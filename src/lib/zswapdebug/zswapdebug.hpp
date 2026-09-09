@@ -26,7 +26,7 @@ public:
     /**
      * Constructor of the ZSwapDebug class.
     */
-    ZSwapDebug() = default;
+    ZSwapDebug();
 
     /**
      * Gets the pool limit hits.
@@ -109,7 +109,7 @@ private:
     /**
      * Stores the kernel module debug path.
     */
-    static constexpr std::string_view ModuleDebugPath = "/sys/kernel/debug/zswap";
+    std::filesystem::path ModuleDebugPath;
 
     /**
      * Reads the value of the ZSwap kernel module debug variable from
