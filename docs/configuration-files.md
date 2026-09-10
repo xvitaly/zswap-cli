@@ -2,18 +2,18 @@
 
 This application uses a modern way of storing configuration files for the systemd unit and the `--system` command line option:
 
-  * default read-only config `/usr/share/zswap-cli/zswap-cli.conf`, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
-  * user high-priority config `/etc/zswap-cli/zswap-cli.conf`, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
+  * default read-only config `/usr/share/zswap-cli/system.conf`, provided by the application developers or your distribution. Should not be edited, as any changes will be overwritten with each program update.
+  * user high-priority config `/etc/zswap-cli/system.conf`, which can be created and edited by the user and will override all settings from the default one. Its contents will persist between application updates.
 
 In order to make changes to the configuration file, it need to be copied to the `/etc/zswap-cli` directory first:
 
 ```
-sudo cp -a /usr/share/zswap-cli/zswap-cli.conf /etc/zswap-cli/zswap-cli.conf
+sudo cp -a /usr/share/zswap-cli/system.conf /etc/zswap-cli/system.conf
 ```
 
 Now this file can be edited:
 ```
-sudoedit /etc/zswap-cli/zswap-cli.conf
+sudoedit /etc/zswap-cli/system.conf
 ```
 
 Both configuration files have the same standard key-value syntax.
@@ -42,7 +42,7 @@ sudo zswap-cli --system
 
 ### Custom config
 
-Create a custom configuration file:
+Create a new `custom.conf` configuration file:
 
 ```ini
 [zswap]
@@ -60,5 +60,5 @@ shrinker_enabled=Y
 Start the application with the `--config` command-line argument:
 
 ```
-sudo zswap-cli --config /path/to/zswap-cli.conf
+sudo zswap-cli --config /path/to/custom.conf
 ```
