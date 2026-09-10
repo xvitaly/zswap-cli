@@ -204,7 +204,7 @@ sudo @APP_NAME@ --system
 
 ### Custom config
 
-Create a configuration file:
+Create a new **custom.conf** configuration file:
 
 ```
 [zswap]
@@ -222,7 +222,7 @@ shrinker_enabled=Y
 Start the application with the `--config` command-line argument:
 
 ```
-sudo @APP_NAME@ --config /path/to/@CONF_FILE_NAME@
+sudo @APP_NAME@ --config /path/to/custom.conf
 ```
 
 # SYSTEMD UNIT
