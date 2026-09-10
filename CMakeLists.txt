@@ -63,8 +63,8 @@ set(ASSETS_COMP_NAME "assets")
 # ===================== File names =====================
 # ======================================================
 
+set(CONF_FILE_NAME "system.conf")
 set(SCHEME_NAME "org.easycoding.${CMAKE_PROJECT_NAME}")
-set(CONF_FILE_NAME "${CMAKE_PROJECT_NAME}.conf")
 set(UNIT_FILE_NAME "${CMAKE_PROJECT_NAME}.service")
 set(METAINFO_FILE_NAME "${SCHEME_NAME}.metainfo.xml")
 
@@ -318,7 +318,7 @@ if (INSTALL_CONFIG_FILE)
         endif()
         install(FILES ${CUSTOM_CONFIG_FILE_PATH} DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" RENAME ${CONF_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
     else()
-        install(FILES "assets/config/${CONF_FILE_NAME}" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
+        install(FILES "assets/config/${APP_NAME}.conf" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/${CMAKE_PROJECT_NAME}" RENAME ${CONF_FILE_NAME} COMPONENT ${ASSETS_COMP_NAME})
     endif()
     install(DIRECTORY DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/${CMAKE_PROJECT_NAME}" COMPONENT ${ASSETS_COMP_NAME})
 endif()
