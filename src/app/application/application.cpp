@@ -218,7 +218,7 @@ int Application::ExecuteEnv() const
     return !Result;
 }
 
-int Application::ExecuteConfig(const std::string& ConfigFile) const
+int Application::ExecuteConfig(const std::filesystem::path& ConfigFile) const
 {
     ParseConfigFile(ConfigFile);
 
@@ -286,18 +286,10 @@ int Application::ExecuteCmdLine() const
 
 int Application::ExecuteSystemConfig() const
 {
-    const std::vector<std::string_view> Prefixes
+    for (const auto& Prefix : AppConstants::ConfigDirectoryPrefixes())
     {
-        { AppConstants::SysConfPrefix() },
-        { AppConstants::DataRootPrefix() },
-        { AppConstants::StandardSysConfPrefix() },
-        { AppConstants::StandardDataRootPrefix() },
-    };
-
-    for (const auto& Prefix : Prefixes)
-    {
-        const std::string ConfigFile = std::format("{0}/{1}/{2}", Prefix, AppConstants::ProductName(), AppConstants::ConfigFileName());
-        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
+        const std::filesystem::path ConfigFile = Prefix / AppConstants::ProductName() / AppConstants::ConfigFileName();
+        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile.string()) << std::endl;
         if (FileManager::CheckFileExists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
@@ -408,10 +400,10 @@ void Application::ParseCmdLine(int argc, char** argv) const
     CmdLine -> notify();
 }
 
-void Application::ParseConfigFile(const std::string& ConfigFile) const
+void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
 {
-    if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
-    if (!FileManager::CheckFileExists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
+    if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile.string()) << std::endl;
+    if (!FileManager::CheckFileExists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile.string()));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
