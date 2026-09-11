@@ -32,6 +32,7 @@
 #include "filemanager/filemanager.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
+#include "templates/formatters.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 #include "zswapobject/zswapobject.hpp"
 
@@ -289,7 +290,7 @@ int Application::ExecuteSystemConfig() const
     for (const auto& Prefix : AppConstants::ConfigDirectoryPrefixes())
     {
         const std::filesystem::path ConfigFile = Prefix / AppConstants::ProductName() / AppConstants::ConfigFileName();
-        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile.string()) << std::endl;
+        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
         if (FileManager::CheckFileExists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
@@ -402,8 +403,8 @@ void Application::ParseCmdLine(int argc, char** argv) const
 
 void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
 {
-    if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile.string()) << std::endl;
-    if (!FileManager::CheckFileExists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile.string()));
+    if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
+    if (!FileManager::CheckFileExists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
