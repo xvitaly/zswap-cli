@@ -9,28 +9,15 @@
  * Contains the AppConstants namespace implementation.
 */
 
+#include <filesystem>
 #include <string_view>
+#include <vector>
 
 #include "appconstants/appconstants.hpp"
 
-std::string_view AppConstants::DataRootPrefix()
+std::vector<std::filesystem::path> AppConstants::ConfigDirectoryPrefixes()
 {
-    return "@CMAKE_INSTALL_FULL_DATAROOTDIR@";
-}
-
-std::string_view AppConstants::SysConfPrefix()
-{
-    return "@CMAKE_INSTALL_FULL_SYSCONFDIR@";
-}
-
-std::string_view AppConstants::StandardDataRootPrefix()
-{
-    return "/usr/share";
-}
-
-std::string_view AppConstants::StandardSysConfPrefix()
-{
-    return "/etc";
+    return { "@CMAKE_INSTALL_FULL_SYSCONFDIR@", "@CMAKE_INSTALL_FULL_DATAROOTDIR@", "/etc", "/usr/share" };
 }
 
 std::string_view AppConstants::ConfigFileName()

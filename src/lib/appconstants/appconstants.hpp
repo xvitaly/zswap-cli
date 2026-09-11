@@ -12,7 +12,9 @@
  * Contains the AppConstants namespace definition.
 */
 
+#include <filesystem>
 #include <string_view>
+#include <vector>
 
 /**
  * Namespace for working with various constants used in project.
@@ -20,28 +22,10 @@
 namespace AppConstants
 {
     /**
-     * Returns the data root directory installation prefix.
-     * @returns Data root directory installation prefix.
+     * Returns the list of system configuration directory prefixes.
+     * @returns System configuration directory prefixes.
     */
-    std::string_view DataRootPrefix();
-
-    /**
-     * Returns the system configuration directory installation prefix.
-     * @returns System configuration directory installation prefix.
-    */
-    std::string_view SysConfPrefix();
-
-    /**
-     * Returns the standard data root directory prefix.
-     * @returns Standard data root directory prefix.
-    */
-    std::string_view StandardDataRootPrefix();
-
-    /**
-     * Returns the standard system configuration directory prefix.
-     * @returns Standard system configuration directory prefix.
-    */
-    std::string_view StandardSysConfPrefix();
+    std::vector<std::filesystem::path> ConfigDirectoryPrefixes();
 
     /**
      * Returns the application configuration file name.
