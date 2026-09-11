@@ -116,7 +116,7 @@ private:
      * Reads and parses the specified configuration file.
      * @param ConfigFile Full path to the configuration file.
     */
-    void ParseConfigFile(const std::string&) const;
+    void ParseConfigFile(const std::filesystem::path&) const;
 
     /**
      * Sets the program additional configuration options.
@@ -179,7 +179,7 @@ private:
      * if an invalid file path was specified.
      * @returns Exit code.
     */
-    int ExecuteConfig(const std::string&) const;
+    int ExecuteConfig(const std::filesystem::path&) const;
 
     /**
      * Gets parameters from the command-line arguments.
