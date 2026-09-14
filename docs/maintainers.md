@@ -4,6 +4,10 @@
 
 Distributions can include a custom [configuration file](configuration-files.md) without the need of patching the default one. This file can be specified by using the `-DCUSTOM_CONFIG_FILE_PATH:FILEPATH=/path/to/custom.conf` [configuration option](installation.md).
 
+## Custom release information
+
+Distributions can include a custom suffix to the project version number by using the `-DCUSTOM_RELEASE_INFO:STRING="custom"` [configuration option](installation.md). The string specified there will be included in the `--version` output, separated by a hyphen.
+
 ## Directories and files ownership
 
 Please remember to include in your package the `$prefix/etc/zswap-cli` directory and a virtual (does not exist by default, but can be created by the user) `$prefix/etc/zswap-cli/system.conf` file to ensure that the package contents are correctly tracked or removed by the package manager.
