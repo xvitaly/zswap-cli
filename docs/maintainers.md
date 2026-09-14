@@ -1,5 +1,11 @@
 # Notes for package maintainers
 
+## Packaging recommendations
+
+Please always include the configuration file in your package (default or custom), as it is now required for using the `--system` command-line option and the systemd unit.
+
+Please do not disable core features without a compelling reason, as this will degrade the user experience.
+
 ## Custom configuration file
 
 Distributions can include a custom [configuration file](configuration-files.md) without the need of patching the default one. This file can be specified by using the `-DCUSTOM_CONFIG_FILE_PATH:FILEPATH=/path/to/custom.conf` [configuration option](installation.md).
