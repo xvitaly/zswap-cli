@@ -99,5 +99,5 @@ bool ZSwapDebug::IsDebugAvailable() const
 
 ZSwapDebug::ZSwapDebug()
 {
-    ModuleDebugPath = std::filesystem::path("/sys/kernel/debug/zswap");
+    ModuleDebugPath = "/sys/kernel/debug/zswap";
 }
