@@ -2,7 +2,7 @@
 
 ## Packaging recommendations
 
-Please always include the configuration file in your package (default or custom), as it is now required for using the `--system` command-line option and the systemd unit.
+Please always include a configuration file (default or custom) in your package, as it is now required for using the `--system` command-line option and the systemd unit.
 
 Please do not disable core features without a compelling reason, as this will degrade the user experience.
 
