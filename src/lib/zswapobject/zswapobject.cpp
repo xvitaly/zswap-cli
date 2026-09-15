@@ -178,5 +178,5 @@ bool ZSwapObject::IsAvailable() const
 
 ZSwapObject::ZSwapObject()
 {
-    ZSwapModuleParametersPath = std::filesystem::path("/sys/module/zswap/parameters");
+    ZSwapModuleParametersPath = "/sys/module/zswap/parameters";
 }
