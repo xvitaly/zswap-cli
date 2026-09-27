@@ -217,6 +217,11 @@ private:
     void PrintCombined() const;
 
     /**
+     * Prints a deprecation message, related to \-\-env command-line argument.
+    */
+    void PrintEnvDeprecationMessage() const;
+
+    /**
      * Handles the \-\-stats command-line argument. Prints user-requested
      * diagnostic information about the ZSwap kernel module.
      * @param Value Request code: 0 - all; 1 - settings; 2 - usage stats;
