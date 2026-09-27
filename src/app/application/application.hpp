@@ -216,6 +216,9 @@ private:
     */
     void PrintCombined() const;
 
+    /**
+     * Prints a deprecation message, related to \-\-env command-line argument.
+    */
     void PrintEnvDeprecationMessage() const;
 
     /**
