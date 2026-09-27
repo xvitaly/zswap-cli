@@ -216,6 +216,8 @@ private:
     */
     void PrintCombined() const;
 
+    void PrintEnvDeprecationMessage() const;
+
     /**
      * Handles the \-\-stats command-line argument. Prints user-requested
      * diagnostic information about the ZSwap kernel module.
