@@ -195,6 +195,8 @@ int Application::PrintVersion() const
 
 int Application::ExecuteEnv() const
 {
+    PrintEnvDeprecationMessage();
+
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
