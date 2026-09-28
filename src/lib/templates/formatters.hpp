@@ -14,6 +14,7 @@
 
 #include <filesystem>
 #include <format>
+#include <optional>
 #include <string>
 
 /**
@@ -25,6 +26,17 @@ struct std::formatter<std::filesystem::path> : std::formatter<std::string>
     auto format(const std::filesystem::path& path, std::format_context& ctx) const
     {
         return std::formatter<std::string>::format(path.string(), ctx);
+    }
+};
+
+template <typename T>
+struct std::formatter<std::optional<T>> : std::formatter<T>
+{
+    auto format(const std::optional<T>& optional, std::format_context& ctx) const
+    {
+        if (optional)
+            return std::formatter<T>::format(*optional, ctx);
+        return std::format_to(ctx.out(), "N/A");
     }
 };
 
