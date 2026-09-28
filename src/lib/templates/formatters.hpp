@@ -29,6 +29,9 @@ struct std::formatter<std::filesystem::path> : std::formatter<std::string>
     }
 };
 
+/**
+ * Custom formatter for the std::optional. Backported from C++26.
+*/
 template <typename T>
 struct std::formatter<std::optional<T>> : std::formatter<T>
 {
