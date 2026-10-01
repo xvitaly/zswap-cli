@@ -31,6 +31,7 @@ std::string KSysVersion::GetHeadersVersion() const
 std::string KSysVersion::GetKernelVersion() const
 {
     struct utsname UTSName;
-    if (uname(&UTSName) == -1) throw std::runtime_error("Got incorrect result from uname() call.");
+    if (uname(&UTSName) == -1)
+        throw std::runtime_error("Got incorrect result from uname() call.");
     return ParseKernelVersion(UTSName.release);
 }
