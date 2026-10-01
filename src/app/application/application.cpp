@@ -216,7 +216,8 @@ int Application::ExecuteEnv() const
         try
         {
             const std::string EnvValue = CWrappers::GetEnv(Key);
-            if (!EnvValue.empty()) Handler(EnvValue);
+            if (!EnvValue.empty())
+                Handler(EnvValue);
         }
         catch (const std::exception& e)
         {
@@ -250,7 +251,8 @@ int Application::ExecuteConfig(const std::filesystem::path& ConfigFile) const
     {
         try
         {
-            if (Config -> count(Key)) Handler(Config -> at(Key).as<std::string>());
+            if (Config -> count(Key))
+                Handler(Config -> at(Key).as<std::string>());
         }
         catch (const std::exception& e)
         {
@@ -282,7 +284,8 @@ int Application::ExecuteCmdLine() const
     {
         try
         {
-            if (CmdLine -> count(Key)) Handler(CmdLine -> at(Key).as<std::string>());
+            if (CmdLine -> count(Key))
+                Handler(CmdLine -> at(Key).as<std::string>());
         }
         catch (const std::exception& e)
         {
@@ -299,7 +302,8 @@ int Application::ExecuteSystemConfig() const
     for (const auto& Prefix : AppConstants::ConfigDirectoryPrefixes())
     {
         const std::filesystem::path ConfigFile = Prefix / AppConstants::ProductName() / AppConstants::ConfigFileName();
-        if (IsVerbose) std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
+        if (IsVerbose)
+            std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
         if (FileManager::CheckFileExists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
@@ -309,39 +313,50 @@ int Application::ExecuteSystemConfig() const
 
 int Application::Run() const
 {
-    if (CmdLine -> empty() || CmdLine -> count("help")) return PrintHelp();
-    if (CmdLine -> count("version")) return PrintVersion();
-    if (CmdLine -> count("stats")) return PrintStats(CmdLine -> at("stats").as<int>());
+    if (CmdLine -> empty() || CmdLine -> count("help"))
+        return PrintHelp();
+    if (CmdLine -> count("version"))
+        return PrintVersion();
+    if (CmdLine -> count("stats"))
+        return PrintStats(CmdLine -> at("stats").as<int>());
     CheckIfRunningBySuperUser();
-    if (CmdLine -> count("system")) return ExecuteSystemConfig();
-    if (CmdLine -> count("config")) return ExecuteConfig(CmdLine -> at("config").as<std::string>());
-    if (CmdLine -> count("env")) return ExecuteEnv();
+    if (CmdLine -> count("system"))
+        return ExecuteSystemConfig();
+    if (CmdLine -> count("config"))
+        return ExecuteConfig(CmdLine -> at("config").as<std::string>());
+    if (CmdLine -> count("env"))
+        return ExecuteEnv();
     return ExecuteCmdLine();
 }
 
 void Application::CheckIfRunningBySuperUser() const
 {
-    if (CWrappers::CheckRoot()) throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
+    if (CWrappers::CheckRoot())
+        throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
 }
 
 void Application::CheckIfSwapAvailable() const
 {
-    if (!SysInfo -> IsSwapAvailable()) throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
+    if (!SysInfo -> IsSwapAvailable())
+        throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
 }
 
 void Application::CheckIfDebugAvailable() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable()) throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
+    if (!ZSwapDebugger -> IsDebugAvailable())
+        throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
 }
 
 void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 {
-    if (PoolSize == 0) throw std::runtime_error("ZSwap is not working. The pool is empty.");
+    if (PoolSize == 0)
+        throw std::runtime_error("ZSwap is not working. The pool is empty.");
 }
 
 void Application::CheckIfModuleLoaded() const
 {
-    if (!ZSwap -> IsAvailable()) throw std::runtime_error("ZSwap kernel module is not loaded or access to sysfs is denied.");
+    if (!ZSwap -> IsAvailable())
+        throw std::runtime_error("ZSwap kernel module is not loaded or access to sysfs is denied.");
 }
 
 void Application::InitClassMembers()
@@ -412,8 +427,10 @@ void Application::ParseCmdLine(int argc, char** argv) const
 
 void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
 {
-    if (IsVerbose) std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
-    if (!FileManager::CheckFileExists(ConfigFile)) throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
+    if (IsVerbose)
+        std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
+    if (!FileManager::CheckFileExists(ConfigFile))
+        throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config -> notify();
@@ -421,7 +438,8 @@ void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
 
 void Application::SetOperatingMode()
 {
-    if (CmdLine -> count("verbose")) IsVerbose = true;
+    if (CmdLine -> count("verbose"))
+        IsVerbose = true;
 }
 
 Application::Application(int argc, char** argv)
