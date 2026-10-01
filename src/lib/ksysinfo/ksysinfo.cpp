@@ -125,7 +125,8 @@ bool KSysInfo::IsSwapAvailable() const
 void KSysInfo::ReadSysInfo()
 {
     struct sysinfo SysInfo;
-    if (sysinfo(&SysInfo) == -1) throw std::runtime_error("Got incorrect result from sysinfo() call.");
+    if (sysinfo(&SysInfo) == -1)
+        throw std::runtime_error("Got incorrect result from sysinfo() call.");
     Uptime = static_cast<long>(SysInfo.uptime);
     TotalRam = static_cast<unsigned long>(SysInfo.totalram);
     FreeRam = static_cast<unsigned long>(SysInfo.freeram);
