@@ -39,7 +39,7 @@ struct std::formatter<std::optional<T>> : std::formatter<T>
     {
         if (optional)
             return std::formatter<T>::format(*optional, ctx);
-        return std::format_to(ctx.out(), "N/A");
+        return std::format_to(ctx.out(), "NOT SUPPORTED");
     }
 };
 
