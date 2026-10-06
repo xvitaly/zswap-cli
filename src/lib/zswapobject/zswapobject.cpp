@@ -72,6 +72,8 @@ void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string
     if (!FileManager::CheckFileExists(FullPath))
         throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
     const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
+    if (OldValue == Value)
+        throw std::runtime_error(std::format("The option \"{0}\" already has the required value \"{1}\"!", Name, Value));
     WriteValue(FullPath, Value);
     if (ReadZSwapValue(Name) != Value)
         throw std::runtime_error(std::format("Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
