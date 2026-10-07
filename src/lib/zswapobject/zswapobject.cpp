@@ -19,6 +19,7 @@
 #include <string>
 
 #include "filemanager/filemanager.hpp"
+#include "templates/formatters.hpp"
 #include "zswapobject/zswapobject.hpp"
 
 void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string& Value) const
@@ -66,7 +67,7 @@ void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string
     const std::filesystem::path FullPath = ZSwapModuleParametersPath / Name;
     if (!FileManager::CheckFileExists(FullPath))
         throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
-    const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
+    const std::optional<std::string> OldValue = ReadZSwapValue(Name);
     if (OldValue == Value)
         throw std::runtime_error(std::format("The option \"{0}\" already has the required value \"{1}\"! No actions performed.", Name, Value));
     WriteValue(FullPath, Value);
