@@ -39,11 +39,6 @@ void ZSwapObject::CheckValueRange(const std::string_view Name, const std::string
         throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is out of range [0..100]!", Name));
 }
 
-void ZSwapObject::WriteLogEntry(const std::string_view Name, const std::string& NewValue, const std::string& OldValue) const
-{
-    std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, NewValue, OldValue) << std::endl;
-}
-
 std::string ZSwapObject::ReadValue(const std::filesystem::path& FullPath) const
 {
     std::string Result;
@@ -77,7 +72,7 @@ void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string
     WriteValue(FullPath, Value);
     if (ReadZSwapValue(Name) != Value)
         throw std::runtime_error(std::format("Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
-    WriteLogEntry(Name, Value, OldValue);
+    std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, Value, OldValue) << std::endl;
 }
 
 std::optional<std::string> ZSwapObject::GetZSwapEnabled() const

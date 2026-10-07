@@ -220,14 +220,6 @@ private:
     void CheckValueRange(const std::string_view, const std::string&) const;
 
     /**
-     * Prints the log entry to the standard output.
-     * @param Name Option name.
-     * @param NewValue New option value.
-     * @param OldValue Old option value.
-    */
-    void WriteLogEntry(const std::string_view, const std::string&, const std::string&) const;
-
-    /**
      * Reads the value of the ZSwap kernel module option from the
      * specified full path.
      * @param FullPath Full path to the ZSwap kernel module option.
