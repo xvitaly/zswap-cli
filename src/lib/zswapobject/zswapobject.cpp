@@ -19,6 +19,7 @@
 #include <string>
 
 #include "filemanager/filemanager.hpp"
+#include "templates/formatters.hpp"
 #include "zswapobject/zswapobject.hpp"
 
 void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string& Value) const
@@ -37,11 +38,6 @@ void ZSwapObject::CheckValueRange(const std::string_view Name, const std::string
 {
     if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$")))
         throw std::invalid_argument(std::format("The requested value for the option \"{0}\" is out of range [0..100]!", Name));
-}
-
-void ZSwapObject::WriteLogEntry(const std::string_view Name, const std::string& NewValue, const std::string& OldValue) const
-{
-    std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, NewValue, OldValue) << std::endl;
 }
 
 std::string ZSwapObject::ReadValue(const std::filesystem::path& FullPath) const
@@ -71,13 +67,13 @@ void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string
     const std::filesystem::path FullPath = ZSwapModuleParametersPath / Name;
     if (!FileManager::CheckFileExists(FullPath))
         throw std::runtime_error(std::format("Configuring the option \"{0}\" is not possible on the current kernel!", Name));
-    const std::string OldValue = ReadZSwapValue(Name).value_or("N/A");
+    const std::optional<std::string> OldValue = ReadZSwapValue(Name);
     if (OldValue == Value)
         throw std::runtime_error(std::format("The option \"{0}\" already has the required value \"{1}\"! No actions performed.", Name, Value));
     WriteValue(FullPath, Value);
     if (ReadZSwapValue(Name) != Value)
         throw std::runtime_error(std::format("Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
-    WriteLogEntry(Name, Value, OldValue);
+    std::cout << std::format("The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, Value, OldValue) << std::endl;
 }
 
 std::optional<std::string> ZSwapObject::GetZSwapEnabled() const
