@@ -319,7 +319,7 @@ int Application::Run() const
     if (CmdLine -> count("system"))
         return ExecuteSystemConfig();
     if (CmdLine -> count("config"))
-        return ExecuteConfig(CmdLine -> at("config").as<std::string>());
+        return ExecuteConfig(CmdLine -> at("config").as<std::filesystem::path>());
     if (CmdLine -> count("env"))
         return ExecuteEnv();
     return ExecuteCmdLine();
@@ -377,7 +377,7 @@ void Application::InitCmdLineOptions() const
 
     boost::program_options::options_description OptionsConfiguration("Application configuration options");
     OptionsConfiguration.add_options()
-        ("config", boost::program_options::value<std::string>(), "Get options from the configuration file instead of the cmdline.")
+        ("config", boost::program_options::value<std::filesystem::path>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
         ("stats", boost::program_options::value<int>() -> implicit_value(0), "Print statistics and current settings of the ZSwap kernel module.")
         ("system", "Get options from the system configuration file instead of the cmdline.")

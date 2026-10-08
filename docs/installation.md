@@ -10,7 +10,7 @@ You need the following versions:
 
   * C++20 capable compiler: GCC 13+ or Clang 16+;
   * CMake: 3.28+;
-  * Boost: 1.70.0+;
+  * Boost: 1.77.0+;
   * doxygen (for building documentation);
   * pandoc (for generating manpage).
 

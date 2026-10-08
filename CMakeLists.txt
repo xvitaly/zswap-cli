@@ -106,7 +106,7 @@ if (LINK_BOOST_STATICALLY OR LINK_ALL_STATICALLY)
     set(Boost_USE_STATIC_LIBS ON)
 endif()
 
-find_package(Boost 1.70.0 REQUIRED COMPONENTS program_options CONFIG)
+find_package(Boost 1.77.0 REQUIRED COMPONENTS program_options CONFIG)
 
 # ======================================================
 # ================= Doxygen detection ==================
