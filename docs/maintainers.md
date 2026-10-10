@@ -10,6 +10,8 @@ Please do not disable core features without a compelling reason, as this will de
 
 Distributions can include a custom [configuration file](configuration-files.md) without the need of patching the default one. This file can be specified by using the `-DCUSTOM_CONFIG_FILE_PATH:FILEPATH=/path/to/custom.conf` [configuration option](installation.md).
 
+The default configuration file will also be installed, but with the `.example` extension for documentation purposes.
+
 ## Custom release information
 
 Distributions can include a custom suffix to the project version number by using the `-DCUSTOM_RELEASE_INFO:STRING="custom"` [configuration option](installation.md). The string specified there will be included in the `--version` output, separated by a hyphen.
