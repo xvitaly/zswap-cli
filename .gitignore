@@ -37,11 +37,15 @@
 *.out
 *.app
 
-# Qt Creator CMake
+# IDE-specific directories
+.qtcreator/
+
+# CMake user configuration
 CMakeLists.txt.user*
 
-# Build directory
+# Build directories
 /build
+/cmake-build-*/
 
 # Doxygen output
 /Doxyfile
