@@ -1,3 +1,9 @@
+#
+# SPDX-FileCopyrightText: 2020-2026 EasyCoding Team and contributors
+#
+# SPDX-License-Identifier: MIT
+#
+
 # Prerequisites
 *.d
 
@@ -16,10 +22,6 @@
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
 # Compiled Static libraries
 *.lai
 *.la
@@ -31,13 +33,16 @@
 *.out
 *.app
 
-# Qt Creator CMake
+# Backup files
+*.orig
+*.bak
+
+# IDE-specific directories
+.qtcreator/
+
+# CMake user configuration
 CMakeLists.txt.user*
 
-# Build directory
-/build
-
-# Doxygen output
-/Doxyfile
-/doxyout
-
+# Build directories
+/build/
+/cmake-build-*/
