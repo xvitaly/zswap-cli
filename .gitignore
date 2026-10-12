@@ -22,10 +22,6 @@
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
 # Compiled Static libraries
 *.lai
 *.la
@@ -37,6 +33,10 @@
 *.out
 *.app
 
+# Backup files
+*.orig
+*.bak
+
 # IDE-specific directories
 .qtcreator/
 
@@ -44,10 +44,5 @@
 CMakeLists.txt.user*
 
 # Build directories
-/build
+/build/
 /cmake-build-*/
-
-# Doxygen output
-/Doxyfile
-/doxyout
-
