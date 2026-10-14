@@ -37,8 +37,12 @@
 *.orig
 *.bak
 
-# IDE-specific directories
+# IDE-specific files and directories
+*.kate-swp
+.idea/
 .qtcreator/
+.vs/
+.vscode/
 
 # CMake user configuration
 CMakeLists.txt.user*
