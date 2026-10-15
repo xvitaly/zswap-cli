@@ -45,6 +45,9 @@
 # CMake user configuration
 CMakeLists.txt.user*
 
+# CMake dependencies
+_deps/
+
 # Build directories
 /build/
 /cmake-build-*/
