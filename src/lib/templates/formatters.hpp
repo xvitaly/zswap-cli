@@ -41,6 +41,12 @@ struct std::formatter<std::filesystem::path> : std::formatter<std::string>
 template <typename T>
 struct std::formatter<std::optional<T>> : std::formatter<T>
 {
+    /**
+     * Performs automatic format of the std::optional instance.
+     * @param optional Instance of the std::optional for formatting.
+     * @param ctx Format context.
+     * @returns Context iterator.
+    */
     auto format(const std::optional<T>& optional, std::format_context& ctx) const
     {
         if (optional)
