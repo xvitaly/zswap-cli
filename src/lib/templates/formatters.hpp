@@ -23,6 +23,12 @@
 template <>
 struct std::formatter<std::filesystem::path> : std::formatter<std::string>
 {
+    /**
+     * Performs automatic format of the std::filesystem::path instance.
+     * @param path Instance of the std::filesystem::path for formatting.
+     * @param ctx Format context.
+     * @returns Context iterator.
+    */
     auto format(const std::filesystem::path& path, std::format_context& ctx) const
     {
         return std::formatter<std::string>::format(path.string(), ctx);
