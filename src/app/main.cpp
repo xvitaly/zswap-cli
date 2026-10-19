@@ -30,15 +30,15 @@ int main(int argc, char** argv)
     }
     catch (const boost::program_options::required_option& e)
     {
-        std::cerr << "Missing command-line argument: " << e.what() << std::endl;
+        std::cerr << "[!] Missing command-line argument: " << e.what() << std::endl;
     }
     catch (const boost::program_options::error& e)
     {
-        std::cerr << "Command-line argument error: " << e.what() << std::endl;
+        std::cerr << "[!] Command-line argument error: " << e.what() << std::endl;
     }
     catch (const std::exception& e)
     {
-        std::cerr << "An error occurred: " << e.what() << std::endl;
+        std::cerr << "[!] An error occurred: " << e.what() << std::endl;
     }
     return 1;
 }
