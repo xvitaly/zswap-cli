@@ -299,7 +299,7 @@ int Application::ExecuteSystemConfig() const
     {
         const std::filesystem::path ConfigFile = Prefix / AppConstants::ProductName() / AppConstants::ConfigFileName();
         if (IsVerbose)
-            std::cout << std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
+            std::cout << std::format("[*] Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
         if (FileManager::CheckFileExists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
@@ -424,7 +424,7 @@ void Application::ParseCmdLine(int argc, char** argv) const
 void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
 {
     if (IsVerbose)
-        std::cout << std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
+        std::cout << std::format("[*] Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
     if (!FileManager::CheckFileExists(ConfigFile))
         throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
