@@ -141,7 +141,7 @@ void Application::PrintCombined() const
 
 void Application::PrintEnvDeprecationMessage() const
 {
-    std::cerr << "Warning! This feature is deprecated and will be removed in future versions."
+    std::cerr << "Warning! This feature is deprecated and will be removed in future versions. "
                  "Please consider switching to configuration files or CLI options."
               << std::endl;
 }
@@ -163,7 +163,7 @@ int Application::PrintStats(const int Value) const
             PrintDebugInfo();
             break;
         default:
-            throw std::invalid_argument("Incorrect value of the --stats command-line option was specified.");
+            throw std::invalid_argument("Incorrect value of the --stats command-line option was specified!");
     }
     return 0;
 }
@@ -304,7 +304,7 @@ int Application::ExecuteSystemConfig() const
             return ExecuteConfig(ConfigFile);
     }
 
-    throw std::runtime_error("System configuration files were not found.");
+    throw std::runtime_error("System configuration files were not found!");
 }
 
 int Application::Run() const
@@ -328,7 +328,7 @@ int Application::Run() const
 void Application::CheckIfRunningBySuperUser() const
 {
     if (CWrappers::CheckRoot())
-        throw std::runtime_error("The requested action requires super-user privileges. Terminating.");
+        throw std::runtime_error("The requested action requires super-user privileges! Terminating.");
 }
 
 void Application::CheckIfSwapAvailable() const
