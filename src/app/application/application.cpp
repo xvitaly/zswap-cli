@@ -141,8 +141,8 @@ void Application::PrintCombined() const
 
 void Application::PrintEnvDeprecationMessage() const
 {
-    std::cerr << "Warning! This feature is deprecated and will be removed in future versions. "
-                 "Please consider switching to configuration files or CLI options."
+    std::cerr << "[!] This feature is deprecated and will be removed in future versions. "
+                 "Please consider switching to configuration files or CLI options.\n"
               << std::endl;
 }
 
