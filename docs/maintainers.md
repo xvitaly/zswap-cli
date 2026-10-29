@@ -1,5 +1,13 @@
 # Notes for package maintainers
 
+## Build recommendations
+
+If your distribution has standard build flags, the project should use them. Otherwise, we recommend the following:
+
+```sh
+export CXXFLAGS="-O2 -fexceptions -fPIC -pipe -Wall -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fstack-protector-strong -fcf-protection"
+```
+
 ## Packaging recommendations
 
 Please always include a configuration file (default or custom) in your package, as it is now required for using the `--system` command-line option and the systemd unit.
