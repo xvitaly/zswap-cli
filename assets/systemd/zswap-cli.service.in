@@ -23,6 +23,7 @@ PrivateUsers=yes
 ProtectClock=yes
 ProtectHome=true
 ProtectSystem=strict
+UMask=0077
 
 [Install]
 WantedBy=multi-user.target
