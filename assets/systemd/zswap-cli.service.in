@@ -13,8 +13,14 @@ Type=oneshot
 ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ --system
 ExecStop=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ --enable N
 RemainAfterExit=yes
-ProtectSystem=strict
+
+# Hardening
+IPAddressDeny=any
+PrivateNetwork=true
+PrivateTmp=yes
+PrivateUsers=yes
 ProtectHome=true
+ProtectSystem=strict
 
 [Install]
 WantedBy=multi-user.target
