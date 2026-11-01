@@ -31,6 +31,7 @@ ProtectSystem=strict
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=yes
+SystemCallArchitectures=native
 UMask=0077
 
 [Install]
