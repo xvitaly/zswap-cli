@@ -30,6 +30,7 @@ ProtectKernelLogs=true
 ProtectSystem=strict
 RestrictNamespaces=true
 RestrictRealtime=true
+RestrictSUIDSGID=yes
 UMask=0077
 
 [Install]
