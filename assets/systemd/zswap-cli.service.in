@@ -17,6 +17,7 @@ RemainAfterExit=yes
 # Hardening
 IPAddressDeny=any
 LockPersonality=yes
+NoNewPrivileges=true
 PrivateDevices=yes
 PrivateNetwork=true
 PrivateTmp=yes
