@@ -29,6 +29,7 @@ ProtectHome=true
 ProtectHostname=true
 ProtectKernelLogs=true
 ProtectSystem=strict
+RestrictAddressFamilies=none
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=yes
