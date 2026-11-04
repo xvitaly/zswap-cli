@@ -15,6 +15,7 @@ ExecStop=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ --enable N
 RemainAfterExit=yes
 
 # Hardening
+CapabilityBoundingSet=CAP_SYS_ADMIN
 IPAddressDeny=any
 LockPersonality=yes
 MemoryDenyWriteExecute=yes
