@@ -29,6 +29,7 @@ ProtectControlGroups=true
 ProtectHome=true
 ProtectHostname=true
 ProtectKernelLogs=true
+ProtectKernelModules=yes
 ProtectSystem=strict
 RestrictAddressFamilies=none
 RestrictNamespaces=true
