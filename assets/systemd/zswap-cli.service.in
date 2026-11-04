@@ -15,6 +15,7 @@ ExecStop=@CMAKE_INSTALL_FULL_BINDIR@/@APP_NAME@ --enable N
 RemainAfterExit=yes
 
 # Hardening
+CapabilityBoundingSet=CAP_SYS_ADMIN
 IPAddressDeny=any
 LockPersonality=yes
 MemoryDenyWriteExecute=yes
@@ -23,17 +24,22 @@ PrivateDevices=yes
 PrivateNetwork=true
 PrivateTmp=yes
 PrivateUsers=yes
+ProcSubset=pid
 ProtectClock=yes
 ProtectControlGroups=true
 ProtectHome=true
 ProtectHostname=true
 ProtectKernelLogs=true
+ProtectKernelModules=yes
+ProtectProc=invisible
 ProtectSystem=strict
 RestrictAddressFamilies=none
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=yes
 SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged
 UMask=0077
 
 [Install]
