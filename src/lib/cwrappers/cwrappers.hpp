@@ -20,7 +20,7 @@
 namespace CWrappers
 {
     /**
-     * Returns the value of the environment variable, specified by name.
+     * Returns the value of the environment variable specified by name.
      * @param KeyName Environment variable name.
      * @returns Environment variable value.
     */
@@ -29,8 +29,8 @@ namespace CWrappers
     /**
      * Returns whether the program is running with super-user privileges.
      * @returns Super-user privileges check results.
-     * @retval true Super-user privileges were detected.
-     * @retval false Super-user privileges weren't detected.
+     * @retval true Super-user privileges weren't detected.
+     * @retval false Super-user privileges were detected.
     */
     bool CheckRoot();
 
