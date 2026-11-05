@@ -18,7 +18,9 @@ jobs:
   build:
     name: Build and install project
     runs-on: ubuntu-latest
-    container: fedora:latest
+    container:
+      image: fedora:latest
+      options: --privileged
     strategy:
       fail-fast: false
       matrix:
@@ -90,3 +92,8 @@ jobs:
     - name: Running installed project
       run: |
         zswap-cli --version
+    - name: Running installed systemd service
+      run: |
+        sudo systemctl daemon-reload
+        sudo systemctl start zswap-cli.service
+        sudo systemctl stop zswap-cli.service

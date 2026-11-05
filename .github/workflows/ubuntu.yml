@@ -88,3 +88,8 @@ jobs:
     - name: Running installed project
       run: |
         zswap-cli --version
+    - name: Running installed systemd service
+      run: |
+        sudo systemctl daemon-reload
+        sudo systemctl start zswap-cli.service
+        sudo systemctl stop zswap-cli.service
