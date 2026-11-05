@@ -20,7 +20,7 @@
 namespace CWrappers
 {
     /**
-     * Returns the value of the environment variable, specified by name.
+     * Returns the value of the environment variable specified by name.
      * @param KeyName Environment variable name.
      * @returns Environment variable value.
     */
