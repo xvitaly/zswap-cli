@@ -42,18 +42,18 @@ void Application::PrintDebugInfo() const
 
     const std::vector<std::pair<std::string_view, std::optional<unsigned long>>> Handlers
     {
-        { "Decompression failures", ZSwapDebugger -> GetDecompressFail() },
-        { "Incompressible pages count", ZSwapDebugger -> GetIncompressiblePages() },
-        { "Pool limit hit", ZSwapDebugger -> GetPoolLimitHit() },
-        { "Pool total size", ZSwapDebugger -> GetPoolTotalSize() },
-        { "Reject allocation failures", ZSwapDebugger -> GetRejectAllocFail() },
-        { "Reject compression failures", ZSwapDebugger -> GetRejectCompressFail() },
-        { "Reject compression poor", ZSwapDebugger -> GetRejectCompressPoor() },
-        { "Reject Kmemcache failures", ZSwapDebugger -> GetRejectKmemCacheFail() },
-        { "Reject reclaim failures", ZSwapDebugger -> GetRejectReclaimFail() },
-        { "Same filled pages count", ZSwapDebugger -> GetSameFilledPages() },
-        { "Stored pages count", ZSwapDebugger -> GetStoredPages() },
-        { "Written back pages count", ZSwapDebugger -> GetWrittenBackPages() },
+        { "Decompression failures", ZSwapDebugger->GetDecompressFail() },
+        { "Incompressible pages count", ZSwapDebugger->GetIncompressiblePages() },
+        { "Pool limit hit", ZSwapDebugger->GetPoolLimitHit() },
+        { "Pool total size", ZSwapDebugger->GetPoolTotalSize() },
+        { "Reject allocation failures", ZSwapDebugger->GetRejectAllocFail() },
+        { "Reject compression failures", ZSwapDebugger->GetRejectCompressFail() },
+        { "Reject compression poor", ZSwapDebugger->GetRejectCompressPoor() },
+        { "Reject Kmemcache failures", ZSwapDebugger->GetRejectKmemCacheFail() },
+        { "Reject reclaim failures", ZSwapDebugger->GetRejectReclaimFail() },
+        { "Same filled pages count", ZSwapDebugger->GetSameFilledPages() },
+        { "Stored pages count", ZSwapDebugger->GetStoredPages() },
+        { "Written back pages count", ZSwapDebugger->GetWrittenBackPages() },
     };
 
     for (const auto& [Name, Value] : Handlers)
@@ -69,15 +69,15 @@ void Application::PrintSettings() const
 
     const std::vector<std::pair<std::string_view, std::optional<std::string>>> Handlers
     {
-        { "Accept threshold percentage", ZSwap -> GetZSwapAcceptThresholdPercent() },
-        { "Compression algorithm", ZSwap -> GetZSwapCompressor() },
-        { "Exclusive loads", ZSwap -> GetZSwapExclusiveLoads() },
-        { "Kernel's zpool type", ZSwap -> GetZSwapZpool() },
-        { "Maximum pool percentage", ZSwap -> GetZSwapMaxPoolPercent() },
-        { "Non same filled pages enabled", ZSwap -> GetZSwapNonSameFilledPages() },
-        { "Same filled pages enabled", ZSwap -> GetZSwapSameFilledPages() },
-        { "Shrinker enabled", ZSwap -> GetZSwapShrinkerEnabled() },
-        { "ZSwap enabled", ZSwap -> GetZSwapEnabled() },
+        { "Accept threshold percentage", ZSwap->GetZSwapAcceptThresholdPercent() },
+        { "Compression algorithm", ZSwap->GetZSwapCompressor() },
+        { "Exclusive loads", ZSwap->GetZSwapExclusiveLoads() },
+        { "Kernel's zpool type", ZSwap->GetZSwapZpool() },
+        { "Maximum pool percentage", ZSwap->GetZSwapMaxPoolPercent() },
+        { "Non same filled pages enabled", ZSwap->GetZSwapNonSameFilledPages() },
+        { "Same filled pages enabled", ZSwap->GetZSwapSameFilledPages() },
+        { "Shrinker enabled", ZSwap->GetZSwapShrinkerEnabled() },
+        { "ZSwap enabled", ZSwap->GetZSwapEnabled() },
     };
 
     for (const auto& [Name, Value] : Handlers)
@@ -92,16 +92,16 @@ void Application::PrintSummary() const
     CheckIfDebugAvailable();
     CheckIfSwapAvailable();
 
-    const unsigned long PoolSize = ZSwapDebugger -> GetPoolTotalSize().value_or(0UL);
-    const unsigned long StoredPages = ZSwapDebugger -> GetStoredPages().value_or(0UL);
+    const unsigned long PoolSize = ZSwapDebugger->GetPoolTotalSize().value_or(0UL);
+    const unsigned long StoredPages = ZSwapDebugger->GetStoredPages().value_or(0UL);
 
     CheckIfPoolIsNotEmpty(PoolSize);
 
-    const float StoredSize = static_cast<float>(StoredPages) * static_cast<float>(SysInfo -> GetPageSize());
+    const float StoredSize = static_cast<float>(StoredPages) * static_cast<float>(SysInfo->GetPageSize());
     const float PoolSizeMB = static_cast<float>(PoolSize) / 1048576.f;
-    const float MemTotalPercent = static_cast<float>(PoolSize) / SysInfo -> GetTotalRamF() * 100.f;
+    const float MemTotalPercent = static_cast<float>(PoolSize) / SysInfo->GetTotalRamF() * 100.f;
     const float StoredSizeMB = StoredSize / 1048576.f;
-    const float SwapUsedPercent = StoredSize / (SysInfo -> GetTotalSwapF() - SysInfo -> GetFreeSwapF()) * 100.f;
+    const float SwapUsedPercent = StoredSize / (SysInfo->GetTotalSwapF() - SysInfo->GetFreeSwapF()) * 100.f;
     const float CompressionRatio = StoredSizeMB / PoolSizeMB;
 
     std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
@@ -170,7 +170,7 @@ int Application::PrintStats(const int Value) const
 
 int Application::PrintHelp() const
 {
-    CmdLineOptions -> print(std::cout);
+    CmdLineOptions->print(std::cout);
     return 0;
 }
 
@@ -183,8 +183,8 @@ int Application::PrintVersion() const
                              AppConstants::ProductName(),
                              AppConstants::ProductVersion(),
                              AppConstants::ProductRelease(),
-                             SysVersion -> GetHeadersVersion(),
-                             SysVersion -> GetKernelVersion())
+                             SysVersion->GetHeadersVersion(),
+                             SysVersion->GetKernelVersion())
               << std::endl;
     return 0;
 }
@@ -196,15 +196,15 @@ int Application::ExecuteEnv() const
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
-        { "ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
-        { "ZSWAP_COMPRESSOR_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
-        { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
-        { "ZSWAP_EXCLUSIVE_LOADS_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
-        { "ZSWAP_MAX_POOL_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
-        { "ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
-        { "ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
-        { "ZSWAP_SHRINKER_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
-        { "ZSWAP_ZPOOL_VALUE", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
+        { "ZSWAP_ACCEPT_THRESHOLD_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapAcceptThresholdPercent(Value); } },
+        { "ZSWAP_COMPRESSOR_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapCompressor(Value); } },
+        { "ZSWAP_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapEnabled(Value); } },
+        { "ZSWAP_EXCLUSIVE_LOADS_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapExclusiveLoads(Value); } },
+        { "ZSWAP_MAX_POOL_PERCENT_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapMaxPoolPercent(Value); } },
+        { "ZSWAP_NON_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapNonSameFilledPages(Value); } },
+        { "ZSWAP_SAME_FILLED_PAGES_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapSameFilledPages(Value); } },
+        { "ZSWAP_SHRINKER_ENABLED_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapShrinkerEnabled(Value); } },
+        { "ZSWAP_ZPOOL_VALUE", [this] (const std::string& Value) { ZSwap->SetZSwapZpool(Value); } },
     };
 
     for (const auto& [Key, Handler] : Handlers)
@@ -232,23 +232,23 @@ int Application::ExecuteConfig(const std::filesystem::path& ConfigFile) const
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
-        { "zswap.accept_threshold_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
-        { "zswap.compressor", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
-        { "zswap.enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
-        { "zswap.exclusive_loads", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
-        { "zswap.max_pool_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
-        { "zswap.non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
-        { "zswap.same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
-        { "zswap.shrinker_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
-        { "zswap.zpool", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
+        { "zswap.accept_threshold_percent", [this] (const std::string& Value) { ZSwap->SetZSwapAcceptThresholdPercent(Value); } },
+        { "zswap.compressor", [this] (const std::string& Value) { ZSwap->SetZSwapCompressor(Value); } },
+        { "zswap.enabled", [this] (const std::string& Value) { ZSwap->SetZSwapEnabled(Value); } },
+        { "zswap.exclusive_loads", [this] (const std::string& Value) { ZSwap->SetZSwapExclusiveLoads(Value); } },
+        { "zswap.max_pool_percent", [this] (const std::string& Value) { ZSwap->SetZSwapMaxPoolPercent(Value); } },
+        { "zswap.non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap->SetZSwapNonSameFilledPages(Value); } },
+        { "zswap.same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap->SetZSwapSameFilledPages(Value); } },
+        { "zswap.shrinker_enabled", [this] (const std::string& Value) { ZSwap->SetZSwapShrinkerEnabled(Value); } },
+        { "zswap.zpool", [this] (const std::string& Value) { ZSwap->SetZSwapZpool(Value); } },
     };
 
     for (const auto& [Key, Handler] : Handlers)
     {
         try
         {
-            if (Config -> count(Key))
-                Handler(Config -> at(Key).as<std::string>());
+            if (Config->count(Key))
+                Handler(Config->at(Key).as<std::string>());
         }
         catch (const std::exception& e)
         {
@@ -265,23 +265,23 @@ int Application::ExecuteCmdLine() const
     bool Result = true;
     const std::vector<std::pair<std::string, std::function<void(const std::string&)>>> Handlers
     {
-        { "accept_threshold_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapAcceptThresholdPercent(Value); } },
-        { "compressor", [this] (const std::string& Value) { ZSwap -> SetZSwapCompressor(Value); } },
-        { "enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapEnabled(Value); } },
-        { "exclusive_loads", [this] (const std::string& Value) { ZSwap -> SetZSwapExclusiveLoads(Value); } },
-        { "max_pool_percent", [this] (const std::string& Value) { ZSwap -> SetZSwapMaxPoolPercent(Value); } },
-        { "non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapNonSameFilledPages(Value); } },
-        { "same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapSameFilledPages(Value); } },
-        { "shrinker_enabled", [this] (const std::string& Value) { ZSwap -> SetZSwapShrinkerEnabled(Value); } },
-        { "zpool", [this] (const std::string& Value) { ZSwap -> SetZSwapZpool(Value); } },
+        { "accept_threshold_percent", [this] (const std::string& Value) { ZSwap->SetZSwapAcceptThresholdPercent(Value); } },
+        { "compressor", [this] (const std::string& Value) { ZSwap->SetZSwapCompressor(Value); } },
+        { "enabled", [this] (const std::string& Value) { ZSwap->SetZSwapEnabled(Value); } },
+        { "exclusive_loads", [this] (const std::string& Value) { ZSwap->SetZSwapExclusiveLoads(Value); } },
+        { "max_pool_percent", [this] (const std::string& Value) { ZSwap->SetZSwapMaxPoolPercent(Value); } },
+        { "non_same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap->SetZSwapNonSameFilledPages(Value); } },
+        { "same_filled_pages_enabled", [this] (const std::string& Value) { ZSwap->SetZSwapSameFilledPages(Value); } },
+        { "shrinker_enabled", [this] (const std::string& Value) { ZSwap->SetZSwapShrinkerEnabled(Value); } },
+        { "zpool", [this] (const std::string& Value) { ZSwap->SetZSwapZpool(Value); } },
     };
 
     for (const auto& [Key, Handler] : Handlers)
     {
         try
         {
-            if (CmdLine -> count(Key))
-                Handler(CmdLine -> at(Key).as<std::string>());
+            if (CmdLine->count(Key))
+                Handler(CmdLine->at(Key).as<std::string>());
         }
         catch (const std::exception& e)
         {
@@ -309,18 +309,18 @@ int Application::ExecuteSystemConfig() const
 
 int Application::Run() const
 {
-    if (CmdLine -> empty() || CmdLine -> count("help"))
+    if (CmdLine->empty() || CmdLine->count("help"))
         return PrintHelp();
-    if (CmdLine -> count("version"))
+    if (CmdLine->count("version"))
         return PrintVersion();
-    if (CmdLine -> count("stats"))
-        return PrintStats(CmdLine -> at("stats").as<int>());
+    if (CmdLine->count("stats"))
+        return PrintStats(CmdLine->at("stats").as<int>());
     CheckIfRunningBySuperUser();
-    if (CmdLine -> count("system"))
+    if (CmdLine->count("system"))
         return ExecuteSystemConfig();
-    if (CmdLine -> count("config"))
-        return ExecuteConfig(CmdLine -> at("config").as<std::filesystem::path>());
-    if (CmdLine -> count("env"))
+    if (CmdLine->count("config"))
+        return ExecuteConfig(CmdLine->at("config").as<std::filesystem::path>());
+    if (CmdLine->count("env"))
         return ExecuteEnv();
     return ExecuteCmdLine();
 }
@@ -333,13 +333,13 @@ void Application::CheckIfRunningBySuperUser() const
 
 void Application::CheckIfSwapAvailable() const
 {
-    if (!SysInfo -> IsSwapAvailable())
+    if (!SysInfo->IsSwapAvailable())
         throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
 }
 
 void Application::CheckIfDebugAvailable() const
 {
-    if (!ZSwapDebugger -> IsDebugAvailable())
+    if (!ZSwapDebugger->IsDebugAvailable())
         throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
 }
 
@@ -351,7 +351,7 @@ void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 
 void Application::CheckIfModuleLoaded() const
 {
-    if (!ZSwap -> IsAvailable())
+    if (!ZSwap->IsAvailable())
         throw std::runtime_error("ZSwap kernel module is not loaded or access to sysfs is denied.");
 }
 
@@ -379,7 +379,7 @@ void Application::InitCmdLineOptions() const
     OptionsConfiguration.add_options()
         ("config", boost::program_options::value<std::filesystem::path>(), "Get options from the configuration file instead of the cmdline.")
         ("env", "Get options from the environment variables instead of the cmdline.")
-        ("stats", boost::program_options::value<int>() -> implicit_value(0), "Print statistics and current settings of the ZSwap kernel module.")
+        ("stats", boost::program_options::value<int>()->implicit_value(0), "Print statistics and current settings of the ZSwap kernel module.")
         ("system", "Get options from the system configuration file instead of the cmdline.")
         ("verbose", "Enable verbose mode to display additional information for debugging or informational purposes.")
         ;
@@ -397,12 +397,12 @@ void Application::InitCmdLineOptions() const
         ("zpool", boost::program_options::value<std::string>(), "The kernel's zpool type.")
         ;
 
-    CmdLineOptions -> add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
+    CmdLineOptions->add(OptionsGeneral).add(OptionsConfiguration).add(OptionsZSwap);
 }
 
 void Application::InitConfigOptions() const
 {
-    ConfigOptions -> add_options()
+    ConfigOptions->add_options()
         ("zswap.accept_threshold_percent", boost::program_options::value<std::string>(), "The threshold at which ZSwap would start accepting pages again after it became full.")
         ("zswap.compressor", boost::program_options::value<std::string>(), "The algorithm used to compress memory pages.")
         ("zswap.enabled", boost::program_options::value<std::string>(), "Enable or disable the ZSwap kernel module.")
@@ -418,7 +418,7 @@ void Application::InitConfigOptions() const
 void Application::ParseCmdLine(int argc, char** argv) const
 {
     boost::program_options::store(boost::program_options::parse_command_line(argc, argv, *CmdLineOptions), *CmdLine);
-    CmdLine -> notify();
+    CmdLine->notify();
 }
 
 void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
@@ -429,12 +429,12 @@ void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
         throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
-    Config -> notify();
+    Config->notify();
 }
 
 void Application::SetOperatingMode()
 {
-    if (CmdLine -> count("verbose"))
+    if (CmdLine->count("verbose"))
         IsVerbose = true;
 }
 

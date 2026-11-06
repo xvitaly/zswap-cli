@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 {
     try
     {
-        return std::make_unique<Application>(argc, argv) -> Run();
+        return std::make_unique<Application>(argc, argv)->Run();
     }
     catch (const boost::program_options::required_option& e)
     {
