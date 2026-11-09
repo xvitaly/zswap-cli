@@ -23,4 +23,13 @@ public:
     using std::runtime_error::runtime_error;
 };
 
+/**
+ * Class for the "Value exists" exception type.
+*/
+class ValueExistsException : public std::runtime_error
+{
+public:
+    using std::runtime_error::runtime_error;
+};
+
 #endif // EXCEPTIONS_HPP
