@@ -12,4 +12,15 @@
  * Contains definitions of various custom exception types.
 */
 
+#include <stdexcept>
+
+/**
+ * Class for the "Not supported" exception type.
+*/
+class NotSupportedException : public std::runtime_error
+{
+public:
+    using std::runtime_error::runtime_error;
+};
+
 #endif // EXCEPTIONS_HPP
