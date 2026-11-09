@@ -41,4 +41,13 @@ public:
     using std::runtime_error::runtime_error;
 };
 
+/**
+ * Class for the "Value incorrect" exception type.
+*/
+class ValueIncorrectException : public std::invalid_argument
+{
+public:
+    using std::invalid_argument::invalid_argument;
+};
+
 #endif // EXCEPTIONS_HPP
