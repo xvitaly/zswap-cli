@@ -50,4 +50,13 @@ public:
     using std::invalid_argument::invalid_argument;
 };
 
+/**
+ * Class for the "Syscall failure" exception type.
+ */
+class SyscallFailureException : public std::runtime_error
+{
+  public:
+    using std::runtime_error::runtime_error;
+};
+
 #endif // EXCEPTIONS_HPP
