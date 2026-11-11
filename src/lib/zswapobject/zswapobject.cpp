@@ -18,6 +18,7 @@
 #include <stdexcept>
 #include <string>
 
+#include "exceptions/exceptions.hpp"
 #include "filemanager/filemanager.hpp"
 #include "templates/formatters.hpp"
 #include "zswapobject/zswapobject.hpp"
@@ -25,19 +26,19 @@
 void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^[YN]$")))
-        throw std::invalid_argument(std::format("[!] The requested value for the option \"{0}\" is incorrect (only Y or N are supported)!", Name));
+        throw ValueIncorrectException(std::format("[!] The requested value for the option \"{0}\" is incorrect (only Y or N are supported)!", Name));
 }
 
 void ZSwapObject::CheckValueModuleName(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^\\w+$")))
-        throw std::invalid_argument(std::format("[!] The requested value for the option \"{0}\" is incorrect (only alphanumeric characters and underscores are supported)!", Name));
+        throw ValueIncorrectException(std::format("[!] The requested value for the option \"{0}\" is incorrect (only alphanumeric characters and underscores are supported)!", Name));
 }
 
 void ZSwapObject::CheckValueRange(const std::string_view Name, const std::string& Value) const
 {
     if (!std::regex_match(Value, std::regex("^\\d{1,2}|100$")))
-        throw std::invalid_argument(std::format("[!] The requested value for the option \"{0}\" is out of range [0..100]!", Name));
+        throw ValueIncorrectException(std::format("[!] The requested value for the option \"{0}\" is out of range [0..100]!", Name));
 }
 
 std::string ZSwapObject::ReadValue(const std::filesystem::path& FullPath) const
@@ -66,13 +67,13 @@ void ZSwapObject::WriteZSwapValue(const std::string_view Name, const std::string
 {
     const std::filesystem::path FullPath = ZSwapModuleParametersPath / Name;
     if (!FileManager::CheckFileExists(FullPath))
-        throw std::runtime_error(std::format("[!] Configuring the option \"{0}\" is not possible on the current kernel!", Name));
+        throw NotSupportedException(std::format("[!] Configuring the option \"{0}\" is not possible on the current kernel!", Name));
     const std::optional<std::string> OldValue = ReadZSwapValue(Name);
     if (OldValue == Value)
-        throw std::runtime_error(std::format("[*] The option \"{0}\" already has the required value \"{1}\"! No actions performed.", Name, Value));
+        throw ValueExistsException(std::format("[*] The option \"{0}\" already has the required value \"{1}\"! No actions performed.", Name, Value));
     WriteValue(FullPath, Value);
     if (ReadZSwapValue(Name) != Value)
-        throw std::runtime_error(std::format("[-] Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
+        throw ValueNotSetException(std::format("[-] Failed to set the option \"{0}\" a new value \"{1}\"! Current value \"{2}\" remains unchanged.", Name, Value, OldValue));
     std::cout << std::format("[+] The option \"{0}\" has been set to a new value of \"{1}\" (old value was \"{2}\").", Name, Value, OldValue) << std::endl;
 }
 
