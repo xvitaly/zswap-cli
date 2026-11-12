@@ -77,4 +77,13 @@ class SwapNotFoundException : public std::runtime_error
     using std::runtime_error::runtime_error;
 };
 
+/**
+ * Class for the "virtual file system access failure" exception type.
+ */
+class VFSAccessFailureException : public std::runtime_error
+{
+  public:
+    using std::runtime_error::runtime_error;
+};
+
 #endif // EXCEPTIONS_HPP
