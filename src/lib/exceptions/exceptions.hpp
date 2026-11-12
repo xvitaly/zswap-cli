@@ -68,4 +68,13 @@ class ConfigNotFoundException : public std::runtime_error
     using std::runtime_error::runtime_error;
 };
 
+/**
+ * Class for the "Swap file or partition not found" exception type.
+ */
+class SwapNotFoundException : public std::runtime_error
+{
+  public:
+    using std::runtime_error::runtime_error;
+};
+
 #endif // EXCEPTIONS_HPP
