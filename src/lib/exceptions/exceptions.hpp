@@ -86,4 +86,13 @@ class VFSAccessFailureException : public std::runtime_error
     using std::runtime_error::runtime_error;
 };
 
+/**
+ * Class for the "no super-user privileges" exception type.
+ */
+class NoPrivilegesException : public std::runtime_error
+{
+  public:
+    using std::runtime_error::runtime_error;
+};
+
 #endif // EXCEPTIONS_HPP
