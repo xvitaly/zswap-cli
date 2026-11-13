@@ -16,6 +16,7 @@
 #include <linux/version.h>
 #include <sys/utsname.h>
 
+#include "exceptions/exceptions.hpp"
 #include "ksysversion/ksysversion.hpp"
 
 std::string KSysVersion::ParseKernelVersion(const std::string& Version) const
@@ -32,6 +33,6 @@ std::string KSysVersion::GetKernelVersion() const
 {
     struct utsname UTSName;
     if (uname(&UTSName) == -1)
-        throw std::runtime_error("Got incorrect result from uname() call.");
+        throw Exceptions::SyscallFailureException("Got incorrect result from uname() call.");
     return ParseKernelVersion(UTSName.release);
 }

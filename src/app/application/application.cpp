@@ -29,6 +29,7 @@
 #include "appconstants/appconstants.hpp"
 #include "application/application.hpp"
 #include "cwrappers/cwrappers.hpp"
+#include "exceptions/exceptions.hpp"
 #include "filemanager/filemanager.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
@@ -163,7 +164,7 @@ int Application::PrintStats(const int Value) const
             PrintDebugInfo();
             break;
         default:
-            throw std::invalid_argument("Incorrect value of the --stats command-line option was specified!");
+            throw Exceptions::ValueIncorrectException("Incorrect value of the --stats command-line option was specified!");
     }
     return 0;
 }
@@ -304,7 +305,7 @@ int Application::ExecuteSystemConfig() const
             return ExecuteConfig(ConfigFile);
     }
 
-    throw std::runtime_error("System configuration files were not found!");
+    throw Exceptions::ConfigNotFoundException("System configuration files were not found!");
 }
 
 int Application::Run() const
@@ -328,31 +329,31 @@ int Application::Run() const
 void Application::CheckIfRunningBySuperUser() const
 {
     if (CWrappers::CheckRoot())
-        throw std::runtime_error("The requested action requires super-user privileges! Terminating.");
+        throw Exceptions::NoPrivilegesException("The requested action requires super-user privileges! Terminating.");
 }
 
 void Application::CheckIfSwapAvailable() const
 {
     if (!SysInfo->IsSwapAvailable())
-        throw std::runtime_error("ZSwap is not functional due to missing swap file or partition.");
+        throw Exceptions::SwapNotFoundException("ZSwap is not functional due to missing swap file or partition.");
 }
 
 void Application::CheckIfDebugAvailable() const
 {
     if (!ZSwapDebugger->IsDebugAvailable())
-        throw std::runtime_error("ZSwap is not running or access to debugfs is denied.");
+        throw Exceptions::VFSAccessFailureException("ZSwap is not running or access to debugfs is denied.");
 }
 
 void Application::CheckIfPoolIsNotEmpty(const unsigned long PoolSize) const
 {
     if (PoolSize == 0)
-        throw std::runtime_error("ZSwap is not working. The pool is empty.");
+        throw Exceptions::EmptyPoolException("ZSwap is not working. The pool is empty.");
 }
 
 void Application::CheckIfModuleLoaded() const
 {
     if (!ZSwap->IsAvailable())
-        throw std::runtime_error("ZSwap kernel module is not loaded or access to sysfs is denied.");
+        throw Exceptions::VFSAccessFailureException("ZSwap kernel module is not loaded or access to sysfs is denied.");
 }
 
 void Application::InitClassMembers()
@@ -426,7 +427,7 @@ void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
     if (IsVerbose)
         std::cout << std::format("[*] Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
     if (!FileManager::CheckFileExists(ConfigFile))
-        throw std::invalid_argument(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
+        throw Exceptions::ConfigNotFoundException(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
     boost::program_options::store(boost::program_options::parse_config_file(ConfigFileFs, *ConfigOptions), *Config);
     Config->notify();
