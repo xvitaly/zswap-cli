@@ -60,7 +60,7 @@ namespace Exceptions
      */
     class SyscallFailureException : public std::runtime_error
     {
-      public:
+    public:
         using std::runtime_error::runtime_error;
     };
 
@@ -69,7 +69,7 @@ namespace Exceptions
      */
     class ConfigNotFoundException : public std::runtime_error
     {
-      public:
+    public:
         using std::runtime_error::runtime_error;
     };
 
@@ -78,7 +78,7 @@ namespace Exceptions
      */
     class SwapNotFoundException : public std::runtime_error
     {
-      public:
+    public:
         using std::runtime_error::runtime_error;
     };
 
@@ -87,7 +87,7 @@ namespace Exceptions
      */
     class VFSAccessFailureException : public std::runtime_error
     {
-      public:
+    public:
         using std::runtime_error::runtime_error;
     };
 
@@ -96,7 +96,7 @@ namespace Exceptions
      */
     class NoPrivilegesException : public std::runtime_error
     {
-      public:
+    public:
         using std::runtime_error::runtime_error;
     };
 
@@ -105,7 +105,7 @@ namespace Exceptions
      */
     class EmptyPoolException : public std::runtime_error
     {
-      public:
+    public:
         using std::runtime_error::runtime_error;
     };
 }
