@@ -6,6 +6,7 @@ If your distribution has standard build flags, the project should use them. Othe
 
 ```sh
 export CXXFLAGS="-O2 -fexceptions -fPIC -pipe -Wall -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fstack-protector-strong -fcf-protection"
+export LDFLAGS="-Wl,-z,relro -Wl,-z,now"
 ```
 
 We also recommend using the `RelWithDebInfo` build configuration to include debug information, which is very useful for obtaining high-quality stack traces when reporting bugs.
