@@ -27,7 +27,7 @@ public:
 
     /**
      * Gets the kernel version.
-     * @exception Raises an instance of std::runtime_error on error.
+     * @exception Raises an instance of Exceptions::SyscallFailure on error.
     */
     std::string GetKernelVersion() const;
 

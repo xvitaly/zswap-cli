@@ -229,7 +229,7 @@ private:
 
     /**
      * Reads the sysinfo structure into the class fields.
-     * @exception Raises an instance of the std::runtime_error on error.
+     * @exception Raises an instance of the Exceptions::SyscallFailure on error.
     */
     void ReadSysInfo();
 
