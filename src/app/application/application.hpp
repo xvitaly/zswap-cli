@@ -115,8 +115,8 @@ private:
     /**
      * Reads and parses the specified configuration file.
      * @param ConfigFile Full path to the configuration file.
-     * @exception Raises an instance of the Exceptions::ConfigNotFoundException
-     * exception if an invalid file path was specified.
+     * @exception Exceptions::ConfigNotFound Raises an instance of the
+     * Exceptions::ConfigNotFound exception if an invalid file path was specified.
     */
     void ParseConfigFile(const std::filesystem::path&) const;
 
@@ -128,32 +128,32 @@ private:
     /**
      * Checks whether the access to debugfs is allowed, and raises
      * an exception if not.
-     * @exception Raises an instance of the Exceptions::VFSAccessFailureException
-     * if the access to debugfs is not allowed.
+     * @exception Exceptions::VFSAccessFailure Raises an instance of the
+     * Exceptions::VFSAccessFailure if the access to debugfs is not allowed.
     */
     void CheckIfDebugAvailable() const;
 
     /**
      * Checks whether the ZSwap kernel module is loaded, and raises
      * an exception if not.
-     * @exception Raises an instance of the Exceptions::VFSAccessFailureException
-     * if the ZSwap kernel module is not loaded.
+     * @exception Exceptions::VFSAccessFailure Raises an instance of the
+     * Exceptions::VFSAccessFailure if the ZSwap kernel module is not loaded.
     */
     void CheckIfModuleLoaded() const;
 
     /**
      * Checks if the application is running with super-user privileges,
      * and raises an exception if not.
-     * @exception Raises an instance of the Exceptions::NoPrivilegesException
-     * on missing super-user privileges.
+     * @exception Exceptions::NoPrivileges Raises an instance of the
+     * Exceptions::NoPrivileges on missing super-user privileges.
     */
     void CheckIfRunningBySuperUser() const;
 
     /**
      * Checks whether the swap file or partition is available, and raises
      * an exception if not.
-     * @exception Raises an instance of the Exceptions::SwapNotFoundException
-     * if the swap file or partition is not available.
+     * @exception Exceptions::SwapNotFound Raises an instance of the
+     * Exceptions::SwapNotFound if the swap file or partition is not available.
     */
     void CheckIfSwapAvailable() const;
 
@@ -161,8 +161,8 @@ private:
      * Checks whether the compressed pool is not empty, and raises
      * an exception if not.
      * @param PoolSize Pool size.
-     * @exception Raises an instance of the Exceptions::EmptyPoolException
-     * if the the compressed pool is empty.
+     * @exception Exceptions::EmptyPool Raises an instance of the
+     * Exceptions::EmptyPool if the the compressed pool is empty.
     */
     void CheckIfPoolIsNotEmpty(const unsigned long) const;
 
@@ -190,8 +190,8 @@ private:
     /**
      * Handles the \-\-system command-line argument. Gets parameters
      * from the system configuration file.
-     * @exception Raises an instance of the Exceptions::ConfigNotFoundException
-     * exception if no configuration files were found.
+     * @exception Exceptions::ConfigNotFound Raises an instance of the
+     * Exceptions::ConfigNotFound exception if no configuration files were found.
      * @returns Exit code.
     */
     int ExecuteSystemConfig() const;
@@ -226,8 +226,9 @@ private:
      * diagnostic information about the ZSwap kernel module.
      * @param Value Request code: 0 - all; 1 - settings; 2 - usage stats;
      * 3 - debug.
-     * @exception Raises an instance of the Exceptions::ValueIncorrectException
-     * exception if an invalid request code was specified.
+     * @exception Exceptions::ValueIncorrect Raises an instance of the
+     * Exceptions::ValueIncorrect exception if an invalid request code was
+     * specified.
      * @returns Exit code.
     */
     int PrintStats(int) const;
