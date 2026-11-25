@@ -216,6 +216,10 @@ int Application::ExecuteEnv() const
             if (!EnvValue.empty())
                 Handler(EnvValue);
         }
+        catch (const Exceptions::ValueExists& e)
+        {
+            std::cerr << "[*] " << e.what() << std::endl;
+        }
         catch (const Exceptions::ValueNotSet& e)
         {
             std::cerr << "[-] " << e.what() << std::endl;
@@ -256,6 +260,10 @@ int Application::ExecuteConfig(const std::filesystem::path& ConfigFile) const
             if (Config->count(Key))
                 Handler(Config->at(Key).as<std::string>());
         }
+        catch (const Exceptions::ValueExists& e)
+        {
+            std::cerr << "[*] " << e.what() << std::endl;
+        }
         catch (const Exceptions::ValueNotSet& e)
         {
             std::cerr << "[-] " << e.what() << std::endl;
@@ -293,6 +301,10 @@ int Application::ExecuteCmdLine() const
         {
             if (CmdLine->count(Key))
                 Handler(CmdLine->at(Key).as<std::string>());
+        }
+        catch (const Exceptions::ValueExists& e)
+        {
+            std::cerr << "[*] " << e.what() << std::endl;
         }
         catch (const Exceptions::ValueNotSet& e)
         {
