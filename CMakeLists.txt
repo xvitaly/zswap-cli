@@ -183,6 +183,7 @@ set(LIBRARY_HEADERS
     src/lib/filemanager/filemanager.hpp
     src/lib/ksysinfo/ksysinfo.hpp
     src/lib/ksysversion/ksysversion.hpp
+    src/lib/logger/logger.hpp
     src/lib/templates/formatters.hpp
     src/lib/zswapdebug/zswapdebug.hpp
     src/lib/zswapobject/zswapobject.hpp

@@ -33,6 +33,7 @@
 #include "filemanager/filemanager.hpp"
 #include "ksysinfo/ksysinfo.hpp"
 #include "ksysversion/ksysversion.hpp"
+#include "logger/logger.hpp"
 #include "templates/formatters.hpp"
 #include "zswapdebug/zswapdebug.hpp"
 #include "zswapobject/zswapobject.hpp"
@@ -60,7 +61,7 @@ void Application::PrintDebugInfo() const
     for (const auto& [Name, Value] : Handlers)
     {
         if (Value || IsVerbose)
-            std::cout << std::format("{0}: {1}", Name, Value) << std::endl;
+            Logger::Tuple(Name, Value);
     }
 }
 
@@ -84,7 +85,7 @@ void Application::PrintSettings() const
     for (const auto& [Name, Value] : Handlers)
     {
         if (Value || IsVerbose)
-            std::cout << std::format("{0}: {1}", Name, Value) << std::endl;
+            Logger::Tuple(Name, Value);
     }
 }
 
@@ -105,15 +106,13 @@ void Application::PrintSummary() const
     const float SwapUsedPercent = StoredSize / (SysInfo->GetTotalSwapF() - SysInfo->GetFreeSwapF()) * 100.f;
     const float CompressionRatio = StoredSizeMB / PoolSizeMB;
 
-    std::cout << std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
-                             "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed)\n"
-                             "Compression ratio: {4:.2f}",
-                             PoolSizeMB,
-                             MemTotalPercent,
-                             StoredSizeMB,
-                             SwapUsedPercent,
-                             CompressionRatio)
-              << std::endl;
+    Logger::Message(
+        std::format("Pool: {0:.2f} MiB ({1:.1f}% of MemTotal)\n"
+                    "Stored: {2:.2f} MiB ({3:.1f}% of SwapUsed)\n"
+                    "Compression ratio: {4:.2f}",
+                    PoolSizeMB, MemTotalPercent,
+                    StoredSizeMB, SwapUsedPercent,
+                    CompressionRatio));
 }
 
 void Application::PrintCombined() const
@@ -129,12 +128,12 @@ void Application::PrintCombined() const
     {
         try
         {
-            std::cout << Message << std::endl;
+            Logger::Message(Message);
             Handler();
         }
         catch (const std::exception& e)
         {
-            std::cerr << e.what() << std::endl;
+            Logger::Message(e.what());
         }
         std::cout << std::endl;
     }
@@ -142,9 +141,8 @@ void Application::PrintCombined() const
 
 void Application::PrintEnvDeprecationMessage() const
 {
-    std::cerr << "[!] This feature is deprecated and will be removed in future versions. "
-                 "Please consider switching to configuration files or CLI options.\n"
-              << std::endl;
+    Logger::Error("This feature is deprecated and will be removed in future versions. "
+                  "Please consider switching to configuration files or CLI options.\n");
 }
 
 int Application::PrintStats(const int Value) const
@@ -177,16 +175,16 @@ int Application::PrintHelp() const
 
 int Application::PrintVersion() const
 {
-    std::cout << std::format("{0} version: {1}{2}\n"
-                             "Kernel API version:\n"
-                             "  build: {3}\n"
-                             "  runtime: {4}",
-                             AppConstants::ProductName(),
-                             AppConstants::ProductVersion(),
-                             AppConstants::ProductRelease(),
-                             SysVersion->GetHeadersVersion(),
-                             SysVersion->GetKernelVersion())
-              << std::endl;
+    Logger::Message(
+        std::format("{0} version: {1}{2}\n"
+                    "Kernel API version:\n"
+                    "  build: {3}\n"
+                    "  runtime: {4}",
+                    AppConstants::ProductName(),
+                    AppConstants::ProductVersion(),
+                    AppConstants::ProductRelease(),
+                    SysVersion->GetHeadersVersion(),
+                    SysVersion->GetKernelVersion()));
     return 0;
 }
 
@@ -218,16 +216,16 @@ int Application::ExecuteEnv() const
         }
         catch (const Exceptions::ValueExists& e)
         {
-            std::cerr << "[*] " << e.what() << std::endl;
+            Logger::Info(e.what());
         }
         catch (const Exceptions::ValueNotSet& e)
         {
-            std::cerr << "[-] " << e.what() << std::endl;
+            Logger::Failure(e.what());
             Result &= false;
         }
         catch (const std::exception& e)
         {
-            std::cerr << "[!] " << e.what() << std::endl;
+            Logger::Error(e.what());
             Result &= false;
         }
     }
@@ -262,16 +260,16 @@ int Application::ExecuteConfig(const std::filesystem::path& ConfigFile) const
         }
         catch (const Exceptions::ValueExists& e)
         {
-            std::cerr << "[*] " << e.what() << std::endl;
+            Logger::Info(e.what());
         }
         catch (const Exceptions::ValueNotSet& e)
         {
-            std::cerr << "[-] " << e.what() << std::endl;
+            Logger::Failure(e.what());
             Result &= false;
         }
         catch (const std::exception& e)
         {
-            std::cerr << "[!] " << e.what() << std::endl;
+            Logger::Error(e.what());
             Result &= false;
         }
     }
@@ -304,16 +302,16 @@ int Application::ExecuteCmdLine() const
         }
         catch (const Exceptions::ValueExists& e)
         {
-            std::cerr << "[*] " << e.what() << std::endl;
+            Logger::Info(e.what());
         }
         catch (const Exceptions::ValueNotSet& e)
         {
-            std::cerr << "[-] " << e.what() << std::endl;
+            Logger::Failure(e.what());
             Result &= false;
         }
         catch (const std::exception& e)
         {
-            std::cerr << "[!] " << e.what() << std::endl;
+            Logger::Error(e.what());
             Result &= false;
         }
     }
@@ -327,7 +325,7 @@ int Application::ExecuteSystemConfig() const
     {
         const std::filesystem::path ConfigFile = Prefix / AppConstants::ProductName() / AppConstants::ConfigFileName();
         if (IsVerbose)
-            std::cout << std::format("[*] Checking the \"{0}\" path as a potential config file.", ConfigFile) << std::endl;
+            Logger::Info(std::format("Checking the \"{0}\" path as a potential config file.", ConfigFile));
         if (FileManager::CheckFileExists(ConfigFile))
             return ExecuteConfig(ConfigFile);
     }
@@ -452,7 +450,7 @@ void Application::ParseCmdLine(int argc, char** argv) const
 void Application::ParseConfigFile(const std::filesystem::path& ConfigFile) const
 {
     if (IsVerbose)
-        std::cout << std::format("[*] Reading and parsing the \"{0}\" configuration file.", ConfigFile) << std::endl;
+        Logger::Info(std::format("Reading and parsing the \"{0}\" configuration file.", ConfigFile));
     if (!FileManager::CheckFileExists(ConfigFile))
         throw Exceptions::ConfigNotFound(std::format("The specified configuration file \"{0}\" does not exist!", ConfigFile));
     std::ifstream ConfigFileFs(ConfigFile);
