@@ -16,6 +16,7 @@
 #include <boost/program_options.hpp>
 
 #include "application/application.hpp"
+#include "logger/logger.hpp"
 
 /**
  * The main entry point.
@@ -30,15 +31,15 @@ int main(int argc, char** argv)
     }
     catch (const boost::program_options::required_option& e)
     {
-        std::cerr << "[!] Missing command-line argument: " << e.what() << std::endl;
+        Logger::Error("Missing command-line argument: ", e.what());
     }
     catch (const boost::program_options::error& e)
     {
-        std::cerr << "[!] Command-line argument error: " << e.what() << std::endl;
+        Logger::Error("Command-line argument error: ", e.what());
     }
     catch (const std::exception& e)
     {
-        std::cerr << "[!] An error occurred: " << e.what() << std::endl;
+        Logger::Error("An error occurred: ", e.what());
     }
     return 1;
 }
