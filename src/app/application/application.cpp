@@ -9,7 +9,6 @@
  * Contains the Application class implementation.
 */
 
-#include <algorithm>
 #include <exception>
 #include <filesystem>
 #include <format>
@@ -18,7 +17,6 @@
 #include <iostream>
 #include <memory>
 #include <optional>
-#include <stdexcept>
 #include <string>
 #include <string_view>
 #include <utility>
