@@ -10,7 +10,6 @@
 */
 
 #include <exception>
-#include <iostream>
 #include <memory>
 
 #include <boost/program_options.hpp>

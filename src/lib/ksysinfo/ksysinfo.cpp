@@ -9,8 +9,6 @@
  * Contains the KSysInfo class implementation.
 */
 
-#include <stdexcept>
-
 #include <linux/sysinfo.h>
 #include <sys/sysinfo.h>
 
