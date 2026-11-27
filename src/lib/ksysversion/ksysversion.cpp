@@ -11,7 +11,6 @@
 
 #include <format>
 #include <string>
-#include <stdexcept>
 
 #include <linux/version.h>
 #include <sys/utsname.h>
