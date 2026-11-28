@@ -15,6 +15,8 @@
 #include <format>
 #include <iostream>
 
+#include "backports/formatters.hpp"
+
 /**
  * Namespace with logger implementation.
 */
