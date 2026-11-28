@@ -16,10 +16,10 @@
 #include <regex>
 #include <string>
 
+#include "backports/formatters.hpp"
 #include "exceptions/exceptions.hpp"
 #include "filemanager/filemanager.hpp"
 #include "logger/logger.hpp"
-#include "templates/formatters.hpp"
 #include "zswapobject/zswapobject.hpp"
 
 void ZSwapObject::CheckValueBool(const std::string_view Name, const std::string& Value) const
